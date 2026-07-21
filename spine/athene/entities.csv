@@ -1,0 +1,54 @@
+name,jurisdiction,role_provisional,notes,naic_cocode,lei,bma_registration,source_doc,source_sha256
+Athene Life Re Ltd.,Bermuda,reinsurer,lead Bermuda reinsurer (ALRe),,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Asset L.P.,Bermuda,fund,Bermuda asset partnership — verify,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Life Re International Ltd.,Bermuda,reinsurer,Bermuda (ALReI),,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene USA Corporation,Iowa,holdco,"US intermediate holdco, Iowa",,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Annuity Re Ltd.,Bermuda,reinsurer,Bermuda (AARe),,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"Athene Employee Services, LLC",Iowa,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene London Assignment Corporation,Delaware,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Assignment Corporation,Delaware,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"A-A Onshore Fund, LLC",Delaware,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"Athene Noctua, LLC",Delaware,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"ACM Trademarks, L.L.C",Iowa,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"ARPH (Headquarters Building), LLC",Iowa,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Annuity and Life Company,Iowa,insurer,"lead US insurer (AAIA), Iowa",,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"P.L. Assigned Services, Inc.",New York,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Annuity & Life Assurance Company of New York,New York,insurer,NY-domiciled (AANY),,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Structured Annuity Reinsurance Company,Iowa,reinsurer,Iowa-domiciled — verify role,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"Athene Securities, LLC",Iowa,other,broker-dealer,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"Centralife Annuities Service, Inc.",Arizona,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"Athene Re USA IV, Inc.",Vermont,reinsurer,Vermont captive — verify,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Life Insurance Company of New York,New York,insurer,second NY insurer — verify status/book,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"AADE RML, LLC",Iowa,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"AAIA RML, LLC",Iowa,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Bermuda Employee Company Ltd.,Bermuda,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene IP Holding Ltd.,Bermuda,other,"IP holdco, Bermuda",,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene North Employment Service Corporation,Canada,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Co-Invest Reinsurance Affiliate Holding Ltd.,Bermuda,holdco,ACRA 1 holdco,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Co-Invest Reinsurance Affiliate 1A Ltd.,Bermuda,reinsurer,ACRA 1A sidecar,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Co-Invest Reinsurance Affiliate 1B Ltd.,Bermuda,reinsurer,ACRA 1B sidecar,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Co-Invest Reinsurance Affiliate LP,Delaware,fund,"ACRA LP, Delaware",,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Co-Invest Reinsurance Affiliate International Ltd.,Bermuda,reinsurer,ACRA international sidecar,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"Athene Risk Aggregator, LLC",Delaware,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"ADIP (Athene) Carry Plan, L.P.",Bermuda,fund,ADIP carry vehicle,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"Athene Re Services, LLC",New York,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"Rosencrantz Depositor, LLC",Delaware,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"NNN AGP Opportunities GP, LLC",Delaware,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"AARE Structured Holdings, LLC",Delaware,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Co Invest Reinsurance Affiliate Holding 2 Ltd.,Bermuda,holdco,ACRA 2 holdco,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Co Invest Reinsurance Affiliate 2A Ltd.,Bermuda,reinsurer,ACRA 2A sidecar,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Co Invest Reinsurance Affiliate 2B Ltd.,Bermuda,reinsurer,ACRA 2B sidecar,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Annuity Re II Ltd.,Bermuda,reinsurer,Bermuda — new vs prior sketch; verify class/purpose,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Japan K.K.,Japan,other,Japan entity — verify role,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+"Athene Re Japan Solutions Co., Ltd",Japan,other,Japan entity — verify role,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Qualified Assignment Corporation,Delaware,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Athene Structured Assignment Corporation,Delaware,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+,,other,service/assignment/SPV — classify at L1,,,,ahl-10k-fy2025-ex21,ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4
+Apollo Insurance Solutions Group LP,Delaware,manager,ISG — manages the Athene book,,,,apo-10k-fy2025-ex21,7c1e5f97764a3882d79b39edde8a0395ba65f3da20cd9e8f09e341ea01774a57
+Redding Ridge Advisors LLC,Delaware,manager,CLO manager,,,,apo-10k-fy2025-ex21,7c1e5f97764a3882d79b39edde8a0395ba65f3da20cd9e8f09e341ea01774a57
+"Atlas Securitized Products Advisors GP, LLC",Delaware,manager,Atlas SP — securitized products,,,,apo-10k-fy2025-ex21,7c1e5f97764a3882d79b39edde8a0395ba65f3da20cd9e8f09e341ea01774a57
+"Apollo MidCap Holdings (Cayman), L.P.",Cayman,holdco,MidCap origination platform holdco,,,,apo-10k-fy2025-ex21,7c1e5f97764a3882d79b39edde8a0395ba65f3da20cd9e8f09e341ea01774a57
+"Apollo ADIP Capital Management, LLC",Delaware,manager,manages ADIP sidecar capital,,,,apo-10k-fy2025-ex21,7c1e5f97764a3882d79b39edde8a0395ba65f3da20cd9e8f09e341ea01774a57
+"Apollo ADIP Advisors, L.P.",Delaware,manager,ADIP I advisor,,,,apo-10k-fy2025-ex21,7c1e5f97764a3882d79b39edde8a0395ba65f3da20cd9e8f09e341ea01774a57
+"Apollo ADIP Advisors II, L.P.",Delaware,manager,ADIP II advisor,,,,apo-10k-fy2025-ex21,7c1e5f97764a3882d79b39edde8a0395ba65f3da20cd9e8f09e341ea01774a57
+"Apollo Athora Advisors, L.P.",Delaware,manager,Athora relationship entity,,,,apo-10k-fy2025-ex21,7c1e5f97764a3882d79b39edde8a0395ba65f3da20cd9e8f09e341ea01774a57
