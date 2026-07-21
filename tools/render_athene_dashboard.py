@@ -103,10 +103,86 @@ for gtitle, items in GROUPS:
     cards.append(f'<div class="mgroup"><h3>{html.escape(gtitle)}</h3><div class="mgrid">{"".join(cs)}</div></div>')
 L0CARDS = '\n'.join(cards)
 
+def musd(metric):
+    return float(claims[metric]['value'])
+
+def fmt_b(v):
+    return f'${v/1e3:,.1f}B'
+
+def stackbar(segs, total):
+    parts = []
+    for label, v, cls in segs:
+        pct = 100 * v / total
+        inner = f'{pct:.0f}%' if pct >= 7 else ''
+        parts.append(f'<div class="seg {cls}" style="width:{pct:.3f}%" '
+                     f'title="{html.escape(label)}: {fmt_b(v)} ({pct:.1f}%)">{inner}</div>')
+    return f'<div class="stackbar">{"".join(parts)}</div>'
+
+def legend(segs, total):
+    items = []
+    for label, v, cls in segs:
+        pct = 100 * v / total
+        items.append(f'<div class="lg"><span class="dot {cls}"></span>'
+                     f'<span class="lgl">{html.escape(label)}</span>'
+                     f'<span class="lgv">{fmt_b(v)} · {pct:.0f}%</span></div>')
+    return f'<div class="legend">{"".join(items)}</div>'
+
+PROD_TOTAL = musd('gross_premiums_deposits_net_ext_ceded')  # 83,650
+prod_groups = [
+    ('Annuities (retail, stickier)', musd('premiums_total_annuity'), 'seg-annuity'),
+    ('Funding agreements (institutional, runnable)', musd('funding_agreement_deposits'), 'seg-funding'),
+    ('Life & other', musd('premiums_life_other'), 'seg-life'),
+]
+prod_detail = [
+    ('Fixed rate annuities', 'premiums_fixed_annuity', 'annuity'),
+    ('Indexed annuities', 'premiums_indexed_annuity', 'annuity'),
+    ('Pension group annuities', 'premiums_pension_group_annuity', 'annuity'),
+    ('Payout annuities', 'premiums_payout_annuity', 'annuity'),
+]
+prod_rows = []
+for label, key, _ in prod_detail:
+    v = musd(key); pct = 100 * v / PROD_TOTAL
+    prod_rows.append(f'<tr><td>{label}</td><td>{fmt_b(v)}</td><td>{pct:.0f}%</td></tr>')
+ann = musd('premiums_total_annuity'); fa = musd('funding_agreement_deposits'); lo = musd('premiums_life_other')
+prod_table = (
+    '<table class="ptable">'
+    '<tr class="sub subhead"><td>Annuities — total</td><td>' + fmt_b(ann) + '</td><td>' + f'{100*ann/PROD_TOTAL:.0f}%' + '</td></tr>'
+    + ''.join(prod_rows)
+    + '<tr class="sub"><td>Funding agreements</td><td>' + fmt_b(fa) + '</td><td>' + f'{100*fa/PROD_TOTAL:.0f}%' + '</td></tr>'
+    + '<tr class="sub"><td>Life &amp; other</td><td>' + fmt_b(lo) + '</td><td>' + f'{100*lo/PROD_TOTAL:.0f}%' + '</td></tr>'
+    + '<tr class="sub"><td>Gross premiums &amp; deposits</td><td>' + fmt_b(PROD_TOTAL) + '</td><td>100%</td></tr>'
+    + '</table>'
+)
+
+ATTRIB_TOTAL = musd('gross_inflows_total')  # 83,438
+attrib = [
+    ('Athene', musd('inflows_attrib_athene'), 'seg-athene'),
+    ('ACRA third-party (ADIP investors)', musd('inflows_attrib_acra_nci'), 'seg-acra'),
+    ('Ceded to third-party reinsurers', musd('inflows_ceded_third_party'), 'seg-ceded'),
+]
+
+CAPITAL_FLOW = (
+    '<p class="cfnote">Two views of the same year of new money. Athene reports two closely-related totals that '
+    'differ by definition: <strong>gross premiums &amp; deposits</strong> ($83.7B, broken out by product below) and '
+    '<strong>gross inflows</strong> ($83.4B, the management flow metric split by whose money it is). '
+    'They differ ~$0.2B by basis — not an error, two different definitions.</p>'
+    '<div class="cflabel"><span class="t">By product — what kind of promise</span>'
+    f'<span class="n">total {fmt_b(PROD_TOTAL)}</span></div>'
+    + stackbar(prod_groups, PROD_TOTAL) + legend(prod_groups, PROD_TOTAL) + prod_table
+    + '<div class="cflabel"><span class="t">By whose money — attribution</span>'
+    f'<span class="n">total {fmt_b(ATTRIB_TOTAL)}</span></div>'
+    + stackbar(attrib, ATTRIB_TOTAL) + legend(attrib, ATTRIB_TOTAL)
+    + '<div class="callout" style="margin-top:18px"><strong>What the split says:</strong> '
+    '42% of the money in is <strong>funding agreements</strong> — institutional, contractually-dated, runnable money, not sticky retiree annuities (the F4 runnability signal). '
+    'And 22% of gross inflows — <strong>$18.5B</strong> — is third-party ADIP capital, not Athene\'s own; Apollo raised it and earns fees on it. '
+    'Only ~$63B of the headline $83B is economically Athene\'s.</div>'
+)
+
 TEMPLATE = open(ROOT / 'tools/dashboard_template.html').read()
 out = (TEMPLATE
        .replace('__ROWS__', ROWS).replace('__DOCS__', DOCS)
        .replace('__L0CARDS__', L0CARDS)
+       .replace('__CAPITAL_FLOW__', CAPITAL_FLOW)
        .replace('__N_TOTAL__', str(n_total)).replace('__N_COC__', str(n_coc))
        .replace('__N_BM__', str(n_bm)).replace('__N_LEI__', str(n_lei))
        .replace('__N_DOCS__', str(len(docs))))
