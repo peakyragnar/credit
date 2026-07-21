@@ -1,0 +1,286 @@
+<title>How Apollo/Athene insurance works</title>
+<style>
+:root{
+  --bg:#F6F5F1; --panel:#FFFFFF; --panel2:#FBFAF7; --ink:#22271F; --muted:#6E756D; --line:#E3E1D8; --line2:#CFCCC0;
+  --us:#0F6E56; --us-bg:#E4F3EC; --us-ink:#085041;
+  --bm:#A3431D; --bm-bg:#F9ECE5; --bm-ink:#712B13;
+  --acc:#185FA5; --acc-bg:#E6F1FB; --acc-ink:#0C447C;
+  --warn:#854F0B; --warn-bg:#FAEEDA; --warn-ink:#633806;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#15191B; --panel:#1D2325; --panel2:#232A2C; --ink:#E7E9E3; --muted:#8F978F; --line:#2B3234; --line2:#3A4245;
+  --us:#5DCAA5; --us-bg:#0C3A2D; --us-ink:#9FE1CB;
+  --bm:#F0997B; --bm-bg:#43200F; --bm-ink:#F5C4B3;
+  --acc:#85B7EB; --acc-bg:#0C2E4C; --acc-ink:#B5D4F4;
+  --warn:#EF9F27; --warn-bg:#3A2B10; --warn-ink:#FAC775;
+}}
+:root[data-theme="dark"]{
+  --bg:#15191B; --panel:#1D2325; --panel2:#232A2C; --ink:#E7E9E3; --muted:#8F978F; --line:#2B3234; --line2:#3A4245;
+  --us:#5DCAA5; --us-bg:#0C3A2D; --us-ink:#9FE1CB;
+  --bm:#F0997B; --bm-bg:#43200F; --bm-ink:#F5C4B3;
+  --acc:#85B7EB; --acc-bg:#0C2E4C; --acc-ink:#B5D4F4;
+  --warn:#EF9F27; --warn-bg:#3A2B10; --warn-ink:#FAC775;
+}
+:root[data-theme="light"]{
+  --bg:#F6F5F1; --panel:#FFFFFF; --panel2:#FBFAF7; --ink:#22271F; --muted:#6E756D; --line:#E3E1D8; --line2:#CFCCC0;
+  --us:#0F6E56; --us-bg:#E4F3EC; --us-ink:#085041;
+  --bm:#A3431D; --bm-bg:#F9ECE5; --bm-ink:#712B13;
+  --acc:#185FA5; --acc-bg:#E6F1FB; --acc-ink:#0C447C;
+  --warn:#854F0B; --warn-bg:#FAEEDA; --warn-ink:#633806;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 "Avenir Next","Segoe UI",system-ui,sans-serif;margin:0}
+.wrap{max-width:820px;margin:0 auto;padding:40px 24px 72px}
+h1{font-size:31px;font-weight:600;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.lede{color:var(--muted);font-size:15px;margin:10px 0 0}
+h2{font-size:21px;font-weight:600;margin:52px 0 4px;letter-spacing:-.01em}
+.kicker{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--acc);font-weight:600;margin:0 0 14px}
+h3{font-size:16px;font-weight:600;margin:28px 0 6px}
+p{margin:14px 0}
+strong{font-weight:600}
+em{font-style:italic}
+hr{border:0;border-top:1px solid var(--line2);margin:44px 0}
+a{color:var(--acc)}
+
+.q{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);padding:18px 22px;margin:22px 0;font-size:16px}
+.q .lab{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:8px}
+.ans{background:var(--acc-bg);border:1px solid var(--acc);color:var(--acc-ink);padding:16px 20px;margin:20px 0;border-radius:8px;font-size:15.5px}
+
+/* flow diagram (vertical) */
+.flow{display:flex;flex-direction:column;align-items:stretch;gap:0;margin:26px 0;max-width:520px}
+.fbox{background:var(--panel);border:1px solid var(--line2);border-radius:8px;padding:13px 16px;text-align:center}
+.fbox .ft{font-weight:600;font-size:15px}
+.fbox .fs{color:var(--muted);font-size:12.5px;margin-top:1px}
+.farr{align-self:center;color:var(--muted);font-size:12px;padding:7px 0;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.3}
+.farr .cap{font-size:12px}
+.farr::before{content:"↓";font-size:17px;color:var(--line2)}
+.us-b{background:var(--us-bg);border-color:var(--us);color:var(--us-ink)}
+.bm-b{background:var(--bm-bg);border-color:var(--bm);color:var(--bm-ink)}
+.neu-b{background:var(--panel2)}
+
+/* spectrum */
+.spec{margin:28px 0 8px}
+.spec-axis{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:var(--muted);margin-bottom:6px;padding:0 2px}
+.spec-axis b{color:var(--ink);font-weight:600;font-size:12.5px}
+.spec-bar{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--bm) 0%,var(--warn) 40%,var(--us) 100%);margin-bottom:16px}
+.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.biz{background:var(--panel);border:1px solid var(--line2);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:7px}
+.biz.hl{border-color:var(--us);border-width:2px;background:var(--us-bg)}
+.biz .tag{font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--muted)}
+.biz.hl .tag{color:var(--us-ink)}
+.biz .nm{font-size:15px;font-weight:600;line-height:1.25}
+.biz.hl .nm{color:var(--us-ink)}
+.biz .row{font-size:12.5px;color:var(--muted);line-height:1.4}
+.biz .row b{color:var(--ink);font-weight:600}
+.biz.hl .row,.biz.hl .row b{color:var(--us-ink)}
+.biz .eg{font-size:11.5px;color:var(--muted);margin-top:auto;padding-top:4px;border-top:1px solid var(--line);font-style:italic}
+.biz.hl .eg{border-top-color:var(--us)}
+
+/* spread mini */
+.spread{display:inline-flex;flex-direction:column;gap:0;border:1px solid var(--line2);border-radius:8px;overflow:hidden;margin:8px 0;font-variant-numeric:tabular-nums;min-width:280px}
+.spread div{display:flex;justify-content:space-between;padding:9px 16px;font-size:14px}
+.spread .a{background:var(--panel)}
+.spread .b{background:var(--panel);border-top:1px solid var(--line)}
+.spread .c{background:var(--us-bg);color:var(--us-ink);font-weight:600;border-top:2px solid var(--us)}
+.spread .k{color:var(--muted)}
+.spread .c .k{color:var(--us-ink)}
+
+/* levers table */
+.lev{width:100%;border-collapse:collapse;margin:22px 0;font-size:14px;border:1px solid var(--line)}
+.lev th,.lev td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+.lev thead th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--panel2)}
+.lev tbody td:first-child{font-weight:600;width:22%}
+.lev .trad{color:var(--muted)}
+.lev .ath{color:var(--ink)}
+.lev .risk{white-space:nowrap;font-size:11.5px;font-weight:600;color:var(--bm-ink);background:var(--bm-bg);border-radius:999px;padding:2px 9px;display:inline-block}
+.tbl-scroll{overflow-x:auto}
+
+/* lever cards in sec4 */
+.annot{display:flex;align-items:flex-start;gap:10px;background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:0 6px 6px 0;padding:9px 13px;margin:6px 0;font-size:13px;color:var(--muted);max-width:520px}
+.annot b{color:var(--ink);font-weight:600}
+.badge{font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--warn-ink);background:var(--warn-bg);border-radius:4px;padding:2px 7px;white-space:nowrap;flex-shrink:0}
+
+.note{background:var(--acc-bg);border:1px solid var(--acc);color:var(--acc-ink);border-radius:8px;padding:15px 19px;margin:24px 0;font-size:14.5px}
+
+/* glossary */
+.gloss{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:20px 0}
+.gloss dl{margin:0}
+.gloss .item{padding:13px 18px;border-bottom:1px solid var(--line);background:var(--panel)}
+.gloss .item:last-child{border-bottom:0}
+.gloss dt{font-weight:600;font-size:14.5px}
+.gloss dd{margin:3px 0 0;color:var(--muted);font-size:13.5px;line-height:1.55}
+.f1{color:var(--bm-ink)}
+
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line2);color:var(--muted);font-size:12.5px}
+
+@media (max-width:680px){
+  .cards4{grid-template-columns:1fr 1fr}
+  h1{font-size:26px}
+}
+@media (max-width:440px){
+  .cards4{grid-template-columns:1fr}
+}
+</style>
+
+<div class="wrap">
+<p class="eyebrow">Credit map · teaching note</p>
+<h1>How Apollo / Athene insurance works</h1>
+<p class="lede">A plain-English mental model of what Athene actually is, so the numbers in the dossier mean something. Read once top to bottom; after that it's a reference. Nothing here is a finding — it's the background the findings sit on.</p>
+
+<div class="q">
+<div class="lab">The one question this note answers</div>
+Is the Athene flow — policyholders → US insurer → Bermuda reinsurer → private credit → borrowers, with Apollo alongside — <em>how insurance works</em>, or just <em>one way</em> to do it?
+</div>
+<div class="ans"><strong>One way.</strong> And a specific, relatively new, aggressive one. All insurance shares a single engine. But there are several different businesses built on that engine, and within the one Athene is in, there's a spectrum from conservative to aggressive — Athene sits at the far aggressive end on purpose. If you remember nothing else: <strong>the basic engine is universal; almost every distinctive thing about Athene is a deliberate choice, not a necessity.</strong></div>
+
+<hr>
+
+<p class="kicker">Section 1</p>
+<h2>The engine every insurer shares</h2>
+<p>Strip away the jargon and every insurer on earth does the same three things: <strong>collect money now, pay money later, invest the money in between.</strong> That in-between pile of not-yet-paid-out cash is called the <strong>float</strong>.</p>
+
+<div class="flow">
+  <div class="fbox neu-b"><div class="ft">Customers</div><div class="fs">pay premiums / deposits</div></div>
+  <div class="farr"><span class="cap">money now</span></div>
+  <div class="fbox"><div class="ft">Insurer</div><div class="fs">holds the float</div></div>
+  <div class="farr"><span class="cap">invests it</span></div>
+  <div class="fbox neu-b"><div class="ft">Assets</div><div class="fs">earn a return over time</div></div>
+  <div class="farr"><span class="cap">pays back later — claims, benefits, savings + interest</span></div>
+  <div class="fbox neu-b"><div class="ft">Customers</div><div class="fs">get money back</div></div>
+</div>
+
+<p>The insurer profits two ways: <strong>underwriting</strong> (did I collect more than I paid out?) and <strong>investment</strong> (what did I earn on the float meanwhile?). Every insurer is some blend of "underwriter" and "investor." <em>Which blend</em> is what splits the industry into different businesses.</p>
+
+<hr>
+
+<p class="kicker">Section 2</p>
+<h2>The four businesses built on that engine</h2>
+<p>Same engine, very different machines bolted on. They line up on a spectrum by where the profit comes from:</p>
+
+<div class="spec">
+  <div class="spec-axis"><span><b>Underwriting-driven</b> · profit from risk</span><span>profit from spread · <b>Investment-driven</b></span></div>
+  <div class="spec-bar"></div>
+  <div class="cards4">
+    <div class="biz">
+      <div class="tag">A</div>
+      <div class="nm">P&amp;C insurance</div>
+      <div class="row"><b>car, home, liability</b></div>
+      <div class="row">risk: claims vs premiums; float invested conservatively</div>
+      <div class="eg">GEICO, Berkshire</div>
+    </div>
+    <div class="biz">
+      <div class="tag">B</div>
+      <div class="nm">Protection life</div>
+      <div class="row"><b>term &amp; whole life</b></div>
+      <div class="row">risk: death timing; patient, conservative bonds</div>
+      <div class="eg">Northwestern Mutual, MassMutual</div>
+    </div>
+    <div class="biz">
+      <div class="tag">C</div>
+      <div class="nm">Spread / annuity <span style="font-weight:400">(traditional)</span></div>
+      <div class="row"><b>fixed &amp; indexed annuities</b></div>
+      <div class="row">risk: mostly the spread; invest-grade bonds, run conservatively</div>
+      <div class="eg">a plain stock-life annuity book</div>
+    </div>
+    <div class="biz hl">
+      <div class="tag">D · ← Athene</div>
+      <div class="nm">PE-insurance</div>
+      <div class="row"><b>same products as C — supercharged</b></div>
+      <div class="row">re-engineered by an affiliated PE firm (Section 3)</div>
+      <div class="eg">Athene, Global Atlantic, Aspida</div>
+    </div>
+  </div>
+</div>
+
+<p><strong>A and B are not Athene at all.</strong> P&amp;C profits from pricing risk; protection life from mortality and patient compounding. The pivot is <strong>C</strong>, and here's the key realization:</p>
+<h3>An annuity isn't insurance against a disaster — it's a savings product.</h3>
+<p>You hand the insurer money; they promise a set interest rate for a set time; you get it back later. The insurer's profit is the <strong>spread</strong> — what they earn investing your money, minus what they promised to pay you:</p>
+
+<div class="spread">
+  <div class="a"><span class="k">insurer earns on your money</span><span>5%</span></div>
+  <div class="b"><span class="k">insurer promised you</span><span>3%</span></div>
+  <div class="c"><span class="k">the spread — the whole game</span><span>2%</span></div>
+</div>
+
+<p>That makes an annuity writer <strong>more of an asset-management business than an insurance business</strong> — a bank-like spread machine in an insurance wrapper. A <em>traditional</em> one (model C) runs it conservatively. <strong>Model D — Athene — takes that same spread engine and pushes every lever to its limit.</strong> That re-engineering is the whole reason this project exists.</p>
+
+<div class="note">Roughly 20 groups run model D — Apollo/Athene, KKR/Global Atlantic, Blackstone, Ares, Brookfield, and the rest of our target list. It barely existed before ~2009 (Apollo founded Athene in 2009). Regulators call it "asset-intensive reinsurance"; critics call it the "Bermuda triangle." It is the newest of the four, not the norm.</div>
+
+<hr>
+
+<p class="kicker">Section 3</p>
+<h2>The four levers that turn C into D</h2>
+<p>A traditional annuity writer and Athene sell the <em>same product</em>. Athene is different because Apollo pulls four levers at once. Each widens profit — and each creates one of the risks the map hunts.</p>
+
+<div class="tbl-scroll">
+<table class="lev">
+<thead><tr><th>Lever</th><th>Traditional (C)</th><th>Athene (D)</th><th>Creates</th></tr></thead>
+<tbody>
+<tr><td>1 · Assets</td><td class="trad">investment-grade public bonds anyone can price</td><td class="ath">private credit the affiliate <strong>originates</strong> — higher yield, illiquid, value is an <em>opinion</em> not a quote</td><td><span class="risk">F1 quality · F2 marks</span></td></tr>
+<tr><td>2 · Capital</td><td class="trad">onshore, full US capital held against the book</td><td class="ath">reinsured to an affiliated <strong>Bermuda</strong> reinsurer — lighter capital + tax, frees capital to write more</td><td><span class="risk">F4 opacity</span></td></tr>
+<tr><td>3 · Manager</td><td class="trad">third-party manager, arm's length</td><td class="ath">the affiliate (Apollo) owns the insurer, picks the assets, originates them, marks them, <strong>and earns a fee on all of it</strong></td><td><span class="risk">the core conflict</span></td></tr>
+<tr><td>4 · Funding</td><td class="trad">sticky retail annuities</td><td class="ath">retail annuities <strong>plus</strong> institutional funding (FABN) that can leave on a schedule</td><td><span class="risk">F4 runnability</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<p>None of the four is illegal or even necessarily wrong — reinsurance, annuities, private credit, and funding agreements are all legitimate tools. The twist is doing all four at once under an owner that profits from <em>volume</em>. Lever 3 is the structural heart of it: <strong>the same firm that profits from filling the pipes also grades its own homework on quality.</strong></p>
+
+<hr>
+
+<p class="kicker">Section 4</p>
+<h2>Athene's actual flow, with the levers labelled</h2>
+<p>The picture you've seen — now annotated with which lever does what, and the real YE2025 numbers from the dossier.</p>
+
+<div class="flow" style="max-width:560px">
+  <div class="fbox neu-b"><div class="ft">Policyholders + institutions</div><div class="fs">$83.4B in during 2025</div></div>
+  <div class="annot"><span class="badge">Lever 4</span><span>$35.4B of that is <b>funding agreements</b> — institutional money, runnable, not sticky.</span></div>
+  <div class="farr"></div>
+  <div class="fbox us-b"><div class="ft">US insurer — Athene Annuity &amp; Life (Iowa), "AAIA"</div><div class="fs">the licensed face; where your contract legally sits</div></div>
+  <div class="annot"><span class="badge">Lever 2</span><span>cede the economics offshore — <b>$168B held as ModCo + $74B ceded outright</b>, all to one affiliate.</span></div>
+  <div class="farr"></div>
+  <div class="fbox bm-b"><div class="ft">Bermuda reinsurer — Athene Annuity Re, "AARe"</div><div class="fs">lighter capital + tax; also (oddly) AAIA's owner; economics pool here</div></div>
+  <div class="annot"><span class="badge">Lever 1</span><span>invest in <b>private credit</b> — a $321B portfolio, much of it Apollo-originated.</span></div>
+  <div class="farr"></div>
+  <div class="fbox neu-b"><div class="ft">Assets → real borrowers</div><div class="fs">companies, real estate, asset-backed deals</div></div>
+</div>
+
+<div class="annot" style="border-left-color:var(--acc);max-width:560px"><span class="badge" style="color:var(--acc-ink);background:var(--acc-bg)">Lever 3</span><span>Alongside <em>every</em> arrow: <b>Apollo</b> owns the insurer, owns the reinsurer, picks and originates the assets, marks them, and collects fees — <b>$1.44B in 2025.</b></span></div>
+
+<p>The "US → Bermuda → US sandwich" that looked strange earlier — AARe is both AAIA's <em>parent</em> and its <em>reinsurer</em> — is just Lever 2 taken to its structural conclusion. The Bermuda reinsurer isn't a sibling the US insurer <em>does business with</em>; it's been placed <em>above</em> the US insurer in the ownership chain, so ownership, dividends, and reinsurance economics all pool in the same lightly-disclosed Bermuda company.</p>
+
+<hr>
+
+<p class="kicker">Section 5</p>
+<h2>What this means for the credit work</h2>
+<p>None of the levers is wrong by itself. The <strong>thesis being tested</strong> is whether pulling all four at once, under an owner that profits from volume, has quietly degraded credit quality while the disclosure that would reveal it moved offshore. That's why the map is built the way it is:</p>
+<ul>
+<li><strong>Lever 1</strong> makes asset values <em>opinions</em> → hunt mismarks (<span class="f1">F2</span>) and yield-vs-quality gaps (<span class="f1">F1</span>).</li>
+<li><strong>Lever 2</strong> moves the truth offshore → measure how much is hidden (<span class="f1">F4 opacity</span>) and rebuild the economic ledger from treaties.</li>
+<li><strong>Lever 3</strong> means one firm grades its own homework → every number it reports is a <em>claim</em> to check against an independent source, never a truth.</li>
+<li><strong>Lever 4</strong> makes the funding runnable → score how fast the money can leave (<span class="f1">F4 runnability</span>).</li>
+</ul>
+<div class="note"><strong>The honest counter-case matters too.</strong> A well-run PE-insurer genuinely can earn a wider spread safely — Apollo really is good at origination, and private credit really can out-yield public bonds for the same risk. The map must be able to conclude "this group is clean" where the evidence says so. We are testing the levers, not assuming they've been abused.</div>
+
+<hr>
+
+<h2 style="margin-top:36px">Glossary</h2>
+<p class="lede" style="margin-bottom:8px">The terms you'll keep hitting.</p>
+<div class="gloss"><dl>
+  <div class="item"><dt>Float</dt><dd>The pile of customer money the insurer holds before it must pay it back; what gets invested.</dd></div>
+  <div class="item"><dt>Spread</dt><dd>Investment return earned <em>minus</em> interest promised to the customer. The core profit of an annuity writer.</dd></div>
+  <div class="item"><dt>Annuity</dt><dd>A savings product, not disaster insurance: give money now, get a promised rate, get it back later.</dd></div>
+  <div class="item"><dt>Funding agreement / FABN</dt><dd>Borrowing dressed as insurance: a trust sells notes to bond investors, hands the cash to the insurer, and the insurer issues an insurance contract (the funding agreement) in return. Legally an insurance liability, economically a bond — and <em>not</em> sticky: it has maturities and must be rolled over. FABR (repo version) and FHLB advances are cousins.</dd></div>
+  <div class="item"><dt>Reinsurance / ceding</dt><dd>One insurer offloads risk and reserves to another ("cedes" to it). Normal — <em>unless</em> the reinsurer is one you own, offshore, for capital/tax efficiency rather than genuine risk transfer.</dd></div>
+  <div class="item"><dt>Reserves</dt><dd>The money set aside representing what the insurer owes policyholders. The central liability number.</dd></div>
+  <div class="item"><dt>ModCo (modified coinsurance)</dt><dd>A reinsurance form where the <em>assets stay legally on the US insurer's books</em> but the economics belong to the reinsurer. The single biggest reason the legal and economic ledgers diverge — $168B of it at AAIA alone.</dd></div>
+  <div class="item"><dt>Funds withheld</dt><dd>Same idea: the ceding insurer physically keeps the assets as collateral for reinsurance it has ceded. Onshore legally, offshore economically.</dd></div>
+  <div class="item"><dt>Private credit</dt><dd>Loans and credit assets not traded on public markets — no market price, so value is an estimate. Athene's asset engine, Apollo-originated.</dd></div>
+  <div class="item"><dt>Statutory (SAP) vs GAAP</dt><dd>Two accounting languages: SAP is what US insurers file with state regulators (conservative, entity-level); GAAP is the investor-facing consolidated version. They don't tie exactly — different rules, different perimeters.</dd></div>
+  <div class="item"><dt>Sidecar / ACRA / ADIP</dt><dd>Vehicles holding <em>outside</em> investors' capital alongside Athene's, invested the same way. Apollo earns fees on this third-party money too (~$15B of it).</dd></div>
+  <div class="item"><dt>Bermuda / BMA</dt><dd>Bermuda Monetary Authority — the offshore regulator with lighter capital rules and less public disclosure than US states. Where AARe reports.</dd></div>
+</dl></div>
+
+<footer>Companion to <code>spec/credit-map-spec.md</code>. Findings F1–F4 are defined in spec §1.1. Markdown source: <code>docs/how-apollo-insurance-works.md</code>.</footer>
+</div>
