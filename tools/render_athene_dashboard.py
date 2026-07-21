@@ -62,6 +62,8 @@ claims = {r['metric']: r for r in csv.DictReader(open(ROOT / 'extract/athene/l0-
 def fmt(metric):
     c = claims[metric]
     v = float(c['value'])
+    if c['unit'] == 'PCT':
+        return f'{v:.0f}%'
     b = v / 1e3 if c['unit'] == 'USD_M' else v / 1e9
     return f'${b:,.1f}B'
 
@@ -91,6 +93,8 @@ GROUPS = [
   ('statcs_alre', 'ALRe statutory capital & surplus', 'Down $3.9B in one year ($17.6B → $13.7B) while earning only +$0.6B — roughly $4.5B moved out. Where it went is an L1 trace item.'),
   ('statcs_acra2a', 'ACRA capital (2A; 1A adds $3.8B)', 'The sidecar cushions: ACRA 2A $6.6B + ACRA 1A $3.8B = ~$10.4B of capital, roughly two-thirds of it ADIP third-party money. Both Class C.'),
   ('athene_re_usa_iv_loc_admitted', 'Vermont captive: LOCs counted as capital', 'Athene Re USA IV counts $76M of letters of credit as admitted assets under a Vermont permitted practice — and the note says WITHOUT this practice it would not have exceeded authorized-control-level RBC. Onshore shadow insurance, disclosed in plain text.'),
+  ('aare_bscr_ratio', 'AARe BSCR ratio — compressing', 'The Bermuda ruler: eligible capital $30.6B vs required (ECR) $15.2B. Was 242% a year ago — required capital jumped 27% in one year while capital grew slower. Still above the 120% target level, but the trend is the story. (FCR, April 2026)'),
+  ('alre_bscr_ratio', 'ALRe BSCR ratio — compressing faster', 'Was 453% a year ago. Eligible capital fell $23.9B → $18.6B (the $3.9B statutory capital outflow shows up here too) while required capital rose. One year took a third off the ratio.'),
  ]),
  ("Apollo's take + runnability", [
   ('apollo_management_fees', 'Management fees to Apollo', 'FY2025 base + sub-allocation + performance fees under the Fee Agreement (0.225% base on the first $103.4B, higher sub-allocation fees for higher-alpha asset classes). Plus $66M sub-advisory passthrough.'),
@@ -185,11 +189,59 @@ CAPITAL_FLOW = (
     'Only ~$63B of the headline $83B is economically Athene\'s.</div>'
 )
 
+treaties = list(csv.DictReader(open(ROOT / 'extract/athene/treaties.csv')))
+def money(v):
+    v = int(v)
+    return f'{v/1e9:,.1f}' if v else '—'
+trows = []
+for r in treaties:
+    trows.append(f"<tr><td>{e(r['effective'])}</td><td>{e(r['account'])}</td><td>{e(r['reins_type'])}</td><td>{e(r['business'])}</td>"
+                 f"<td>{money(r['premiums_fy2025'])}</td><td>{money(r['modco_reserve'])}</td>"
+                 f"<td>{money(r['reserve_credit_cur'])}</td><td>{money(r['funds_withheld'])}</td></tr>")
+TREATY_TABLE = (
+    '<div class="tbl-scroll"><table class="ptable"><thead><tr>'
+    '<th>Effective</th><th>Acct</th><th>Type</th><th>Business</th>'
+    '<th>Premiums FY25 ($B)</th><th>ModCo ($B)</th><th>Res. credit ($B)</th><th>Funds withheld ($B)</th>'
+    '</tr></thead><tbody>' + '\n'.join(trows) + '</tbody></table></div>'
+)
+
+CONNECT = '''
+<div class="callout" style="border-left-color:var(--acc)">
+<strong>How the pieces connect (top to bottom of this page):</strong>
+① Savers and institutions put in <strong>$83.4B</strong> during 2025 (42% of it bond-like funding agreements; $18.5B of it owned by ADIP third-party capital) →
+② that money accumulates as <strong>reserves</strong> — $271.2B owed — at the US insurer AAIA →
+③ AAIA passes the economics through <strong>one door</strong> to Bermuda: $168.3B ModCo + $74.3B ceded + $66.7B funds withheld, all to AARe — decomposed below into its <strong>29 treaties</strong> →
+④ below AARe the economics split between Athene's own account and the <strong>ACRA sidecars</strong> (ADIP equity $15.1B) →
+⑤ the money is invested — <strong>$321B</strong> of bonds, mortgages, private credit, physically held at AAIA, managed by Apollo for <strong>$1.44B of fees</strong> →
+⑥ the loss-absorbing layer under all of it is the <strong>cushion</strong>: AAIA TAC $9.5B (RBC 871% ACL), AARe EBS $30.6B vs ECR $15.2B (BSCR 202%, was 242%).
+Every number is a card or table on this page, cited to its filed source.
+</div>'''
+
+L1_SECTION = f'''
+<h2>L1 — the offshore door, decomposed into treaties</h2>
+<hr class="rule">
+<p class="cfnote">This table splits the L0 offshore-transfer totals (③ above) into the individual AAIA → AARe reinsurance
+agreements from Schedule S. <strong>Footing: 8/8 gates pass</strong> — premiums, ModCo, reserve credit, and funds withheld
+each sum exactly to the statement's printed section totals. Two treaty families: the 2018–2022 ModCo vintages
+(unauthorized status) and the 2024+ funds-withheld coinsurance (reciprocal-jurisdiction status). Business codes:
+IA = individual annuities, FA = funding agreements/deposit-type, OA/OL = other annuities/life, VA = variable annuities.</p>
+{TREATY_TABLE}
+<div class="callout"><strong>Two findings sit in this table.</strong> First: funding agreements (FA rows) ARE inside the
+ceded pool — including $8.4B of FY2025 premiums into the 2024 funds-withheld treaty — so the runnable liabilities are
+part of what moves offshore (whether the ACRA/ADIP slice includes them is still open; ACRA files no public FCR —
+the sidecars sit outside the Bermuda sub-group's own disclosure). Second, the <strong>mirror check is partially
+blocked by design</strong>: AARe publishes no unconsolidated statutory statement, so Iowa's ceded numbers cannot be
+line-item reconciled against Bermuda's assumed numbers from public documents. The FCR confirms the aggregate EBS
+picture (AARe eligible capital $30.6B vs required $15.2B), but the treaty-level mirror is not publicly checkable —
+a measured opacity finding, logged not papered over.</div>'''
+
 TEMPLATE = open(ROOT / 'tools/dashboard_template.html').read()
 out = (TEMPLATE
        .replace('__ROWS__', ROWS).replace('__DOCS__', DOCS)
        .replace('__L0CARDS__', L0CARDS)
        .replace('__CAPITAL_FLOW__', CAPITAL_FLOW)
+       .replace('__CONNECT__', CONNECT)
+       .replace('__L1_SECTION__', L1_SECTION)
        .replace('__N_TOTAL__', str(n_total)).replace('__N_COC__', str(n_coc))
        .replace('__N_BM__', str(n_bm)).replace('__N_LEI__', str(n_lei))
        .replace('__N_DOCS__', str(len(docs))))

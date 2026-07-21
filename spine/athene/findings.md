@@ -33,5 +33,13 @@ Working notes from the entity-map build. Each item is a finding or an open verif
 16. **Intercompany liquidity web**: revolving notes — AHL owes ALRe $2.22B (2.29% fixed), AUSA owes ALRe $417M; AARe can borrow $1B from AUSA ($19M drawn). Below-market related-party lending; map at L1.
 17. **Bermuda permitted practices boost capital**: p.64 shows increases to capital & surplus "due to permitted practices" of $1,982M / $808M / $2,655M / $2,655M / $54M (column mapping to entities not yet pinned — extract the full table at L1).
 
+## L1 findings (treaty decomposition + FCR, 2026-07-21)
+18. **Treaty table footed 8/8.** All 29 AAIA→AARe Schedule S rows encode to `extract/athene/treaties.csv`; premiums, ModCo, reserve credit, and funds withheld each sum exactly to the printed section totals (18,265,046,901 / 110,346,917,726 / 65,263,421,108 / 65,543,636,517 / 52,198,633,311 …). The offshore door is now decomposed with zero residual.
+19. **Bermuda cushion compressing fast** (FCR §8b, April 2026): AARe BSCR **242% → 202%** (ECR required capital $11.9B → $15.2B, +27%); ALRe BSCR **453% → 309%**. Still above the 120%-of-ECR target level, but the one-year trend is steep — required capital is growing much faster than eligible capital.
+20. **Three capital measures diverge at AARe**: GAAP $42.9B vs Bermuda statutory (SFS) $23.7B vs EBS eligible $30.6B. Mapping the prudential filters/permitted practices between them is an L2 item.
+21. **ACRA is NOT in the Bermuda sub-group FCR** — the FCR covers only AARe + ALRe + ALReI. The sidecars (with the ADIP third-party capital) file separately; their FCR/disclosure needs its own hunt. Opacity note: the group's own public Bermuda narrative excludes the third-party-capital vehicles.
+22. **ALReI is the Class C in the sub-group** (tiny: £65M eligible capital, GBP-denominated) — distinct from ACRA 1A/2A's Class C designation in the AARe GAAP note.
+23. **Mirror-check status: PARTIAL.** AARe publishes no unconsolidated statutory FS (only consolidated GAAP, which eliminates the AAIA intercompany). The FCR's EBS view confirms the Bermuda side at aggregate level, and ALRe's unconsolidated stat FS ($29.0B gross reserves assumed) evidences the retro layer — but a line-item AAIA-ceded ↔ AARe-assumed reconciliation is not possible from public documents. **This measured gap IS the opacity finding Gober described; it's now quantified and logged, not papered over.**
+
 ## Phase 1 bonus (parked)
 - BMA Class E declaration page lists Global Atlantic's entities: Ivy Re, Ivy Re II, Ivy Peak Co-Invest Re I/II, Global Atlantic Ivy Re III, GA Iris Re, Global Atlantic Assurance — a head start on the GA census.

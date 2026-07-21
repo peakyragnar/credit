@@ -56,3 +56,10 @@ statcs_acra1a,3822,USD_M,SAP-Bermuda,ACRA 1A (PY 4521),2025-12-31,aare-gaap-fs-y
 statcs_acra2a,6585,USD_M,SAP-Bermuda,ACRA 2A (PY 4569),2025-12-31,aare-gaap-fs-ye2025,Note - Statutory capital and surplus table,2026-07-02,5dadb3d244e8d8dc5f1d81bd39439455dc1c1806d4b80cb535350ac74c6df5b9
 statcs_aaia,4122,USD_M,SAP,AAIA (PY 3899),2025-12-31,aare-gaap-fs-ye2025,Note - Statutory capital and surplus table,2026-07-02,5dadb3d244e8d8dc5f1d81bd39439455dc1c1806d4b80cb535350ac74c6df5b9
 athene_re_usa_iv_loc_admitted,76,USD_M,SAP-permitted-practice,Athene Re USA IV — LOCs counted as admitted assets,2025-12-31,aare-gaap-fs-ye2025,Note - Statutory Requirements,2026-07-02,5dadb3d244e8d8dc5f1d81bd39439455dc1c1806d4b80cb535350ac74c6df5b9
+aare_gaap_capital_surplus,42889,USD_M,GAAP,AARe,2025-12-31,athene-bermuda-fcr-2025,Section 8b(i) ECR and MSM table,2026-04,318949f0ae8329b1c2e28b2d0f04a983da9eeb26c1e752eb263427d0801bd314
+aare_ebs_capital,30623,USD_M,EBS,AARe eligible capital (all Tier 1),2025-12-31,athene-bermuda-fcr-2025,Section 8b(i) ECR and MSM table,2026-04,318949f0ae8329b1c2e28b2d0f04a983da9eeb26c1e752eb263427d0801bd314
+aare_ecr_required,15166,USD_M,EBS,AARe (PY 11911 — +27% in a year),2025-12-31,athene-bermuda-fcr-2025,Section 8b(i) ECR and MSM table,2026-04,318949f0ae8329b1c2e28b2d0f04a983da9eeb26c1e752eb263427d0801bd314
+aare_bscr_ratio,202,PCT,EBS,AARe (PY 242%),2025-12-31,athene-bermuda-fcr-2025,Section 8b(i) ECR and MSM table,2026-04,318949f0ae8329b1c2e28b2d0f04a983da9eeb26c1e752eb263427d0801bd314
+alre_ebs_capital,18622,USD_M,EBS,ALRe eligible capital (PY 23939),2025-12-31,athene-bermuda-fcr-2025,Section 8b(i) ECR and MSM table,2026-04,318949f0ae8329b1c2e28b2d0f04a983da9eeb26c1e752eb263427d0801bd314
+alre_ecr_required,6026,USD_M,EBS,ALRe (PY 5283),2025-12-31,athene-bermuda-fcr-2025,Section 8b(i) ECR and MSM table,2026-04,318949f0ae8329b1c2e28b2d0f04a983da9eeb26c1e752eb263427d0801bd314
+alre_bscr_ratio,309,PCT,EBS,ALRe (PY 453%),2025-12-31,athene-bermuda-fcr-2025,Section 8b(i) ECR and MSM table,2026-04,318949f0ae8329b1c2e28b2d0f04a983da9eeb26c1e752eb263427d0801bd314
