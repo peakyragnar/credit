@@ -1,0 +1,319 @@
+<title>Athene entity map</title>
+<style>
+:root{
+  --bg:#F6F5F1; --panel:#FFFFFF; --ink:#22271F; --muted:#6E756D; --line:#E3E1D8; --line2:#CFCCC0;
+  --us:#0F6E56; --us-bg:#E4F3EC; --us-ink:#085041;
+  --bm:#A3431D; --bm-bg:#F9ECE5; --bm-ink:#712B13;
+  --acc:#185FA5; --warn-bg:#FAEEDA; --warn-ink:#633806;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15191B; --panel:#1D2325; --ink:#E7E9E3; --muted:#8F978F; --line:#2B3234; --line2:#3A4245;
+  --us:#5DCAA5; --us-bg:#0C3A2D; --us-ink:#9FE1CB;
+  --bm:#F0997B; --bm-bg:#43200F; --bm-ink:#F5C4B3;
+  --acc:#85B7EB; --warn-bg:#3A2B10; --warn-ink:#FAC775;
+}}
+:root[data-theme="dark"]{
+  --bg:#15191B; --panel:#1D2325; --ink:#E7E9E3; --muted:#8F978F; --line:#2B3234; --line2:#3A4245;
+  --us:#5DCAA5; --us-bg:#0C3A2D; --us-ink:#9FE1CB;
+  --bm:#F0997B; --bm-bg:#43200F; --bm-ink:#F5C4B3;
+  --acc:#85B7EB; --warn-bg:#3A2B10; --warn-ink:#FAC775;
+}
+:root[data-theme="light"]{
+  --bg:#F6F5F1; --panel:#FFFFFF; --ink:#22271F; --muted:#6E756D; --line:#E3E1D8; --line2:#CFCCC0;
+  --us:#0F6E56; --us-bg:#E4F3EC; --us-ink:#085041;
+  --bm:#A3431D; --bm-bg:#F9ECE5; --bm-ink:#712B13;
+  --acc:#185FA5; --warn-bg:#FAEEDA; --warn-ink:#633806;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 "Avenir Next","Segoe UI",system-ui,sans-serif;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:36px 24px 64px}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-variant-numeric:tabular-nums}
+.dim{color:var(--muted)}
+.sm{font-size:13px}.xs{font-size:11.5px}
+
+header{border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:8px}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+h1{font-size:30px;font-weight:600;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:8px 0 0;font-size:14px}
+.sub .mono{font-size:12.5px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0 32px}
+.stat{background:var(--panel);padding:14px 16px}
+.stat .v{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.stat .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+
+h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin:40px 0 6px;color:var(--ink)}
+h2 .cnt{color:var(--muted);font-weight:400;letter-spacing:0;text-transform:none;font-size:13px}
+.rule{border:0;border-top:1px solid var(--line2);margin:0 0 16px}
+
+.callout{background:var(--panel);border-left:3px solid var(--bm);padding:14px 18px;margin:0 0 20px;font-size:14.5px}
+.callout strong{font-weight:600}
+
+.figure{background:var(--panel);border:1px solid var(--line);padding:20px 8px;overflow-x:auto}
+.figure svg{display:block;margin:0 auto;min-width:660px;max-width:720px;width:100%}
+svg .nd{stroke-width:1;rx:3}
+svg .neutral{fill:var(--panel);stroke:var(--line2)}
+svg .usn{fill:var(--us-bg);stroke:var(--us)}
+svg .bmn{fill:var(--bm-bg);stroke:var(--bm)}
+svg text{font-family:"Avenir Next","Segoe UI",system-ui,sans-serif}
+svg .t1{fill:var(--ink);font-size:13.5px;font-weight:600}
+svg .t2{fill:var(--muted);font-size:11.5px}
+svg .usn ~ .t1u,svg text.t1u{fill:var(--us-ink);font-size:13.5px;font-weight:600}
+svg text.t2u{fill:var(--us);font-size:11.5px}
+svg text.t1b{fill:var(--bm-ink);font-size:13.5px;font-weight:600}
+svg text.t2b{fill:var(--bm);font-size:11.5px}
+svg .wire{stroke:var(--muted);stroke-width:1;fill:none}
+svg .box-dash{fill:none;stroke:var(--line2);stroke-dasharray:5 4;stroke-width:1}
+svg .lbl{fill:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 14px}
+.controls input{background:var(--panel);border:1px solid var(--line2);color:var(--ink);padding:8px 12px;font:inherit;font-size:13.5px;width:260px;border-radius:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{background:var(--panel);border:1px solid var(--line2);color:var(--muted);font:inherit;font-size:12px;padding:5px 11px;cursor:pointer;border-radius:999px}
+.chips button.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);font-size:13.5px}
+th{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:600;padding:10px 12px;border-bottom:1px solid var(--line2);background:var(--panel);position:sticky;top:0}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.nm{font-weight:600}
+.note{color:var(--muted);font-size:12px;margin-top:1px}
+.tbl-scroll{overflow-x:auto}
+.chip{display:inline-block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.r-us{background:var(--us-bg);color:var(--us-ink)}
+.r-re{background:var(--bm-bg);color:var(--bm-ink)}
+.r-hc{background:var(--line);color:var(--ink)}
+.r-mg{background:var(--warn-bg);color:var(--warn-ink)}
+.r-fd{background:var(--line);color:var(--muted)}
+.r-af{background:var(--line);color:var(--muted)}
+.r-ot{background:var(--line);color:var(--muted)}
+.empty{padding:28px;text-align:center;color:var(--muted);display:none}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);padding:18px 20px}
+.panel h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 10px;font-weight:600}
+.panel ul{margin:0;padding-left:18px;font-size:13.5px}
+.panel li{margin-bottom:9px}
+.panel li:last-child{margin-bottom:0}
+
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line2);color:var(--muted);font-size:12px}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">Credit map · phase 0 census</p>
+  <h1>Athene complex — entity map</h1>
+  <p class="sub">Verified from FY2025 filings: EX-21 exhibits (APO, AHL) · AAIA Schedule Y (YE2025 statutory) · GLEIF.
+  As of <span class="mono">2026-07-21</span>. Roles marked provisional pending L1.</p>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="v">65</div><div class="k">Entities in spine</div></div>
+  <div class="stat"><div class="v">15</div><div class="k">NAIC cocodes</div></div>
+  <div class="stat"><div class="v">16</div><div class="k">Bermuda entities</div></div>
+  <div class="stat"><div class="v">16</div><div class="k">LEIs matched</div></div>
+  <div class="stat"><div class="v">6</div><div class="k">Source documents</div></div>
+</div>
+
+<div class="callout"><strong>The structural headline:</strong> Athene Holding does not own its US insurers directly.
+The chain runs AHL → Athene USA Corp (Iowa) → <strong>Athene Annuity Re Ltd. (Bermuda)</strong> → the entire US fleet
+<em>and</em> the other Bermuda reinsurers. AARe — not ALRe — is the pivot. Cited to AAIA Schedule Y Part 1A.</div>
+
+<h2>Verified ownership chain</h2>
+<hr class="rule">
+<div class="figure">
+<svg viewBox="0 0 680 742" role="img" aria-label="Athene verified ownership chain">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect class="nd neutral" x="210" y="30" width="260" height="50" rx="3"/><text class="t1" x="340" y="50" text-anchor="middle">Apollo Global Management</text><text class="t2" x="340" y="68" text-anchor="middle">NYSE: APO — ultimate parent</text>
+<line class="wire" x1="340" y1="80" x2="340" y2="104" marker-end="url(#ar)"/>
+<rect class="nd bmn" x="210" y="110" width="260" height="50" rx="3"/><text class="t1b" x="340" y="130" text-anchor="middle">Athene Holding Ltd.</text><text class="t2b" x="340" y="148" text-anchor="middle">Bermuda — SEC registrant</text>
+<line class="wire" x1="340" y1="160" x2="340" y2="184" marker-end="url(#ar)"/>
+<rect class="nd neutral" x="210" y="190" width="260" height="50" rx="3"/><text class="t1" x="340" y="210" text-anchor="middle">Athene USA Corporation</text><text class="t2" x="340" y="228" text-anchor="middle">Iowa holdco</text>
+<line class="wire" x1="340" y1="240" x2="340" y2="264" marker-end="url(#ar)"/>
+<rect class="nd bmn" x="210" y="270" width="260" height="50" rx="3"/><text class="t1b" x="340" y="290" text-anchor="middle">Athene Annuity Re Ltd. (AARe)</text><text class="t2b" x="340" y="308" text-anchor="middle">Bermuda pivot — owns both legs</text>
+<path class="wire" d="M340 320 V340 H180 V354" marker-end="url(#ar)"/>
+<path class="wire" d="M340 320 V340 H500 V354" marker-end="url(#ar)"/>
+<rect class="box-dash" x="40" y="360" width="280" height="310" rx="3"/>
+<text class="lbl" x="55" y="380">US fleet — all under AAIA</text>
+<rect class="nd usn" x="55" y="390" width="250" height="50" rx="3"/><text class="t1u" x="180" y="410" text-anchor="middle">AAIA (61689) — lead insurer</text><text class="t2u" x="180" y="428" text-anchor="middle">Athene Annuity and Life, Iowa</text>
+<path class="wire" d="M68 440 V625 M68 485 H78 M68 555 H78 M68 625 H78"/>
+<rect class="nd usn" x="80" y="460" width="225" height="50" rx="3"/><text class="t1u" x="192" y="480" text-anchor="middle">AANY (68039) — New York</text><text class="t2u" x="192" y="498" text-anchor="middle">owns ALICNY (63932)</text>
+<rect class="nd usn" x="80" y="530" width="225" height="50" rx="3"/><text class="t1u" x="192" y="550" text-anchor="middle">SARC (15306) — Iowa</text><text class="t2u" x="192" y="568" text-anchor="middle">reinsurer, 99% AAIA</text>
+<rect class="nd usn" x="80" y="600" width="225" height="50" rx="3"/><text class="t1u" x="192" y="620" text-anchor="middle">Athene Re USA IV (14179)</text><text class="t2u" x="192" y="638" text-anchor="middle">Vermont captive</text>
+<rect class="box-dash" x="360" y="360" width="280" height="240" rx="3"/>
+<text class="lbl" x="375" y="380">Bermuda — 100% AARe</text>
+<rect class="nd bmn" x="375" y="390" width="250" height="50" rx="3"/><text class="t1b" x="500" y="410" text-anchor="middle">Athene Life Re Ltd. (ALRe)</text><text class="t2b" x="500" y="428" text-anchor="middle">13% VA Capital · ACRA 2</text>
+<rect class="nd bmn" x="375" y="460" width="250" height="50" rx="3"/><text class="t1b" x="500" y="480" text-anchor="middle">Athene Life Re International</text><text class="t2b" x="500" y="498" text-anchor="middle">ALReI</text>
+<rect class="nd bmn" x="375" y="530" width="250" height="50" rx="3"/><text class="t1b" x="500" y="550" text-anchor="middle">Athene Annuity Re II Ltd.</text><text class="t2b" x="500" y="568" text-anchor="middle">new — purpose tbd</text>
+<line class="wire" x1="500" y1="600" x2="500" y2="618" stroke-dasharray="3 3"/>
+<rect class="box-dash" x="360" y="620" width="280" height="60" rx="3"/>
+<text class="t1" x="500" y="644" text-anchor="middle">ACRA sidecars (gen 1 and 2)</text>
+<text class="t2" x="500" y="663" text-anchor="middle">33% Athene · 67% ADIP third-party</text>
+<rect class="nd usn" x="40" y="700" width="12" height="12"/><text class="t2" x="58" y="710">US-regulated insurer</text>
+<rect class="nd bmn" x="230" y="700" width="12" height="12"/><text class="t2" x="248" y="710">Bermuda entity</text>
+</svg>
+</div>
+
+<h2>Entity spine <span class="cnt" id="cnt"></span></h2>
+<hr class="rule">
+<div class="controls">
+  <input id="q" type="search" placeholder="Search name, parent, identifier…" aria-label="Search entities">
+  <div class="chips" id="chips">
+    <button class="on" data-f="all">All</button>
+    <button data-f="insurer">US insurers</button>
+    <button data-f="reinsurer">Reinsurers</button>
+    <button data-f="holdco">Holdcos</button>
+    <button data-f="manager">Managers</button>
+    <button data-f="fund">Funds</button>
+    <button data-f="affiliated-insurer">Affiliated complexes</button>
+    <button data-f="other">Other</button>
+  </div>
+</div>
+<div class="tbl-scroll">
+<table>
+<thead><tr><th>Entity</th><th>Jurisdiction</th><th>Role</th><th>Identifiers</th><th>Parent · %</th><th>Sources</th></tr></thead>
+<tbody id="tb">
+<tr data-role="manager-parent" data-q="apollo global management, inc. delaware nyse: apo; ultimate parent; cik 1858681    "><td><div class="nm">Apollo Global Management, Inc.</div><div class="note">NYSE: APO; ultimate parent; CIK 1858681</div></td><td>Delaware</td><td><span class="chip r-mg">Manager</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+<tr data-role="holdco" data-q="athene holding ltd. bermuda sec registrant (listed prefs ath-pa/b/d/e, aths); cik 1527469 apollo global management, inc.  549300h316ct32fqxi76 "><td><div class="nm">Athene Holding Ltd.</div><div class="note">SEC registrant (listed prefs ATH-PA/B/D/E, ATHS); CIK 1527469</div><span class="mono dim" title="LEI">549300H316CT32FQXI76</span></td><td>Bermuda</td><td><span class="chip r-hc">Holdco</span></td><td class="mono sm"></td><td class="sm">Apollo Global Management, Inc. · 100%</td><td class="mono xs dim">apo-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="reinsurer" data-q="athene life re ltd. bermuda alre; also holds 13% of va capital (venerable parent) and 100% acra holding 2 athene annuity re ltd.  549300zew850iu8xxp60 98-0628973"><td><div class="nm">Athene Life Re Ltd.</div><div class="note">ALRe; also holds 13% of VA Capital (Venerable parent) and 100% ACRA Holding 2</div><span class="mono dim" title="LEI">549300ZEW850IU8XXP60</span></td><td>Bermuda</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm">FEIN 98-0628973</td><td class="sm">Athene Annuity Re Ltd. · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="fund" data-q="athene asset l.p. bermuda held by alre athene life re ltd.   "><td><div class="nm">Athene Asset L.P.</div><div class="note">held by ALRe</div></td><td>Bermuda</td><td><span class="chip r-fd">Fund</span></td><td class="mono sm"></td><td class="sm">Athene Life Re Ltd. · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025</td></tr>
+<tr data-role="reinsurer" data-q="athene life re international ltd. bermuda alrei athene annuity re ltd.  2549004zh5dhteubb984 "><td><div class="nm">Athene Life Re International Ltd.</div><div class="note">ALReI</div><span class="mono dim" title="LEI">2549004ZH5DHTEUBB984</span></td><td>Bermuda</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm"></td><td class="sm">Athene Annuity Re Ltd. · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="holdco" data-q="athene usa corporation iowa iowa holdco; upstream parent of aare (udp per schedule y) athene holding ltd.  549300su8646dm9jpt70 "><td><div class="nm">Athene USA Corporation</div><div class="note">Iowa holdco; upstream parent of AARe (UDP per Schedule Y)</div><span class="mono dim" title="LEI">549300SU8646DM9JPT70</span></td><td>Iowa</td><td><span class="chip r-hc">Holdco</span></td><td class="mono sm"></td><td class="sm">Athene Holding Ltd. · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="reinsurer" data-q="athene annuity re ltd. bermuda aare — bermuda pivot: owns aaia + alre + alrei + aare ii per schedule y athene usa corporation  5493004t1xxkio7s5v28 98-1408540"><td><div class="nm">Athene Annuity Re Ltd.</div><div class="note">AARe — Bermuda pivot: owns AAIA + ALRe + ALReI + AARe II per Schedule Y</div><span class="mono dim" title="LEI">5493004T1XXKIO7S5V28</span></td><td>Bermuda</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm">FEIN 98-1408540</td><td class="sm">Athene USA Corporation · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="other" data-q="athene employee services, llc iowa service/assignment/spv — classify at l1    "><td><div class="nm">Athene Employee Services, LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Iowa</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="athene london assignment corporation delaware service/assignment/spv — classify at l1    "><td><div class="nm">Athene London Assignment Corporation</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Delaware</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="athene assignment corporation delaware service/assignment/spv — classify at l1    "><td><div class="nm">Athene Assignment Corporation</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Delaware</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="a-a onshore fund, llc delaware service/assignment/spv — classify at l1    "><td><div class="nm">A-A Onshore Fund, LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Delaware</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="athene noctua, llc delaware service/assignment/spv — classify at l1    "><td><div class="nm">Athene Noctua, LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Delaware</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="acm trademarks, l.l.c iowa service/assignment/spv — classify at l1    "><td><div class="nm">ACM Trademarks, L.L.C</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Iowa</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="arph (headquarters building), llc iowa service/assignment/spv — classify at l1    "><td><div class="nm">ARPH (Headquarters Building), LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Iowa</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="insurer" data-q="athene annuity and life company iowa lead us insurer (aaia); schedule y reporting entity athene annuity re ltd. 61689 xwz5f0ncyyun02gidr14 42-0175020"><td><div class="nm">Athene Annuity and Life Company</div><div class="note">lead US insurer (AAIA); Schedule Y reporting entity</div><span class="mono dim" title="LEI">XWZ5F0NCYYUN02GIDR14</span></td><td>Iowa</td><td><span class="chip r-us">US insurer</span></td><td class="mono sm">NAIC 61689<br>FEIN 42-0175020</td><td class="sm">Athene Annuity Re Ltd. · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="other" data-q="p.l. assigned services, inc. new york service/assignment/spv — classify at l1    "><td><div class="nm">P.L. Assigned Services, Inc.</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>New York</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="insurer" data-q="athene annuity &amp; life assurance company of new york new york aany athene annuity and life company 68039 549300bbe7lti10i2258 13-2570714"><td><div class="nm">Athene Annuity &amp; Life Assurance Company of New York</div><div class="note">AANY</div><span class="mono dim" title="LEI">549300BBE7LTI10I2258</span></td><td>New York</td><td><span class="chip r-us">US insurer</span></td><td class="mono sm">NAIC 68039<br>FEIN 13-2570714</td><td class="sm">Athene Annuity and Life Company · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="reinsurer" data-q="structured annuity reinsurance company iowa iowa reinsurer athene annuity and life company 15306 549300sudocwonvduo16 46-2091695"><td><div class="nm">Structured Annuity Reinsurance Company</div><div class="note">Iowa reinsurer</div><span class="mono dim" title="LEI">549300SUDOCWONVDUO16</span></td><td>Iowa</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm">NAIC 15306<br>FEIN 46-2091695</td><td class="sm">Athene Annuity and Life Company · 99%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="other" data-q="athene securities, llc iowa broker-dealer    "><td><div class="nm">Athene Securities, LLC</div><div class="note">broker-dealer</div></td><td>Iowa</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="centralife annuities service, inc. arizona service/assignment/spv — classify at l1    "><td><div class="nm">Centralife Annuities Service, Inc.</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Arizona</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="reinsurer" data-q="athene re usa iv, inc. vermont vermont captive athene annuity and life company 14179 984500eb2g2c3ec59666 45-3727380"><td><div class="nm">Athene Re USA IV, Inc.</div><div class="note">Vermont captive</div><span class="mono dim" title="LEI">984500EB2G2C3EC59666</span></td><td>Vermont</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm">NAIC 14179<br>FEIN 45-3727380</td><td class="sm">Athene Annuity and Life Company · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="insurer" data-q="athene life insurance company of new york new york owned by aany per schedule y athene annuity &amp; life assurance company of new york 63932 549300ra19imnroii339 13-1970218"><td><div class="nm">Athene Life Insurance Company of New York</div><div class="note">owned by AANY per Schedule Y</div><span class="mono dim" title="LEI">549300RA19IMNROII339</span></td><td>New York</td><td><span class="chip r-us">US insurer</span></td><td class="mono sm">NAIC 63932<br>FEIN 13-1970218</td><td class="sm">Athene Annuity &amp; Life Assurance Company of New York · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="other" data-q="aade rml, llc iowa service/assignment/spv — classify at l1    "><td><div class="nm">AADE RML, LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Iowa</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="aaia rml, llc iowa service/assignment/spv — classify at l1    "><td><div class="nm">AAIA RML, LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Iowa</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="athene bermuda employee company ltd. bermuda service/assignment/spv — classify at l1    "><td><div class="nm">Athene Bermuda Employee Company Ltd.</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Bermuda</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="athene ip holding ltd. bermuda ip holdco    "><td><div class="nm">Athene IP Holding Ltd.</div><div class="note">IP holdco</div></td><td>Bermuda</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="athene north employment service corporation canada service/assignment/spv — classify at l1    "><td><div class="nm">Athene North Employment Service Corporation</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Canada</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="holdco" data-q="athene co-invest reinsurance affiliate holding ltd. bermuda acra 1 holdco    "><td><div class="nm">Athene Co-Invest Reinsurance Affiliate Holding Ltd.</div><div class="note">ACRA 1 holdco</div></td><td>Bermuda</td><td><span class="chip r-hc">Holdco</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="reinsurer" data-q="athene co-invest reinsurance affiliate 1a ltd. bermuda acra 1a — only 33% athene-held; remainder third-party adip capital athene co-invest reinsurance affiliate holding ltd.  549300edjbtcj4s1at57 "><td><div class="nm">Athene Co-Invest Reinsurance Affiliate 1A Ltd.</div><div class="note">ACRA 1A — only 33% Athene-held; remainder third-party ADIP capital</div><span class="mono dim" title="LEI">549300EDJBTCJ4S1AT57</span></td><td>Bermuda</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm"></td><td class="sm">Athene Co-Invest Reinsurance Affiliate Holding Ltd. · 33%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="reinsurer" data-q="athene co-invest reinsurance affiliate 1b ltd. bermuda acra 1b; parent stake tbd   549300jbo6t99tqdfi39 "><td><div class="nm">Athene Co-Invest Reinsurance Affiliate 1B Ltd.</div><div class="note">ACRA 1B; parent stake tbd</div><span class="mono dim" title="LEI">549300JBO6T99TQDFI39</span></td><td>Bermuda</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21 · gleif-api</td></tr>
+<tr data-role="fund" data-q="athene co-invest reinsurance affiliate lp delaware delaware lp under acra 1a athene co-invest reinsurance affiliate 1a ltd.   "><td><div class="nm">Athene Co-Invest Reinsurance Affiliate LP</div><div class="note">Delaware LP under ACRA 1A</div></td><td>Delaware</td><td><span class="chip r-fd">Fund</span></td><td class="mono sm"></td><td class="sm">Athene Co-Invest Reinsurance Affiliate 1A Ltd. · 99%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025</td></tr>
+<tr data-role="reinsurer" data-q="athene co-invest reinsurance affiliate international ltd. bermuda acra international athene co-invest reinsurance affiliate 1a ltd.  254900hb53m9we36t980 "><td><div class="nm">Athene Co-Invest Reinsurance Affiliate International Ltd.</div><div class="note">ACRA international</div><span class="mono dim" title="LEI">254900HB53M9WE36T980</span></td><td>Bermuda</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm"></td><td class="sm">Athene Co-Invest Reinsurance Affiliate 1A Ltd. · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="other" data-q="athene risk aggregator, llc delaware service/assignment/spv — classify at l1    "><td><div class="nm">Athene Risk Aggregator, LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Delaware</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="fund" data-q="adip (athene) carry plan, l.p. bermuda carry vehicle; alre-linked per schedule y athene life re ltd.   "><td><div class="nm">ADIP (Athene) Carry Plan, L.P.</div><div class="note">carry vehicle; ALRe-linked per Schedule Y</div></td><td>Bermuda</td><td><span class="chip r-fd">Fund</span></td><td class="mono sm"></td><td class="sm">Athene Life Re Ltd.</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025</td></tr>
+<tr data-role="other" data-q="athene re services, llc new york service/assignment/spv — classify at l1    "><td><div class="nm">Athene Re Services, LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>New York</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="rosencrantz depositor, llc delaware service/assignment/spv — classify at l1    "><td><div class="nm">Rosencrantz Depositor, LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Delaware</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="nnn agp opportunities gp, llc delaware service/assignment/spv — classify at l1    "><td><div class="nm">NNN AGP Opportunities GP, LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Delaware</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="aare structured holdings, llc delaware service/assignment/spv — classify at l1    "><td><div class="nm">AARE Structured Holdings, LLC</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Delaware</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="holdco" data-q="athene co invest reinsurance affiliate holding 2 ltd. bermuda acra 2 holdco — athene side held via alre athene life re ltd.   "><td><div class="nm">Athene Co Invest Reinsurance Affiliate Holding 2 Ltd.</div><div class="note">ACRA 2 holdco — Athene side held via ALRe</div></td><td>Bermuda</td><td><span class="chip r-hc">Holdco</span></td><td class="mono sm"></td><td class="sm">Athene Life Re Ltd. · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025</td></tr>
+<tr data-role="reinsurer" data-q="athene co invest reinsurance affiliate 2a ltd. bermuda acra 2a; parent stake tbd   254900iuadmsxd9mm527 "><td><div class="nm">Athene Co Invest Reinsurance Affiliate 2A Ltd.</div><div class="note">ACRA 2A; parent stake tbd</div><span class="mono dim" title="LEI">254900IUADMSXD9MM527</span></td><td>Bermuda</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21 · gleif-api</td></tr>
+<tr data-role="reinsurer" data-q="athene co invest reinsurance affiliate 2b ltd. bermuda acra 2b; parent stake tbd   254900pv1cqftrvdh464 "><td><div class="nm">Athene Co Invest Reinsurance Affiliate 2B Ltd.</div><div class="note">ACRA 2B; parent stake tbd</div><span class="mono dim" title="LEI">254900PV1CQFTRVDH464</span></td><td>Bermuda</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21 · gleif-api</td></tr>
+<tr data-role="reinsurer" data-q="athene annuity re ii ltd. bermuda new reinsurer; purpose tbd athene annuity re ltd.  254900jdoh5ly8um3i39 "><td><div class="nm">Athene Annuity Re II Ltd.</div><div class="note">new reinsurer; purpose tbd</div><span class="mono dim" title="LEI">254900JDOH5LY8UM3I39</span></td><td>Bermuda</td><td><span class="chip r-re">Reinsurer</span></td><td class="mono sm"></td><td class="sm">Athene Annuity Re Ltd. · 100%</td><td class="mono xs dim">ahl-10k-fy2025-ex21 · aaia-schedule-y-ye2025 · gleif-api</td></tr>
+<tr data-role="other" data-q="athene japan k.k. japan service/assignment/spv — classify at l1    "><td><div class="nm">Athene Japan K.K.</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Japan</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="athene re japan solutions co., ltd japan service/assignment/spv — classify at l1    "><td><div class="nm">Athene Re Japan Solutions Co., Ltd</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Japan</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="athene qualified assignment corporation delaware service/assignment/spv — classify at l1    "><td><div class="nm">Athene Qualified Assignment Corporation</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Delaware</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="athene structured assignment corporation delaware service/assignment/spv — classify at l1    "><td><div class="nm">Athene Structured Assignment Corporation</div><div class="note">service/assignment/SPV — classify at L1</div></td><td>Delaware</td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="other" data-q="  service/assignment/spv — classify at l1    "><td><div class="nm"></div><div class="note">service/assignment/SPV — classify at L1</div></td><td></td><td><span class="chip r-ot">Other</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">ahl-10k-fy2025-ex21</td></tr>
+<tr data-role="manager" data-q="apollo insurance solutions group lp delaware isg — manages the athene book    "><td><div class="nm">Apollo Insurance Solutions Group LP</div><div class="note">ISG — manages the Athene book</div></td><td>Delaware</td><td><span class="chip r-mg">Manager</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">apo-10k-fy2025-ex21</td></tr>
+<tr data-role="manager" data-q="redding ridge advisors llc delaware clo manager    "><td><div class="nm">Redding Ridge Advisors LLC</div><div class="note">CLO manager</div></td><td>Delaware</td><td><span class="chip r-mg">Manager</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">apo-10k-fy2025-ex21</td></tr>
+<tr data-role="manager" data-q="atlas securitized products advisors gp, llc delaware atlas sp    "><td><div class="nm">Atlas Securitized Products Advisors GP, LLC</div><div class="note">Atlas SP</div></td><td>Delaware</td><td><span class="chip r-mg">Manager</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">apo-10k-fy2025-ex21</td></tr>
+<tr data-role="holdco" data-q="apollo midcap holdings (cayman), l.p. cayman midcap origination platform    "><td><div class="nm">Apollo MidCap Holdings (Cayman), L.P.</div><div class="note">MidCap origination platform</div></td><td>Cayman</td><td><span class="chip r-hc">Holdco</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">apo-10k-fy2025-ex21</td></tr>
+<tr data-role="manager" data-q="apollo adip capital management, llc delaware manages adip sidecar capital    "><td><div class="nm">Apollo ADIP Capital Management, LLC</div><div class="note">manages ADIP sidecar capital</div></td><td>Delaware</td><td><span class="chip r-mg">Manager</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">apo-10k-fy2025-ex21</td></tr>
+<tr data-role="manager" data-q="apollo adip advisors, l.p. delaware adip i advisor    "><td><div class="nm">Apollo ADIP Advisors, L.P.</div><div class="note">ADIP I advisor</div></td><td>Delaware</td><td><span class="chip r-mg">Manager</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">apo-10k-fy2025-ex21</td></tr>
+<tr data-role="manager" data-q="apollo adip advisors ii, l.p. delaware adip ii advisor    "><td><div class="nm">Apollo ADIP Advisors II, L.P.</div><div class="note">ADIP II advisor</div></td><td>Delaware</td><td><span class="chip r-mg">Manager</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">apo-10k-fy2025-ex21</td></tr>
+<tr data-role="manager" data-q="apollo athora advisors, l.p. delaware athora relationship entity    "><td><div class="nm">Apollo Athora Advisors, L.P.</div><div class="note">Athora relationship entity</div></td><td>Delaware</td><td><span class="chip r-mg">Manager</span></td><td class="mono sm"></td><td class="sm"><span class="dim">—</span></td><td class="mono xs dim">apo-10k-fy2025-ex21</td></tr>
+<tr data-role="affiliated-insurer" data-q="aspen american insurance company texas aspen complex — naic group 4734, outside athene chain aspen u.s. holdings, inc. 43460  75-2344200"><td><div class="nm">Aspen American Insurance Company</div><div class="note">Aspen complex — NAIC group 4734, outside Athene chain</div></td><td>Texas</td><td><span class="chip r-af">Affiliated</span></td><td class="mono sm">NAIC 43460<br>FEIN 75-2344200</td><td class="sm">Aspen U.S. Holdings, Inc. · 100%</td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+<tr data-role="affiliated-insurer" data-q="aspen specialty insurance company north dakota aspen complex — naic group 4734, outside athene chain aspen american insurance company 10717  06-1463851"><td><div class="nm">Aspen Specialty Insurance Company</div><div class="note">Aspen complex — NAIC group 4734, outside Athene chain</div></td><td>North Dakota</td><td><span class="chip r-af">Affiliated</span></td><td class="mono sm">NAIC 10717<br>FEIN 06-1463851</td><td class="sm">Aspen American Insurance Company · 100%</td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+<tr data-role="affiliated-insurer" data-q="alea north america insurance company new york catalina runoff — naic group 4734, outside athene chain alea holdings us company 24899  06-1022232"><td><div class="nm">Alea North America Insurance Company</div><div class="note">Catalina runoff — NAIC group 4734, outside Athene chain</div></td><td>New York</td><td><span class="chip r-af">Affiliated</span></td><td class="mono sm">NAIC 24899<br>FEIN 06-1022232</td><td class="sm">Alea Holdings US Company · 100%</td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+<tr data-role="affiliated-insurer" data-q="sparta insurance company connecticut catalina runoff — naic group 4734, outside athene chain alea holdings us company 20613  04-1027270"><td><div class="nm">SPARTA Insurance Company</div><div class="note">Catalina runoff — NAIC group 4734, outside Athene chain</div></td><td>Connecticut</td><td><span class="chip r-af">Affiliated</span></td><td class="mono sm">NAIC 20613<br>FEIN 04-1027270</td><td class="sm">Alea Holdings US Company · 100%</td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+<tr data-role="affiliated-insurer" data-q="national american insurance company of california california catalina runoff — naic group 4734, outside athene chain alea holdings us company 23671  95-2488300"><td><div class="nm">National American Insurance Company of California</div><div class="note">Catalina runoff — NAIC group 4734, outside Athene chain</div></td><td>California</td><td><span class="chip r-af">Affiliated</span></td><td class="mono sm">NAIC 23671<br>FEIN 95-2488300</td><td class="sm">Alea Holdings US Company · 100%</td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+<tr data-role="affiliated-insurer" data-q="probuilders specialty insurance company district of columbia catalina runoff (control=other) — naic group 4734, outside athene chain residential loss control holdings llc 11671  88-0510283"><td><div class="nm">ProBuilders Specialty Insurance Company</div><div class="note">Catalina runoff (control=Other) — NAIC group 4734, outside Athene chain</div></td><td>District of Columbia</td><td><span class="chip r-af">Affiliated</span></td><td class="mono sm">NAIC 11671<br>FEIN 88-0510283</td><td class="sm">Residential Loss Control Holdings LLC · 0%</td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+<tr data-role="affiliated-insurer" data-q="venerable insurance and annuity company iowa venerable complex; ucp incl. agm + others; alre holds 13% of va capital — naic group 4734, outside athene chain venerable holdings, inc. 80942  41-0991508"><td><div class="nm">Venerable Insurance and Annuity Company</div><div class="note">Venerable complex; UCP incl. AGM + others; ALRe holds 13% of VA Capital — NAIC group 4734, outside Athene chain</div></td><td>Iowa</td><td><span class="chip r-af">Affiliated</span></td><td class="mono sm">NAIC 80942<br>FEIN 41-0991508</td><td class="sm">Venerable Holdings, Inc. · 100%</td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+<tr data-role="affiliated-insurer" data-q="corporate solutions life reinsurance company iowa owned by venerable, not athene — naic group 4734, outside athene chain venerable insurance and annuity company 68365  04-2729166"><td><div class="nm">Corporate Solutions Life Reinsurance Company</div><div class="note">owned by Venerable, not Athene — NAIC group 4734, outside Athene chain</div></td><td>Iowa</td><td><span class="chip r-af">Affiliated</span></td><td class="mono sm">NAIC 68365<br>FEIN 04-2729166</td><td class="sm">Venerable Insurance and Annuity Company · 100%</td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+<tr data-role="affiliated-insurer" data-q="rocky range, inc. arizona venerable complex — naic group 4734, outside athene chain venerable insurance and annuity company 16308  82-5039393"><td><div class="nm">Rocky Range, Inc.</div><div class="note">Venerable complex — NAIC group 4734, outside Athene chain</div></td><td>Arizona</td><td><span class="chip r-af">Affiliated</span></td><td class="mono sm">NAIC 16308<br>FEIN 82-5039393</td><td class="sm">Venerable Insurance and Annuity Company · 100%</td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+<tr data-role="affiliated-insurer" data-q="upper peninsula health plan, llc michigan lifepoint complex — naic group 4734, outside athene chain dlp marquette health plan, llc 52615  46-0927995"><td><div class="nm">Upper Peninsula Health Plan, LLC</div><div class="note">LifePoint complex — NAIC group 4734, outside Athene chain</div></td><td>Michigan</td><td><span class="chip r-af">Affiliated</span></td><td class="mono sm">NAIC 52615<br>FEIN 46-0927995</td><td class="sm">DLP Marquette Health Plan, LLC · 58.97%</td><td class="mono xs dim">aaia-schedule-y-ye2025</td></tr>
+</tbody>
+</table>
+<div class="empty" id="empty">No entities match.</div>
+</div>
+
+<div class="cols" style="margin-top:40px">
+<div class="panel">
+<h3>Verified findings</h3>
+<ul>
+<li><strong>Ownership sandwich</strong> — the Bermuda reinsurer AARe sits between the US holdco and the entire US fleet. Every US policyholder dollar is in a company whose direct 100% parent is a Bermuda reinsurer.</li>
+<li><strong>AADE dissolved</strong> — absent from FY2025 EX-21 and Schedule Y; AAIA (61689) is now the sole lead. Only AADE RML, LLC survives as a trace.</li>
+<li><strong>NAIC group 4734 is bigger than Athene</strong> — same regulated group holds Aspen, Catalina runoff (Alea, SPARTA, NAICC, ProBuilders), Venerable and LifePoint entities.</li>
+<li><strong>Athene ↔ Venerable link</strong> — ALRe owns 13% of VA Capital (Venerable's parent).</li>
+<li><strong>ACRA split visible</strong> — ACRA 1A only 33% Athene-held; balance is third-party ADIP capital. ACRA Holding 2 is 100% ALRe.</li>
+<li><strong>Reconciliations passed</strong> — AHL EX-21 ⊆ APO EX-21 (45/45); Schedule Y ↔ EX-21 consistent on the insurance core.</li>
+</ul>
+</div>
+<div class="panel">
+<h3>Open items</h3>
+<ul>
+<li>BMA class confirmation for ALRe, AARe, ALReI, AARe II, ACRA entities (via FCRs; register page didn't list Athene on p.1).</li>
+<li>ACRA gen-2 parent stakes — Schedule Y hyphenation variant search.</li>
+<li>Purpose of new Athene Annuity Re II Ltd.</li>
+<li>Japan entities — materiality unknown.</li>
+<li>Schedule Y Part 2 inter-affiliate flows (~$10.3B visible) — deferred to L1.</li>
+<li>Large-file policy: AAIA statement (221&nbsp;MB) is local-only; git-lfs vs manifest-refetch to decide.</li>
+</ul>
+</div>
+</div>
+
+<h2>Source documents</h2>
+<hr class="rule">
+<div class="tbl-scroll">
+<table>
+<thead><tr><th>Document</th><th>SHA-256</th><th>Published</th><th></th></tr></thead>
+<tbody>
+<tr><td><div class="nm">Apollo Global Management Inc</div><div class="note">10-K EX-21.1 subsidiary list · FY2025</div></td><td class="mono xs" title="7c1e5f97764a3882d79b39edde8a0395ba65f3da20cd9e8f09e341ea01774a57">7c1e5f97764a3882…</td><td class="sm">2026-02-25</td><td><a href="https://www.sec.gov/Archives/edgar/data/1858681/000185868126000013/exhibit211q425-subsidiaries.htm">source</a></td></tr>
+<tr><td><div class="nm">Athene Holding Ltd</div><div class="note">10-K EX-21.1 subsidiary list · FY2025</div></td><td class="mono xs" title="ac382b6990b05928dda740c894de1db07e5b031caebedd6e0b7348de472325f4">ac382b6990b05928…</td><td class="sm">2026-02-25</td><td><a href="https://www.sec.gov/Archives/edgar/data/1527469/000152746926000013/q42025exhibit211.htm">source</a></td></tr>
+<tr><td><div class="nm">Athene Annuity and Life Company</div><div class="note">statutory annual statement · YE2025</div></td><td class="mono xs" title="6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a">6580cd4c9b539f8f…</td><td class="sm">2026 <span class="chip r-af">local only</span></td><td><a href="https://d1io3yog0oux5.cloudfront.net/_791dd5cf9ee1d35706561f013030a883/athene/db/2370/22531/pdf/AAIA_4Q_2025_Statement_-_FINAL.pdf">source</a></td></tr>
+<tr><td><div class="nm">Athene Annuity &amp; Life Assurance Company of New York</div><div class="note">statutory annual statement · YE2025</div></td><td class="mono xs" title="ab1cb3744205ff0e7f2643d23d80756b89c05b786f491022f74b82cf8d9015c2">ab1cb3744205ff0e…</td><td class="sm">2026</td><td><a href="https://d1io3yog0oux5.cloudfront.net/_791dd5cf9ee1d35706561f013030a883/athene/db/2370/22530/pdf/AANY_4Q_2025_Statement_-_FINAL.pdf">source</a></td></tr>
+<tr><td><div class="nm">Athene Life Re Ltd</div><div class="note">Bermuda statutory FS (unaudited; unconsolidated) · YE2025</div></td><td class="mono xs" title="64e628cec44e4975677cab736927140316d5f5a49eec070c9ee59f810da1c29e">64e628cec44e4975…</td><td class="sm">2026</td><td><a href="https://d1io3yog0oux5.cloudfront.net/_791dd5cf9ee1d35706561f013030a883/athene/db/2370/22528/pdf/ALRe+-+STAT+FS+-+Year+end+2025+%28unconsolidated%29.pdf">source</a></td></tr>
+<tr><td><div class="nm">Athene Annuity Re Ltd</div><div class="note">GAAP consolidated FS (audited; BMA-published) · YE2025</div></td><td class="mono xs" title="5dadb3d244e8d8dc5f1d81bd39439455dc1c1806d4b80cb535350ac74c6df5b9">5dadb3d244e8d8dc…</td><td class="sm">2026-07-02</td><td><a href="https://cdn.bma.bm/documents/2026-07-02-06-02-59-Athene-Bermuda-2025-Financial-Statement-Group.pdf">source</a></td></tr>
+</tbody>
+</table>
+</div>
+
+<footer>Internal investing infrastructure — not for redistribution. Generated from <span class="mono">spine/athene/entities.csv</span> and <span class="mono">acquisition/manifest.csv</span> · repo <span class="mono">peakyragnar/credit</span>.</footer>
+</div>
+
+<script>
+(function(){
+  var q=document.getElementById('q'),tb=document.getElementById('tb'),
+      chips=document.getElementById('chips'),cnt=document.getElementById('cnt'),
+      empty=document.getElementById('empty'),f='all';
+  function apply(){
+    var s=q.value.trim().toLowerCase(),n=0,rows=tb.rows;
+    for(var i=0;i<rows.length;i++){
+      var r=rows[i],role=r.getAttribute('data-role'),
+          okF=(f==='all')||(role===f)||(f==='manager'&&role==='manager-parent'),
+          okQ=!s||r.getAttribute('data-q').indexOf(s)>-1,
+          show=okF&&okQ;
+      r.style.display=show?'':'none'; if(show)n++;
+    }
+    cnt.textContent='· '+n+' of '+rows.length;
+    empty.style.display=n?'none':'block';
+  }
+  q.addEventListener('input',apply);
+  chips.addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b)return;
+    chips.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on'); f=b.getAttribute('data-f'); apply();
+  });
+  apply();
+})();
+</script>
