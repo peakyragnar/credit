@@ -101,6 +101,21 @@ tr:last-child td{border-bottom:0}
 .panel li:last-child{margin-bottom:0}
 
 footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line2);color:var(--muted);font-size:12px}
+
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:12px 0 4px}
+.mcard{background:var(--panel);border:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.mcard .mv{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}
+.mcard .mv .sub{font-size:13px;color:var(--muted);font-weight:400}
+.mcard .ml{font-size:12.5px;font-weight:600}
+.mcard .mx{font-size:12px;color:var(--muted);line-height:1.45}
+.mcard .ms{font-size:10px;color:var(--muted);font-family:ui-monospace,"SF Mono",Menlo,monospace;margin-top:auto;padding-top:6px}
+.mgroup{margin:22px 0 0}
+.mgroup h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin:0;color:var(--muted)}
+svg .mgn{fill:var(--warn-bg);stroke:var(--warn-ink)}
+svg text.t1w{fill:var(--warn-ink);font-size:13px;font-weight:600}
+svg text.t2w{fill:var(--warn-ink);font-size:11px}
+svg text.flow{fill:var(--ink);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+svg text.flow2{fill:var(--muted);font-size:11px}
 </style>
 
 <div class="wrap">
@@ -116,12 +131,43 @@ footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line2);color:
   <div class="stat"><div class="v">15</div><div class="k">NAIC cocodes</div></div>
   <div class="stat"><div class="v">16</div><div class="k">Bermuda entities</div></div>
   <div class="stat"><div class="v">16</div><div class="k">LEIs matched</div></div>
-  <div class="stat"><div class="v">6</div><div class="k">Source documents</div></div>
+  <div class="stat"><div class="v">7</div><div class="k">Source documents</div></div>
 </div>
 
 <div class="callout"><strong>The structural headline:</strong> Athene Holding does not own its US insurers directly.
 The chain runs AHL → Athene USA Corp (Iowa) → <strong>Athene Annuity Re Ltd. (Bermuda)</strong> → the entire US fleet
 <em>and</em> the other Bermuda reinsurers. AARe — not ALRe — is the pivot. Cited to AAIA Schedule Y Part 1A.</div>
+
+<h2>Level 0 — the money picture, YE2025</h2>
+<hr class="rule">
+<div class="figure">
+<svg viewBox="0 0 680 452" role="img" aria-label="Athene money chain with Level 0 control totals">
+<defs><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect class="nd neutral" x="210" y="30" width="260" height="46" rx="3"/><text class="t1" x="340" y="49" text-anchor="middle">Policyholders and institutions</text><text class="t2" x="340" y="66" text-anchor="middle">annuities · pensions · FABN buyers</text>
+<line class="wire" x1="340" y1="76" x2="340" y2="114" marker-end="url(#ar2)"/>
+<text class="flow" x="356" y="92">$83.4B gross inflows FY2025</text>
+<text class="flow2" x="356" y="107">funding agreements $35.4B · ADIP share $18.5B</text>
+<rect class="nd usn" x="210" y="118" width="260" height="52" rx="3"/><text class="t1u" x="340" y="138" text-anchor="middle">US insurers — AAIA lead</text><text class="t2u" x="340" y="156" text-anchor="middle">bonds $158.9B · mortgages $84.7B</text>
+<line class="wire" x1="340" y1="170" x2="340" y2="226" marker-end="url(#ar2)"/>
+<text class="flow" x="356" y="190">ModCo $168.3B · ceded $74.3B</text>
+<text class="flow2" x="356" y="205">funds withheld $66.7B</text>
+<text class="flow2" x="356" y="219">premiums ceded $35.8B (FY2025)</text>
+<rect class="nd bmn" x="210" y="230" width="260" height="52" rx="3"/><text class="t1b" x="340" y="250" text-anchor="middle">Athene Annuity Re Ltd. (Bermuda)</text><text class="t2b" x="340" y="268" text-anchor="middle">sole offshore counterparty</text>
+<rect class="nd mgn" x="30" y="230" width="156" height="52" rx="3"/><text class="t1w" x="108" y="250" text-anchor="middle">Apollo — manager</text><text class="t2w" x="108" y="268" text-anchor="middle">fees $1.4B FY2025</text>
+<line class="wire" x1="210" y1="256" x2="192" y2="256" stroke-dasharray="4 3" marker-end="url(#ar2)"/>
+<rect class="nd neutral" x="494" y="230" width="156" height="52" rx="3"/><text class="t1" x="572" y="250" text-anchor="middle">ACRA sidecars</text><text class="t2" x="572" y="268" text-anchor="middle">NCI $15.1B · 67% ADIP</text>
+<line class="wire" x1="470" y1="256" x2="488" y2="256" stroke-dasharray="4 3" marker-end="url(#ar2)"/>
+<line class="wire" x1="340" y1="282" x2="340" y2="320" marker-end="url(#ar2)"/>
+<text class="flow2" x="356" y="305">invested by Apollo / ISG</text>
+<rect class="nd neutral" x="210" y="324" width="260" height="52" rx="3"/><text class="t1" x="340" y="344" text-anchor="middle">Asset portfolio → borrowers</text><text class="t2" x="340" y="362" text-anchor="middle">$321.1B investments · $386.6B net invested</text>
+<rect class="nd mgn" x="210" y="392" width="260" height="44" rx="3"/><text class="t1w" x="340" y="410" text-anchor="middle">Runnable: funding agreements $71.4B</text><text class="t2w" x="340" y="427" text-anchor="middle">26.3% of net reserves — was 21.0% a year ago</text>
+</svg>
+</div>
+
+<div class="mgroup"><h3>Money in — FY2025</h3><div class="mgrid"><div class="mcard"><div class="mv">$83.4B</div><div class="ml">Gross inflows</div><div class="mx">All new money taken in during 2025: annuity sales, pension buyouts, funding agreements, assumed reinsurance. The real growth number — GAAP &quot;premiums&quot; were only $2.6B because deposits never touch the income statement.</div><div class="ms">ahl-10k-fy2025 · MD&amp;A net flows table</div></div><div class="mcard"><div class="mv">$35.4B</div><div class="ml">of which funding agreements</div><div class="mx">Institutional borrowings dressed as insurance: FABN notes sold to bond investors, FHLB advances, repurchase-style agreements. $7.2B in 2023 → $35.4B in 2025.</div><div class="ms">ahl-10k-fy2025 · Item 1 Business products table</div></div><div class="mcard"><div class="mv">$18.5B</div><div class="ml">of which third-party (ADIP)</div><div class="mx">Inflows belonging to outside investors in the ACRA sidecars — not Athene shareholders. Apollo raised this capital and charges fees on it too.</div><div class="ms">ahl-10k-fy2025 · MD&amp;A net flows table</div></div><div class="mcard"><div class="mv">$47.9B</div><div class="ml">Net flows</div><div class="mx">Inflows minus outflows (surrenders, withdrawals, maturities, benefit payments). The machine grew $47.9B net in one year.</div><div class="ms">ahl-10k-fy2025 · MD&amp;A net flows table</div></div></div></div>
+<div class="mgroup"><h3>Offshore transfer — AAIA to AARe (statutory)</h3><div class="mgrid"><div class="mcard"><div class="mv">$168.3B</div><div class="ml">ModCo reserves</div><div class="mx">The dual-ledger number: liabilities kept legally on AAIA&#x27;s books while the investment economics belong to AARe in Bermuda. $116.1B general account + $52.2B separate account.</div><div class="ms">aaia-statutory-4q2025 · Schedule S Part 3 Sec 1 line 9999999</div></div><div class="mcard"><div class="mv">$74.3B</div><div class="ml">Reserve credit taken</div><div class="mx">Reserves removed from AAIA&#x27;s balance sheet entirely because they are ceded outright (mostly funds-withheld coinsurance to AARe under 2024+ treaties).</div><div class="ms">aaia-statutory-4q2025 · Schedule S Part 3 Sec 1 line 9999999</div></div><div class="mcard"><div class="mv">$66.7B</div><div class="ml">Funds withheld</div><div class="mx">Assets AAIA physically keeps as collateral backing the coinsurance it ceded — legally held onshore, economically working for Bermuda.</div><div class="ms">aaia-statutory-4q2025 · Schedule S Part 3 Sec 1 line 9999999</div></div><div class="mcard"><div class="mv">$35.8B</div><div class="ml">Premiums ceded FY2025</div><div class="mx">The year&#x27;s premium passed through to reinsurers. Every affiliate dollar of it went to one counterparty: AARe.</div><div class="ms">aaia-statutory-4q2025 · Schedule S Part 3 Sec 1 line 9999999</div></div></div></div>
+<div class="mgroup"><h3>Group balance sheet — GAAP</h3><div class="mgrid"><div class="mcard"><div class="mv">$442.2B</div><div class="ml">Total assets</div><div class="mx">Athene Holding consolidated, everything on the books at 12/31/2025. Up from $363.3B a year earlier.</div><div class="ms">ahl-10k-fy2025 · Consolidated Balance Sheets (printed p.113)</div></div><div class="mcard"><div class="mv">$321.1B</div><div class="ml">Total investments</div><div class="mx">The general-account investment portfolio at fair value: $192.6B AFS securities, $91.9B mortgage loans, plus trading, derivatives, funds withheld.</div><div class="ms">ahl-10k-fy2025 · Consolidated Balance Sheets (printed p.112-113)</div></div><div class="mcard"><div class="mv">$386.6B</div><div class="ml">Net invested assets</div><div class="mx">Management&#x27;s economic measure: adds related-party holdings and consolidated-VIE look-through, counts ACRA at Athene&#x27;s economic share.</div><div class="ms">ahl-10k-fy2025 · MD&amp;A (net invested assets)</div></div><div class="mcard"><div class="mv">$271.2B</div><div class="ml">Net reserve liabilities</div><div class="mx">Policyholder obligations net of reinsurance — the money Athene owes savers and institutions, at its own economic share.</div><div class="ms">ahl-10k-fy2025 · Item 1 Business net reserve liabilities table</div></div><div class="mcard"><div class="mv">$15.1B</div><div class="ml">Noncontrolling interests</div><div class="mx">Third-party (mostly ADIP) equity inside consolidated ACRA vehicles. Was $9.5B a year ago — up 59% in one year.</div><div class="ms">ahl-10k-fy2025 · Consolidated Balance Sheets (printed p.114)</div></div></div></div>
+<div class="mgroup"><h3>Apollo&#x27;s take + runnability</h3><div class="mgrid"><div class="mcard"><div class="mv">$1.4B</div><div class="ml">Management fees to Apollo</div><div class="mx">FY2025 base + sub-allocation + performance fees under the Fee Agreement (0.225% base on the first $103.4B, higher sub-allocation fees for higher-alpha asset classes). Plus $66M sub-advisory passthrough.</div><div class="ms">ahl-10k-fy2025 · Note 15 Related Parties</div></div><div class="mcard"><div class="mv">$17.8B</div><div class="ml">Net investment income</div><div class="mx">What the portfolio earned in FY2025 (net of the fees above; includes $2.1B earned from related-party investments).</div><div class="ms">ahl-10k-fy2025 · Consolidated Statements of Income (printed p.114)</div></div><div class="mcard"><div class="mv">$71.4B</div><div class="ml">Funding agreements outstanding</div><div class="mx">The runnable slice of the liability stack: FABN, FABR, FHLB and repo-style funding agreements. 26.3% of net reserve liabilities, was 21.0% a year ago — the F4 signal.</div><div class="ms">ahl-10k-fy2025 · Item 1 Business net reserve liabilities table</div></div></div></div>
 
 <h2>Verified ownership chain</h2>
 <hr class="rule">
@@ -284,6 +330,7 @@ The chain runs AHL → Athene USA Corp (Iowa) → <strong>Athene Annuity Re Ltd.
 <tr><td><div class="nm">Athene Annuity &amp; Life Assurance Company of New York</div><div class="note">statutory annual statement · YE2025</div></td><td class="mono xs" title="ab1cb3744205ff0e7f2643d23d80756b89c05b786f491022f74b82cf8d9015c2">ab1cb3744205ff0e…</td><td class="sm">2026</td><td><a href="https://d1io3yog0oux5.cloudfront.net/_791dd5cf9ee1d35706561f013030a883/athene/db/2370/22530/pdf/AANY_4Q_2025_Statement_-_FINAL.pdf">source</a></td></tr>
 <tr><td><div class="nm">Athene Life Re Ltd</div><div class="note">Bermuda statutory FS (unaudited; unconsolidated) · YE2025</div></td><td class="mono xs" title="64e628cec44e4975677cab736927140316d5f5a49eec070c9ee59f810da1c29e">64e628cec44e4975…</td><td class="sm">2026</td><td><a href="https://d1io3yog0oux5.cloudfront.net/_791dd5cf9ee1d35706561f013030a883/athene/db/2370/22528/pdf/ALRe+-+STAT+FS+-+Year+end+2025+%28unconsolidated%29.pdf">source</a></td></tr>
 <tr><td><div class="nm">Athene Annuity Re Ltd</div><div class="note">GAAP consolidated FS (audited; BMA-published) · YE2025</div></td><td class="mono xs" title="5dadb3d244e8d8dc5f1d81bd39439455dc1c1806d4b80cb535350ac74c6df5b9">5dadb3d244e8d8dc…</td><td class="sm">2026-07-02</td><td><a href="https://cdn.bma.bm/documents/2026-07-02-06-02-59-Athene-Bermuda-2025-Financial-Statement-Group.pdf">source</a></td></tr>
+<tr><td><div class="nm">Athene Holding Ltd</div><div class="note">10-K annual report · FY2025</div></td><td class="mono xs" title="50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be">50ca45b205389d30…</td><td class="sm">2026-02-25</td><td><a href="https://www.sec.gov/Archives/edgar/data/1527469/000152746926000013/ahl-20251231.htm">source</a></td></tr>
 </tbody>
 </table>
 </div>
