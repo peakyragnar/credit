@@ -1,0 +1,37 @@
+metric,value,unit,basis,entity_scope,as_of,source_doc,source_location,published,sha256
+total_assets,442205,USD_M,GAAP,AHL consolidated,2025-12-31,ahl-10k-fy2025,Consolidated Balance Sheets (printed p.113),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+total_investments,321081,USD_M,GAAP,AHL consolidated,2025-12-31,ahl-10k-fy2025,Consolidated Balance Sheets (printed p.112-113),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+net_invested_assets_incl_rp_vie,386600,USD_M,GAAP/mgmt,AHL consolidated,2025-12-31,ahl-10k-fy2025,MD&A (net invested assets),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+interest_sensitive_contract_liabilities,315889,USD_M,GAAP,AHL consolidated,2025-12-31,ahl-10k-fy2025,Consolidated Balance Sheets (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+future_policy_benefits,50264,USD_M,GAAP,AHL consolidated,2025-12-31,ahl-10k-fy2025,Consolidated Balance Sheets (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+total_liabilities,406567,USD_M,GAAP,AHL consolidated,2025-12-31,ahl-10k-fy2025,Consolidated Balance Sheets (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+debt,7848,USD_M,GAAP,AHL consolidated,2025-12-31,ahl-10k-fy2025,Consolidated Balance Sheets (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+total_equity,35638,USD_M,GAAP,AHL consolidated,2025-12-31,ahl-10k-fy2025,Consolidated Balance Sheets (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+noncontrolling_interests,15146,USD_M,GAAP,AHL consolidated (ACRA/ADIP third-party),2025-12-31,ahl-10k-fy2025,Consolidated Balance Sheets (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+total_revenues,25677,USD_M,GAAP,AHL consolidated,FY2025,ahl-10k-fy2025,Consolidated Statements of Income (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+net_investment_income,17847,USD_M,GAAP,AHL consolidated,FY2025,ahl-10k-fy2025,Consolidated Statements of Income (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+premiums_gaap,2628,USD_M,GAAP,AHL consolidated,FY2025,ahl-10k-fy2025,Consolidated Statements of Income (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+net_income,4221,USD_M,GAAP,AHL consolidated,FY2025,ahl-10k-fy2025,Consolidated Statements of Income (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+net_income_attrib_nci,1510,USD_M,GAAP,AHL consolidated,FY2025,ahl-10k-fy2025,Consolidated Statements of Income (printed p.114),2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+gross_inflows_total,83438,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,MD&A net flows table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+gross_inflows_organic,82098,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,MD&A net flows table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+inflows_attrib_athene,63236,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,MD&A net flows table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+inflows_attrib_acra_nci,18452,USD_M,mgmt,ACRA noncontrolling interests,FY2025,ahl-10k-fy2025,MD&A net flows table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+gross_outflows,35528,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,MD&A net flows table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+net_flows,47910,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,MD&A net flows table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+gross_premiums_deposits_net_ext_ceded,83650,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,Item 1 Business products table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+funding_agreement_deposits,35375,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,Item 1 Business products table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+net_reserve_liabilities,271233,USD_M,mgmt,AHL consolidated,2025-12-31,ahl-10k-fy2025,Item 1 Business net reserve liabilities table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+funding_agreements_net_reserve_liab,71433,USD_M,mgmt,AHL consolidated (26.3% of NRL; PY 47384 = 21.0%),2025-12-31,ahl-10k-fy2025,Item 1 Business net reserve liabilities table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+apollo_management_fees,1441,USD_M,GAAP,fees to Apollo/ISG excl. sub-advisory passthrough 66,FY2025,ahl-10k-fy2025,Note 15 Related Parties,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+bonds_sched_d,158852395199,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Assets p.2 line 1,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+mortgage_first_liens,84664838463,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Assets p.2 line 3.1,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+agg_life_reserves,110615749220,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Liabilities p.3 line 1,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+agg_life_reserves_modco_portion,75305165062,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Liabilities p.3 line 1 parenthetical,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+deposit_type_liabilities,64259784362,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Liabilities p.3 line 3,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+deposit_type_modco_portion,40787538317,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Liabilities p.3 line 3 parenthetical,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+schedS_reserve_credit_taken_total,74345535505,USD,SAP,AAIA ceded all counterparties,2025-12-31,aaia-statutory-4q2025,Schedule S Part 3 Sec 1 line 9999999,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+schedS_premiums_ceded_total,35774014423,USD,SAP,AAIA ceded all counterparties,FY2025,aaia-statutory-4q2025,Schedule S Part 3 Sec 1 line 9999999,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+schedS_modco_reserve_total,168291336691,USD,SAP,AAIA (GA 116092703380 + SA 52198633311),2025-12-31,aaia-statutory-4q2025,Schedule S Part 3 Sec 1 line 9999999,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+schedS_funds_withheld_total,66695003878,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Schedule S Part 3 Sec 1 line 9999999,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+schedS_nonUS_reserve_credit,65263421108,USD,SAP,AAIA ceded to AARe (BMU) — sole non-US affiliate counterparty,2025-12-31,aaia-statutory-4q2025,Schedule S Part 3 Sec 1 line 9299999,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
