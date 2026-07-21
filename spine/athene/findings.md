@@ -1,20 +1,27 @@
-# Census findings — Athene complex (in progress)
+# Census findings — Athene complex
 
-Working notes from the entity-map build. Each item is a finding or an open verification, not a conclusion.
+Working notes from the entity-map build. Each item is a finding or an open verification, not a conclusion. Sources: FY2025 EX-21 exhibits (APO, AHL), AAIA YE2025 statutory statement Schedule Y (pages 148, 203–441), GLEIF API.
 
 ## Reconciliations run
-1. **AHL EX-21 ⊆ APO EX-21: PASS.** All 45 entities in Athene Holding's FY2025 EX-21 appear verbatim in Apollo's FY2025 EX-21. The two source lists agree.
+1. **AHL EX-21 ⊆ APO EX-21: PASS.** All 45 entities in Athene Holding's FY2025 EX-21 appear verbatim in Apollo's FY2025 EX-21.
+2. **Schedule Y ↔ EX-21 cross-check: PASS on the insurance core.** Every insurer/reinsurer in the EX-21 lists appears in Schedule Y Part 1A with consistent domiciles.
 
-## Findings to verify
-2. **AADE absent.** Athene Annuity & Life Assurance Company (Delaware) — historically one of the main US insurers — does not appear in either FY2025 EX-21. Only `AADE RML, LLC` survives as a name trace. Hypothesis: merged into Athene Annuity and Life Company (AAIA). Verify in 10-K text / Iowa DOI / Schedule Y before treating AAIA as the sole lead entity.
-3. **Athene Annuity Re II Ltd. (Bermuda)** — not in the prior working sketch. New reinsurer. Verify BMA class and purpose (FCR should exist if Class C/D/E).
-4. **Two NY insurers**: Athene Annuity & Life Assurance Company of New York AND Athene Life Insurance Company of New York. Verify the second's status (active book vs shell).
-5. **Structured Annuity Reinsurance Company (Iowa)** and **Athene Re USA IV, Inc. (Vermont)** — onshore reinsurers/captives; verify roles. Vermont = limited public disclosure; feeds the opacity ratio if reserves sit there.
-6. **ACRA family fuller than sketched**: Holding + 1A + 1B + International + LP (DE) + Holding 2 + 2A + 2B + ADIP Carry Plan. Sidecar structure has at least two generations with A/B splits — treaty mapping at L1 must keep these distinct.
-7. **Japan entities** (Athene Japan K.K., Athene Re Japan Solutions) — new jurisdiction not in the sketch. Verify whether reserves are material.
+## Verified structural findings (cited to AAIA Schedule Y, YE2025)
+3. **The ownership sandwich.** The chain is AHL (Bermuda) → Athene USA Corporation (Iowa) → **Athene Annuity Re Ltd. (Bermuda, FEIN 98-1408540)** → Athene Annuity and Life Company (61689, the entire US fleet) AND ALRe, ALReI, AARe II. A US holdco owns the Bermuda reinsurer that owns the US insurers. AARe is the structural pivot of the whole group — not ALRe as commonly assumed. (Part 1A: AAIA "RE" row shows Directly Controlled By = Athene Annuity Re Ltd., 100%; AARe row shows UDP = Athene USA Corporation.)
+4. **AADE is gone, confirmed.** Not in either EX-21 and not in Schedule Y; AAIA (61689) is the reporting entity and lead insurer. Only AADE RML, LLC survives as a name trace.
+5. **NAIC group 4734 "Apollo Global Mgmt Grp" is much bigger than Athene.** Same regulated group and same ultimate controlling persons (AGM; M. Rowan; L. Black) include: **Aspen** (43460 TX, 10717 ND), **Catalina runoff** (Alea North America 24899, SPARTA 20613, National American of CA 23671, ProBuilders 11671), **Venerable** (80942, + Corporate Solutions Life Re 68365, Rocky Range 16308; UCP shared with Crestview/RCP/others), **LifePoint** (Upper Peninsula Health Plan 52615). Part 1 explicitly names Aspen, Athene, Catalina, LifePoint, VA Capital as insurer-controlling portfolio companies.
+6. **Athene ↔ Venerable economic link.** ALRe owns 13.000% of VA Capital Company LLC (Venerable's parent). Corporate Solutions Life Reinsurance Company (68365) is Venerable's, not Athene's.
+7. **ACRA third-party split is visible.** ACRA 1A is only 33.000%-owned by ACRA Holding Ltd. — the remainder is third-party ADIP capital. ACRA Holding 2 Ltd. is 100% ALRe-owned (the gen-2 Athene side). ACRA 1A owns ACRA International (100%) and ACRA LP (99%).
+8. **ALRe's other holdings:** Athene Asset L.P. (100%), A-A Onshore Fund LLC (99.37%), ADIP (Athene) Carry Plan.
+9. **Cocodes captured:** AAIA 61689, AANY 68039, ALICNY 63932 (owned by AANY), SARC 15306 (99% AAIA), Athene Re USA IV 14179 (100% AAIA).
 
-## Census gaps (next steps)
-- **Schedule Y** (statutory, Iowa DOI): the regulated-group org chart + NAIC cocodes. Not yet fetched.
-- **BMA register**: confirm registration + class for each Bermuda reinsurer. Not yet fetched.
-- **Identifiers**: NAIC cocodes, LEIs (GLEIF), BMA registrations — all columns currently empty in `entities.csv`.
-- **EX-21 limitation**: lists "subsidiaries of the registrant" — may omit entities below materiality thresholds and definitely omits non-consolidated affiliates (Athora, ADIP funds themselves, third-party ACRA investors).
+## Open items
+- **BMA register/class confirmation** for ALRe, AARe, ALReI, AARe II, ACRA entities — the Class E declaration-of-compliance page listed no Athene entities on its first page (paginated or filed elsewhere?); classes should come from FCRs. Note: BMA does host AARe's audited GAAP FS.
+- **ACRA 2A/2B parent stakes** — Schedule Y search with hyphen variants needed.
+- **Athene Annuity Re II Ltd. purpose** — new; find its FCR/first filings.
+- **Japan entities** — materiality unknown.
+- **Part 2 inter-affiliate flows** (page 440) — large numbers visible (e.g., ~$10.3B AAIA-related), extraction deferred to L1.
+- **Oversized-file policy:** AAIA statement (221MB) exceeds GitHub's 100MB limit — kept local-only, hash+URL in manifest. Decide: git-lfs vs manifest-refetch policy for large statutory PDFs.
+
+## Phase 1 bonus (parked)
+- BMA Class E declaration page lists Global Atlantic's entities: Ivy Re, Ivy Re II, Ivy Peak Co-Invest Re I/II, Global Atlantic Ivy Re III, GA Iris Re, Global Atlantic Assurance — a head start on the GA census.
