@@ -42,3 +42,8 @@ premiums_payout_annuity,637,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,It
 premiums_total_annuity,46159,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,Item 1 Business gross premiums & deposits by product,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
 premiums_life_other,2116,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,Item 1 Business gross premiums & deposits by product,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
 inflows_ceded_third_party,1750,USD_M,mgmt,AHL consolidated,FY2025,ahl-10k-fy2025,MD&A net flows table,2026-02-25,50ca45b205389d30b59fdc75dc66ccfded4df8a2187d1545102f3a3d1399a9be
+aaia_total_admitted_assets,340749854753,USD,SAP,AAIA entity (incl separate accounts),2025-12-31,aaia-statutory-4q2025,Assets p.2 line 28 col 3,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+aany_total_admitted_assets,5371386374,USD,SAP,AANY entity,2025-12-31,aany-statutory-4q2025,Assets p.2 line 28 col 3,2026,ab1cb3744205ff0e7f2643d23d80756b89c05b786f491022f74b82cf8d9015c2
+aare_total_assets_gaap,441427,USD_M,GAAP,AARe consolidated (= operating group),2025-12-31,aare-gaap-fs-ye2025,Consolidated Balance Sheet,2026-07-02,5dadb3d244e8d8dc5f1d81bd39439455dc1c1806d4b80cb535350ac74c6df5b9
+aare_total_investments_gaap,321057,USD_M,GAAP,AARe consolidated,2025-12-31,aare-gaap-fs-ye2025,Consolidated Balance Sheet,2026-07-02,5dadb3d244e8d8dc5f1d81bd39439455dc1c1806d4b80cb535350ac74c6df5b9
+alre_total_investments_derived,23957672000,USD,SAP-Bermuda derived,ALRe standalone (sum of quoted+unquoted+affiliate+mortgage; not a printed total),2025-12-31,alre-stat-fs-ye2025,Balance sheet components,2026,64e628cec44e4975677cab736927140316d5f5a49eec070c9ee59f810da1c29e
