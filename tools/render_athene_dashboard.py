@@ -85,6 +85,13 @@ GROUPS = [
   ('net_reserve_liabilities', 'Net reserve liabilities', 'Policyholder obligations net of reinsurance — the money Athene owes savers and institutions, at its own economic share.'),
   ('noncontrolling_interests', 'Noncontrolling interests', "Third-party (mostly ADIP) equity inside consolidated ACRA vehicles. Was $9.5B a year ago — up 59% in one year."),
  ]),
+ ('The cushion — loss-absorbing capital vs the risk on top', [
+  ('aaia_total_adjusted_capital', 'AAIA total adjusted capital', 'The regulatory capital measure for the lead US insurer. Against a $1.09B authorized-control-level RBC, the ratio is ~871% ACL (~436% company-action level) — healthy on its face. The catch: RBC is measured AFTER the economics were ceded to Bermuda affiliates, the exact mechanism the shadow-insurance literature flags as flattering. And AAIA\'s maximum dividend without Iowa approval is $0.'),
+  ('statcs_aare', 'AARe statutory capital & surplus', 'The Bermuda pivot\'s own cushion (Class E; ECR is its binding constraint; BSCR above target level per the note). Bermuda CIT revocation (Jan 2026) will cut this by $847M in Q1 2026.'),
+  ('statcs_alre', 'ALRe statutory capital & surplus', 'Down $3.9B in one year ($17.6B → $13.7B) while earning only +$0.6B — roughly $4.5B moved out. Where it went is an L1 trace item.'),
+  ('statcs_acra2a', 'ACRA capital (2A; 1A adds $3.8B)', 'The sidecar cushions: ACRA 2A $6.6B + ACRA 1A $3.8B = ~$10.4B of capital, roughly two-thirds of it ADIP third-party money. Both Class C.'),
+  ('athene_re_usa_iv_loc_admitted', 'Vermont captive: LOCs counted as capital', 'Athene Re USA IV counts $76M of letters of credit as admitted assets under a Vermont permitted practice — and the note says WITHOUT this practice it would not have exceeded authorized-control-level RBC. Onshore shadow insurance, disclosed in plain text.'),
+ ]),
  ("Apollo's take + runnability", [
   ('apollo_management_fees', 'Management fees to Apollo', 'FY2025 base + sub-allocation + performance fees under the Fee Agreement (0.225% base on the first $103.4B, higher sub-allocation fees for higher-alpha asset classes). Plus $66M sub-advisory passthrough.'),
   ('net_investment_income', 'Net investment income', 'What the portfolio earned in FY2025 (net of the fees above; includes $2.1B earned from related-party investments).'),

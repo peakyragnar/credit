@@ -1,11 +1,11 @@
 name,jurisdiction,role_provisional,notes,naic_cocode,fein,lei,bma_registration,parent_entity,parent_pct,sources
 "Apollo Global Management, Inc.",Delaware,manager-parent,NYSE: APO; ultimate parent; CIK 1858681,,,,,,,aaia-schedule-y-ye2025
 Athene Holding Ltd.,Bermuda,holdco,"SEC registrant (listed prefs ATH-PA/B/D/E, ATHS); CIK 1527469",,,549300H316CT32FQXI76,,"Apollo Global Management, Inc.",100,apo-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api
-Athene Life Re Ltd.,Bermuda,reinsurer,ALRe; also holds 13% of VA Capital (Venerable parent) and 100% ACRA Holding 2,,98-0628973,549300ZEW850IU8XXP60,,Athene Annuity Re Ltd.,100,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api
+Athene Life Re Ltd.,Bermuda,reinsurer,ALRe; also holds 13% of VA Capital (Venerable parent) and 100% ACRA Holding 2,,98-0628973,549300ZEW850IU8XXP60,Class E,Athene Annuity Re Ltd.,100,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api;aare-gaap-fs-ye2025
 Athene Asset L.P.,Bermuda,fund,held by ALRe,,,,,Athene Life Re Ltd.,100,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025
 Athene Life Re International Ltd.,Bermuda,reinsurer,ALReI,,,2549004ZH5DHTEUBB984,,Athene Annuity Re Ltd.,100,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api
 Athene USA Corporation,Iowa,holdco,Iowa holdco; upstream parent of AARe (UDP per Schedule Y),,,549300SU8646DM9JPT70,,Athene Holding Ltd.,100,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api
-Athene Annuity Re Ltd.,Bermuda,reinsurer,AARe — Bermuda pivot: owns AAIA + ALRe + ALReI + AARe II per Schedule Y,,98-1408540,5493004T1XXKIO7S5V28,,Athene USA Corporation,100,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api
+Athene Annuity Re Ltd.,Bermuda,reinsurer,AARe — Bermuda pivot: owns AAIA + ALRe + ALReI + AARe II per Schedule Y,,98-1408540,5493004T1XXKIO7S5V28,Class E,Athene USA Corporation,100,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api;aare-gaap-fs-ye2025
 "Athene Employee Services, LLC",Iowa,other,service/assignment/SPV — classify at L1,,,,,,,ahl-10k-fy2025-ex21
 Athene London Assignment Corporation,Delaware,other,service/assignment/SPV — classify at L1,,,,,,,ahl-10k-fy2025-ex21
 Athene Assignment Corporation,Delaware,other,service/assignment/SPV — classify at L1,,,,,,,ahl-10k-fy2025-ex21
@@ -27,7 +27,7 @@ Athene Bermuda Employee Company Ltd.,Bermuda,other,service/assignment/SPV — cl
 Athene IP Holding Ltd.,Bermuda,other,IP holdco,,,,,,,ahl-10k-fy2025-ex21
 Athene North Employment Service Corporation,Canada,other,service/assignment/SPV — classify at L1,,,,,,,ahl-10k-fy2025-ex21
 Athene Co-Invest Reinsurance Affiliate Holding Ltd.,Bermuda,holdco,ACRA 1 holdco,,,,,,,ahl-10k-fy2025-ex21
-Athene Co-Invest Reinsurance Affiliate 1A Ltd.,Bermuda,reinsurer,ACRA 1A — only 33% Athene-held; remainder third-party ADIP capital,,,549300EDJBTCJ4S1AT57,,Athene Co-Invest Reinsurance Affiliate Holding Ltd.,33,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api
+Athene Co-Invest Reinsurance Affiliate 1A Ltd.,Bermuda,reinsurer,ACRA 1A — only 33% Athene-held; remainder third-party ADIP capital,,,549300EDJBTCJ4S1AT57,Class C,Athene Co-Invest Reinsurance Affiliate Holding Ltd.,33,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api;aare-gaap-fs-ye2025
 Athene Co-Invest Reinsurance Affiliate 1B Ltd.,Bermuda,reinsurer,ACRA 1B; parent stake tbd,,,549300JBO6T99TQDFI39,,,,ahl-10k-fy2025-ex21;gleif-api
 Athene Co-Invest Reinsurance Affiliate LP,Delaware,fund,Delaware LP under ACRA 1A,,,,,Athene Co-Invest Reinsurance Affiliate 1A Ltd.,99,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025
 Athene Co-Invest Reinsurance Affiliate International Ltd.,Bermuda,reinsurer,ACRA international,,,254900HB53M9WE36T980,,Athene Co-Invest Reinsurance Affiliate 1A Ltd.,100,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api
@@ -38,7 +38,7 @@ Athene Co-Invest Reinsurance Affiliate International Ltd.,Bermuda,reinsurer,ACRA
 "NNN AGP Opportunities GP, LLC",Delaware,other,service/assignment/SPV — classify at L1,,,,,,,ahl-10k-fy2025-ex21
 "AARE Structured Holdings, LLC",Delaware,other,service/assignment/SPV — classify at L1,,,,,,,ahl-10k-fy2025-ex21
 Athene Co Invest Reinsurance Affiliate Holding 2 Ltd.,Bermuda,holdco,ACRA 2 holdco — Athene side held via ALRe,,,,,Athene Life Re Ltd.,100,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025
-Athene Co Invest Reinsurance Affiliate 2A Ltd.,Bermuda,reinsurer,ACRA 2A; parent stake tbd,,,254900IUADMSXD9MM527,,,,ahl-10k-fy2025-ex21;gleif-api
+Athene Co Invest Reinsurance Affiliate 2A Ltd.,Bermuda,reinsurer,ACRA 2A; parent stake tbd,,,254900IUADMSXD9MM527,Class C,,,ahl-10k-fy2025-ex21;gleif-api;aare-gaap-fs-ye2025
 Athene Co Invest Reinsurance Affiliate 2B Ltd.,Bermuda,reinsurer,ACRA 2B; parent stake tbd,,,254900PV1CQFTRVDH464,,,,ahl-10k-fy2025-ex21;gleif-api
 Athene Annuity Re II Ltd.,Bermuda,reinsurer,new reinsurer; purpose tbd,,,254900JDOH5LY8UM3I39,,Athene Annuity Re Ltd.,100,ahl-10k-fy2025-ex21;aaia-schedule-y-ye2025;gleif-api
 Athene Japan K.K.,Japan,other,service/assignment/SPV — classify at L1,,,,,,,ahl-10k-fy2025-ex21

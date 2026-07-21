@@ -23,5 +23,15 @@ Working notes from the entity-map build. Each item is a finding or an open verif
 - **Part 2 inter-affiliate flows** (page 440) — large numbers visible (e.g., ~$10.3B AAIA-related), extraction deferred to L1.
 - **Oversized-file policy:** AAIA statement (221MB) exceeds GitHub's 100MB limit — kept local-only, hash+URL in manifest. Decide: git-lfs vs manifest-refetch policy for large statutory PDFs.
 
+## Capital-cushion findings (from AARe FS Note "Statutory Requirements", 2026-07-21)
+10. **AADE merger confirmed with date**: AADE merged into AAIA on **October 11, 2025** (related-parties note). Census hypothesis #2 closed.
+11. **BMA classes confirmed**: AARe and ALRe are **Class E**; ACRA 1A and ACRA 2A are **Class C**. Census open item closed (register lookup no longer needed for these four).
+12. **AAIA max dividend without Iowa approval: $0** (both 2025 and 2024) — the lead US insurer has no ordinary dividend capacity; all upstreaming needs regulatory sign-off.
+13. **Vermont captive solvent only via permitted practice**: Athene Re USA IV counts $76M face amount of letters of credit as admitted assets; the note states that without this practice it "would not have exceeded authorized control level RBC." A US onshore shadow-insurance structure, disclosed in plain text.
+14. **ALRe capital down $3.9B in a year** ($17.6B → $13.7B) while earning +$0.6B — implies ~$4.5B of distributions/other movements out of ALRe. Trace at L1.
+15. **Bermuda CIT revoked January 2026** (per the note): AARe to record a full valuation allowance in Q1 2026 — capital effects AARe $(847)M, ACRA 1A +$164M, ACRA 2A $(45)M. The Bermuda tax regime is moving under the structure in real time.
+16. **Intercompany liquidity web**: revolving notes — AHL owes ALRe $2.22B (2.29% fixed), AUSA owes ALRe $417M; AARe can borrow $1B from AUSA ($19M drawn). Below-market related-party lending; map at L1.
+17. **Bermuda permitted practices boost capital**: p.64 shows increases to capital & surplus "due to permitted practices" of $1,982M / $808M / $2,655M / $2,655M / $54M (column mapping to entities not yet pinned — extract the full table at L1).
+
 ## Phase 1 bonus (parked)
 - BMA Class E declaration page lists Global Atlantic's entities: Ivy Re, Ivy Re II, Ivy Peak Co-Invest Re I/II, Global Atlantic Ivy Re III, GA Iris Re, Global Atlantic Assurance — a head start on the GA census.
