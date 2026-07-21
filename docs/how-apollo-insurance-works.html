@@ -252,6 +252,45 @@ Is the Athene flow — policyholders → US insurer → Bermuda reinsurer → pr
 
 <hr>
 
+<p class="kicker">Deep dive</p>
+<h2>How a funding agreement works — debt in an insurance costume</h2>
+<p>Funding agreements are ~42% of Athene's annual inflow, so they earn their own walk-through. The one-liner: <strong>a funding agreement is the insurer borrowing from the bond market, dressed as an insurance liability.</strong> It raises cash, buys assets, and keeps the spread — in substance, a bond issue.</p>
+
+<h3>It runs the opposite way to a securitization</h3>
+<p>Easy to picture backwards. A securitization <em>starts</em> with cash-flowing assets and issues bonds against them. A funding agreement runs the other way — raise the cash first, buy the assets after:</p>
+<div class="annot"><span class="badge">Securitization</span><span>assets earning ~10% come <b>first</b> → issue bonds against them → investors receive the assets' cash flows and bear their performance.</span></div>
+<div class="annot"><span class="badge">Funding agreement</span><span>issue the note <b>first</b> → raise cash → buy assets (~7%) → pay the noteholder a <b>fixed</b> ~5% → keep the spread. Athene keeps all the upside and bears all the losses.</span></div>
+<p>The noteholder gets a <strong>fixed rate</strong>, never a share of the returns — the opposite of a securitization's risk transfer. (Securitization <em>does</em> live in this ecosystem, but on the <em>asset</em> side: Apollo originates loans, packages them into CLOs/ABS, and Athene buys the tranches as assets.)</p>
+
+<h3>The mechanics</h3>
+<div class="flow" style="max-width:560px">
+  <div class="fbox neu-b"><div class="ft">Bond investors</div><div class="fs">money funds, bond funds, banks</div></div>
+  <div class="farr"><span class="cap">① buy notes — CUSIP, coupon, maturity; trades like a corporate bond</span></div>
+  <div class="fbox"><div class="ft">Athene Global Funding</div><div class="fs">bankruptcy-remote trust</div></div>
+  <div class="farr"><span class="cap">② cash buys a funding agreement</span></div>
+  <div class="fbox us-b"><div class="ft">Athene insurer (AAIA / Bermuda)</div><div class="fs">③ issues funding agreement — insurance contract, fixed rate + principal</div></div>
+  <div class="farr"><span class="cap">④ invests the cash in private credit</span></div>
+  <div class="fbox neu-b"><div class="ft">Assets earn ~7%</div><div class="fs">spread over the note coupon is the profit</div></div>
+</div>
+
+<h3>Why the insurance costume is valuable</h3>
+<p>There is <strong>no insurance risk</strong> in a plain funding agreement — no mortality, no contingency, a pure "pay 5% and return principal" obligation. But because a licensed insurer issues it under statutes that authorize funding agreements, the law treats it as insurance:</p>
+<ul>
+<li><strong>It's booked as an insurance liability, not debt</strong> (statutory "deposit-type contracts"; GAAP "interest-sensitive contract liabilities") — which is why the balance sheet shows only $7.8B of "debt" against $71.4B of funding agreements.</li>
+<li><strong>The holder gets policyholder priority</strong> in insolvency — senior to the holding company's own bondholders — and the insurer's high rating gives the notes a strong rating and cheap funding.</li>
+<li><strong>Capital is held under insurance rules (RBC)</strong>, not bank or debt rules.</li>
+</ul>
+<p>Bond-like economics, insurance seniority and treatment. That's the appeal — and why regulators eye it as classification arbitrage.</p>
+
+<h3>Whose balance sheet is it on? (the dual ledger, again)</h3>
+<p>A funding agreement is <strong>legally</strong> always a liability of the issuing US insurer (AAIA) — only a licensed insurer can issue one. Through reinsurance its <strong>economics</strong> can move to AARe (Bermuda) or the ACRA sidecar (ADIP's capital). Under ModCo the liability stays <em>legally</em> on AAIA while the economics sit offshore — so "whose balance sheet?" has two answers at once. ADIP never holds it directly; ADIP investors are exposed through their equity in ACRA.</p>
+<div class="annot" style="border-left-color:var(--us)"><span class="badge" style="color:var(--us-ink);background:var(--us-bg)">Legal ledger</span><span>who <em>reports</em> it: <b>AAIA</b>, the US insurer — always.</span></div>
+<div class="annot" style="border-left-color:var(--bm)"><span class="badge" style="color:var(--bm-ink);background:var(--bm-bg)">Economic ledger</span><span>who <em>bears</em> it: <b>AARe</b> or the <b>ACRA sidecar</b> (ADIP's capital), if reinsured.</span></div>
+
+<div class="note"><strong>The catch — runnability (F4).</strong> Unlike a retiree's annuity (surrender charges, tax penalties, sticky), funding agreements are <strong>wholesale, dated, and rate-sensitive</strong>. They have maturities and must be <strong>rolled over</strong> — new notes issued to repay maturing ones. If markets freeze or Athene's credit looks shaky, buyers won't roll, and Athene must repay cash <em>on schedule</em> — forcing sales of possibly-illiquid private credit into a bad market. That's the run. Not hypothetical: a Fed study documented an $18B run on life-insurer funding agreements in 2007, ~40% self-fulfilling. And it's the fastest-growing slice of Athene's funding — $35.4B issued in 2025, outstanding up from $47.4B to $71.4B in a year (21% → 26% of net reserves).</div>
+
+<hr>
+
 <p class="kicker">Section 5</p>
 <h2>What this means for the credit work</h2>
 <p>None of the levers is wrong by itself. The <strong>thesis being tested</strong> is whether pulling all four at once, under an owner that profits from volume, has quietly degraded credit quality while the disclosure that would reveal it moved offshore. That's why the map is built the way it is:</p>
