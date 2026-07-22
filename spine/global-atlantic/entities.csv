@@ -1,0 +1,26 @@
+name,jurisdiction,role_provisional,notes,naic_cocode,fein,lei,bma_registration,parent_entity,parent_pct,sources
+"KKR & Co. Inc.",Delaware,manager-parent,NYSE: KKR; ultimate parent; CIK 1404912,,,,,,,kkr-10k-fy2025
+"Global Atlantic Financial Group Limited",Bermuda,holdco-top,GA top holding company; KKR 100% since Jan-2024 (bought out minority),,,,,"KKR & Co. Inc.",100,kkr-10k-fy2025-ex21
+"The Global Atlantic Financial Group LLC",Bermuda,holdco,intermediate holdco,,,,,"Global Atlantic Financial Group Limited",,kkr-10k-fy2025-ex21
+"Global Atlantic (Fin) Company",Delaware,finco-issuer,public debt issuer; former SEC reporter,,,98450051B2E65CAA7E94,,"The Global Atlantic Financial Group LLC",,kkr-10k-fy2025-ex21 · gleif-api
+"Global Atlantic Financial Company",Delaware,holdco,US intermediate,,,,,"The Global Atlantic Financial Group LLC",,kkr-10k-fy2025-ex21
+"Global Atlantic Financial Company Bermuda Limited",Bermuda,holdco,Bermuda intermediate,,,,,"The Global Atlantic Financial Group LLC",,kkr-10k-fy2025-ex21
+"Global Atlantic Limited (Delaware)",Delaware,holdco,,,,,,,,kkr-10k-fy2025-ex21
+"Forethought Life Insurance Company",Indiana,insurer-lead-annuity,THE lead US annuity writer (Athene-AAIA analog),,,549300ACVCQKP6Y6VN63,,provisional pending Schedule Y,,kkr-10k-fy2025-ex21 · gleif-api
+"Commonwealth Annuity & Life Insurance Company",Massachusetts,insurer-reinsurance,block reinsurance carrier,,,TA68BIKOADG4WT4STB33,,provisional pending Schedule Y,,kkr-10k-fy2025-ex21 · gleif-api
+"Accordia Life and Annuity Company",Iowa,insurer-life,life carrier (Athene-of-Iowa analog jurisdiction),,,549300DU6J1Y6IPG7Z50,,provisional pending Schedule Y,,kkr-10k-fy2025-ex21 · gleif-api
+"First Allmerica Financial Life Insurance Company",Massachusetts,insurer-life,legacy carrier,,,0552JIREPRY5ZIETIM08,,provisional pending Schedule Y,,kkr-10k-fy2025-ex21 · gleif-api
+"Global Atlantic Re Limited",Bermuda,reinsurer-pivot,GA Bermuda reinsurer (AARe analog); Class E,,,549300QMWJCI8DGI7O31,Class E (BMA),provisional,,kkr-10k-fy2025-ex21 · gleif-api · bma-class-declaration
+"Global Atlantic Assurance Limited",Bermuda,reinsurer,Class E per BMA declaration,,,549300EJ48NYYDHMFB14,Class E (BMA),provisional,,kkr-10k-fy2025-ex21 · gleif-api · bma-class-declaration
+"Ivy Re Limited",Bermuda,reinsurer-sidecar,co-invest sidecar (ACRA analog); no LEI found,,,,Class E (BMA),provisional,,bma-class-declaration · gleif-api-nomatch
+"Ivy Re II Limited",Bermuda,reinsurer-sidecar,co-invest sidecar vintage II; no LEI found,,,,Class E (BMA),provisional,,bma-class-declaration · gleif-api-nomatch
+"Global Atlantic Ivy Re III Limited",Bermuda,reinsurer-sidecar,co-invest sidecar vintage III; no LEI found,,,,Class E (BMA),provisional,,bma-class-declaration · gleif-api-nomatch
+"Ivy Peak Co-Invest Re I Ltd.",Bermuda,reinsurer-sidecar,co-invest vehicle; no LEI found,,,,Class E (BMA),provisional,,bma-class-declaration · gleif-api-nomatch
+"Ivy Peak Co-Invest Re II Ltd.",Bermuda,reinsurer-sidecar,co-invest vehicle; no LEI found,,,,Class E (BMA),provisional,,bma-class-declaration · gleif-api-nomatch
+"GA Iris Re Ltd.",Bermuda,reinsurer,per BMA declaration; no LEI found,,,,Class E (BMA),provisional,,bma-class-declaration · gleif-api-nomatch
+"Global Atlantic Distributors, LLC",Delaware,service,distribution,,,,,,,kkr-10k-fy2025-ex21
+"Global Atlantic Investment Advisors, LLC",Indiana,service-investment,RIA,,,,,,,kkr-10k-fy2025-ex21
+"Global Atlantic Risk Advisors, L.P.",Delaware,service-investment,asset management,,,,,,,kkr-10k-fy2025-ex21
+"Global Atlantic Insurance Network LLC",Delaware,service,,,,,,,,kkr-10k-fy2025-ex21
+"Global Atlantic Equipment Management, LLC",Delaware,service-asset,equipment leasing platform,,,,,,,kkr-10k-fy2025-ex21
+"Ivy Co-Invest Vehicle III Feeder GP LLC",Delaware,fund-gp,sidecar feeder GP,,,,,,,kkr-10k-fy2025-ex21

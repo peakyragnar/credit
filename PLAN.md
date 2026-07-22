@@ -59,6 +59,15 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 - 9 supplements fetched (manifest+sha); 2 clean docs parsed (`tools/parse_fin_supplement.py`, 384 cells, all cross-foot + overlap gates); 7 older docs glyph-encoded → decoder parked.
 - `dossiers/athene/athene-quarterly-engine.xlsx`: 4 sheets, 77 live identity checks, formulas recalc in Excel; 2Q26 column ready. Finding 57 (spread compression + flow deceleration, quarterly).
 
+## PHASE 1 — GLOBAL ATLANTIC (goal set 2026-07-22: full Athene-parity process + comparison artifact)
+### GA-1 `[~]` Document hunt — census sources, statutory statements, KKR filings, Bermuda FCR
+### GA-2 `[ ]` Census/spine — entities, cocodes, LEIs, Bermuda classes (BMA head start in findings: Ivy Re I/II/III, Ivy Peak I/II, GA Iris Re, Global Atlantic Assurance)
+### GA-3 `[ ]` L0 control totals — banked claims from primary docs
+### GA-4 `[ ]` Statutory bond drill — Schedule D through the parameterized parsers (if statements public), aging/concentration/source trends
+### GA-5 `[ ]` Quarterly + annual engine — KKR insurance-segment series 2023–2026, gated
+### GA-6 `[ ]` GA surfaces — dashboard artifact + engine workbook, verified
+### GA-7 `[ ]` THE COMPARISON — Athene vs Global Atlantic HTML artifact: 3 years quarterly + annual + all 2026 reported; same footed metrics side by side
+
 ## New ideas (Michael, 2026-07-22 — parked, not yet scoped)
 - `[ ]` **Funding-map queries**: "which businesses does Athene/Apollo finance?" — issuer names now on 100% of D1 rows makes this queryable (the whale shelf was the first output); scope a proper query surface after D4 resolution.
 - `[ ]` **Peer normalization layer**: same footed metrics (PL share, private floor, aging, concentration, ROE tree, capital trends) computed identically across PE-insurance peers — KKR/Global Atlantic (already Phase 1), Brookfield/AEL, Ares/Aspida, Blue Owl — so quality is comparable, not narrative. This is the Phase-1+ payoff of the parameterized parsers.
