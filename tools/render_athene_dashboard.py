@@ -438,6 +438,28 @@ PNL_TABLE = (
 )
 
 
+_nii = 12732.699320; _fwh = 3544.758297 - 130.183473
+_cred = 2096.835422 + 8.269553 + 1573.987953
+_otti_all = 110.227270 + 51.810227
+_spread = _nii - _fwh - _cred - _otti_all
+NETSPREAD = (
+    '<div class="cflabel" style="margin-top:22px"><span class="t">Net spread — income minus impairments minus cost of funding</span>'
+    '<span class="n">AAIA statutory, FY2025 — every line cited</span></div>'
+    '<div class="tbl-scroll"><table class="ptable" style="max-width:640px"><tbody>'
+    f'<tr><td>Net investment income (after expenses)</td><td class="nm">$12,733M</td></tr>'
+    f'<tr><td>− investment results passed to AARe (funds-withheld adjustment, net)</td><td>−$3,415M</td></tr>'
+    f'<tr><td>− interest credited to policyholders and deposit contracts<br>'
+    '<span class="dim" style="font-size:11.5px">annuity tabular interest $2,105M + deposit-type/FABN interest $1,574M</span></td><td>−$3,679M</td></tr>'
+    f'<tr><td>− impairments taken (bonds $110M + mortgages $52M)</td><td>−$162M</td></tr>'
+    f'<tr class="sub"><td>≈ Net spread retained at AAIA</td><td class="nm">${_spread:,.0f}M</td></tr>'
+    '</tbody></table></div>'
+    '<p class="cfnote">Cross-check at group level (GAAP, already banked): NII $17,847M − interest-sensitive contract '
+    'benefits $12,089M ≈ $5,758M — same order of magnitude by an independent route. Caveats, logged: the ModCo block\'s '
+    'pass-through is embedded in reserve movements (not fully isolated here, unlike the funds-withheld line); the GAAP '
+    'benefits line includes index credits and reserve remeasurement; realized G/L and IMR/AVR flows sit outside this '
+    'operating view. Good enough for L0/L1 anchoring; the treaty-level spread decomposition is an L2 item.</p>'
+)
+
 D1_SECTION = (
     '<div class="cflabel" style="margin-top:26px"><span class="t">D1 — every bond position, extracted and footed</span>'
     f'<span class="n">8,582 rows · both sections foot to the dollar</span></div>'
@@ -463,6 +485,7 @@ D1_SECTION = (
     'cannot say; impairment outcomes by rating source (period backfill) and cross-holder marks (D4) are the '
     'discriminators. Deliberately unresolved.</div>'
     + PNL_TABLE
+    + NETSPREAD
 )
 
 # ---- 5b: the disposal machine (Part 4 + Part 5 extracts) ----
