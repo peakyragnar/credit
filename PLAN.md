@@ -39,7 +39,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 - ROE-common 16.6% / ex-AOCI 13.2% / total 13.7% / ADIP realized 12.2% / Apollo take $4.07B; 10bp-losses ≈ −1pt ROE sensitivity.
 - **Gate:** every line traces to a banked claim; income/equity/expense cross-foots exact. Finding 54.
 
-### H. `[ ]` Letter-slip stress — the capital-at-risk instrument (absorbs old D/Level-3 item)
+### H. `[x]` Letter-slip stress — DONE 2026-07-22 (capital-at-risk instrument; absorbed old D/Level-3 item)
 - Re-grade the $40.1B PL book at yield-implied ratings (2–3 notch slip per D3); recompute RBC C-1 charges (public NAIC factors) → impact on AAIA CAL ratio and Bermuda BSCR trend.
 - Companion: run-stress arithmetic (runnable 26.3% of liabilities vs $1.7B <1y asset maturities + 31% identifier-private book).
 - Level 3 rollforward from 10-K folds in here as the GAAP-ruler cross-check.
@@ -72,6 +72,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 
 ## Evidence log
 *(append: date · item · what moved · commit)*
+- 2026-07-22 · H · C-1 factors banked (Milliman 11/2021, sha) · `compute_letter_slip.py` (PL gate exact) → slip 2/3 = 376%/337% CAL bound, below-IG 7.0%/14.2% · run-stress $71B vs $11B + ratchet · dashboard panel in ⑥ · findings 55–56.
 - 2026-07-22 · G · 20 new L0 claims from 10-K (income/equity/expense stacks, cross-foots exact) · dashboard section ⑦ (engine waterfall + 6 return cards + levers callout) · glossary +3 (ROE/hurdle, AOCI, NCI realized return) · finding 54.
 - 2026-07-22 · C · doc hunt (4 fetched, 2 full + 2 partial-only, manifest+sha) · parser year-parameterized, era-2 quirks #11–14, 2025 regression byte-identical · gates 2025 exact / 2024 +$1 / 2023 −$327K assigned · `d1_trends.csv` footed · THE RESULT: PL 3.4× in 2yrs to 25.3%, FE −$5.1B absolute in 2025, quality prints flat; cohort run 1 mostly benign w/ violent tail (12-notch miss) · findings 50–53 · trends panel on dashboard.
 - 2026-07-22 · B · description-column fix in `parse_sched_d.py` (quirk #10; reparse gated byte-identical by `tools/check_d1_reparse.py`, names now on 100% of rows) → `tools/compute_d1_concentration.py` → `extract/athene/d1_concentration.csv` (foots exactly) · findings 47–49 (whale shelf: top-10 = $22.7B, 10/12 PL + 2025 vintage; AP Grange anatomy verified vs raw p.5903) · dashboard concentration panel in ⑤ · glossary +1 (CUSIP6) · repo venv `.venv` with pypdf for parser runs.
