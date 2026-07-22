@@ -27,6 +27,7 @@ SRC = ROOT / 'extract/athene/quarterly_supplement.csv'
 DEST = ROOT / 'dossiers/athene/athene-quarterly-engine.xlsx'
 
 QUARTERS = ['4Q24', '1Q25', '2Q25', '3Q25', '4Q25', '1Q26']
+METRIC_ROW = {}          # metric -> Engine row of its blue (filed) values
 FILL_Q = '2Q26'
 COLS = {q: get_column_letter(2 + i) for i, q in enumerate(QUARTERS)}   # B..G
 FILL_COL = get_column_letter(2 + len(QUARTERS))                        # H
@@ -67,6 +68,7 @@ def put(label, font=BLACK, indent=0):
 
 
 def vals(metric, scale=1.0, fmt=MONEY_FMT, pct=False):
+    METRIC_ROW.setdefault(metric, row)
     for q in QUARTERS:
         v = D.get((q, metric))
         c = ws.cell(row=row, column=2 + QUARTERS.index(q))
@@ -91,7 +93,7 @@ def check(fml_by_col):
         col = COLS[q]
         c = ws.cell(row=row, column=2 + QUARTERS.index(q), value=fml_by_col(col))
         c.font = GREY
-        check_cells.append(f'{col}{row}')
+        check_cells.append(f'Engine!{col}{row}')
 
 
 def section(title):
@@ -282,6 +284,80 @@ check(lambda c: f'=IF(ABS({c}{r_dnis}-{c}{r_nispct})<0.0005,"OK","FAIL")'); row 
 
 last_row = row
 
+# ---- Engine-FY sheet: annual columns (10-K MD&A) + live quarters cross-audit ----
+ANN = {}
+for r_ in csv.DictReader(open(ROOT / 'extract/athene/annual_engine.csv')):
+    ANN[(r_['year'], r_['metric'])] = float(r_['value'])
+FYS = ['FY2023', 'FY2024', 'FY2025']
+fy = wb.create_sheet('Engine-FY')
+fy.column_dimensions['A'].width = 46
+for i_ in range(2, 8):
+    fy.column_dimensions[get_column_letter(i_)].width = 12
+fy.cell(row=1, column=1, value='ATHENE — THE ANNUAL ENGINE  (10-K MD&A; FY2025 cross-audited against the quarterly sheet)').font = HDR
+fy.cell(row=2, column=1, value='Blue = filed value (ahl-10k-fy2025, sha in extract/athene/l0-claims.csv rows). '
+        '"FY25 Σ quarters" is a live formula over the Engine sheet — its check must read OK.').font = GREY
+hdr = FYS + ['FY25 Σ quarters', 'cross-check']
+for i_, h_ in enumerate(hdr):
+    c_ = fy.cell(row=4, column=2 + i_, value=h_)
+    c_.font = BOLD
+    c_.alignment = Alignment(horizontal='center')
+
+FY_FLOW = [('retail', 'Retail'), ('flow_reins', 'Flow reinsurance'),
+           ('funding_agreements', 'Funding agreements'), ('pga', 'Pension group annuities'),
+           ('other_spread', 'Other spread products'), ('gross_organic', '= Gross organic inflows'),
+           ('gross_inorganic', 'Gross inorganic (block) inflows'),
+           ('total_gross_inflows', '= TOTAL GROSS INFLOWS'),
+           ('gross_outflows', 'Gross outflows'), ('net_flows', '= NET FLOWS'),
+           ('inflows_athene', 'Inflows attributable to Athene'),
+           ('inflows_adip', 'Inflows attributable to ADIP/ACRA NCI'),
+           ('inflows_ceded_3p', 'Inflows ceded to third-party reinsurers')]
+FY_SRE = [('sre_fi_nii', 'Fixed income & other net investment income'),
+          ('sre_alt_nii', 'Alternatives net investment income'),
+          ('sre_nie', '= Net investment earnings'), ('sre_fees', '+ Strategic capital management fees'),
+          ('sre_cof', '− Cost of funds'), ('sre_nis', '= NET INVESTMENT SPREAD'),
+          ('sre_opex', '− Other operating expenses'), ('sre_fin', '− Interest & other financing costs'),
+          ('sre', '= SPREAD RELATED EARNINGS')]
+
+fyrow = 6
+fy.cell(row=fyrow, column=1, value='MONEY IN / MONEY OUT — annual').font = HDR
+fyrow += 1
+fy_first = {}
+for key, label in FY_FLOW + [(None, None)] + FY_SRE:
+    if key is None:
+        fyrow += 1
+        fy.cell(row=fyrow, column=1, value='THE INCOME ENGINE — annual').font = HDR
+        fyrow += 1
+        continue
+    lc = fy.cell(row=fyrow, column=1, value=label)
+    if label.startswith('='):
+        lc.data_type = 's'
+    lc.font = BOLD if label.startswith('=') else BLUE
+    fy_first[key] = fyrow
+    for i_, y_ in enumerate(FYS):
+        c_ = fy.cell(row=fyrow, column=2 + i_)
+        v_ = ANN.get((y_, key))
+        if v_ is not None:
+            c_.value = v_
+        c_.font = BLUE
+        c_.number_format = MONEY_FMT
+    qrow = METRIC_ROW.get(key)
+    if qrow:
+        c_ = fy.cell(row=fyrow, column=5, value=f'=SUM(Engine!C{qrow}:F{qrow})')
+        c_.font = BLACK
+        c_.number_format = MONEY_FMT
+        cc = fy.cell(row=fyrow, column=6, value=f'=IF(F{fyrow}=D{fyrow},"OK","FAIL")')
+        cc.font = GREY
+        check_cells.append(f"'Engine-FY'!G{fyrow}")
+        # note: formula compares col F (sum) to col D (FY2025); written into col F/G below
+    fyrow += 1
+# fix the check-cell column letters: sum sits in col F(6)? -> columns: B,C,D = FYs; E(5)=sum? adjust
+# (we wrote sum into column 5 = E and check into column 6 = F)
+for r_ in range(6, fyrow):
+    c_ = fy.cell(row=r_, column=6)
+    if isinstance(c_.value, str) and c_.value.startswith('=IF(F'):
+        c_.value = c_.value.replace(f'=IF(F{r_}=D{r_}', f'=IF(E{r_}=D{r_}')
+check_cells = [x.replace("'Engine-FY'!G", "'Engine-FY'!F") for x in check_cells]
+
 # ---- Checks sheet ----
 cs = wb.create_sheet('Checks')
 cs.column_dimensions['A'].width = 60
@@ -289,7 +365,7 @@ cs['A1'] = 'LIVE CHECKS — this cell must read 0'
 cs['A1'].font = HDR
 cs['A3'] = 'Number of failing identity checks on Engine:'
 cs['A3'].font = BLACK
-parts = '+'.join(f'COUNTIF(Engine!{c},"FAIL")' for c in check_cells)
+parts = '+'.join(f'COUNTIF({c},"FAIL")' for c in check_cells)
 cs['B3'] = f'={parts}'
 cs['B3'].font = BOLD
 cs['A5'] = f'Checks watched: {len(check_cells)} cells (totals cross-cuts, rollforward identities, continuity, SRE chain, derived spread).'
