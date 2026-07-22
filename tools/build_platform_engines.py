@@ -353,11 +353,21 @@ def build_bnt():
             lambda p: sum(g(p, m) or 0 for m in ('pretax_doe_annuities', 'pretax_doe_pc',
                                                  'pretax_doe_life_insurance', 'pretax_doe_corporate_and_other')),
             lambda p: g(p, 'total_pretax_doe'))
-    q.section('② THE ANNUITY RULER — rates (printed, %)')
-    q.vals('Annuity net investment income (rate)', 'annuity_net_investment_income', fmt='0.00"%"')
-    q.vals('Annuity cost of funds (rate)', 'annuity_cost_of_funds', fmt='0.00"%"')
-    q.vals('ANNUITY NET INVESTMENT SPREAD', 'annuity_net_investment_spread', fmt='0.00"%"')
-    q.vals('Annuity average invested assets', 'annuity_average_invested_assets')
+    q.section('② THE ANNUITY RULER — segment dollars (printed) and derived annualized rates')
+    q.vals('Annuity net investment income', 'annuity_net_investment_income', mark='aNII')
+    q.vals('Annuity cost of funds', 'annuity_cost_of_funds', mark='aCoF')
+    q.vals('ANNUITY NET INVESTMENT SPREAD (printed)', 'annuity_net_investment_spread', mark='aNIS')
+    q.check('NII + cost of funds = net spread',
+            lambda c: f"{q.ref('aNII', c)}+{q.ref('aCoF', c)}", lambda c: q.ref('aNIS', c),
+            lambda p: (g(p, 'annuity_net_investment_income') or 0) + (g(p, 'annuity_cost_of_funds') or 0),
+            lambda p: g(p, 'annuity_net_investment_spread'))
+    q.vals('Annuity average invested assets', 'annuity_average_invested_assets', mark='aAIA')
+    q.formula('Earned rate (derived, ×4 / avg invested assets)',
+              lambda c: f"=IF({q.ref('aAIA', c)}=0,\"\",{q.ref('aNII', c)}*4/{q.ref('aAIA', c)})", fmt=PCT)
+    q.formula('Cost of funds rate (derived)',
+              lambda c: f"=IF({q.ref('aAIA', c)}=0,\"\",{q.ref('aCoF', c)}*4/{q.ref('aAIA', c)})", fmt=PCT)
+    q.formula('NET INVESTMENT SPREAD rate (derived)',
+              lambda c: f"=IF({q.ref('aAIA', c)}=0,\"\",{q.ref('aNIS', c)}*4/{q.ref('aAIA', c)})", fmt=PCT)
     q.section('③ FLOWS — sales, outflows, net flows')
     q.vals('Retail sales — fixed index', 'retail_annuity_sales_fixed_index', indent=1)
     q.vals('Retail sales — fixed rate', 'retail_annuity_sales_fixed_rate', indent=1)

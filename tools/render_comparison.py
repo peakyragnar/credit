@@ -31,14 +31,92 @@ CAP = {(r['entity'], r['year'], r['metric']): float(r['value_musd'])
 STAT = {(r['carrier'], int(r['year']), r['metric']): float(r['value']) if r['value'] else None
         for r in csv.DictReader(open(ROOT / 'extract/global-atlantic/statutory_l0.csv'))}
 
+from collections import defaultdict
+import json
+
+
+def load_pref(fname, pref, scale):
+    by = defaultdict(dict)
+    for r in csv.DictReader(open(ROOT / f'extract/cross-section/{fname}.csv')):
+        by[(r['period'], r['metric'])][r['source_file']] = float(r['value'])
+    return {k: v[sorted(v, key=lambda s2: next((i for i, p in enumerate(pref) if p in s2), 99))[0]] * scale
+            for k, v in by.items()}
+
+
+BNT = load_pref('bnt_engine_raw', ['20f', 'q1-2026', 'q4-2025'], 1.0)          # $M as printed
+ASP = load_pref('aspida_engine_raw', ['485bpos', 'n4a'], 1e-3)                 # $k -> $M
+KLR = {}
+_klr_src = {'FY2022': 'klr-fs-2023', 'FY2023': 'klr-fs-2023', 'FY2024': 'klr-fs-2025', 'FY2025': 'klr-fs-2025'}
+for _r in csv.DictReader(open(ROOT / 'extract/cross-section/klr_engine_raw.csv')):
+    if _r['period'] in _klr_src and _klr_src[_r['period']] in _r['source_file']:
+        KLR[(_r['period'], _r['metric'])] = float(_r['value']) / 1e6           # USD -> $M
+XCAP = {(r['entity'], r['year'], r['metric']): float(r['value_kusd']) / 1e3
+        for r in csv.DictReader(open(ROOT / 'extract/cross-section/capital.csv'))}
+XSTAT = {(r['carrier'], r['year'], r['metric']): float(r['value_kusd'])
+         for r in csv.DictReader(open(ROOT / 'extract/cross-section/statutory_l0.csv'))}
+AELF = json.load(open(ROOT / 'extract/cross-section/ael_bond_features.json'))
+
+B = lambda p, k: BNT.get((p, k))
+S = lambda p, k: ASP.get((p, k))
+K = lambda p, k: KLR.get((p, k))
+
+# quarterly metric -> FY: BNT FY rows use the 20-F metric names
+BNT_FY_ALIAS = {'gaap_net_income': 'net_income',
+                'distributable_operating_earnings': 'distributable_operating_earnings',
+                'total_gross_annuity_sales': 'gross_annuity_sales_total',
+                'institutional_annuity_sales_funding_agreements': 'gross_annuity_sales_funding_agreements'}
+
+
+def bq(p, k):
+    """BNT value for quarter or FY period (FY via 20-F alias)."""
+    if p.startswith('FY'):
+        return BNT.get((p, BNT_FY_ALIAS.get(k, k)))
+    return BNT.get((p, k))
+
+
+def bnt_rate(p, dollar_key):
+    d, aia = BNT.get((p, dollar_key)), BNT.get((p, 'annuity_average_invested_assets'))
+    if d is None or not aia:
+        return None
+    return round(d * 4 / aia * 100, 2)
+
+
+def asp_rate(p):
+    if not p.startswith('FY'):
+        return None
+    prev = f'FY{int(p[2:]) - 1}'
+    nii = ASP.get((p, 'ops_net_investment_income'))
+    a0, a1 = ASP.get((prev, 'bs_total_cash_and_invested_assets')), ASP.get((p, 'bs_total_cash_and_invested_assets'))
+    if None in (nii, a0, a1):
+        return None
+    return round(nii / ((a0 + a1) / 2) * 100, 2)
+
+
+def klr_rate(p):
+    if not p.startswith('FY'):
+        return None
+    prev = f'FY{int(p[2:]) - 1}'
+    num = sum(KLR.get((p, m), 0) for m in ('net_investment_income', 'investment_income_funds_withheld',
+                                           'investment_management_expenses'))
+    def base(pp):
+        a, f = KLR.get((pp, 'total_cash_and_invested_assets')), KLR.get((pp, 'funds_withheld_assets'))
+        return None if a is None or f is None else a + f
+    b0, b1 = base(prev), base(p)
+    if not num or b0 is None or b1 is None:
+        return None
+    return round(num / ((b0 + b1) / 2) * 100, 2)
+
+
 QTRS = ['1Q23', '2Q23', '3Q23', '4Q23', '1Q24', '2Q24', '3Q24', '4Q24',
         '1Q25', '2Q25', '3Q25', '4Q25', '1Q26']
 FYS = ['FY2023', 'FY2024', 'FY2025']
 
 
-def fmt(v, money=True, pct=False, dp=0):
+def fmt(v, money=True, pct=False, dp=0, years=False):
     if v is None:
         return '<span class="na">·</span>'
+    if years:
+        return f'{v:.1f}y'
     if pct:
         return f'{v:.2f}%'
     if abs(v) >= 1000 and money:
@@ -46,11 +124,27 @@ def fmt(v, money=True, pct=False, dp=0):
     return f'{"−" if v < 0 else ""}${abs(v):,.0f}M' if money else f'{v:,.{dp}f}'
 
 
+PLATS = [('ath', 'ATHENE'), ('ga', 'GLOBAL ATLANTIC'), ('bf', 'BROOKFIELD (BNT)'),
+         ('ar', 'ARES · ASPIDA'), ('ow', 'BLUE OWL · KUVARE')]
+
+
+def rows5(label, fns, periods, pct=False, years=False, note={}):
+    """One block: a row per platform (in PLATS order). fns: dict plat-key -> fn(period)
+    or None (platform publishes nothing for this metric -> dotted row).
+    note: plat-key -> short annotation shown beside the platform tag."""
+    out = []
+    for i, (cls, name) in enumerate(PLATS):
+        fn = fns.get(cls)
+        cells = ''.join(f'<td>{fmt(fn(p) if fn else None, pct=pct, years=years)}</td>' for p in periods)
+        tag = name + (f' <span style="font-weight:400">({note[cls]})</span>' if cls in note else '')
+        lbl = f'{label}<span class="who">{tag}</span>' if i == 0 else f'<span class="who">{tag}</span>'
+        last = ' class="blockend"' if i == len(PLATS) - 1 else ''
+        out.append(f'<tr class="{cls}"{last}><td class="lbl">{lbl}</td>{cells}</tr>')
+    return ''.join(out)
+
+
 def rowpair(label, a_fn, g_fn, periods, pct=False):
-    cells_a = ''.join(f'<td>{fmt(a_fn(p), pct=pct)}</td>' for p in periods)
-    cells_g = ''.join(f'<td>{fmt(g_fn(p), pct=pct)}</td>' for p in periods)
-    return (f'<tr class="ath"><td class="lbl">{label}<span class="who">ATHENE</span></td>{cells_a}</tr>'
-            f'<tr class="ga"><td class="lbl"><span class="who">GLOBAL ATLANTIC</span></td>{cells_g}</tr>')
+    return rows5(label, {'ath': a_fn, 'ga': g_fn}, periods, pct=pct)
 
 
 def table(title, note, rows_html, periods):
@@ -79,31 +173,62 @@ P = QTRS + FYS
 
 # spread pair: Athene NIS% vs GA underwriting margin%
 html_rows_spread = (
-    rowpair('Earned rate', lambda p: A(p, 'sre_nie_pct'), lambda p: ga_rate(p, 'nier', 'adj_nii'), P, pct=True)
-    + rowpair('Cost of float/insurance', lambda p: A(p, 'sre_cof_pct'), lambda p: ga_rate(p, 'cost_ins_ratio', 'adj_cost_ins'), P, pct=True)
-    + rowpair('NET SPREAD / UNDERWRITING MARGIN', lambda p: A(p, 'sre_nis_pct'), lambda p: ga_rate(p, 'underwriting_ratio', 'adj_underwriting'), P, pct=True)
+    rows5('Earned rate',
+          {'ath': lambda p: A(p, 'sre_nie_pct'), 'ga': lambda p: ga_rate(p, 'nier', 'adj_nii'),
+           'bf': lambda p: bnt_rate(p, 'annuity_net_investment_income') if not p.startswith('FY') else None,
+           'ar': asp_rate, 'ow': klr_rate},
+          P, pct=True,
+          note={'bf': 'annuity segment, derived', 'ar': 'derived, statutory', 'ow': 'derived, incl funds withheld'})
+    + rows5('Cost of float/insurance',
+            {'ath': lambda p: A(p, 'sre_cof_pct'), 'ga': lambda p: ga_rate(p, 'cost_ins_ratio', 'adj_cost_ins'),
+             'bf': lambda p: bnt_rate(p, 'annuity_cost_of_funds') if not p.startswith('FY') else None,
+             'ar': None, 'ow': None},
+            P, pct=True, note={'bf': 'derived', 'ar': 'not derivable — statutory basis', 'ow': 'not derivable'})
+    + rows5('NET SPREAD / UNDERWRITING MARGIN',
+            {'ath': lambda p: A(p, 'sre_nis_pct'), 'ga': lambda p: ga_rate(p, 'underwriting_ratio', 'adj_underwriting'),
+             'bf': lambda p: bnt_rate(p, 'annuity_net_investment_spread') if not p.startswith('FY') else None,
+             'ar': None, 'ow': None},
+            P, pct=True, note={'bf': 'derived'})
 )
+def asp_inflows(p):
+    prem, dep = S(p, 'ops_premium_and_annuity_considerations_life_net'), S(p, 'cf_net_deposits_on_deposit_type_contracts')
+    return None if prem is None else prem + (dep or 0)
+
+
 html_rows_growth = (
-    rowpair('Total inflows / new business', lambda p: A(p, 'total_gross_inflows') or ATH_AN.get((p, 'total_gross_inflows')),
-            lambda p: (lambda vals: sum(v for v in vals if v is not None) if any(v is not None for v in vals) else None)(
-                [G(p, k) for k in ('nbv_retirement_total', 'nbv_preneed', 'nbv_block', 'nbv_flow', 'nbv_prt', 'nbv_funding_agreements', 'nbv_life')]), P)
-    + rowpair('of which funding agreements', lambda p: A(p, 'funding_agreements') or ATH_AN.get((p, 'funding_agreements')),
-              lambda p: G(p, 'nbv_funding_agreements'), P)
-    + rowpair('of which block/inorganic', lambda p: A(p, 'gross_inorganic') or ATH_AN.get((p, 'gross_inorganic')),
-              lambda p: G(p, 'nbv_block'), P)
+    rows5('Total inflows / new business',
+          {'ath': lambda p: A(p, 'total_gross_inflows') or ATH_AN.get((p, 'total_gross_inflows')),
+           'ga': lambda p: (lambda vals: sum(v for v in vals if v is not None) if any(v is not None for v in vals) else None)(
+               [G(p, k) for k in ('nbv_retirement_total', 'nbv_preneed', 'nbv_block', 'nbv_flow', 'nbv_prt', 'nbv_funding_agreements', 'nbv_life')]),
+           'bf': lambda p: bq(p, 'total_gross_annuity_sales'),
+           'ar': asp_inflows, 'ow': lambda p: K(p, 'premium_income')},
+          P, note={'bf': 'gross annuity sales', 'ar': 'net premiums + deposits', 'ow': 'premium income'})
+    + rows5('of which funding agreements',
+            {'ath': lambda p: A(p, 'funding_agreements') or ATH_AN.get((p, 'funding_agreements')),
+             'ga': lambda p: G(p, 'nbv_funding_agreements'),
+             'bf': lambda p: bq(p, 'institutional_annuity_sales_funding_agreements'),
+             'ar': lambda p: S(p, 'cf_net_deposits_on_deposit_type_contracts'), 'ow': None},
+            P, note={'ar': 'deposit-type, launched 2025', 'ow': 'none published'})
 )
 html_rows_earn = (
-    rowpair('Operating earnings (SRE / AOE pre-tax)', lambda p: A(p, 'sre') or ATH_AN.get((p, 'sre')),
-            lambda p: G(p, 'adj_op_pretax'), P)
-    + rowpair('GAAP net income to common/shareholder', lambda p: A(p, 'gaap_ni_common') or ATH_AN.get((p, 'gaap_ni_common')),
-              lambda p: G(p, 'ni_shareholder'), P)
+    rows5('Operating earnings (SRE / AOE / DOE)',
+          {'ath': lambda p: A(p, 'sre') or ATH_AN.get((p, 'sre')), 'ga': lambda p: G(p, 'adj_op_pretax'),
+           'bf': lambda p: bq(p, 'distributable_operating_earnings'), 'ar': None, 'ow': None},
+          P, note={'ar': 'no operating measure exists', 'ow': 'no operating measure exists'})
+    + rows5('GAAP / statutory net income',
+            {'ath': lambda p: A(p, 'gaap_ni_common') or ATH_AN.get((p, 'gaap_ni_common')),
+             'ga': lambda p: G(p, 'ni_shareholder'), 'bf': lambda p: bq(p, 'gaap_net_income'),
+             'ar': lambda p: S(p, 'ops_net_income_loss'), 'ow': lambda p: K(p, 'net_income_loss')},
+            P, note={'ar': 'statutory', 'ow': 'FY2024 = LDTI-restated'})
 )
 html_rows_equity = (
-    rowpair('Shareholders equity (AHL / GALD)', lambda p: A(p, 'eq_ahl_total'),
-            lambda p: G(p, 'shareholders_equity'), P)
-    + rowpair('ROE — GAAP basis', lambda p: None, lambda p: G(p, 'roe'), P, pct=True)
-    + rowpair('Operating ROE (Adj Op ROE; Athene = engine-panel ROE, annual)', lambda p: None,
-              lambda p: G(p, 'adj_op_roe'), P, pct=True)
+    rows5('Total equity / capital & surplus',
+          {'ath': lambda p: A(p, 'eq_ahl_total'), 'ga': lambda p: G(p, 'shareholders_equity'),
+           'bf': lambda p: bq(p, 'total_equity'),
+           'ar': lambda p: S(p, 'bs_total_capital_and_surplus'), 'ow': lambda p: K(p, 'total_shareholders_equity')},
+          P, note={'ar': 'statutory C&S', 'ow': 'NEGATIVE until 2024'})
+    + rows5('ROE — GAAP basis',
+            {'ath': None, 'ga': lambda p: G(p, 'roe'), 'bf': None, 'ar': None, 'ow': None}, P, pct=True)
 )
 
 # quality year-ends
@@ -136,25 +261,59 @@ def ath_pl(p):
     return ATH_TR[(y, 'rating_source', 'PL (private letter)')] / ATH_TR[(y, 'total', 'all')] * 100
 
 
+def ael_feat(p, key):
+    y = {'4Q23': '2023', '4Q24': '2024', '4Q25': '2025'}.get(p)
+    return AELF['years'][y][key] if y else None
+
+
 html_rows_quality = (
-    rowpair('Below-IG share — regulatory ruler (NAIC)', ath_bigsh, ga_naic_bigsh, QY, pct=True)
-    + rowpair('Below-IG share — market ruler (NRSRO)', lambda p: None, ga_nrsro_bigsh, QY, pct=True)
-    + rowpair('Private-letter share (Athene statutory; GA n/a — no public CUSIP-level filing)',
-              ath_pl, lambda p: None, QY, pct=True)
+    rows5('Below-IG share — regulatory ruler (NAIC)',
+          {'ath': ath_bigsh, 'ga': ga_naic_bigsh, 'bf': lambda p: ael_feat(p, 'below_ig_pct'),
+           'ar': None, 'ow': None},
+          QY, pct=True, note={'bf': 'AEL, position-level', 'ar': 'no public schedule', 'ow': 'no public schedule'})
+    + rows5('Below-IG share — market ruler (NRSRO)',
+            {'ath': None, 'ga': ga_nrsro_bigsh, 'bf': None, 'ar': None, 'ow': None}, QY, pct=True)
+    + rows5('Private-letter share (position-level statutory drill)',
+            {'ath': ath_pl, 'ga': None, 'bf': lambda p: ael_feat(p, 'pl_share_pct'), 'ar': None, 'ow': None},
+            QY, pct=True, note={'bf': 'AEL — no Athene-style ramp', 'ga': 'no public CUSIP-level filing'})
+    + rows5('Bond-book weighted holding age',
+            {'ath': lambda p: {'4Q25': 1.72}.get(p), 'ga': None,
+             'bf': lambda p: ael_feat(p, 'wavg_age'), 'ar': None, 'ow': None},
+            QY, years=True, note={'bf': 'seasoned', 'ath': 'unseasoned'})
 )
 
 CAPY = ['2023', '2024', '2025']
+
+
+def xcov(entity, y):
+    ec, ecr = XCAP.get((entity, y, 'eligible_capital')), XCAP.get((entity, y, 'ecr'))
+    return ec / ecr * 100 if ec and ecr else None
+
+
 html_rows_capital = (
-    rowpair('Bermuda pivot ECR coverage (AARe / GA Re)',
-            lambda y: {'2024': 242.0, '2025': 202.0}.get(y),
-            lambda y: CAP[('GA Re', y, 'eligible_capital')] / CAP[('GA Re', y, 'ecr')] * 100, CAPY, pct=True)
-    + rowpair('Second reinsurer (ALRe / GAAL)',
-              lambda y: {'2024': 453.0, '2025': 309.0}.get(y),
-              lambda y: CAP[('GAAL', y, 'eligible_capital')] / CAP[('GAAL', y, 'ecr')] * 100, CAPY, pct=True)
-    + rowpair('Lead US carrier C&S (AAIA TAC / FLIC+CWA C&S)',
-              lambda y: 9504.0 if y == '2025' else None,
-              lambda y: ((STAT.get(('flic', int(y), 'capital_surplus')) or 0)
-                         + (STAT.get(('cwa', int(y), 'capital_surplus')) or 0)) / 1e6 or None, CAPY)
+    rows5('Bermuda pivot ECR coverage',
+          {'ath': lambda y: {'2024': 242.0, '2025': 202.0}.get(y),
+           'ga': lambda y: CAP[('GA Re', y, 'eligible_capital')] / CAP[('GA Re', y, 'ecr')] * 100,
+           'bf': None,
+           'ar': lambda y: xcov('Aspida Re', y), 'ow': lambda y: xcov('Kuvare Life Re', y)},
+          CAPY, pct=True,
+          note={'ath': 'AARe', 'ga': 'GA Re', 'bf': 'North End Re — NO FCR published',
+                'ar': 'Aspida Re', 'ow': 'Kuvare Life Re — lowest'})
+    + rows5('Second reinsurer ECR coverage',
+            {'ath': lambda y: {'2024': 453.0, '2025': 309.0}.get(y),
+             'ga': lambda y: CAP[('GAAL', y, 'eligible_capital')] / CAP[('GAAL', y, 'ecr')] * 100,
+             'bf': None, 'ar': None, 'ow': None},
+            CAPY, pct=True, note={'ath': 'ALRe', 'ga': 'GAAL', 'bf': 'Freestone Re — no FCR'})
+    + rows5('Lead US carrier capital ($M)',
+            {'ath': lambda y: 9504.0 if y == '2025' else None,
+             'ga': lambda y: ((STAT.get(('flic', int(y), 'capital_surplus')) or 0)
+                              + (STAT.get(('cwa', int(y), 'capital_surplus')) or 0)) / 1e6 or None,
+             'bf': lambda y: (lambda v: v / 1e6 if v else None)(XSTAT.get(('ael', y, 'capital_surplus'))),
+             'ar': lambda y: S(f'FY{y}', 'bs_total_capital_and_surplus'),
+             'ow': lambda y: K(f'FY{y}', 'total_shareholders_equity')},
+            CAPY,
+            note={'ath': 'AAIA TAC', 'ga': 'FLIC+CWA C&S', 'bf': 'AEL C&S — falling as assets grow',
+                  'ar': 'Aspida Life C&S', 'ow': 'KLR equity (Bermuda)'})
 )
 
 
@@ -168,19 +327,34 @@ def runnable_g(p):
     return fa / tot * 100 if fa and tot else None
 
 
-html_rows_run = rowpair('Funding agreements as % of net reserves (runnable share)',
-                        runnable_a, runnable_g, ['4Q24', '1Q25', '2Q25', '3Q25', '4Q25', '1Q26'], pct=True)
+RUNP = ['4Q24', '1Q25', '2Q25', '3Q25', '4Q25', '1Q26']
+html_rows_run = (
+    rows5('Funding agreements as % of net reserves (runnable share)',
+          {'ath': runnable_a, 'ga': runnable_g, 'bf': None, 'ar': None, 'ow': None},
+          RUNP, pct=True, note={'bf': 'stock not split out quarterly', 'ar': 'annual only', 'ow': 'none'})
+    + rows5('Funding-agreement / deposit-type sales & stocks ($M)',
+            {'ath': lambda p: A(p, 'funding_agreements'), 'ga': lambda p: G(p, 'nbv_funding_agreements'),
+             'bf': lambda p: bq(p, 'institutional_annuity_sales_funding_agreements'),
+             'ar': lambda p: {'4Q25': (lambda v: v)(S('FY2025', 'bs_liability_deposit_type_contracts'))}.get(p),
+             'ow': None},
+            RUNP, note={'bf': 'FA sales/quarter', 'ar': 'deposit-type stock YE25 — 0 two years ago',
+                        'ow': 'none published'})
+)
 
-html = f"""<title>Athene vs Global Atlantic — the comparison</title>
+html = f"""<title>The Cross Map — five PE-insurance machines</title>
 <style>
 :root{{--bg:#F6F5F1;--panel:#FFF;--ink:#22271F;--muted:#6E756D;--line:#E3E1D8;--line2:#CFCCC0;
---us:#0F6E56;--us-bg:#E4F3EC;--bm:#A3431D;--bm-bg:#F9ECE5;--acc:#185FA5;--warn:#BA7517;--warn-bg:#FAEEDA}}
+--us:#0F6E56;--us-bg:#E4F3EC;--bm:#A3431D;--bm-bg:#F9ECE5;--acc:#185FA5;--warn:#BA7517;--warn-bg:#FAEEDA;
+--bfc:#2E5E8C;--bf-bg:#E9F1F8;--arc:#6B4FA0;--ar-bg:#F0EBF8;--owc:#8C6D1F;--ow-bg:#F8F2DF}}
 @media (prefers-color-scheme: dark){{:root{{--bg:#15191B;--panel:#1D2325;--ink:#E7E9E3;--muted:#8F978F;
---line:#2B3234;--line2:#3A4245;--us:#5DCAA5;--us-bg:#0C3A2D;--bm:#F0997B;--bm-bg:#43200F;--acc:#85B7EB;--warn:#D9A54A;--warn-bg:#3A2B10}}}}
+--line:#2B3234;--line2:#3A4245;--us:#5DCAA5;--us-bg:#0C3A2D;--bm:#F0997B;--bm-bg:#43200F;--acc:#85B7EB;--warn:#D9A54A;--warn-bg:#3A2B10;
+--bfc:#8FBCE8;--bf-bg:#152A3C;--arc:#B79CE8;--ar-bg:#251B3A;--owc:#D9B958;--ow-bg:#332A10}}}}
 :root[data-theme="dark"]{{--bg:#15191B;--panel:#1D2325;--ink:#E7E9E3;--muted:#8F978F;--line:#2B3234;--line2:#3A4245;
---us:#5DCAA5;--us-bg:#0C3A2D;--bm:#F0997B;--bm-bg:#43200F;--acc:#85B7EB;--warn:#D9A54A;--warn-bg:#3A2B10}}
+--us:#5DCAA5;--us-bg:#0C3A2D;--bm:#F0997B;--bm-bg:#43200F;--acc:#85B7EB;--warn:#D9A54A;--warn-bg:#3A2B10;
+--bfc:#8FBCE8;--bf-bg:#152A3C;--arc:#B79CE8;--ar-bg:#251B3A;--owc:#D9B958;--ow-bg:#332A10}}
 :root[data-theme="light"]{{--bg:#F6F5F1;--panel:#FFF;--ink:#22271F;--muted:#6E756D;--line:#E3E1D8;--line2:#CFCCC0;
---us:#0F6E56;--us-bg:#E4F3EC;--bm:#A3431D;--bm-bg:#F9ECE5;--acc:#185FA5;--warn:#BA7517;--warn-bg:#FAEEDA}}
+--us:#0F6E56;--us-bg:#E4F3EC;--bm:#A3431D;--bm-bg:#F9ECE5;--acc:#185FA5;--warn:#BA7517;--warn-bg:#FAEEDA;
+--bfc:#2E5E8C;--bf-bg:#E9F1F8;--arc:#6B4FA0;--ar-bg:#F0EBF8;--owc:#8C6D1F;--ow-bg:#F8F2DF}}
 *{{box-sizing:border-box}}
 body{{background:var(--bg);color:var(--ink);font:15px/1.55 "Avenir Next","Segoe UI",system-ui,sans-serif;margin:0}}
 .wrap{{max-width:1140px;margin:0 auto;padding:36px 24px 64px}}
@@ -202,25 +376,38 @@ td{{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-s
 font-variant-numeric:tabular-nums}}
 td.lbl{{text-align:left;font-weight:600;min-width:230px;white-space:normal}}
 .who{{display:block;font-size:9.5px;letter-spacing:.1em;font-weight:700}}
-tr.ath .who{{color:var(--us)}} tr.ga .who{{color:var(--bm)}}
-tr.ath{{background:var(--us-bg)}} tr.ga{{background:var(--bm-bg)}}
-tr.ath td,tr.ga td{{border-bottom:0}} tr.ga td{{border-bottom:1px solid var(--line2)}}
+tr.ath .who{{color:var(--us)}} tr.ga .who{{color:var(--bm)}} tr.bf .who{{color:var(--bfc)}}
+tr.ar .who{{color:var(--arc)}} tr.ow .who{{color:var(--owc)}}
+tr.ath{{background:var(--us-bg)}} tr.ga{{background:var(--bm-bg)}} tr.bf{{background:var(--bf-bg)}}
+tr.ar{{background:var(--ar-bg)}} tr.ow{{background:var(--ow-bg)}}
+tr.ath td,tr.ga td,tr.bf td,tr.ar td,tr.ow td{{border-bottom:0}}
+tr.blockend td{{border-bottom:1px solid var(--line2)}}
 .na{{color:var(--muted)}}
 .footer{{margin-top:40px;padding-top:14px;border-top:1px solid var(--line2);font-size:12px;color:var(--muted)}}
 </style>
 <div class="wrap">
 <header>
-<p class="eyebrow">CREDIT MAP · PHASE 1 · THE CROSS-SECTION BEGINS</p>
-<h1>Athene vs Global Atlantic — two PE-insurance machines, one ruler</h1>
+<p class="eyebrow">CREDIT MAP · THE CROSS MAP · FIVE PLATFORMS, ONE RULER</p>
+<h1>The cross map — every PE-insurance machine, on one ruler</h1>
 <p class="sub">Every number machine-extracted and gate-verified from each company's own filings
-(ATH &amp; GALD financial supplements, 10-K/10-Q, statutory statements, Bermuda FCRs — sha-tracked in the manifest).
-Periods: all quarters 2023–2025, annuals, and everything reported in 2026 (both companies through 1Q26).
-Athene quarterly cells before 4Q24 are blank where its older supplements use an unreadable font encoding
-(decoder parked — boundary logged, not papered over); its annual columns are complete.</p>
+(supplements, 10-K/20-F/10-Q, statutory statements incl. position-level Schedule D where published, audited FS,
+Bermuda FCRs — sha-tracked in the manifest). Five platforms: <strong>Athene (Apollo) · Global Atlantic (KKR) ·
+Brookfield (BNT: AEL+ANICO) · Ares (Aspida) · Blue Owl (Kuvare)</strong>. Periods: all quarters 2023–2025, annuals,
+and everything reported in 2026. A dotted cell means that platform publishes nothing for that metric/period — every
+blank is a disclosure fact, not a gap in the machine: Athene quarterlies before 4Q24 are glyph-encoded (decoder
+parked); BNT quarterly reporting began 1Q25; Aspida and Kuvare publish no quarterly cadence at all
+(annual columns only); "derived" rates are computed from printed dollars and flagged.</p>
 </header>
 
 <div class="verdict">
-<strong>The comparative read:</strong> the same machine, tuned differently. Athene runs bigger
+<strong>The cross-map read:</strong> five machines, one design, tuned differently — and the dials that matter
+all move the same direction. <strong>Every measurable spread is compressing</strong> (Athene NIS 1.65→1.34%,
+GA margin 1.80→1.17%, BNT annuity spread 1.90→1.76% derived). <strong>Every Bermuda pivot with a public FCR
+sits in the same thinning 176–205% band.</strong> <strong>Every platform with an "operating" measure printed
+GAAP losses under it within five quarters</strong> (Athene 1Q26 −$1,973M vs SRE +$719M; GA FY25 −$1,203M vs
++$1,081M; BNT 1Q26 −$602M vs DOE +$438M — a metronome over a tape). Where the platforms differ is structure:
+opacity (Athene), hypergrowth (Aspida), model risk (Blue Owl), seasoning (AEL). Head-to-head detail on the
+two biggest below. Athene runs bigger
 ($297B avg invested assets vs GA's $157B), hotter (net spread 1.34% vs GA's 1.25% — both compressed hard from
 2023), and more opaque (25.3% of its bond book graded by private letters; GA has no public position-level filing
 at all — a boundary, not an exoneration). GA runs <em>junkier on the market's ruler</em> — 10.0% below-IG by NRSRO
@@ -232,19 +419,25 @@ Bermuda cushions: GA Re 205% ECR coverage sits in the same compressing band as A
 
 {table('1 · The spread engines', 'earned rate − cost of float = the margin; both compressing',
        html_rows_spread, P)}
-<div class="callout"><strong>Both margins rolled over.</strong> Athene: 1.65% → 1.34% over 2025-26.
-GA: 1.80% (2023) → 1.25% (1Q26) — a deeper slide from a lower peak. The repricing race
-(cost of funds up faster than earned) is the same story on both balance sheets.</div>
+<div class="callout"><strong>Every measurable margin rolled over.</strong> Athene: 1.65% → 1.34% over 2025-26.
+GA: 1.80% (2023) → 1.17% (1Q26) — a deeper slide from a lower peak. BNT (derived from printed segment dollars):
+1.90% (4Q24) → 1.76% (1Q26), with cost of funds up EVERY quarter. Aspida and Kuvare publish no cost-of-funds
+basis at all — their spread is unmeasurable from public documents, which is itself a finding. The repricing race
+(cost of funds up faster than earned) is the same story on every balance sheet that can be read.</div>
 
 {table('2 · Growth — money in', 'gross inflows (Athene) vs new business volume (GA); bases differ, trends compare',
        html_rows_growth, P)}
 
 {table('3 · Operating earnings vs the GAAP tape', 'the divergence both companies share',
        html_rows_earn, P)}
-<div class="callout"><strong>The shared tell:</strong> GA FY2025 net income to shareholder was
-<strong>−$1,203M</strong> against +$1,081M adjusted-operating pre-tax; Athene's 1Q26 was
-<strong>−$1,973M</strong> to common against +$719M SRE. Investment losses and reinsurance fair-value moves
-are recognized in GAAP and stripped from the operating measures — on both tapes, in the same direction, at scale.</div>
+<div class="callout"><strong>The shared tell, now at three platforms:</strong> GA FY2025 printed
+<strong>−$1,203M</strong> to shareholder against +$1,081M adjusted-operating; Athene's 1Q26 was
+<strong>−$1,973M</strong> against +$719M SRE; BNT's GAAP swung from −$282M (1Q25) to +$608M (3Q25) to <strong>−$602M</strong> (1Q26) while
+its DOE printed ~$437M <em>every single quarter</em> — a metronome over a tape. Investment losses and
+reinsurance fair-value moves are recognized in GAAP and stripped from every operating measure, in the same
+direction, at scale. Aspida and Kuvare don't publish an operating measure — their single bottom lines are the
+whole story: Aspida three loss years shrinking to exact breakeven on contributed capital; Kuvare −$624M (2022),
+then +$24M / −$41M / +$17M on a $9.8B balance sheet.</div>
 
 {table('4 · Portfolio quality — the two rulers', 'regulatory (NAIC) vs market (NRSRO) grading of the bond books',
        html_rows_quality, QY)}
@@ -252,15 +445,19 @@ are recognized in GAAP and stripped from the operating measures — on both tape
 but 10.0% by market ratings — a 4.4pt flattering gap. Athene's statutory below-IG is 2.9% with its supplement
 NAIC view at ~3.9% — but 25.3% of its book is graded by unpublished private letters the market prices 2–3 notches
 lower (its letter-slip stress: below-IG would reach 7–14% if the market is right). Different mechanisms,
-same direction: both books look better on the regulatory ruler than the market one.</div>
+same direction: both books look better on the regulatory ruler than the market's. AEL is the control:
+position-level like Athene, but PL share 9.4→14.2→9.7% (no ramp), 71% publicly rated, and a 4.0y seasoned book —
+proof the Athene configuration is a choice. Aspida and Kuvare publish no bond-level quality data on any ruler
+— the two youngest, fastest-growing books are the two least measurable</div>
 
 {table('5 · Capital — the cushions, on their own rulers', 'Bermuda ECR coverage + lead-carrier statutory capital',
        html_rows_capital, CAPY)}
 
 {table('6 · The runnable share', 'funding agreements as % of net reserves', html_rows_run,
        ['4Q24', '1Q25', '2Q25', '3Q25', '4Q25', '1Q26'])}
-<div class="callout"><strong>Divergent funding risk:</strong> Athene's runnable share climbed 21% → 27.2%;
-GA's sits near 6–8% of net reserves. On liquidity structure, Athene is the outlier of the pair.</div>
+<div class="callout"><strong>Divergent funding risk:</strong> Athene's runnable share climbed 21% → 27.2%
+of net reserves; GA sits near 6–8%. BNT's funding-agreement issuance is lumpy — $0 to $1.4B a quarter (stock not split out quarterly — boundary); Aspida went 0 → $819M of deposit-type liabilities in 2025 (the channel just opened at the
+fastest-growing platform); Kuvare publishes none. On liquidity structure, Athene is the outlier of the five.</div>
 
 <h2>7 · THE FIVE-PLATFORM CROSS-SECTION <span class="cnt">— every PE-insurance machine, one table (latest year-end)</span></h2><hr class="rule">
 <div class="tbl-scroll"><table>
