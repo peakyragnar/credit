@@ -77,6 +77,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 
 ## Evidence log
 *(append: date · item · what moved · commit)*
+- 2026-07-22 · I-v2 · four new mirrored sections (statutory features / mgmt NIA+quality / GAAP income-to-common / equity+ROE): parsers extended (788 suppl. cells + 99 annual cells, all gated), 316 live checks · finding 58 (1Q26 net loss −$1,973M common; equity −13% in Q; provisions −67% while book +75%).
 - 2026-07-22 · I-annual · `parse_10k_annual_tables.py` (66 cells FY2023–25, gates incl. quarters-vs-10-K cross-source exact) · Engine-FY sheet added (annual columns + live Σ-quarters audit column); 97 total live checks.
 - 2026-07-22 · I · 9 supplements fetched+hashed · parser w/ exact gates (2 clean docs, 384 cells, overlaps identical) · quarterly engine workbook (77 live checks, python-verified identities) · finding 57 · glossary +2.
 - 2026-07-22 · H · C-1 factors banked (Milliman 11/2021, sha) · `compute_letter_slip.py` (PL gate exact) → slip 2/3 = 376%/337% CAL bound, below-IG 7.0%/14.2% · run-stress $71B vs $11B + ratchet · dashboard panel in ⑥ · findings 55–56.

@@ -43,10 +43,38 @@ for (p, k), v in QD.items():
 for (y, k), v in AD.items():
     FYD.setdefault((y, k), v)                      # 10-K fills FY2023 (+ anything supplements lack)
 for fy, q in (('FY2024', '4Q24'), ('FY2025', '4Q25')):
-    for k in ('nrl_indexed', 'nrl_fixed', 'nrl_deferred_total', 'nrl_pga', 'nrl_payout',
-              'nrl_fa', 'nrl_life_other', 'nrl_total'):
-        if (q, k) in QD:
+    for k in list({k for (_, k) in QD}):
+        if k in ('nrl_begin', 'nrl_end'):
+            continue                               # rollforward stocks come from the YTD columns
+        if (k.startswith(('nrl_', 'nia_', 'cq_', 'eq_'))) and (q, k) in QD:
             FYD[(fy, k)] = QD[(q, k)]              # year-end stock = 4Q period-end
+for key in list(FYD):
+    if key[1] == 'provision_credit_losses':
+        FYD[key] = -abs(FYD[key])                  # note prints spaced parens; sign restored
+
+# statutory bond-book features (footed d1_trends.csv, BACV -> $M)
+_SRC_MAP = {'FE (public agency rating)': 'stat_src_fe', 'PL (private letter)': 'stat_src_pl',
+            'FM (financially modeled)': 'stat_src_fm', 'self/temporary (Z,YE,E,M,GI...)': 'stat_src_self',
+            'none (exempt/blank)': 'stat_src_none'}
+_ID_MAP = {'CUSIP': 'stat_id_cusip', 'PPN (private placement)': 'stat_id_ppn',
+           'no identifier': 'stat_id_noid'}
+for r in csv.DictReader(open(ROOT / 'extract/athene/d1_trends.csv')):
+    fy = 'FY' + r['year']
+    v = int(r['bacv']) / 1e6
+    d, b = r['dimension'], r['bucket']
+    if d == 'total':
+        FYD[(fy, 'stat_total')] = v
+    elif d == 'naic_band':
+        if b in ('NAIC 1', 'NAIC 2'):
+            FYD[(fy, 'stat_naic' + b[-1])] = v
+        else:
+            FYD[(fy, 'stat_belowig')] = FYD.get((fy, 'stat_belowig'), 0) + v
+    elif d == 'cliff_2C' and b == '2.C (BBB-)':
+        FYD[(fy, 'stat_cliff')] = v
+    elif d == 'rating_source':
+        FYD[(fy, _SRC_MAP[b])] = v
+    elif d == 'id_type':
+        FYD[(fy, _ID_MAP[b])] = v
 
 BLUE = Font(name='Arial', size=10, color='0000FF')
 BLACK = Font(name='Arial', size=10)
@@ -305,6 +333,172 @@ def build_body():
     put('   check vs filed NIS % (±5bp rounding)', GREY)
     check(lambda c: f'=IF({c}{r_dnis}="","n/a",IF(ABS({c}{r_dnis}-{c}{r_nispct})<0.0005,"OK","FAIL"))'); row += 1
 
+    section('THE PORTFOLIO — STATUTORY BOND BOOK, THE FEATURES WE BUILT (year-ends; footed to the dollar)')
+    ra = row
+    put('Total bond book (BACV)', BLUE); vals('stat_total'); row += 1
+    put('NAIC 1 (AAA…A−)', BLUE, 1); vals('stat_naic1'); row += 1
+    put('NAIC 2 (BBB band)', BLUE, 1); vals('stat_naic2'); row += 1
+    put('Below investment grade (NAIC 3–6)', BLUE, 1); vals('stat_belowig'); row += 1
+    put('   check: bands sum to total', GREY)
+    check(lambda c: f'=IF({c}{ra}="","n/a",IF(SUM({c}{ra+1}:{c}{ra+3})={c}{ra},"OK","FAIL"))'); row += 1
+    put('BBB− cliff (2.C) — memo', BLUE, 1); vals('stat_cliff'); row += 1
+    rs = row
+    put('Publicly rated (FE)', BLUE, 1); vals('stat_src_fe'); row += 1
+    put('PRIVATE LETTER (PL) — the channel', BLUE, 1); vals('stat_src_pl'); row += 1
+    put('Modeled (FM)', BLUE, 1); vals('stat_src_fm'); row += 1
+    put('Self/temporary (Z,YE…)', BLUE, 1); vals('stat_src_self'); row += 1
+    put('Exempt/blank', BLUE, 1); vals('stat_src_none'); row += 1
+    put('   check: sources sum to total', GREY)
+    check(lambda c: f'=IF({c}{ra}="","n/a",IF(SUM({c}{rs}:{c}{rs+4})={c}{ra},"OK","FAIL"))'); row += 1
+    r_pl = rs + 1
+    put('= PL share of book', BOLD)
+    formula(lambda c: f'=IF({c}{ra}="","",{c}{r_pl}/{c}{ra})', fmt=PCT_FMT); row += 1
+    ri = row
+    put('CUSIP (public identifier)', BLUE, 1); vals('stat_id_cusip'); row += 1
+    put('PPN (private placement)', BLUE, 1); vals('stat_id_ppn'); row += 1
+    put('No identifier', BLUE, 1); vals('stat_id_noid'); row += 1
+    r_floor = row
+    put('= Identifier-private floor (PPN + no-ID)', BOLD)
+    formula(lambda c: f'=IF({c}{ri}="","",{c}{ri+1}+{c}{ri+2})'); row += 1
+    put('= Private floor share of book', BOLD)
+    formula(lambda c: f'=IF({c}{ra}="","",{c}{r_floor}/{c}{ra})', fmt=PCT_FMT); row += 1
+    put('   check: identifiers sum to total', GREY)
+    check(lambda c: f'=IF({c}{ra}="","n/a",IF(SUM({c}{ri}:{c}{ri+2})={c}{ra},"OK","FAIL"))'); row += 1
+
+    section('THE PORTFOLIO — MANAGEMENT VIEW, NET INVESTED ASSETS BY CLASS (period-ends)')
+    rn = row
+    put('Corporate', BLUE, 1); vals('nia_corporate'); row += 1
+    put('CLO', BLUE, 1); vals('nia_clo'); row += 1
+    r_cred = row
+    put('= Credit', BOLD); formula(lambda c: f'=IF({c}{rn}="","",{c}{rn}+{c}{rn+1})'); row += 1
+    put('Commercial mortgage loans', BLUE, 1); vals('nia_cml'); row += 1
+    put('Residential mortgage loans', BLUE, 1); vals('nia_rml'); row += 1
+    put('RMBS', BLUE, 1); vals('nia_rmbs'); row += 1
+    put('CMBS', BLUE, 1); vals('nia_cmbs'); row += 1
+    r_re = row
+    put('= Real estate', BOLD); formula(lambda c: f'=IF({c}{r_cred+1}="","",SUM({c}{r_cred+1}:{c}{r_cred+4}))'); row += 1
+    put('ABS', BLUE, 1); vals('nia_abs'); row += 1
+    put('Alternative investments', BLUE, 1); vals('nia_alts'); row += 1
+    put('Munis / foreign government', BLUE, 1); vals('nia_munis_foreign'); row += 1
+    put('Equity securities', BLUE, 1); vals('nia_equity_sec'); row += 1
+    put('Short-term investments', BLUE, 1); vals('nia_short_term'); row += 1
+    put('US government and agencies', BLUE, 1); vals('nia_us_gov'); row += 1
+    r_oth = row
+    put('= Other investments', BOLD); formula(lambda c: f'=IF({c}{r_re+1}="","",SUM({c}{r_re+1}:{c}{r_re+6}))'); row += 1
+    put('Cash and cash equivalents', BLUE, 1); vals('nia_cash'); row += 1
+    put('Other', BLUE, 1); vals('nia_other'); row += 1
+    r_niat = row
+    put('= NET INVESTED ASSETS', BOLD)
+    formula(lambda c: f'=IF({c}{r_cred}="","",{c}{r_cred}+{c}{r_re}+{c}{r_oth}+{c}{r_oth+1}+{c}{r_oth+2})'); row += 1
+    r_niarep = row
+    put('   reported (filed)', BLUE); vals('nia_total'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_niarep}="","n/a",IF({c}{r_niat}={c}{r_niarep},"OK","FAIL"))'); row += 1
+
+    section('THE PORTFOLIO — CREDIT QUALITY, NAIC-DESIGNATED ASSETS (management view, period-ends)')
+    rq = row
+    put('NAIC 1', BLUE, 1); vals('cq_naic1'); row += 1
+    put('NAIC 2', BLUE, 1); vals('cq_naic2'); row += 1
+    put('Non-designated (IG)', BLUE, 1); vals('cq_nondesig_ig'); row += 1
+    r_ig = row
+    put('= Total investment grade', BOLD); formula(lambda c: f'=IF({c}{rq}="","",SUM({c}{rq}:{c}{rq+2}))'); row += 1
+    put('NAIC 3', BLUE, 1); vals('cq_naic3'); row += 1
+    put('NAIC 4', BLUE, 1); vals('cq_naic4'); row += 1
+    put('NAIC 5', BLUE, 1); vals('cq_naic5'); row += 1
+    put('NAIC 6', BLUE, 1); vals('cq_naic6'); row += 1
+    put('Non-designated (BIG)', BLUE, 1); vals('cq_nondesig_big'); row += 1
+    r_big = row
+    put('= Total below investment grade', BOLD)
+    formula(lambda c: f'=IF({c}{r_ig+1}="","",SUM({c}{r_ig+1}:{c}{r_ig+5}))'); row += 1
+    r_cqt = row
+    put('= Total NAIC-designated assets', BOLD)
+    formula(lambda c: f'=IF({c}{r_ig}="","",{c}{r_ig}+{c}{r_big})'); row += 1
+    r_cqtrep = row
+    put('   reported (filed)', BLUE); vals('cq_total_desig'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_cqtrep}="","n/a",IF({c}{r_cqt}={c}{r_cqtrep},"OK","FAIL"))'); row += 1
+
+    section('GAAP INCOME — TO THE NET INCOME THAT VALUES THE EQUITY')
+    rg = row
+    put('Premiums', BLUE, 1); vals('gaap_premiums'); row += 1
+    put('Product charges', BLUE, 1); vals('gaap_product_charges'); row += 1
+    put('Net investment income', BLUE, 1); vals('gaap_nii'); row += 1
+    put('Investment related gains (losses)', BLUE, 1); vals('gaap_inv_gl'); row += 1
+    put('Other revenues', BLUE, 1); vals('gaap_other_rev'); row += 1
+    put('VIE net investment income', BLUE, 1); vals('gaap_vie_nii'); row += 1
+    put('VIE investment related gains (losses)', BLUE, 1); vals('gaap_vie_gl'); row += 1
+    r_rev = row
+    put('= Total revenues', BOLD); formula(lambda c: f'=IF({c}{rg}="","",SUM({c}{rg}:{c}{rg+6}))'); row += 1
+    r_revrep = row
+    put('   reported (filed)', BLUE); vals('gaap_total_rev'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_revrep}="","n/a",IF({c}{r_rev}={c}{r_revrep},"OK","FAIL"))'); row += 1
+    rb = row
+    put('Interest sensitive contract benefits', BLUE, 1); vals('gaap_iscb'); row += 1
+    put('Future policy benefits', BLUE, 1); vals('gaap_fpb'); row += 1
+    put('Market risk benefits remeasurement', BLUE, 1); vals('gaap_mrb'); row += 1
+    put('DAC amortization', BLUE, 1); vals('gaap_dac'); row += 1
+    put('Policy and other operating expenses', BLUE, 1); vals('gaap_opex'); row += 1
+    r_be = row
+    put('= Total benefits and expenses', BOLD); formula(lambda c: f'=IF({c}{rb}="","",SUM({c}{rb}:{c}{rb+4}))'); row += 1
+    put('Provision for credit losses (annual, GAAP; memo — inside inv. gains/losses)', BLUE, 1)
+    vals('provision_credit_losses'); row += 1
+    r_pt = row
+    put('= Pre-tax income', BOLD); formula(lambda c: f'=IF({c}{r_rev}="","",{c}{r_rev}-{c}{r_be})'); row += 1
+    put('− Income tax expense (benefit)', BLUE, 1); vals('gaap_tax'); row += 1
+    r_ni = row
+    put('= NET INCOME', BOLD); formula(lambda c: f'=IF({c}{r_pt}="","",{c}{r_pt}-{c}{r_pt+1})'); row += 1
+    r_nirep = row
+    put('   reported net income (filed)', BLUE); vals('gaap_ni'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_nirep}="","n/a",IF({c}{r_ni}={c}{r_nirep},"OK","FAIL"))'); row += 1
+    put('− NI attributable to NCI (ADIP)', BLUE, 1); vals('gaap_ni_nci'); row += 1
+    put('− Preferred dividends (net of redemption adj.)', BLUE, 1); vals('gaap_pref'); row += 1
+    put('+ Preferred redemption adjustment', BLUE, 1); vals('gaap_pref_red'); row += 1
+    r_nic = row
+    put('= NET INCOME TO COMMON — the valuation line', BOLD)
+    formula(lambda c: f'=IF({c}{r_nirep}="","",{c}{r_nirep}-{c}{r_nic-3}-{c}{r_nic-2}+{c}{r_nic-1})'); row += 1
+    r_nicrep = row
+    put('   reported (filed)', BLUE); vals('gaap_ni_common'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_nicrep}="","n/a",IF({c}{r_nic}={c}{r_nicrep},"OK","FAIL"))'); row += 1
+
+    section('THE EQUITY UNDERNEATH — AND THE RETURN ON IT')
+    re_ = row
+    put('Additional paid-in capital', BLUE, 1); vals('eq_apic'); row += 1
+    put('Retained earnings', BLUE, 1); vals('eq_re'); row += 1
+    put('AOCI (the bond-mark hole)', BLUE, 1); vals('eq_aoci'); row += 1
+    r_ahl = row
+    put('= AHL stockholders equity', BOLD)
+    formula(lambda c: f'=IF({c}{re_}="","",SUM({c}{re_}:{c}{re_+2}))'); row += 1
+    r_ahlrep = row
+    put('   reported (filed)', BLUE); vals('eq_ahl_total'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_ahlrep}="","n/a",IF({c}{r_ahl}={c}{r_ahlrep},"OK","FAIL"))'); row += 1
+    put('Noncontrolling interests (ADIP)', BLUE, 1); vals('eq_nci'); row += 1
+    r_eqt = row
+    put('= Total equity', BOLD)
+    formula(lambda c: f'=IF({c}{r_ahlrep}="","",{c}{r_ahlrep}+{c}{r_eqt-1})'); row += 1
+    r_eqtrep = row
+    put('   reported (filed)', BLUE); vals('eq_total'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_eqtrep}="","n/a",IF({c}{r_eqt}={c}{r_eqtrep},"OK","FAIL"))'); row += 1
+    r_roe = row
+    put(f'ROE — NI-common ×{ANNUALIZE} ÷ avg AHL equity (this and prior period)', BOLD)
+    for i, p in enumerate(PERIODS):
+        col = get_column_letter(2 + i)
+        c = ws.cell(row=r_roe, column=2 + i)
+        if i == 0:
+            c.value = 'n/a'
+            c.font = GREY
+        else:
+            pcol = get_column_letter(1 + i)
+            c.value = (f'=IF(OR({col}{r_nicrep}="",{col}{r_ahlrep}="",{pcol}{r_ahlrep}=""),"",'
+                       f'{col}{r_nicrep}*{ANNUALIZE}/(({col}{r_ahlrep}+{pcol}{r_ahlrep})/2))')
+            c.font = BOLD
+            c.number_format = PCT_FMT
+    row += 1
+
 
 def sheet_header(title, note, extra_cols=()):
     global row
@@ -389,6 +583,12 @@ for r in csv.DictReader(open(ROOT / 'extract/athene/annual_engine.csv')):
     ds.cell(row=i, column=2, value=r['metric']).font = BLACK
     ds.cell(row=i, column=3, value=float(r['value'])).font = BLACK
     ds.cell(row=i, column=4, value='10-K MD&A').font = BLACK
+    i += 1
+for r in csv.DictReader(open(ROOT / 'extract/athene/d1_trends.csv')):
+    ds.cell(row=i, column=1, value='FY' + r['year']).font = BLACK
+    ds.cell(row=i, column=2, value=f"stat:{r['dimension']}:{r['bucket']}").font = BLACK
+    ds.cell(row=i, column=3, value=int(r['bacv']) / 1e6).font = BLACK
+    ds.cell(row=i, column=4, value='statutory D1 (footed)').font = BLACK
     i += 1
 
 rm = wb.create_sheet('ReadMe')

@@ -1,6 +1,15 @@
 year,metric,value
+FY2023,eq_ahl_total,13838
+FY2023,eq_nci,7397
+FY2023,eq_total,21235
 FY2023,flow_reins,10547
 FY2023,funding_agreements,7193
+FY2023,gaap_ni,5752
+FY2023,gaap_ni_ahl,4665
+FY2023,gaap_ni_common,4484
+FY2023,gaap_ni_nci,1087
+FY2023,gaap_pref,181
+FY2023,gaap_pref_red,0
 FY2023,gross_inorganic,2214
 FY2023,gross_organic,63407
 FY2023,gross_outflows,-33868
@@ -12,6 +21,7 @@ FY2023,other_spread,0
 FY2023,outflows_adip,-5105
 FY2023,outflows_athene,-28763
 FY2023,pga,10374
+FY2023,provision_credit_losses,335
 FY2023,retail,35293
 FY2023,sre,3107
 FY2023,sre_alt_nii,864
@@ -26,6 +36,12 @@ FY2023,total_gross_inflows,65621
 FY2023,total_gross_outflows_check,-33868
 FY2024,flow_reins,5573
 FY2024,funding_agreements,28748
+FY2024,gaap_ni,4904
+FY2024,gaap_ni_ahl,3461
+FY2024,gaap_ni_common,3280
+FY2024,gaap_ni_nci,1443
+FY2024,gaap_pref,181
+FY2024,gaap_pref_red,0
 FY2024,gross_inorganic,0
 FY2024,gross_organic,71003
 FY2024,gross_outflows,-33469
@@ -37,6 +53,7 @@ FY2024,other_spread,0
 FY2024,outflows_adip,-6221
 FY2024,outflows_athene,-27248
 FY2024,pga,918
+FY2024,provision_credit_losses,181
 FY2024,retail,35764
 FY2024,sre,3221
 FY2024,sre_alt_nii,939
@@ -51,6 +68,12 @@ FY2024,total_gross_inflows,71003
 FY2024,total_gross_outflows_check,-33469
 FY2025,flow_reins,11171
 FY2025,funding_agreements,35375
+FY2025,gaap_ni,4221
+FY2025,gaap_ni_ahl,2711
+FY2025,gaap_ni_common,2634
+FY2025,gaap_ni_nci,1510
+FY2025,gaap_pref,161
+FY2025,gaap_pref_red,84
 FY2025,gross_inorganic,1340
 FY2025,gross_organic,82098
 FY2025,gross_outflows,-35528
@@ -62,6 +85,7 @@ FY2025,other_spread,674
 FY2025,outflows_adip,-5803
 FY2025,outflows_athene,-29725
 FY2025,pga,751
+FY2025,provision_credit_losses,111
 FY2025,retail,34127
 FY2025,sre,3361
 FY2025,sre_alt_nii,1299

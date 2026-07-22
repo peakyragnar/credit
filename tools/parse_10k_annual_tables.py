@@ -85,6 +85,38 @@ def main():
     sz = t[sz_i:sz_i + 4000]
     res.update(scan(sz, SRE_ROWS))
 
+    # NI-to-common chain (EPS-note zone: clean, no related-party parentheticals)
+    ci = -1
+    for m_ in re.finditer(r'available to Athene Holding Ltd\. common stockholder', t):
+        tail = t[m_.end():m_.end() + 25]
+        if '$' in tail or re.search(r'\d', tail):
+            ci = m_.start()
+            break
+    if ci < 0:
+        sys.exit('EPS-note table anchor not found')
+    cz = t[max(0, ci - 1600):ci + 400]
+    res.update(scan(cz, [
+        ('gaap_ni', 'Net income'),
+        ('gaap_ni_nci', 'noncontrolling interests'),
+        ('gaap_ni_ahl', 'attributable to Athene Holding Ltd. stockholders'),
+        ('gaap_pref', 'Preferred stock dividends'),
+        ('gaap_pref_red', 'Preferred stock redemption'),
+        ('gaap_ni_common', 'common stockholder'),
+    ]))
+    # credit-loss provision (investment gains/losses note; parens = expense)
+    pi = t.find('Provision for credit losses')
+    res.update(scan(t[pi:pi + 300], [('provision_credit_losses', 'Provision for credit losses')]))
+    # YE2023 equity balances (statement of changes in equity; last three money
+    # tokens of the balance row = AHL stockholders / NCI / total)
+    bi = t.find('Balance at December 31, 2023')
+    bz = t[bi:t.find('Net income', bi)]
+    toks = [(-int(m.group(1).replace(',', '')) if '(' in m.group(0) else int(m.group(1).replace(',', '')))
+            for m in MONEY.finditer(bz) if m.group(1)]
+    ahl_eq, nci_eq, tot_eq = toks[-3], toks[-2], toks[-1]
+    res[('FY2023', 'eq_ahl_total')] = ahl_eq
+    res[('FY2023', 'eq_nci')] = nci_eq
+    res[('FY2023', 'eq_total')] = tot_eq
+
     def gate(cond, msg):
         if not cond:
             sys.exit(f'GATE FAIL: {msg}')
@@ -102,6 +134,8 @@ def main():
         gate(g('sre_nie') == g('sre_fi_nii') + g('sre_alt_nii'), f'{y} NIE sum')
         gate(g('sre_nis') == g('sre_nie') + g('sre_fees') + g('sre_cof'), f'{y} NIS chain')
         gate(g('sre') == g('sre_nis') + g('sre_opex') + g('sre_fin'), f'{y} SRE chain')
+        gate(g('gaap_ni') - g('gaap_ni_nci') == g('gaap_ni_ahl'), f'{y} NI-AHL chain')
+        gate(g('gaap_ni_ahl') - g('gaap_pref') + g('gaap_pref_red') == g('gaap_ni_common'), f'{y} NI-common chain')
 
     # cross-source gate: FY2025 == sum of the four gated supplement quarters
     Q = {}
@@ -117,6 +151,10 @@ def main():
         if (y, k) in Q and y in ('FY2024', 'FY2025'):
             gate(Q[(y, k)] == v, f'{y} {k}: supplement YTD {Q[(y, k)]} != 10-K {v}')
 
+    gate(res[('FY2023', 'eq_ahl_total')] + res[('FY2023', 'eq_nci')] == res[('FY2023', 'eq_total')],
+         'YE2023 equity stack')
+    gate(res[('FY2025', 'gaap_ni')] == 4221 and res[('FY2023', 'gaap_ni')] == 5752,
+         'NI chain anchored to banked claims')
     with open(DEST, 'w', newline='') as f:
         w = csv.writer(f)
         w.writerow(['year', 'metric', 'value'])

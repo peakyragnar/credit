@@ -85,6 +85,55 @@ SRE_A_ROWS = [
     ('avg_nia', 'Average net invested assets'),
 ]
 
+GAAP_ROWS = [
+    ('gaap_premiums', 'Premiums'), ('gaap_product_charges', 'Product charges'),
+    ('gaap_nii', 'Net investment income'), ('gaap_inv_gl', 'Investment related gains (losses)'),
+    ('gaap_other_rev', 'Other revenues'),
+    ('gaap_vie_nii', 'Net investment income'), ('gaap_vie_gl', 'Investment related gains (losses)'),
+    ('gaap_total_rev', 'Total revenues'),
+    ('gaap_iscb', 'Interest sensitive contract benefits'),
+    ('gaap_fpb', 'Future policy and other policy benefits'),
+    ('gaap_mrb', 'Market risk benefits remeasurement'),
+    ('gaap_dac', 'Amortization of deferred acquisition costs'),
+    ('gaap_opex', 'Policy and other operating expenses'),
+    ('gaap_total_be', 'Total benefits and expenses'),
+    ('gaap_pretax', 'Income before income taxes'),
+    ('gaap_tax', 'Income tax expense (benefit)'),
+    ('gaap_ni', ('Net income (loss)', 'Net income')),
+    ('gaap_ni_nci', 'Net income attributable to noncontrolling interests'),
+    ('gaap_ni_ahl', ('Net income (loss) attributable to Athene Holding Ltd. stockholders',
+                     'Net income attributable to Athene Holding Ltd. stockholders')),
+    ('gaap_pref', 'Preferred stock dividends'),
+    ('gaap_pref_red', 'Preferred stock redemption'),
+    ('gaap_ni_common', 'common stockholder'),
+]
+NIA_ROWS = [
+    ('nia_corporate', 'Corporate'), ('nia_clo', 'CLO'), ('nia_credit_sub', 'Credit'),
+    ('nia_cml', 'CML'), ('nia_rml', 'RML'), ('nia_rmbs', 'RMBS'), ('nia_cmbs', 'CMBS'),
+    ('nia_real_estate_sub', 'Real estate'), ('nia_abs', 'ABS'),
+    ('nia_alts', 'Alternative investments'),
+    ('nia_munis_foreign', 'State, municipal, political subdivisions and foreign government'),
+    ('nia_equity_sec', 'Equity securities'), ('nia_short_term', 'Short-term investments'),
+    ('nia_us_gov', 'US government and agencies'), ('nia_other_inv_sub', 'Other investments'),
+    ('nia_cash', 'Cash and cash equivalents'), ('nia_other', 'Other'),
+    ('nia_total', 'Net invested assets'),
+]
+CQ_ROWS = [
+    ('cq_naic1', '1 A-G'), ('cq_naic2', '2 A-C'), ('cq_nondesig_ig', 'Non-designated'),
+    ('cq_total_ig', 'Total investment grade'),
+    ('cq_naic3', '3 A-C'), ('cq_naic4', '4 A-C'), ('cq_naic5', '5 A-C'), ('cq_naic6', ' 6 '),
+    ('cq_nondesig_big', 'Non-designated'), ('cq_total_big', 'Total below investment grade'),
+    ('cq_total_desig', 'Total NAIC designated assets'),
+]
+EQ_ROWS = [
+    ('eq_apic', 'Additional paid-in capital'), ('eq_re', 'Retained earnings'),
+    ('eq_aoci', 'Accumulated other comprehensive loss'),
+    ('eq_ahl_total', ("Total Athene Holding Ltd. stockholders' equity",
+                      'Total Athene Holding Ltd. stockholders’ equity')),
+    ('eq_nci', 'Noncontrolling interests'), ('eq_total', 'Total equity'),
+    ('eq_total_le', 'Total liabilities and equity'),
+]
+
 MONTH_Q = {'March 31': '1Q', 'June 30': '2Q', 'September 30': '3Q', 'December 31': '4Q'}
 
 
@@ -155,7 +204,7 @@ def scan(text, rows, quarters, mode='money'):
             sys.exit(f'ROW NOT FOUND: {opts!r} after pos {pos}')
         i, label = min(hits, key=lambda t: (t[0], -len(t[1])))
         j = i + len(label)
-        fn = re.match(r'\d[\d,]*', text[j:])   # attached footnote marker(s), e.g. 'agreements1', 'outflows6,12'
+        fn = re.match(r'\d{1,2}(?:,\d{1,2})?(?![\d,])', text[j:])   # footnote marker(s): 1-2 digits, e.g. 'agreements1', 'outflows6,12'
         if fn:
             j += fn.end()
         vals, j2 = (money_after if mode == 'money' else rates_after)(text, j, len(quarters))
@@ -187,6 +236,21 @@ def parse_doc(tag, path):
     res.update(scan(head, NRL_STOCK_ROWS, stock_periods))
     body = tr[tr.find('NET RESERVE LIABILITY ROLLFORWARD'):]
     res.update(scan(body, ROLL_ROWS, quarters))
+
+    tg = find_page(r, 'Condensed Consolidated Statements of Income')
+    res.update(scan(tg, GAAP_ROWS, quarters))
+
+    tn = find_page(r, 'Net Invested Assets (Management view)')
+    ndm = re.findall(r'(March 31|June 30|September 30|December 31), (\d{4})', tn[:300])[:2]
+    nia_periods = [f'{MONTH_Q[m]}{y[2:]}' for m, y in ndm]
+    res.update(scan(tn, NIA_ROWS, nia_periods))
+
+    tq = find_page(r, 'Credit Quality of Net Invested Assets (Management view)')
+    res.update(scan(tq, CQ_ROWS, nia_periods))
+
+    te = find_page(r, 'Condensed Consolidated Balance Sheets, continued')
+    ez = te[te.find('Total liabilities'):]
+    res.update(scan(ez, EQ_ROWS, nia_periods))
 
     ts = find_page(r, 'Spread Related Earnings')
     dollar_zone = ts[:ts.find('Average net invested assets')]
@@ -234,6 +298,37 @@ def main():
             gate(g('nrl_indexed') + g('nrl_fixed') == g('nrl_deferred_total'), f'{tag} {q} deferred sum')
             gate(g('nrl_deferred_total') + g('nrl_pga') + g('nrl_payout') + g('nrl_fa') + g('nrl_life_other')
                  == g('nrl_total'), f'{tag} {q} NRL stock sum')
+        # new-table gates (key-presence guarded; run for every period that has them)
+        periods_all = sorted({p for (p, k) in res})
+        for q in periods_all:
+            g = lambda k: res.get((q, k))
+            if g('gaap_total_rev') is not None:
+                gate(g('gaap_premiums') + g('gaap_product_charges') + g('gaap_nii') + g('gaap_inv_gl')
+                     + g('gaap_other_rev') + g('gaap_vie_nii') + g('gaap_vie_gl')
+                     == g('gaap_total_rev'), f'{tag} {q} GAAP revenue sum')
+                gate(g('gaap_iscb') + g('gaap_fpb') + g('gaap_mrb') + g('gaap_dac') + g('gaap_opex')
+                     == g('gaap_total_be'), f'{tag} {q} GAAP expense sum')
+                gate(g('gaap_total_rev') - g('gaap_total_be') == g('gaap_pretax'), f'{tag} {q} pretax')
+                gate(g('gaap_pretax') - g('gaap_tax') == g('gaap_ni'), f'{tag} {q} NI')
+                gate(g('gaap_ni') - g('gaap_ni_nci') == g('gaap_ni_ahl'), f'{tag} {q} NI-AHL')
+                gate(g('gaap_ni_ahl') - g('gaap_pref') + g('gaap_pref_red')
+                     == g('gaap_ni_common'), f'{tag} {q} NI-common')
+            if g('nia_total') is not None:
+                gate(g('nia_credit_sub') == g('nia_corporate') + g('nia_clo'), f'{tag} {q} NIA credit sub')
+                gate(g('nia_real_estate_sub') == g('nia_cml') + g('nia_rml') + g('nia_rmbs') + g('nia_cmbs'),
+                     f'{tag} {q} NIA real-estate sub')
+                gate(g('nia_other_inv_sub') == g('nia_abs') + g('nia_alts') + g('nia_munis_foreign')
+                     + g('nia_equity_sec') + g('nia_short_term') + g('nia_us_gov'), f'{tag} {q} NIA other sub')
+                gate(g('nia_total') == g('nia_credit_sub') + g('nia_real_estate_sub')
+                     + g('nia_other_inv_sub') + g('nia_cash') + g('nia_other'), f'{tag} {q} NIA total')
+            if g('cq_total_desig') is not None:
+                gate(g('cq_total_ig') == g('cq_naic1') + g('cq_naic2') + g('cq_nondesig_ig'), f'{tag} {q} CQ IG')
+                gate(g('cq_total_big') == g('cq_naic3') + g('cq_naic4') + g('cq_naic5') + g('cq_naic6')
+                     + g('cq_nondesig_big'), f'{tag} {q} CQ BIG')
+                gate(g('cq_total_desig') == g('cq_total_ig') + g('cq_total_big'), f'{tag} {q} CQ total')
+            if g('eq_total') is not None:
+                gate(g('eq_apic') + g('eq_re') + g('eq_aoci') == g('eq_ahl_total'), f'{tag} {q} equity AHL sum')
+                gate(g('eq_ahl_total') + g('eq_nci') == g('eq_total'), f'{tag} {q} equity total')
         # YTD gates
         gkeys = sorted({k for (p, k) in res if p.startswith('GATE_')})
         for gq in ('1Q25', '1Q26'):
