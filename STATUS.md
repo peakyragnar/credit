@@ -27,6 +27,8 @@ Phase 0 (Athene by hand) is deep into the asset drill — far ahead of the origi
 - AAIA statement PDF (221MB) is local-only (`raw/…/aaia-statutory-4q2025.pdf`), refetch via manifest URL; sha in manifest.
 
 ## Queue (agreed order)
+
+**→ Superseded by `PLAN.md` (living tracker, order re-agreed 2026-07-22): aging + concentration from the existing D1 extract first, then the time-series backfill, then Level 3 rollforward, then mortgages, then D4. The list below is the session-1 snapshot, kept for history.**
 1. **Time series / period backfill** — YE2021→2024 annuals through existing parsers (structure-era mapping: pre-2025 Schedule D uses old categories, PBBD bridge documented). Unlocks: designation migration by rating source (THE PL discriminator), cliff history, vintage aging, source-mix drift, spread trend.
 2. Matched-pair leftovers: 2 suspect "market" legs at exactly 100.000 in finding 43; mix-controlled RP test extensions.
 3. Schedule B mortgage drill ($52.1B resi book, pp 495–2475). 4. D4 obligor resolution + BDC engine (reaches the 94% untestable RP flow). 5. Small: ACRA public disclosure hunt, ALRe $4.5B outflow trace, FA maturity ladder via XBRL, Bermuda permitted-practices table, dossier emit + runbook v1 freeze.
