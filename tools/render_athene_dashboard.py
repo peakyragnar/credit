@@ -126,8 +126,8 @@ def stackbar(segs, total):
         if pct >= 13:
             inner = f'{short} · {pct:.0f}%'
         elif pct >= 6 and len(short) <= 4:
-            inner = short
-        elif pct >= 6:
+            inner = f'{short} {pct:.0f}%'
+        elif pct >= 3:
             inner = f'{pct:.0f}%'
         else:
             inner = ''
