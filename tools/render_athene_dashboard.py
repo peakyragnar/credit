@@ -397,6 +397,47 @@ MATRIX = (
     'assigned in a channel with no market check. Self-assigned paper carries the largest below-IG share.</p>'
 )
 
+
+# P&L of the held book: income + valuation actions by band and source
+def _pnl_rows(sel):
+    b = sum(_iv(r['bacv']) for r in sel)
+    ir = sum(_iv(r['interest_received']) for r in sel)
+    da = sum(_iv(r['interest_due_accrued']) for r in sel)
+    ot = sum(_iv(r['otti']) for r in sel)
+    un = sum(_iv(r['unrealized_val_change']) for r in sel)
+    return b, ir, da, ot, un
+_pnl_html = []
+for _bl, _fn, _cls in _BANDS:
+    sel = [r for r in dlines if _fn(r['naic_designation'])]
+    b, ir, da, ot, un = _pnl_rows(sel)
+    if b <= 0: continue
+    cy = 100*ir/b if b else 0
+    _pnl_html.append(f'<tr><td><span class="dot {_cls}" style="margin-right:6px"></span>{_bl}</td>'
+                     f'<td>${b/1e9:,.1f}B</td><td>${ir/1e6:,.0f}M</td><td class="nm">{cy:.2f}%</td>'
+                     f'<td>${da/1e6:,.0f}M</td><td>${ot/1e6:,.1f}M</td><td>${un/1e6:+,.1f}M</td></tr>')
+for _sl, _key in [('— of which PL-graded', 'Private letter (PL)'), ('— of which FE-graded', 'Public rating (FE)')]:
+    sel = [r for r in dlines if _srcb(r['svo_symbol']) == _key]
+    b, ir, da, ot, un = _pnl_rows(sel)
+    cy = 100*ir/b if b else 0
+    _pnl_html.append(f'<tr style="color:var(--muted)"><td>{_sl}</td>'
+                     f'<td>${b/1e9:,.1f}B</td><td>${ir/1e6:,.0f}M</td><td class="nm">{cy:.2f}%</td>'
+                     f'<td>${da/1e6:,.0f}M</td><td>${ot/1e6:,.1f}M</td><td>${un/1e6:+,.1f}M</td></tr>')
+PNL_TABLE = (
+    '<div class="cflabel" style="margin-top:22px"><span class="t">P&amp;L of the held book, FY2025 — income and valuation actions</span>'
+    '<span class="n">positions held at 12/31 only; sold positions land with the Part 4 parse</span></div>'
+    '<div class="tbl-scroll"><table class="ptable"><thead><tr><th>Band</th><th>BACV</th><th>Interest received</th>'
+    '<th>Cash yield*</th><th>Due &amp; accrued</th><th>OTTI (impairments)</th><th>Unrealized chg</th></tr></thead>'
+    '<tbody>' + ''.join(_pnl_html) + '</tbody></table></div>'
+    '<p class="cfnote">*Interest received ÷ year-end BACV — approximate (denominator is year-end, book grew all year; '
+    'positions bought late-year drag the ratio). Due &amp; accrued = income booked but not yet paid ($1.50B book-wide — '
+    'the accrual wedge to watch). OTTI = statutory impairments taken on held positions. Gates: BACV exact; P&amp;L columns '
+    'carry structurally-assigned residuals (disposed positions) that the Part 4 parse closes.</p>'
+    '<div class="callout"><strong>First read:</strong> impairments on the held book are tiny ($109M on $158.9B — 7bps) '
+    'while the capital-gains exhibit shows realized losses on 2025 bond sales (−$77.8M unaffiliated) — whether losses are '
+    'being realized via disposals rather than impairments is exactly what the Part 4 (disposals) parse answers.</div>'
+)
+
+
 D1_SECTION = (
     '<div class="cflabel" style="margin-top:26px"><span class="t">D1 — every bond position, extracted and footed</span>'
     f'<span class="n">8,582 rows · both sections foot to the dollar</span></div>'
@@ -421,6 +462,7 @@ D1_SECTION = (
     '(the industry\'s pitch) or the market disbelieving the letters by 2–3 notches (the NAIC\'s finding). Yield alone '
     'cannot say; impairment outcomes by rating source (period backfill) and cross-holder marks (D4) are the '
     'discriminators. Deliberately unresolved.</div>'
+    + PNL_TABLE
 )
 
 extras = {
