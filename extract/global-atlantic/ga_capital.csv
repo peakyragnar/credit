@@ -1,0 +1,13 @@
+entity,year,metric,value_musd,source
+GA Re,2023,eligible_capital,2281,gare-fcr-2023
+GA Re,2023,ecr,1335,gare-fcr-2023
+GA Re,2024,eligible_capital,4221,gare-fcr-2024
+GA Re,2024,ecr,1795,gare-fcr-2024
+GA Re,2025,eligible_capital,4710,gare-fcr-2025
+GA Re,2025,ecr,2301,gare-fcr-2025
+GAAL,2023,eligible_capital,1411,gaal-fcr-2023
+GAAL,2023,ecr,238,gaal-fcr-2023
+GAAL,2024,eligible_capital,1520,gaal-fcr-2024
+GAAL,2024,ecr,222,gaal-fcr-2024
+GAAL,2025,eligible_capital,1571,gaal-fcr-2025
+GAAL,2025,ecr,190,gaal-fcr-2025

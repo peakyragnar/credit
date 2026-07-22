@@ -89,7 +89,9 @@ NAIC_ROWS = [
     ('naic_big', 'Total below investment grade'), ('naic_total', 'Total AFS fixed maturity securities'),
 ]
 NRSRO_ROWS = [
-    ('nrsro_a', 'AAA/AA/A'), ('nrsro_bbb', 'BBB'), ('nrsro_ig', ('Total Investment Grade', 'Total investment grade')),
+    ('nrsro_a', 'AAA/AA/A'), ('nrsro_bbb', 'BBB'),
+    ('nrsro_nr_ig', 'Non-rated', True),
+    ('nrsro_ig', ('Total Investment Grade', 'Total investment grade')),
     ('nrsro_bb', 'BB'), ('nrsro_b', ' B '), ('nrsro_ccc', 'CCC'),
     ('nrsro_cc', 'CC and lower'), ('nrsro_nr', 'Non-rated'),
     ('nrsro_big', 'Total below investment grade'), ('nrsro_total', 'Total AFS fixed maturity securities'),
@@ -244,25 +246,45 @@ def parse_doc(tag):
               '(coverage boundary: reserves-by-product series starts 4Q24)')
 
     tq = page_with(r, 'Fixed maturity securities by ratings')
-    d2 = DATE.findall(tq[:400])[:2]
-    ends = [qtag(m, y) for m, d, y in d2]
+    MONTHQ = {'March': '1Q', 'June': '2Q', 'September': '3Q', 'December': '4Q'}
+    d2 = re.findall(r'(March|June|September|December) \d{1,2}, (\d{4})', tq[:500])[:2]
+    ends = [f'{MONTHQ[mo]}{yy[2:]}' for mo, yy in d2]
+    if len(ends) != 2:
+        sys.exit(f'{tag}: ratings period header not parsed')
     zone_naic = tq[:tq.find('NRSRO Rating')]
     zone_nrsro = tq[tq.find('NRSRO Rating'):]
+    pos2 = zone_naic.find('NAIC designation:')
     for key, label in NAIC_ROWS:
-        i = zone_naic.find(label if isinstance(label, str) else label[0],
-                           zone_naic.find('NAIC designation:'))
-        if i < 0:
-            sys.exit(f'NAIC ROW NOT FOUND {label!r}')
-        vals = []
-        pos2 = i + len(label if isinstance(label, str) else label[0])
-        got = money_after(zone_naic, pos2, 2)
-        # each period-end prints value then percent; % tokens are skipped by money_after
+        if key.startswith('naic') and key[4:] in '123456':
+            m2 = re.search(rf'(?<![\d.,]){key[4:]}(?![\d.,%])\s+\$? ?\d', zone_naic[pos2:])
+            if not m2:
+                sys.exit(f'NAIC ROW NOT FOUND {key}')
+            i = pos2 + m2.start()
+            lab_len = 1
+        else:
+            lab = label if isinstance(label, str) else label[0]
+            i = zone_naic.find(lab, pos2)
+            if i < 0:
+                sys.exit(f'NAIC ROW NOT FOUND {label!r}')
+            lab_len = len(lab)
+        got = money_after(zone_naic, i + lab_len, 2)
         for p, v in zip(ends, got):
             res[(p, key)] = v
+        pos2 = i + lab_len
     pos2 = 0
-    for key, label in NRSRO_ROWS:
+    for ridx, rrow in enumerate(NRSRO_ROWS):
+        key, label = rrow[0], rrow[1]
+        optional = len(rrow) > 2 and rrow[2]
         opts = label if isinstance(label, tuple) else (label,)
         hits = [(zone_nrsro.find(o, pos2), o) for o in opts if zone_nrsro.find(o, pos2) >= 0]
+        if optional:
+            nxt = NRSRO_ROWS[ridx + 1]
+            nopts = nxt[1] if isinstance(nxt[1], tuple) else (nxt[1],)
+            npos = min((zone_nrsro.find(o, pos2) for o in nopts if zone_nrsro.find(o, pos2) >= 0), default=-1)
+            if not hits or (npos >= 0 and min(hits)[0] > npos):
+                for p in ends:
+                    res[(p, key)] = 0
+                continue
         if not hits:
             sys.exit(f'NRSRO ROW NOT FOUND {opts!r}')
         i, lab = min(hits, key=lambda t: (t[0], -len(t[1])))
@@ -302,6 +324,8 @@ def main():
                 if g('naic_ig') + g('naic_big') != g('naic_total'):
                     sys.exit(f'{tag} {q} NAIC total FAIL')
             if g('nrsro_total') is not None:
+                if g('nrsro_a') + g('nrsro_bbb') + (g('nrsro_nr_ig') or 0) != g('nrsro_ig'):
+                    sys.exit(f'{tag} {q} NRSRO IG sum FAIL')
                 if g('nrsro_ig') + g('nrsro_big') != g('nrsro_total'):
                     sys.exit(f'{tag} {q} NRSRO total FAIL')
                 if g('nrsro_total') != g('naic_total'):
@@ -331,6 +355,15 @@ def main():
                     if old_pt is not None and new_pt is not None and old_pt != new_pt:
                         sys.exit(f'RECLASS NOT PRETAX-NEUTRAL {p_}: {old_pt} vs {new_pt}')
                     print(f'  note: {kk} reclassed {series[kk]} -> {v} (taking {tag})')
+                    series[kk] = v
+                    prov[kk] = tag
+                    continue
+                if k_.startswith(('nrsro_', 'naic')) and k_ not in ('nrsro_total', 'naic_total'):
+                    tot_old = series.get((p_, 'nrsro_total' if k_.startswith('nrsro') else 'naic_total'))
+                    tot_new = res.get((p_, 'nrsro_total' if k_.startswith('nrsro') else 'naic_total'))
+                    if tot_old is not None and tot_new is not None and tot_old != tot_new:
+                        sys.exit(f'QUALITY RECAST BROKE TOTAL {p_}: {tot_old} vs {tot_new}')
+                    print(f'  note: {kk} re-rated {series[kk]} -> {v} (taking {tag}; total invariant)')
                     series[kk] = v
                     prov[kk] = tag
                     continue
