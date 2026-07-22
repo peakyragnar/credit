@@ -220,7 +220,8 @@ Each section decomposes exactly one part of the picture and foots to it:
 <a href="#step3">③ the offshore door</a> →
 <a href="#step4">④ the sidecars</a> →
 <a href="#step5">⑤ the assets + Apollo's take</a> →
-<a href="#step6">⑥ the cushion</a>.
+<a href="#step6">⑥ the cushion</a> →
+<a href="#step7">⑦ the engine</a>.
 Every number is cited to its filed source.
 </div>"""
 
@@ -746,6 +747,64 @@ D5B_SECTION = (
     'cross-holder marks (the D4 / BDC-engine work) — which is exactly why that layer exists.</div>'
 )
 
+# ---- ⑦ the engine: float -> ROE driver tree (all lines from banked claims) ----
+_ni_common = musd('ni_available_common')
+_ceq = musd('ahl_stockholders_equity') - musd('preferred_liquidation_outstanding')
+_ceq_py = musd('ahl_stockholders_equity_py') - musd('preferred_liquidation_outstanding_py')
+_avg_ceq = (_ceq + _ceq_py) / 2
+_roe = _ni_common / _avg_ceq * 100
+_ceq_x = _ceq - musd('aoci_loss')            # AOCI is a loss (negative) -> adding it back raises equity
+_ceq_x_py = _ceq_py - musd('aoci_loss_py')
+_roe_x = _ni_common / ((_ceq_x + _ceq_x_py) / 2) * 100
+_ret_total = musd('net_income_consolidated') / ((musd('total_equity') + musd('total_equity_py')) / 2) * 100
+_adip_ret = musd('ni_attrib_nci') / ((musd('noncontrolling_interests') + musd('nci_py')) / 2) * 100
+_take = musd('apollo_management_fees') + _ni_common
+
+def _erow(label, v, sub='', cls=''):
+    s = f'<br><span class="dim" style="font-size:11.5px">{sub}</span>' if sub else ''
+    return f'<tr{" class=" + chr(34) + cls + chr(34) if cls else ""}><td>{label}{s}</td><td class="nm">{v}</td></tr>'
+
+ENGINE_SECTION = (
+    '<h2 id="step7"><span class="stepchip">⑦</span> The engine <span class="cnt">— from float to return on equity, every line banked</span></h2>'
+    '<hr class="rule">'
+    '<p class="cfnote">The whole machine as one P&amp;L: raise float (①②), pay for it, invest it (⑤), pay the manager, '
+    'absorb losses, pay tax — and measure what\'s left against the equity actually at risk. GAAP consolidated FY2025; '
+    'every line is a banked claim from the 10-K; cross-foots are exact.</p>'
+    '<div class="tbl-scroll"><table class="ptable" style="max-width:680px"><tbody>'
+    + _erow('Total revenues', '$25,677M',
+            'incl. net investment income $17,847M — already net of Apollo\'s $1,440M management fees, the toll inside the pipe')
+    + _erow('− Benefits &amp; expenses', '−$20,570M',
+            'cost of float: interest-sensitive $12,089M + future policy benefits $4,433M + market-risk-benefits $452M · DAC $1,242M · opex $2,354M')
+    + _erow('= Pre-tax income', '$5,107M', '', 'sub')
+    + _erow('− Tax', '−$886M', 'the Bermuda CIT era begins — effective rate 17%, was ~13%')
+    + _erow('= Net income', '$4,221M', '', 'sub')
+    + _erow('− ADIP / noncontrolling interests', '−$1,510M', 'the sidecar investors\' share — 36% of the machine\'s profit')
+    + _erow('− Preferred dividends (net of redemption adj.)', '−$77M')
+    + _erow('= Available to the common stockholder (Apollo)', '$2,634M', '', 'sub')
+    + '</tbody></table></div>'
+    '<div class="mgrid" style="margin-top:16px">'
+    f'<div class="mcard"><div class="mv">{_roe:.1f}%</div><div class="ml">ROE — common</div><div class="mx">$2,634M on average common equity of ${_avg_ceq/1e3:,.1f}B (stockholders\' equity less preferred). The headline return.</div></div>'
+    f'<div class="mcard"><div class="mv">{_roe_x:.1f}%</div><div class="ml">ROE — ex-AOCI</div><div class="mx">Same income on equity before the bond-mark hole (AOCI −$2.6B, was −$5.5B — the shrinking hole flattered equity growth). The cleaner economic read.</div></div>'
+    f'<div class="mcard"><div class="mv">{_ret_total:.1f}%</div><div class="ml">Return on total equity</div><div class="mx">All $4,221M on all ${(musd("total_equity")+musd("total_equity_py"))/2e3:,.1f}B average equity including ADIP — the machine\'s blended productivity.</div></div>'
+    f'<div class="mcard"><div class="mv">{_adip_ret:.1f}%</div><div class="ml">ADIP\'s realized return</div><div class="mx">What the outside sidecar money actually earned — the market-clearing price of bearing this risk pool, set by sophisticated LPs.</div></div>'
+    f'<div class="mcard"><div class="mv">${_take/1e3:,.1f}B</div><div class="ml">Apollo\'s total annual take</div><div class="mx">$1,440M fees (capital-light, off the top) + $2,634M spread income (capital-heavy). The fee leg alone is 55% the size of the equity leg.</div></div>'
+    '<div class="mcard"><div class="mv">~10–12%</div><div class="ml">Generic hurdle</div><div class="mx">A conventional cost-of-equity range for a levered spread balance sheet. Reported ROE clears it; the question is whether the inputs are real — see below.</div></div>'
+    '</div>'
+    '<div class="callout" style="margin-top:16px"><strong>Where this ROE is manufactured — the three levers under the hood.</strong> '
+    '(1) <strong>Capital relief offshore</strong>: the ③ door moves economics to Bermuda, shrinking required capital — the denominator. '
+    '(2) <strong>Grading relief</strong>: the private-letter channel (25.3% of bonds and rising — the film above) sets RBC charges via '
+    'designations assigned with no market check — the denominator again. '
+    '(3) <strong>Loss recognition</strong>: provisioning ran $111M GAAP / $162M statutory — <strong>3–7bp</strong> — on a book whose '
+    'weighted-average age is 1.7 years; unseasoned books don\'t show losses because they haven\'t had time to. '
+    '<strong>Sensitivity: every 10bp of credit losses on the $321B portfolio costs ≈1 point of common ROE.</strong> '
+    'A normalized-loss assumption of even 30–40bp puts reported ROE at the bottom of the hurdle range; the AAIA statutory '
+    'cross-check (net spread ≈$5.5B, ⑤) says the same thing from the other ledger. '
+    'Benign reading: a genuinely wide-spread origination machine earning its excess return. Adverse reading: an ordinary spread '
+    'business whose excess ROE is the sum of untested grades, untested losses, and geography. '
+    '<strong>The next instrument decides:</strong> the letter-slip stress — re-grade the $40.1B PL book at its yield-implied '
+    'ratings and recompute the capital ratios. Queued.</div>'
+)
+
 extras = {
  'step1': ('<div style="margin-top:18px"></div>' + CAPITAL_FLOW),
  'step5': ASSET_SECTION + D1_SECTION + AGING_SECTION + CONC_SECTION + TRENDS_SECTION,
@@ -769,6 +828,7 @@ for sid, badge, title, sub, intro, items in STEPS:
         + extras.get(sid, '')
     )
 sections.insert(5, D5B_SECTION)
+sections.append(ENGINE_SECTION)
 FLOW_SECTIONS = '\n'.join(sections)
 
 TEMPLATE = open(ROOT / 'tools/dashboard_template.html').read()

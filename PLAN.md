@@ -34,7 +34,17 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 - **Unlocks:** designation migration by rating source (THE private-letter discriminator), BBB− cliff history, vintage/cohort survival, source-mix drift, spread trend.
 - **Gate per year:** schedules foot to that year's printed control totals or go to the exception pile.
 
-### D. `[ ]` Level 3 rollforward — bounded side-extraction from AHL 10-K (already local)
+### G. `[x]` The engine panel — ROE/ROIC driver tree — DONE 2026-07-22
+- Full float→ROE waterfall from banked claims (20 new L0 claims, cross-foots exact); dashboard section ⑦.
+- ROE-common 16.6% / ex-AOCI 13.2% / total 13.7% / ADIP realized 12.2% / Apollo take $4.07B; 10bp-losses ≈ −1pt ROE sensitivity.
+- **Gate:** every line traces to a banked claim; income/equity/expense cross-foots exact. Finding 54.
+
+### H. `[ ]` Letter-slip stress — the capital-at-risk instrument (absorbs old D/Level-3 item)
+- Re-grade the $40.1B PL book at yield-implied ratings (2–3 notch slip per D3); recompute RBC C-1 charges (public NAIC factors) → impact on AAIA CAL ratio and Bermuda BSCR trend.
+- Companion: run-stress arithmetic (runnable 26.3% of liabilities vs $1.7B <1y asset maturities + 31% identifier-private book).
+- Level 3 rollforward from 10-K folds in here as the GAAP-ruler cross-check.
+
+### D. `[→H]` Level 3 rollforward — absorbed into H (letter-slip stress)
 - FV hierarchy totals + Level 3 rollforward (transfers in/out, purchases, gains) by year.
 - Framing: Level 3 = holder-marked assets — the opacity question on the GAAP ruler, cross-check to the 31% identifier-private floor.
 - Glossary: add Level 1 / Level 2 / Level 3 in plain language.
@@ -44,6 +54,10 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 
 ### F. `[ ]` D4 obligor resolution + BDC engine
 - Reaches the untestable 94% of related-party flow; upgrades B's coarse buckets to true industry/sector + concentration.
+
+## New ideas (Michael, 2026-07-22 — parked, not yet scoped)
+- `[ ]` **Funding-map queries**: "which businesses does Athene/Apollo finance?" — issuer names now on 100% of D1 rows makes this queryable (the whale shelf was the first output); scope a proper query surface after D4 resolution.
+- `[ ]` **Peer normalization layer**: same footed metrics (PL share, private floor, aging, concentration, ROE tree, capital trends) computed identically across PE-insurance peers — KKR/Global Atlantic (already Phase 1), Brookfield/AEL, Ares/Aspida, Blue Owl — so quality is comparable, not narrative. This is the Phase-1+ payoff of the parameterized parsers.
 
 ## Parked small items (pull in opportunistically)
 - `[ ]` Schedule D Part 3 (acquisitions) parse — vendor column separates street purchases from affiliate transfers; discriminator for the Q4-2025 surge (finding 46). Now cheap: parser is year-parameterized and Part 3 pages are bookmarked in all three PDFs.
@@ -58,6 +72,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 
 ## Evidence log
 *(append: date · item · what moved · commit)*
+- 2026-07-22 · G · 20 new L0 claims from 10-K (income/equity/expense stacks, cross-foots exact) · dashboard section ⑦ (engine waterfall + 6 return cards + levers callout) · glossary +3 (ROE/hurdle, AOCI, NCI realized return) · finding 54.
 - 2026-07-22 · C · doc hunt (4 fetched, 2 full + 2 partial-only, manifest+sha) · parser year-parameterized, era-2 quirks #11–14, 2025 regression byte-identical · gates 2025 exact / 2024 +$1 / 2023 −$327K assigned · `d1_trends.csv` footed · THE RESULT: PL 3.4× in 2yrs to 25.3%, FE −$5.1B absolute in 2025, quality prints flat; cohort run 1 mostly benign w/ violent tail (12-notch miss) · findings 50–53 · trends panel on dashboard.
 - 2026-07-22 · B · description-column fix in `parse_sched_d.py` (quirk #10; reparse gated byte-identical by `tools/check_d1_reparse.py`, names now on 100% of rows) → `tools/compute_d1_concentration.py` → `extract/athene/d1_concentration.csv` (foots exactly) · findings 47–49 (whale shelf: top-10 = $22.7B, 10/12 PL + 2025 vintage; AP Grange anatomy verified vs raw p.5903) · dashboard concentration panel in ⑤ · glossary +1 (CUSIP6) · repo venv `.venv` with pypdf for parser runs.
 - 2026-07-22 · A · `tools/compute_d1_aging.py` → `extract/athene/d1_aging.csv` (6 tables + wavg, all foot to $158,852,395,199 exactly; f38 cross-check reproduced to the dollar) · findings 44–46 · dashboard aging panel in ⑤ · glossary +2 terms · exception logged (11271L-10-2 no-date/matured-2020) · runbook quirk #9. Follow-up spawned: Part 3 vendor parse (street vs affiliate on the Q4 surge) → parked list.
