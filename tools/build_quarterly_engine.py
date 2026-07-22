@@ -251,7 +251,8 @@ put('− Other operating expenses', BLUE); vals('sre_opex'); row += 1
 put('− Interest & other financing costs', BLUE); vals('sre_fin'); row += 1
 r_sre = row
 put('= SPREAD RELATED EARNINGS', BOLD)
-formula(lambda c: f'={c}{r_nis}+{c}{r_nis+2}+{c}{r_nis+3}'); row += 1
+# r_nis+1 = reported, r_nis+2 = check ("OK" text!), r_nis+3 = opex, r_nis+4 = financing
+formula(lambda c: f'={c}{r_nis}+{c}{r_nis+3}+{c}{r_nis+4}'); row += 1
 r_srerep = row
 put('   reported (filed)', BLUE); vals('sre'); row += 1
 put('   check', GREY); check(lambda c: f'=IF({c}{r_sre}={c}{r_srerep},"OK","FAIL")'); row += 1
