@@ -288,9 +288,92 @@ ASSET_SECTION = (
     'on bonds).</div>'
 )
 
+
+# ---- D1/D2/D3: line-level Schedule D analysis (from footed extract) ----
+dlines = list(csv.DictReader(open(ROOT / 'extract/athene/sched_d_part1_lines.csv')))
+def _iv(x): return int(x) if x not in ('', None) else 0
+DTOT = sum(_iv(r['bacv']) for r in dlines)
+
+_band_groups = []
+for label, keys, cls in [
+    ('AAA', ['1.A'], 'seg-athene'),
+    ('AA band', ['1.B','1.C','1.D'], 'seg-annuity'),
+    ('A band', ['1.E','1.F','1.G'], 'seg-life'),
+    ('BBB+ / BBB', ['2.A','2.B'], 'seg-funding'),
+    ('BBB− (the cliff)', ['2.C'], 'seg-acra'),
+    ('Below IG', ['3','4','5','6'], 'seg-ceded'),
+]:
+    v = sum(_iv(r['bacv']) for r in dlines
+            if r['naic_designation'] in keys or (len(keys[0])==1 and (r['naic_designation'] or '?').split('.')[0] in keys))
+    _band_groups.append((label, v/1e6, cls))
+
+def _srcb(sym):
+    if sym == 'FE': return 'Public rating (FE)'
+    if sym in ('PL','PLGI'): return 'Private letter (PL)'
+    if sym in ('Z','YE'): return 'Self-assigned (Z/YE)'
+    if sym in ('FM','FMR'): return 'Modeled (FM)'
+    if not sym: return 'Exempt / SVO-assessed'
+    return 'Other'
+_src_agg = {}
+for r in dlines:
+    k = _srcb(r['svo_symbol']); _src_agg[k] = _src_agg.get(k, 0) + _iv(r['bacv'])
+_src_groups = [
+    ('Public rating (FE)', _src_agg.get('Public rating (FE)',0)/1e6, 'seg-annuity'),
+    ('Private letter (PL)', _src_agg.get('Private letter (PL)',0)/1e6, 'seg-acra'),
+    ('Exempt / SVO-assessed', _src_agg.get('Exempt / SVO-assessed',0)/1e6, 'seg-athene'),
+    ('Self-assigned (Z/YE)', _src_agg.get('Self-assigned (Z/YE)',0)/1e6, 'seg-funding'),
+    ('Modeled (FM)', (_src_agg.get('Modeled (FM)',0)+_src_agg.get('Other',0))/1e6, 'seg-life'),
+]
+
+# yield cross (FE vs PL, same notch, 2024-25 vintages)
+_yagg = {}
+for r in dlines:
+    if r['acquired'][-4:] not in ('2024','2025'): continue
+    try: er = float(r['effective_rate'])
+    except (ValueError, TypeError): continue
+    if er <= 0 or er > 20: continue
+    sym = 'PL' if r['svo_symbol'] in ('PL','PLGI') else ('FE' if r['svo_symbol']=='FE' else None)
+    if not sym: continue
+    k = (r['naic_designation'], sym)
+    w = _iv(r['bacv'])
+    a = _yagg.setdefault(k, [0.0, 0]); a[0] += er*w; a[1] += w
+_yrows = []
+for d, eq in [('1.F','A'),('1.G','A−'),('2.A','BBB+'),('2.B','BBB')]:
+    fe, pl = _yagg.get((d,'FE')), _yagg.get((d,'PL'))
+    if fe and pl and fe[1] > 100e6 and pl[1] > 100e6:
+        fy, py = fe[0]/fe[1], pl[0]/pl[1]
+        _yrows.append(f'<tr><td>{eq}</td><td>{fy:.2f}%</td><td>{py:.2f}%</td><td class="nm">{py-fy:+.2f}pp</td></tr>')
+YIELD_TABLE = ('<table class="ptable" style="max-width:480px"><thead><tr><th>Notch</th><th>Public-rated (FE)</th>'
+               '<th>Private letter (PL)</th><th>PL premium</th></tr></thead><tbody>' + ''.join(_yrows) + '</tbody></table>')
+
+D1_SECTION = (
+    '<div class="cflabel" style="margin-top:26px"><span class="t">D1 — every bond position, extracted and footed</span>'
+    f'<span class="n">8,582 rows · both sections foot to the dollar</span></div>'
+    '<p class="cfnote">The parser extracted all Schedule D Part 1 line items; book value sums match the printed control '
+    'totals exactly ($85,388,493,721 + $73,463,901,478). PPN-symbol identifiers (#, @, *) mark private placements: '
+    '<strong>$39.4B — 24.8% of the bond book</strong>.</p>'
+    '<div class="cflabel"><span class="t">Credit quality — by agency-equivalent rating</span>'
+    f'<span class="n">total {DTOT/1e9:,.1f}B</span></div>'
+    + stackbar(_band_groups, DTOT/1e6) + legend(_band_groups, DTOT/1e6)
+    + '<div class="cflabel" style="margin-top:16px"><span class="t">Who graded it — rating source (SVO symbol)</span>'
+    '<span class="n">the credibility axis</span></div>'
+    + stackbar(_src_groups, DTOT/1e6) + legend(_src_groups, DTOT/1e6)
+    + '<div class="callout" style="margin-top:16px"><strong>D2 — the cliff is mostly publicly rated (exculpatory, recorded):</strong> '
+    'of the $18.5B at BBB−, 76% carries public agency ratings; private letters are only 7.4%. The PL book ($40.1B) '
+    'clusters at A/BBB+ instead — where the capital relief is earned.</div>'
+    '<div class="cflabel" style="margin-top:16px"><span class="t">D3 — same notch, different grader, different yield</span>'
+    '<span class="n">2024–25 vintages, BACV-weighted</span></div>'
+    + YIELD_TABLE
+    + '<div class="callout"><strong>The open question of F1:</strong> private-letter paper yields +0.6–0.9pp over '
+    'publicly-rated paper at the same notch — PL "A" prices between public BBB and BBB−. Either an illiquidity premium '
+    '(the industry\'s pitch) or the market disbelieving the letters by 2–3 notches (the NAIC\'s finding). Yield alone '
+    'cannot say; impairment outcomes by rating source (period backfill) and cross-holder marks (D4) are the '
+    'discriminators. Deliberately unresolved.</div>'
+)
+
 extras = {
  'step1': ('<div style="margin-top:18px"></div>' + CAPITAL_FLOW),
- 'step5': ASSET_SECTION,
+ 'step5': ASSET_SECTION + D1_SECTION,
  'step3': ('<p class="cfnote" style="margin-top:18px"><strong>The 29 treaties behind those cards.</strong> Two families: 2018–2022 ModCo vintages (unauthorized status) and 2024+ funds-withheld coinsurance (reciprocal jurisdiction). The structure is readable from which column is populated — ModCo treaties fill the ModCo column; COFW treaties fill reserve credit + funds withheld. Business codes: IA individual annuities, FA funding agreements, VA variable, OA/OL other.</p>'
            + TREATY_TABLE + TREATY_FOOT
            + '<div class="callout"><strong>Mirror-check status:</strong> AARe publishes no unconsolidated statutory statement, so Iowa\'s ceded numbers cannot be line-item reconciled against Bermuda\'s assumed side from public documents. The FCR confirms the aggregate EBS picture (AARe eligible capital $30.6B vs required $15.2B). The treaty-level mirror is not publicly checkable — a measured opacity finding, logged not papered over.</div>'),
