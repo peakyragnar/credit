@@ -558,8 +558,16 @@ cs['A1'] = 'LIVE CHECKS — this cell must read 0'
 cs['A1'].font = HDR
 cs['A3'] = 'Number of failing identity checks across Engine + Engine-FY:'
 cs['A3'].font = BLACK
-parts = '+'.join(f'COUNTIF({c},"FAIL")' for c in check_cells)
-cs['B3'] = f'={parts}'
+# Excel caps a formula at 8,192 chars — chunk the COUNTIFs and sum the chunks
+CHUNK = 40
+chunk_rows = []
+for ci in range(0, len(check_cells), CHUNK):
+    rr = 8 + len(chunk_rows)
+    parts = '+'.join(f'COUNTIF({c},"FAIL")' for c in check_cells[ci:ci + CHUNK])
+    cs.cell(row=rr, column=2, value=f'={parts}').font = GREY
+    cs.cell(row=rr, column=1, value=f'checks {ci + 1}–{min(ci + CHUNK, len(check_cells))}').font = GREY
+    chunk_rows.append(rr)
+cs['B3'] = f'=SUM(B8:B{chunk_rows[-1]})'
 cs['B3'].font = BOLD
 cs['A5'] = (f'Checks watched: {len(check_cells)} cells — totals cross-cuts, rollforward identities, continuity, '
             'SRE chain, derived spread, and the quarterly-vs-annual source audit.')
