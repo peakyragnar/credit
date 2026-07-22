@@ -81,3 +81,6 @@ Parser extended to capture per-position: unrealized valuation change, (amortizat
 ## Standing exceptions & resolutions
 
 See `exceptions.md`. Every exception resolved in any run gets generalized into a rule here — later runs inherit the scar tissue.
+
+### Date columns (aging lane, 2026-07-22)
+Quirk #9 — Schedule D date semantics: `maturity` uses sentinel **9999-01-01** for perpetual/no-stated-maturity paper (21 rows); **matured-but-held** rows exist (10 rows — defaulted/pending, do not drop); `acquired` is the **reporting entity's** acquisition date — affiliate transfers and ModCo restructurings reset it, so holding age ≠ asset vintage (both-readings note in finding 44). Downstream tool `tools/compute_d1_aging.py` emits `extract/athene/d1_aging.csv`; its gates: every aggregate table re-foots to the D1 control total exactly, and the identifier split must reproduce finding 38 ($49,301,212,968 = 31.0%) as a cross-check.

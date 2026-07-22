@@ -460,6 +460,69 @@ NETSPREAD = (
     'operating view. Good enough for L0/L1 anchoring; the treaty-level spread decomposition is an L2 item.</p>'
 )
 
+# ---- A: aging + maturity ladder (from footed d1_aging.csv aggregates) ----
+_aging = list(csv.DictReader(open(ROOT / 'extract/athene/d1_aging.csv')))
+def _atab(table):
+    return {(r['bucket'], r['split']): int(r['bacv']) for r in _aging if r['table'] == table}
+_age_tot = _atab('age_total')
+_AGE_SPEC = [('<1y', '<1y', 'seg-q-cliff'), ('1-2y', '1–2y', 'seg-q-bbb'), ('2-3y', '2–3y', 'seg-q-a'),
+             ('3-5y', '3–5y', 'seg-q-aa'), ('5-10y', '5–10y', 'seg-q-aaa'), ('>=10y', '≥10y', 'seg-athene'),
+             ('unknown', 'no date', 'seg-ceded')]
+_age_groups = [(lbl, _age_tot.get((k, 'all'), 0)/1e6, cls) for k, lbl, cls in _AGE_SPEC if _age_tot.get((k, 'all'), 0) > 0]
+
+_mat_tot = _atab('maturity_total')
+_MAT_SPEC = [('<3y', ['matured, still held', '<1y', '1-3y'], 'seg-q-aaa'), ('3–7y', ['3-5y', '5-7y'], 'seg-q-aa'),
+             ('7–10y', ['7-10y'], 'seg-q-a'), ('10–20y', ['10-20y'], 'seg-q-bbb'),
+             ('20–30y', ['20-30y'], 'seg-q-cliff'), ('>30y + perpetual', ['>30y', 'perpetual/no stated maturity', 'unknown'], 'seg-q-junk')]
+_mat_groups = [(lbl, sum(_mat_tot.get((k, 'all'), 0) for k in ks)/1e6, cls) for lbl, ks, cls in _MAT_SPEC]
+
+_wavg = {r['split']: (float(r['bucket']), int(r['bacv'])) for r in _aging if r['table'] == 'wavg_age_by_source'}
+_wavg_all = next(float(r['bucket']) for r in _aging if r['table'] == 'wavg_age_total')
+_wrows = ''.join(
+    f'<tr{" style=\"font-weight:600\"" if "PL" in s else ""}><td>{html.escape(s)}</td>'
+    f'<td>${v/1e9:,.1f}B</td><td class="nm">{a:.2f}y</td></tr>'
+    for s, (a, v) in sorted(_wavg.items(), key=lambda kv: -kv[1][1]))
+
+_y_all = _age_tot.get(('<1y', 'all'), 0)
+_y_pl = _atab('age_by_source').get(('<1y', 'PL (private letter)'), 0)
+_q4v = _decv = 0
+for r in dlines:
+    a = r['acquired']
+    if len(a) == 10 and a.endswith('2025') and a[:2] in ('10', '11', '12'):
+        _q4v += _iv(r['bacv'])
+        if a[:2] == '12': _decv += _iv(r['bacv'])
+
+AGING_SECTION = (
+    '<div class="cflabel" style="margin-top:26px"><span class="t">Aging — how long the book has been held, vs how long it runs</span>'
+    '<span class="n">acquired + maturity dates on all 8,582 rows · every bucket foots to the same total</span></div>'
+    f'<p class="cfnote">Two clocks on the same bonds. <strong>Holding age</strong> (time since AAIA acquired the position): '
+    f'<strong>{_y_all/DTOT*100:.0f}% of the book was bought within the last 12 months</strong>; weighted-average age {_wavg_all:.1f} years. '
+    f'<strong>Remaining maturity</strong> (time until the bond repays): 70% runs longer than 10 years. Long-dated paper, very short holding periods — '
+    'a conveyor belt, not a vault. Near-term maturities are tiny ($1.7B inside a year), so the book generates almost no natural liquidity: '
+    'cash comes from selling (the ⑤b machine) or from new inflows (①).</p>'
+    '<div class="cflabel"><span class="t">Holding age — time on AAIA\'s books</span>'
+    f'<span class="n">total {DTOT/1e9:,.1f}B</span></div>'
+    + stackbar(_age_groups, DTOT/1e6) + legend(_age_groups, DTOT/1e6)
+    + '<div class="cflabel" style="margin-top:16px"><span class="t">Remaining maturity — when the money actually comes back</span>'
+    f'<span class="n">total {DTOT/1e9:,.1f}B</span></div>'
+    + stackbar(_mat_groups, DTOT/1e6) + legend(_mat_groups, DTOT/1e6)
+    + '<div class="cflabel" style="margin-top:18px"><span class="t">Weighted-average holding age by rating source</span>'
+    '<span class="n">BACV-weighted; the youngest paper is the least-checked paper</span></div>'
+    '<div class="tbl-scroll"><table class="ptable" style="max-width:520px"><thead><tr><th>Rating source</th><th>BACV</th><th>Wtd-avg age</th></tr></thead>'
+    f'<tbody>{_wrows}</tbody></table></div>'
+    f'<div class="callout" style="margin-top:16px"><strong>The private-letter book is the youngest shelf — and growing fastest.</strong> '
+    f'PL paper averages {_wavg["PL (private letter)"][0]:.1f}y old vs {_wavg["FE (public agency rating)"][0]:.1f}y for publicly-rated; '
+    f'PL is <strong>{_y_pl/_y_all*100:.0f}% of the newest cohort</strong> vs 25.3% of the stock — the least-checkable rating channel is the fastest-growing one. '
+    'Benign reading: the letters are fresh, recently underwritten — not stale grades on old paper. Adverse reading: a quarter of the book has existed '
+    'in its current form for under two years — <em>no position-level history of impairments, downgrades, or marks exists yet for most of it</em>. '
+    'Fresh is the opposite of seasoned.<br><br>'
+    f'<strong>Caveats, logged:</strong> "acquired" = the date <em>this entity</em> got the bond — affiliate transfers and restructurings reset it, '
+    f'so young can mean "recently moved," not "recently originated." Buying accelerated all year into Q4 (${_q4v/1e9:,.1f}B in Q4 alone, '
+    f'${_decv/1e9:,.1f}B in December, $6.1B on a single day, 12/22) — pattern consistent with block transfers as much as market buying. '
+    'Discriminator: Schedule D Part 3 names the <em>vendor</em> on every acquisition — parsing it separates street purchases from affiliate transfers. Queued.</div>'
+)
+
+
 D1_SECTION = (
     '<div class="cflabel" style="margin-top:26px"><span class="t">D1 — every bond position, extracted and footed</span>'
     f'<span class="n">8,582 rows · both sections foot to the dollar</span></div>'
@@ -490,7 +553,6 @@ D1_SECTION = (
 
 # ---- 5b: the disposal machine (Part 4 + Part 5 extracts) ----
 import datetime as _dtmod
-_NONSALE = re.compile(r'paydown|call|matur|redempt|sink|tender|conversion|exchange|cancel', re.I) if 're' in dir() else None
 import re as _re
 _NONSALE = _re.compile(r'paydown|call|matur|redempt|sink|tender|conversion|exchange|cancel', _re.I)
 def _dload(p, rpcol):
@@ -579,7 +641,7 @@ D5B_SECTION = (
 
 extras = {
  'step1': ('<div style="margin-top:18px"></div>' + CAPITAL_FLOW),
- 'step5': ASSET_SECTION + D1_SECTION,
+ 'step5': ASSET_SECTION + D1_SECTION + AGING_SECTION,
  'step3': ('<p class="cfnote" style="margin-top:18px"><strong>The 29 treaties behind those cards.</strong> Two families: 2018–2022 ModCo vintages (unauthorized status) and 2024+ funds-withheld coinsurance (reciprocal jurisdiction). The structure is readable from which column is populated — ModCo treaties fill the ModCo column; COFW treaties fill reserve credit + funds withheld. Business codes: IA individual annuities, FA funding agreements, VA variable, OA/OL other.</p>'
            + TREATY_TABLE + TREATY_FOOT
            + '<div class="callout"><strong>Mirror-check status:</strong> AARe publishes no unconsolidated statutory statement, so Iowa\'s ceded numbers cannot be line-item reconciled against Bermuda\'s assumed side from public documents. The FCR confirms the aggregate EBS picture (AARe eligible capital $30.6B vs required $15.2B). The treaty-level mirror is not publicly checkable — a measured opacity finding, logged not papered over.</div>'),

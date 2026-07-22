@@ -6,7 +6,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 
 ## Working order
 
-### A. `[ ]` Aging + maturity ladder — from existing D1 extract, no new documents
+### A. `[x]` Aging + maturity ladder — from existing D1 extract, no new documents — DONE 2026-07-22
 - BACV-weighted holding-age distribution from `acquired` column of `extract/athene/sched_d_part1_lines.csv` (8,582 positions).
 - Splits: PL vs. publicly rated · private placement vs. public · rating band.
 - Maturity ladder from `maturity` column (absorbs the old queue-#5 "FA maturity ladder" asset-side half).
@@ -41,6 +41,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 - Reaches the untestable 94% of related-party flow; upgrades B's coarse buckets to true industry/sector + concentration.
 
 ## Parked small items (pull in opportunistically)
+- `[ ]` Schedule D Part 3 (acquisitions) parse — vendor column separates street purchases from affiliate transfers; discriminator for the Q4-2025 surge (finding 46).
 - `[ ]` Matched-pair leftovers: 2 suspect "market" legs at exactly 100.000 (finding 43); mix-controlled RP test extensions.
 - `[ ]` ACRA public disclosure hunt.
 - `[ ]` ALRe $4.5B outflow trace.
@@ -50,3 +51,4 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 
 ## Evidence log
 *(append: date · item · what moved · commit)*
+- 2026-07-22 · A · `tools/compute_d1_aging.py` → `extract/athene/d1_aging.csv` (6 tables + wavg, all foot to $158,852,395,199 exactly; f38 cross-check reproduced to the dollar) · findings 44–46 · dashboard aging panel in ⑤ · glossary +2 terms · exception logged (11271L-10-2 no-date/matured-2020) · runbook quirk #9. Follow-up spawned: Part 3 vendor parse (street vs affiliate on the Q4 surge) → parked list.
