@@ -747,6 +747,47 @@ D5B_SECTION = (
     'cross-holder marks (the D4 / BDC-engine work) — which is exactly why that layer exists.</div>'
 )
 
+# ---- H: letter-slip stress (from footed letter_slip_stress.csv) ----
+_ls = list(csv.DictReader(open(ROOT / 'extract/athene/letter_slip_stress.csv')))
+_lsrows = ''.join(
+    f'<tr{" style=" + chr(34) + "font-weight:600" + chr(34) if r["slip_notches"] != "1" else ""}>'
+    f'<td>{r["slip_notches"]} notch{"es" if r["slip_notches"] != "1" else ""}'
+    f'{" — market-implied range" if r["slip_notches"] in ("2", "3") else ""}</td>'
+    f'<td>+${int(r["delta_c1_pretax"])/1e6:,.0f}M</td>'
+    f'<td>{r["cal_ratio_pct"]}%</td>'
+    f'<td>${int(r["pl_fell_below_ig"])/1e9:,.1f}B</td>'
+    f'<td class="nm">{r["book_belowig_pct"]}%</td></tr>'
+    for r in _ls)
+LETTERSLIP_SECTION = (
+    '<div class="cflabel" style="margin-top:26px"><span class="t">The letter-slip stress — what if the market is right about the letters?</span>'
+    '<span class="n">re-grade the $40.1B PL book at yield-implied ratings; recompute the capital charge</span></div>'
+    '<p class="cfnote">The D3 yield cross (⑤) shows PL paper priced 2–3 notches below its letter. This stress makes that '
+    'concrete: every PL position slips k notches down the 20-rung designation ladder; the C-1 bond charge is recomputed with '
+    'the adopted 2021+ NAIC factors (banked, Milliman 11/2021); the ratio translation is an <em>adverse upper bound</em> '
+    '(full covariance pass-through — the real formula dampens it). Baseline: PL C-1 $472M (a 1.18% average charge); '
+    'AAIA 871% ACL / 436% CAL; book below-IG 2.9%.</p>'
+    '<div class="tbl-scroll"><table class="ptable" style="max-width:680px"><thead><tr><th>Slip</th><th>Δ C-1 charge (pre-tax)</th>'
+    '<th>CAL ratio (bound)</th><th>PL falling below IG</th><th>Book below-IG share</th></tr></thead>'
+    f'<tbody>{_lsrows}</tbody></table></div>'
+    '<div class="callout" style="margin-top:16px"><strong>Two-sided verdict, recorded honestly.</strong> '
+    '<strong>Not a solvency event at AAIA:</strong> even the full market-implied slip leaves the RBC ratio at 337% of the '
+    'company-action level — the statutory cushion absorbs its letters being wrong 3 notches deep. Clean is a valid answer, '
+    'and this one is largely clean <em>on this ruler</em>. But two catches: '
+    '(1) <strong>the junk-share event</strong> — the same slip takes the book\'s below-investment-grade share from 2.9% to '
+    '<strong>7.0–14.2%</strong>, which is a rating-agency, investment-guideline, and funding-cost event long before it is a '
+    'solvency one (FABN buyers and the agencies price that share); '
+    '(2) <strong>the ruler is partly the lever</strong> — AAIA\'s robustness is measured <em>after</em> the ③ door moved the '
+    'economics to AARe. The slipped risk lands on the Bermuda ruler (BSCR already compressing 242%→202%) — exactly the ledger '
+    'with no public unconsolidated statement, behind the measured mirror-check boundary. The stress is reassuring precisely '
+    'where disclosure is good, and unmeasurable precisely where the risk went.<br><br>'
+    '<strong>The run-stress arithmetic (the liquidity leg):</strong> runnable funding-agreement money ≈ $71B (26.3% of net '
+    'reserves, was 21.0% a year earlier) against natural liquidity of ≈ $11B (cash + short-term $9.4B, bonds maturing inside '
+    'a year $1.7B). A one-in-four runnable-money year (~$18B) is ~1.6× natural liquidity: the gap is met by selling — and the '
+    'sellable-fast shelf is the publicly-rated 49% of the book, so <strong>every stressed sale makes the remaining book more '
+    'private, less liquid, and less market-checked</strong>. A ratchet, not a cliff; measured, logged.</div>'
+)
+
+
 # ---- ⑦ the engine: float -> ROE driver tree (all lines from banked claims) ----
 _ni_common = musd('ni_available_common')
 _ceq = musd('ahl_stockholders_equity') - musd('preferred_liquidation_outstanding')
@@ -808,6 +849,7 @@ ENGINE_SECTION = (
 extras = {
  'step1': ('<div style="margin-top:18px"></div>' + CAPITAL_FLOW),
  'step5': ASSET_SECTION + D1_SECTION + AGING_SECTION + CONC_SECTION + TRENDS_SECTION,
+ 'step6': LETTERSLIP_SECTION,
  'step3': ('<p class="cfnote" style="margin-top:18px"><strong>The 29 treaties behind those cards.</strong> Two families: 2018–2022 ModCo vintages (unauthorized status) and 2024+ funds-withheld coinsurance (reciprocal jurisdiction). The structure is readable from which column is populated — ModCo treaties fill the ModCo column; COFW treaties fill reserve credit + funds withheld. Business codes: IA individual annuities, FA funding agreements, VA variable, OA/OL other.</p>'
            + TREATY_TABLE + TREATY_FOOT
            + '<div class="callout"><strong>Mirror-check status:</strong> AARe publishes no unconsolidated statutory statement, so Iowa\'s ceded numbers cannot be line-item reconciled against Bermuda\'s assumed side from public documents. The FCR confirms the aggregate EBS picture (AARe eligible capital $30.6B vs required $15.2B). The treaty-level mirror is not publicly checkable — a measured opacity finding, logged not papered over.</div>'),
