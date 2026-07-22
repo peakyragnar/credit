@@ -125,7 +125,9 @@ def stackbar(segs, total):
         short = html.escape(label.split(' (')[0].split(' — ')[0])
         if pct >= 13:
             inner = f'{short} · {pct:.0f}%'
-        elif pct >= 7:
+        elif pct >= 6 and len(short) <= 4:
+            inner = short
+        elif pct >= 6:
             inner = f'{pct:.0f}%'
         else:
             inner = ''
@@ -302,12 +304,12 @@ DTOT = sum(_iv(r['bacv']) for r in dlines)
 
 _band_groups = []
 for label, keys, cls in [
-    ('AAA', ['1.A'], 'seg-annuity'),
-    ('AA band', ['1.B','1.C','1.D'], 'seg-annuity'),
-    ('A band', ['1.E','1.F','1.G'], 'seg-annuity'),
-    ('BBB+ / BBB', ['2.A','2.B'], 'seg-funding'),
-    ('BBB− (the cliff)', ['2.C'], 'seg-acra'),
-    ('Below IG', ['3','4','5','6'], 'seg-ceded'),
+    ('AAA', ['1.A'], 'seg-q-aaa'),
+    ('AA band', ['1.B','1.C','1.D'], 'seg-q-aa'),
+    ('A band', ['1.E','1.F','1.G'], 'seg-q-a'),
+    ('BBB+ / BBB', ['2.A','2.B'], 'seg-q-bbb'),
+    ('BBB− (the cliff)', ['2.C'], 'seg-q-cliff'),
+    ('Below IG', ['3','4','5','6'], 'seg-q-junk'),
 ]:
     v = sum(_iv(r['bacv']) for r in dlines
             if r['naic_designation'] in keys or (len(keys[0])==1 and (r['naic_designation'] or '?').split('.')[0] in keys))
@@ -354,12 +356,12 @@ YIELD_TABLE = ('<table class="ptable" style="max-width:480px"><thead><tr><th>Not
 
 # quality-within-source matrix: one quality bar per rating source
 _BANDS = [
-    ('AAA', lambda d: d == '1.A', 'seg-annuity'),
-    ('AA', lambda d: d in ('1.B','1.C','1.D'), 'seg-annuity'),
-    ('A', lambda d: d in ('1.E','1.F','1.G'), 'seg-annuity'),
-    ('BBB+/BBB', lambda d: d in ('2.A','2.B'), 'seg-funding'),
-    ('BBB−', lambda d: d == '2.C', 'seg-acra'),
-    ('<IG', lambda d: (d or '?').split('.')[0] in ('3','4','5','6'), 'seg-ceded'),
+    ('AAA', lambda d: d == '1.A', 'seg-q-aaa'),
+    ('AA', lambda d: d in ('1.B','1.C','1.D'), 'seg-q-aa'),
+    ('A', lambda d: d in ('1.E','1.F','1.G'), 'seg-q-a'),
+    ('BBB+/BBB', lambda d: d in ('2.A','2.B'), 'seg-q-bbb'),
+    ('BBB−', lambda d: d == '2.C', 'seg-q-cliff'),
+    ('<IG', lambda d: (d or '?').split('.')[0] in ('3','4','5','6'), 'seg-q-junk'),
 ]
 _matrix_rows = []
 for _src_label, _key in [('Public rating (FE)','Public rating (FE)'),
@@ -381,9 +383,14 @@ for _src_label, _key in [('Public rating (FE)','Public rating (FE)'),
         f'<div class="cflabel" style="margin:10px 0 4px"><span class="t" style="font-size:13px;font-weight:500">{_src_label}</span>'
         f'<span class="n">${_stot/1e9:,.1f}B</span></div>'
         + stackbar(_segs, _stot/1e6))
+_qlegend = ('<div class="legend" style="margin-bottom:6px">' + ''.join(
+    f'<div class="lg"><span class="dot {c}"></span><span class="lgl">{n}</span></div>'
+    for n, c in [('AAA','seg-q-aaa'),('AA','seg-q-aa'),('A','seg-q-a'),
+                 ('BBB+/BBB','seg-q-bbb'),('BBB− cliff','seg-q-cliff'),('Below IG','seg-q-junk')]) + '</div>')
 MATRIX = (
     '<div class="cflabel" style="margin-top:22px"><span class="t">Quality within each rating source</span>'
-    '<span class="n">same risk gradient; hover segments for exact figures</span></div>'
+    '<span class="n">color = rating band; hover for exact figures</span></div>'
+    + _qlegend
     + ''.join(_matrix_rows)
     + '<p class="cfnote">Read: the public-rated (FE) book skews higher-grade and holds most of the cliff paper; '
     'the private-letter (PL) book is ~81% A/BBB with almost no cliff or junk — grades that earn capital relief, '

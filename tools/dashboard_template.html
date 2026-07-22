@@ -127,6 +127,32 @@ svg text.flow2{fill:var(--muted);font-size:11px}
 .cflabel .n{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .stackbar{display:flex;gap:1.5px;background:var(--panel);width:100%;height:38px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .seg{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;overflow:hidden;white-space:nowrap;min-width:0}
+.seg-q-aaa{background:#0F6E56;color:#E1F5EE}
+.seg-q-aa{background:#5DCAA5;color:#04342C}
+.seg-q-a{background:#E1F5EE;color:#085041}
+.seg-q-bbb{background:#FAC775;color:#633806}
+.seg-q-cliff{background:#D85A30;color:#FDF1EC}
+.seg-q-junk{background:#5F5E5A;color:#F1EFE8}
+.dot.seg-q-aaa{background:#0F6E56;border-color:#0F6E56}.dot.seg-q-aa{background:#5DCAA5;border-color:#5DCAA5}
+.dot.seg-q-a{background:#E1F5EE;border-color:#0F6E56}.dot.seg-q-bbb{background:#FAC775;border-color:#BA7517}
+.dot.seg-q-cliff{background:#D85A30;border-color:#D85A30}.dot.seg-q-junk{background:#5F5E5A;border-color:#5F5E5A}
+@media (prefers-color-scheme: dark){
+.seg-q-aaa{background:#0B5C47;color:#C9F0E1}.seg-q-aa{background:#1D9E75;color:#04342C}
+.seg-q-a{background:#0C3A2D;color:#9FE1CB}.seg-q-bbb{background:#8A5510;color:#FAE3B3}
+.seg-q-cliff{background:#B14A22;color:#FBE4D8}.seg-q-junk{background:#444441;color:#D3D1C7}
+.dot.seg-q-a{background:#0C3A2D;border-color:#5DCAA5}}
+:root[data-theme="dark"] .seg-q-aaa{background:#0B5C47;color:#C9F0E1}
+:root[data-theme="dark"] .seg-q-aa{background:#1D9E75;color:#04342C}
+:root[data-theme="dark"] .seg-q-a{background:#0C3A2D;color:#9FE1CB}
+:root[data-theme="dark"] .seg-q-bbb{background:#8A5510;color:#FAE3B3}
+:root[data-theme="dark"] .seg-q-cliff{background:#B14A22;color:#FBE4D8}
+:root[data-theme="dark"] .seg-q-junk{background:#444441;color:#D3D1C7}
+:root[data-theme="light"] .seg-q-aaa{background:#0F6E56;color:#E1F5EE}
+:root[data-theme="light"] .seg-q-aa{background:#5DCAA5;color:#04342C}
+:root[data-theme="light"] .seg-q-a{background:#E1F5EE;color:#085041}
+:root[data-theme="light"] .seg-q-bbb{background:#FAC775;color:#633806}
+:root[data-theme="light"] .seg-q-cliff{background:#D85A30;color:#FDF1EC}
+:root[data-theme="light"] .seg-q-junk{background:#5F5E5A;color:#F1EFE8}
 .seg-annuity{background:var(--us-bg);color:var(--us-ink)}
 .seg-funding{background:var(--warn-bg);color:var(--warn-ink)}
 .seg-life{background:var(--line);color:var(--muted)}
