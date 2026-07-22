@@ -97,8 +97,13 @@ All values from sha-tracked public filings. As of 2026-07-22.</p></header>
 # ---------- Brookfield ----------
 c = cap_rows('brookfield')
 bf_cards = (
-    card(f"${AEL['total']/1e9:.1f}B", 'AEL bond book (footed)',
-         '5,692 positions, both sections foot TO THE DOLLAR through the Athene parser — the only peer where the position-level drill runs.')
+    card(f"${AEL['total']/1e9:.1f}B", 'AEL bond book (footed ×3 years)',
+         'YE2023/24/25 ALL foot TO THE DOLLAR through the Athene parser (5,199 / 5,203 / 5,692 positions; zero exceptions in 2023-24) — the only peer with the full position-level drill.')
+    + card(' → '.join(f"{AEL['years'][y]['pl_share_pct']}%" for y in ('2023','2024','2025')), 'AEL PL share, 3-year trend',
+           'NO Athene-style ramp (Athene: 15.6% → 25.3% over the same window). The PL climb is an Athene choice, now proven against a measured control.')
+    + card(' → '.join(f"{AEL['years'][y]['below_ig_pct']}%" for y in ('2023','2024','2025')), 'AEL below-IG trend (NAIC)',
+           'Creeping up under Brookfield — the one deteriorating dial on this book.')
+    + card('$423M = 1.0%', 'Top concentration: BROOKFIELD SECURITIZATION CFO', 'An affiliate-originated structure at #1 — the same fingerprint as Athene\'s AP Grange, at 1/9th the weight (Athene top name: 2.3% of book).')
     + card(f"{AEL['src']['PL']/AEL['total']*100:.1f}%", 'AEL private-letter share',
            'vs Athene 25.3% — Athene runs 2.6× the PL concentration of its closest structural peer.')
     + card(f"{(AEL['ids']['ppn']+AEL['ids'].get('noid',0))/AEL['total']*100:.1f}%", 'AEL identifier-private floor', 'vs Athene 31.0%.')
@@ -109,13 +114,16 @@ bf_cards = (
            f"C&S fell from ${s('brookfield','ael',2023,'capital_surplus')/1e9:.2f}B at YE2023 while assets grew — leverage rising.")
     + card(f"${s('brookfield','anico',2025,'total_admitted_assets')/1e9:.1f}B", 'American National assets YE2025',
            f"C&S ${s('brookfield','anico',2025,'capital_surplus')/1e9:.2f}B.")
+    + card('$642M → $658M', 'BNT quarterly gross spread (DOE basis, 1Q25→1Q26)',
+           'Cost of funds rose every quarter ($904M → $1,028M) — the same repricing race as Athene/GA, now measured at a third platform. Full chain in the engine workbook (87 checks).')
+    + card('−$602M vs +$438M', 'BNT 1Q26: GAAP net loss vs DOE',
+           'The adjusted-vs-GAAP divergence, quarterly: GAAP −$282M/+$21M/−$602M in 1Q25/4Q25/1Q26 while DOE held ~$437M every single quarter. A metronome over a tape.')
 )
 bf_boundaries = ('BNT/BWS is a foreign private issuer (20-F/6-K); its quarterly supplement series only began 1Q25. '
                  'North End Re and Freestone Re publish audited FS via the BMA but NO Financial Condition Reports — '
                  'Bermuda coverage ratios are not publicly computable for Brookfield (unlike every other platform here). '
                  'North End Re (Cayman) SPC publishes nothing. AEL Re Bermuda appears wound down after 2023. '
-                 'The BN/BNT merger (approved 2026-07-16) will likely END standalone BNT reporting — documents archived now. '
-                 'AEL 2023/2024 Schedule D drills are configured but not yet run (era-2 pages pending).')
+                 'The BN/BNT merger (approved 2026-07-16) will likely END standalone BNT reporting — documents archived now.')
 bf_html = page('brookfield', 'Brookfield Wealth Solutions — the machine', 'CREDIT MAP · CROSS-SECTION · BROOKFIELD (BNT)',
                'The only peer whose lead carrier (AEL, Iowa) publishes FULL statutory statements — so the Athene-grade '
                'position-level drill actually ran, and footed exactly. AEL is older, more publicly rated, and less '
@@ -124,7 +132,8 @@ bf_html = page('brookfield', 'Brookfield Wealth Solutions — the machine', 'CRE
                bf_cards, '', bf_boundaries,
                'Sources: AEL statutory annual statements 2023–2025 + 1Q26 (american-equity.com; Schedule D parsed by '
                'tools/parse_sched_d.py, gates exact) · ANICO statutory 2023–2025 · BNT 20-Fs FY2023–25 + 6-K 1Q26 · '
-               'BWS supplements 1Q25–1Q26 · North End Re / Freestone Re audited FS (BMA). sha-tracked in manifest.')
+               'BWS supplements 1Q25–1Q26 · North End Re / Freestone Re audited FS (BMA). sha-tracked in manifest. '
+               'Engine workbook: dossiers/brookfield/bnt-quarterly-engine.xlsx (quarterly + FY tabs, 87 live checks).')
 
 # ---------- Ares ----------
 ar_cards = (
@@ -135,6 +144,10 @@ ar_cards = (
     + card('398%', 'Aspida Life RBC (CAL, 2024)', 'Down from 480% in 2023 (KBRA). Both rulers compressing while assets 5×.')
     + card('$25.9B', 'AIS-managed AUM for Aspida', 'Of which $16.9B sub-advised by Ares vehicles (ares-10k-fy2025) — the manager-owner loop, Apollo-style.')
     + card('49.7%', 'Invested assets restricted', 'Under funds-withheld reinsurance (audited statutory notes) — half the balance sheet works for counterparties.')
+    + card('−$48.8M → −$36.7M → −$0.01M', 'Net loss trend (statutory)',
+           'Three straight loss years shrinking to exact breakeven; C&S growth is all capital contributions. Full chain in the engine workbook (33 checks).')
+    + card('61%', 'Ceded share of gross annuity reserves YE2025',
+           '21% → 58% → 61%: gross reserves $12.8B but net only $5.1B — most of the machine now runs through reinsurance counterparties (incl. Aspida Re, its own Bermuda affiliate).')
 )
 ar_boundaries = ('No public NAIC blanks (no Schedule D detail) — the audited statutory FS embedded in EDGAR RILA filings '
                  'are the public substitute. No consolidated Aspida Holdings GAAP statements (one-pager only: $31B assets, '
@@ -148,7 +161,8 @@ ar_html = page('ares', 'Ares / Aspida — the machine', 'CREDIT MAP · CROSS-SEC
                'the manager IS the shareholder controller (BMA term), one step more entangled than the Apollo model.',
                ar_cards, '', ar_boundaries,
                'Sources: EY-audited statutory FS FY2022–25 (EDGAR 485BPOS/N-4, CIK 1934234) · Aspida Re FCRs FY2021–25 '
-               '(aspidare.bm) · Aspida Re GAAP FS (BMA) · ares-10k-fy2025 · KBRA/AM Best actions · group one-pager 3/31/26.')
+               '(aspidare.bm) · Aspida Re GAAP FS (BMA) · ares-10k-fy2025 · KBRA/AM Best actions · group one-pager 3/31/26. '
+               'Engine workbook: dossiers/ares/aspida-annual-engine.xlsx (FY2023–25, 33 live checks).')
 
 # ---------- Blue Owl ----------
 kc = cap_rows('blueowl')
@@ -159,6 +173,10 @@ ow_cards = (
     + card('$842M + $250M', 'What Blue Owl actually bought', 'KAM (the asset manager, 100%, July 2024) + a $250M preferred in Kuvare UK Holdings marked $267M → $304M. It owns the MANAGER, not the insurers.')
     + card('$19.2B', 'IG-credit AUM at Blue Owl', 'The KAM-driven strategy; management fees $27.9M → $67.6M in one year — the fee engine the deal was for.')
     + card('$40M', 'GILICO surplus notes held by Kuvare Life Re', '6% due 2049 + 5.5% due 2051 — capital circularity inside the group, flagged.')
+    + card('−$175M → −$64M → $172M', 'KLR shareholder equity 2022→2025',
+           'The Bermuda pivot ran NEGATIVE GAAP equity through YE2023 and holds $172M against $9.8B of assets (1.8%) at YE2025. Full statements in the engine workbook (20 checks).')
+    + card('$80M', 'Misprint found in KLR 2025 FS',
+           'FY2024 operating-cash comparative prints $1,601.2M where its own components and restatement note prove $1,681.2M — caught by the footing gate, logged as a finding.')
 )
 ow_boundaries = ('The three US carriers (Guaranty Income LA, United Life IA, Lincoln Benefit NE) publish NO statutory '
                  'statements — only ALIRT derivatives and reinsurance summaries; United Life\'s site is bot-walled. '
@@ -173,7 +191,8 @@ ow_html = page('blueowl', 'Blue Owl / Kuvare — the machine', 'CREDIT MAP · CR
                'everyone else\'s.',
                ow_cards, '', ow_boundaries,
                'Sources: Kuvare Life Re FCRs FY2022–25 (kuvare.com) + audited FS FY2023–25 (BMA) · Kuvare Bermuda Re FS · '
-               'owl-10k-fy2025 (KAM acquisition + preferred marks) · GILICO/LBL disclosure pages · AM Best/KBRA actions.')
+               'owl-10k-fy2025 (KAM acquisition + preferred marks) · GILICO/LBL disclosure pages · AM Best/KBRA actions. '
+               'Engine workbook: dossiers/blueowl/klr-annual-engine.xlsx (FY2022–25, LDTI-restated basis, 20 live checks).')
 
 for name, html in (('brookfield', bf_html), ('ares', ar_html), ('blueowl', ow_html)):
     d = ROOT / f'dossiers/{name}'

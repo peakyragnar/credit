@@ -15,12 +15,16 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / 'extract/athene/sched_d_part1_lines.csv'
-DEST = ROOT / 'extract/athene/d1_aging.csv'
+import sys
+SUFFIX = sys.argv[1] if len(sys.argv) > 1 else ''
+SRC = ROOT / f'extract/athene/sched_d_part1_lines{SUFFIX}.csv'
+DEST = ROOT / f'extract/athene/d1_aging{SUFFIX}.csv'
 
-AS_OF = dt.date(2025, 12, 31)
-D1_TOTAL = 158_852_395_199          # footed control total, sessions 1 (to the dollar)
-F38_NOID_ROWS = 481                 # finding 38
+AS_OF = dt.date(2023 if SUFFIX.endswith('2023') else 2024 if SUFFIX.endswith('2024') else 2025, 12, 31)
+CONTROLS = {'': 158_852_395_199, '_ael2025': 43_049_162_735,
+            '_ael2024': 38_063_028_918, '_ael2023': 37_602_643_077}  # gate-banked BACV per book
+D1_TOTAL = CONTROLS[SUFFIX]
+F38_NOID_ROWS = 481 if SUFFIX == '' else None   # finding 38 — Athene book only
 PPN_CHARS = set('#@*')              # PPN charset quirk (runbook)
 NOID = '000000-00-0'
 
@@ -115,11 +119,11 @@ def main():
         r['_id'] = id_type(r['cusip'])
         r['_naic'] = naic_band(r['naic_designation'])
 
-    # cross-check vs finding 38
+    # cross-check vs finding 38 (Athene book only; AEL books skip)
     noid_rows = [r for r in rows if r['_id'] == 'no identifier']
     ppn_bacv = sum(r['_bacv'] for r in rows if r['_id'] == 'PPN (private placement)')
     noid_bacv = sum(r['_bacv'] for r in noid_rows)
-    if len(noid_rows) != F38_NOID_ROWS:
+    if F38_NOID_ROWS is not None and len(noid_rows) != F38_NOID_ROWS:
         sys.exit(f'CROSS-CHECK FAIL: no-ID rows {len(noid_rows)} != finding-38 {F38_NOID_ROWS}')
     print(f'cross-check f38: PPN {ppn_bacv:,} + no-ID {noid_bacv:,} '
           f'= {ppn_bacv + noid_bacv:,} ({(ppn_bacv + noid_bacv) / total * 100:.1f}%)')

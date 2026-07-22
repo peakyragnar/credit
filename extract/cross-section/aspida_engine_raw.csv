@@ -1,0 +1,258 @@
+period,metric,value,unit,source_file,anchor_quote
+FY2023,bs_aggregate_reserve_life_contracts,2068747,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Aggregate reserve for life contracts
+FY2023,bs_asset_valuation_reserve,10625,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Asset valuation reserve
+FY2023,bs_common_stock,2500,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,"Common stock, $100 par value per share; 25,000 shares authorized, issued and outstanding"
+FY2023,bs_funds_held_under_reinsurance_treaties_unauthorized,555366,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Funds held under reinsurance treaties with unauthorized reinsurers
+FY2023,bs_insurance_policy_benefits_claim_reserves,5032,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,"Insurance policy benefits, claim reserves"
+FY2023,bs_interest_maintenance_reserve_liability,182,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Interest maintenance reserve
+FY2023,bs_liability_deposit_type_contracts,22,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Liability for deposit-type contracts
+FY2023,bs_paid_in_and_contributed_surplus,416666,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Paid-in and contributed surplus
+FY2023,bs_total_admitted_assets,3080855,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Total admitted assets
+FY2023,bs_total_capital_and_surplus,352026,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Total capital and surplus
+FY2023,bs_total_cash_and_invested_assets,3017144,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Total cash and invested assets
+FY2023,bs_total_liabilities,2728829,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Total liabilities
+FY2023,bs_total_liabilities_and_capital_and_surplus,3080855,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Total liabilities and capital and surplus
+FY2023,bs_unassigned_deficit,-67140,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Unassigned deficit
+FY2023,cf_capital_and_paid_in_surplus,245000,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Capital and paid in surplus, less treasury stock"
+FY2023,cf_cash_provided_by_revenues,2100190,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Cash provided by revenues
+FY2023,cf_funds_withheld_premium_ceded,552027,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Funds withheld premium ceded
+FY2023,cf_net_cash_from_operations,1878910,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net cash from operations
+FY2023,cf_net_deposits_on_deposit_type_contracts,22,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net deposits on deposit-type contracts and other insurance liabilities
+FY2023,cf_net_investment_income_received,75868,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net investment income received
+FY2023,cf_premiums_and_policy_proceeds,1999176,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums and policy proceeds
+FY2023,cs_beginning_balance,114922,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Balance, December 31, 2022"
+FY2023,cs_capital_contributions,247370,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Capital contributions
+FY2023,cs_change_asset_valuation_reserve,-8852,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Change in asset valuation reserve
+FY2023,cs_change_net_deferred_income_tax,25742,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Change in net deferred income tax
+FY2023,cs_change_net_unrealized_capital_gains,15960,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Change in net unrealized capital gains less capital gains tax of $4,243"
+FY2023,cs_change_nonadmitted_assets,-3209,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Change in nonadmitted assets
+FY2023,cs_deferred_reinsurance_gain_net_of_amortization,8853,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Deferred reinsurance gain net of amortization
+FY2023,cs_ending_balance,352026,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Balance, December 31, 2023"
+FY2023,cs_net_loss,-48760,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net loss
+FY2023,note2_gross_investment_income,119632,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Gross investment income
+FY2023,note2_investment_expenses,-10379,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Less: Investment expenses
+FY2023,note2_net_investment_income,109253,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net investment income
+FY2023,note2_net_realized_gains_on_bond_sales,470,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Such sales generated net realized gains of $11,850, $965, and $470 for the years ended December 31, 2025, 2024, and 2023, respectively."
+FY2023,note2_otti_recognized,1191,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"OTTI recognized during the years ended December 31, 2025, 2024, and 2023 was $905, $0, and $1,191, respectively."
+FY2023,note3_net_realized_gain_loss_on_derivatives,1837,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"At December 31, 2025, 2024, and 2023 the net realized gain/(loss) on derivatives was $73,896, $40,983, and $1,837, respectively."
+FY2023,note5_claim_reserves_direct,5032,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Claim reserves: Direct
+FY2023,note5_claim_reserves_reinsurance_ceded,0,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Claim reserves: Reinsurance ceded
+FY2023,note5_insurance_policy_benefits_direct,1965856,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Insurance policy benefits: Direct
+FY2023,note5_insurance_policy_benefits_reinsurance_assumed,0,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Insurance policy benefits: Reinsurance assumed
+FY2023,note5_insurance_policy_benefits_reinsurance_ceded,-552779,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Insurance policy benefits: Reinsurance ceded
+FY2023,note5_net_claim_reserves,5032,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Net claim reserves
+FY2023,note5_net_insurance_policy_benefits,1413077,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net insurance policy benefits
+FY2023,note5_net_policy_benefits,23714,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net policy benefits
+FY2023,note5_net_premiums_earned,1447149,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net premiums earned
+FY2023,note5_policy_benefits_direct,16802,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Policy benefits: Direct
+FY2023,note5_policy_benefits_reinsurance_assumed,6916,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Policy benefits: Reinsurance assumed
+FY2023,note5_policy_benefits_reinsurance_ceded,-4,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Policy benefits: Reinsurance ceded
+FY2023,note5_premiums_earned_direct,1999178,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums earned: Direct
+FY2023,note5_premiums_earned_reinsurance_assumed,1,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums earned: Reinsurance assumed
+FY2023,note5_premiums_earned_reinsurance_ceded,-552030,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums earned: Reinsurance ceded
+FY2023,note6_ceded_annuity_reserves,552798,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Ceded reserves
+FY2023,note6_gross_annuity_reserves_total,2621545,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Total gross annuity reserves
+FY2023,note6_net_annuity_reserves_total,2068747,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Total net annuity reserves
+FY2023,note6_total_insurance_policy_and_claim_reserves,2073779,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Total insurance policy and claim reserves
+FY2023,ops_amortization_deferred_reinsurance_gain,0,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Amortization of deferred reinsurance gain
+FY2023,ops_amortization_of_imr,98,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Amortization of interest maintenance reserve
+FY2023,ops_annuity_benefits,23714,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Annuity benefits
+FY2023,ops_commission_expense_allowance_reinsurance_assumed,520,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Commission and expense allowance on reinsurance assumed
+FY2023,ops_commissions_and_brokerage_expense,133841,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Commissions and brokerage expense
+FY2023,ops_commissions_and_brokerage_expense_combined_per_fy2024_filing,134361,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Commissions and brokerage expense
+FY2023,ops_commissions_expense_allowances_reinsurance_ceded,2507,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Commissions and expense allowances on reinsurance ceded
+FY2023,ops_considerations_supplementary_contracts_life_contingencies,0,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Considerations for supplementary contracts with life contingencies
+FY2023,ops_fit_expense_benefit,4752,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,(Benefits) expenses for federal and foreign income taxes
+FY2023,ops_general_insurance_expenses,29093,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,General insurance expenses
+FY2023,ops_general_insurance_expenses_alt_per_fy2024_filing,28876,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,General insurance expenses
+FY2023,ops_increase_in_aggregate_reserves_life,1413077,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Increase in aggregate reserves for life contracts
+FY2023,ops_insurance_taxes_licenses_fees,1319,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Insurance taxes, licenses and fees"
+FY2023,ops_interest_adjustments_contract_deposit_type_funds,0,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Interest and adjustments on contract or deposit-type contract funds
+FY2023,ops_loss_from_operations_before_fit,-44847,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Loss from operations before federal and foreign income taxes
+FY2023,ops_miscellaneous_income,374,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Miscellaneous income
+FY2023,ops_modco_assumed_adjustment,22119,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Modified coinsurance assumed adjustment
+FY2023,ops_net_income_loss,-48758,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net loss
+FY2023,ops_net_investment_income,109253,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Investment income (net of related expenses of $20,550 in 2025, $14,211 in 2024, and $10,379 in 2023)"
+FY2023,ops_net_loss_from_operations_before_realized_gains,-49599,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net loss from operations before net realized investment gains
+FY2023,ops_net_realized_investment_gains_net_of_tax,841,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Net realized investment gains net of tax of $17,895 in 2025, $0 in 2024, and $0 in 2023"
+FY2023,ops_net_transfers_to_from_separate_accounts,-217,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net transfers to or (from) Separate Accounts
+FY2023,ops_premium_and_annuity_considerations_life_net,1447149,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premium and annuity considerations for life contracts
+FY2023,ops_reinsurance_investment_credit,3339,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Reinsurance investment credit
+FY2023,ops_separate_accounts_net_gain_from_operations,0,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Separate Accounts net gain from operations excluding unrealized gains or losses
+FY2023,ops_surrender_benefits_and_withdrawals,21661,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Surrender benefits and withdrawals
+FY2023,ops_total_benefits_and_other_deductions,1626347,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total benefits and other deductions
+FY2023,ops_total_benefits_excl_reserve_increase_per_fy2024_filing,45375,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Total benefits
+FY2023,ops_total_benefits_incl_reserve_increase,1458452,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total benefits
+FY2023,ops_total_premiums_and_other_revenues,1581500,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total premiums and other revenues
+FY2024,bs_aggregate_reserve_life_contracts,2927845,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Aggregate reserve for life contracts
+FY2024,bs_asset_valuation_reserve,39105,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Asset valuation reserve
+FY2024,bs_common_stock,2500,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Common stock, $100 par value per share; 25,000 shares authorized, issued and outstanding"
+FY2024,bs_funds_held_under_reinsurance_treaties_unauthorized,3867938,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Funds held under reinsurance treaties with unauthorized reinsurers
+FY2024,bs_insurance_policy_benefits_claim_reserves,6730,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Insurance policy benefits, claim reserves"
+FY2024,bs_interest_maintenance_reserve_liability,679,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Interest maintenance reserve
+FY2024,bs_liability_deposit_type_contracts,8041,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Liability for deposit-type contracts
+FY2024,bs_paid_in_and_contributed_surplus,566666,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Paid-in and contributed surplus
+FY2024,bs_total_admitted_assets,7711458,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total admitted assets
+FY2024,bs_total_capital_and_surplus,433050,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total capital and surplus
+FY2024,bs_total_cash_and_invested_assets,7603906,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total cash and invested assets
+FY2024,bs_total_liabilities,7278408,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total liabilities
+FY2024,bs_total_liabilities_and_capital_and_surplus,7711458,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total liabilities and capital and surplus
+FY2024,bs_unassigned_deficit,-136116,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Unassigned deficit
+FY2024,cf_capital_and_paid_in_surplus,150000,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Capital and paid in surplus, less treasury stock"
+FY2024,cf_cash_provided_by_revenues,1303509,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Cash provided by revenues
+FY2024,cf_funds_withheld_premium_ceded,3375986,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Funds withheld premium ceded
+FY2024,cf_net_cash_from_operations,971919,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net cash from operations
+FY2024,cf_net_deposits_on_deposit_type_contracts,8019,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net deposits on deposit-type contracts and other insurance liabilities
+FY2024,cf_net_investment_income_received,246834,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net investment income received
+FY2024,cf_premiums_and_policy_proceeds,783928,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums and policy proceeds
+FY2024,cs_beginning_balance,352026,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Balance, December 31, 2023"
+FY2024,cs_capital_contributions,150000,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Capital contributions
+FY2024,cs_ceding_unrealized_gains_losses_reinsurance,-33833,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Ceding unrealized gains and losses on reinsurance transactions
+FY2024,cs_change_asset_valuation_reserve,-28480,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Change in asset valuation reserve
+FY2024,cs_change_net_deferred_income_tax,8541,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Change in net deferred income tax
+FY2024,cs_change_net_unrealized_capital_gains,33547,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Change in net unrealized capital gains less capital gains tax of $50
+FY2024,cs_change_nonadmitted_assets,-3216,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Change in nonadmitted assets
+FY2024,cs_deferred_reinsurance_gain_net_of_amortization,-8853,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Deferred reinsurance gain net of amortization
+FY2024,cs_ending_balance,433050,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Balance, December 31, 2024"
+FY2024,cs_net_loss,-36682,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net loss
+FY2024,note2_gross_investment_income,321045,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Gross investment income
+FY2024,note2_investment_expenses,-14211,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Less: Investment expenses
+FY2024,note2_net_investment_income,306834,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net investment income
+FY2024,note2_net_realized_gains_on_bond_sales,965,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Such sales generated net realized gains of $11,850, $965, and $470 for the years ended December 31, 2025, 2024, and 2023, respectively."
+FY2024,note2_otti_recognized,0,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"OTTI recognized during the years ended December 31, 2025, 2024, and 2023 was $905, $0, and $1,191, respectively."
+FY2024,note3_net_realized_gain_loss_on_derivatives,40983,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"At December 31, 2025, 2024, and 2023 the net realized gain/(loss) on derivatives was $73,896, $40,983, and $1,837, respectively."
+FY2024,note5_claim_reserves_direct,11465,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Claim reserves: Direct
+FY2024,note5_claim_reserves_reinsurance_ceded,-4735,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Claim reserves: Reinsurance ceded
+FY2024,note5_insurance_policy_benefits_direct,3975569,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Insurance policy benefits: Direct
+FY2024,note5_insurance_policy_benefits_reinsurance_assumed,357628,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Insurance policy benefits: Reinsurance assumed
+FY2024,note5_insurance_policy_benefits_reinsurance_ceded,-3474099,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Insurance policy benefits: Reinsurance ceded
+FY2024,note5_net_claim_reserves,6730,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Net claim reserves
+FY2024,note5_net_insurance_policy_benefits,859098,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net insurance policy benefits
+FY2024,note5_net_policy_benefits,28649,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net policy benefits
+FY2024,note5_net_premiums_earned,783928,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net premiums earned
+FY2024,note5_policy_benefits_direct,44016,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Policy benefits: Direct
+FY2024,note5_policy_benefits_reinsurance_assumed,7008,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Policy benefits: Reinsurance assumed
+FY2024,note5_policy_benefits_reinsurance_ceded,-22375,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Policy benefits: Reinsurance ceded
+FY2024,note5_premiums_earned_direct,3814150,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums earned: Direct
+FY2024,note5_premiums_earned_reinsurance_assumed,345764,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums earned: Reinsurance assumed
+FY2024,note5_premiums_earned_reinsurance_ceded,-3375986,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums earned: Reinsurance ceded
+FY2024,note6_ceded_annuity_reserves,4026897,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Ceded reserves
+FY2024,note6_deposit_type_total_gross_reserves,8041,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total gross reserves
+FY2024,note6_deposit_type_total_net_reserves,8041,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total net reserves
+FY2024,note6_gross_annuity_reserves_total,6956197,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total gross annuity reserves
+FY2024,note6_net_annuity_reserves_total,2929300,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total net annuity reserves
+FY2024,note6_total_insurance_policy_and_claim_reserves,2934575,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total insurance policy and claim reserves
+FY2024,note7_net_realized_capital_gains_before_income_taxes,41174,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Net realized capital gains before income taxes
+FY2024,ops_amortization_deferred_reinsurance_gain,43526,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Amortization of deferred reinsurance gain
+FY2024,ops_amortization_of_imr,209,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Amortization of interest maintenance reserve
+FY2024,ops_annuity_benefits,28649,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Annuity benefits
+FY2024,ops_commission_expense_allowance_reinsurance_assumed,10292,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Commission and expense allowance on reinsurance assumed
+FY2024,ops_commissions_and_brokerage_expense,297015,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Commissions and brokerage expense
+FY2024,ops_commissions_and_brokerage_expense_combined_per_fy2024_filing,307307,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Commissions and brokerage expense
+FY2024,ops_commissions_expense_allowances_reinsurance_ceded,203491,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Commissions and expense allowances on reinsurance ceded
+FY2024,ops_considerations_supplementary_contracts_life_contingencies,0,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Considerations for supplementary contracts with life contingencies
+FY2024,ops_fit_expense_benefit,0,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,(Benefits) expenses for federal and foreign income taxes
+FY2024,ops_general_insurance_expenses,43188,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,General insurance expenses
+FY2024,ops_general_insurance_expenses_alt_per_fy2024_filing,42665,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,General insurance expenses
+FY2024,ops_increase_in_aggregate_reserves_life,859098,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Increase in aggregate reserves for life contracts
+FY2024,ops_insurance_taxes_licenses_fees,5389,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Insurance taxes, licenses and fees"
+FY2024,ops_interest_adjustments_contract_deposit_type_funds,-514,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Interest and adjustments on contract or deposit-type contract funds
+FY2024,ops_loss_from_operations_before_fit,-77856,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Loss from operations before federal and foreign income taxes
+FY2024,ops_miscellaneous_income,1258,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Miscellaneous income
+FY2024,ops_modco_assumed_adjustment,24472,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Modified coinsurance assumed adjustment
+FY2024,ops_net_income_loss,-36682,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net loss
+FY2024,ops_net_investment_income,306834,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Investment income (net of related expenses of $20,550 in 2025, $14,211 in 2024, and $10,379 in 2023)"
+FY2024,ops_net_loss_from_operations_before_realized_gains,-77856,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net loss from operations before net realized investment gains
+FY2024,ops_net_realized_investment_gains_net_of_tax,41174,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Net realized investment gains net of tax of $17,895 in 2025, $0 in 2024, and $0 in 2023"
+FY2024,ops_net_transfers_to_from_separate_accounts,-523,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net transfers to or (from) Separate Accounts
+FY2024,ops_premium_and_annuity_considerations_life_net,783928,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premium and annuity considerations for life contracts
+FY2024,ops_reinsurance_investment_credit,137309,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Reinsurance investment credit
+FY2024,ops_separate_accounts_net_gain_from_operations,0,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Separate Accounts net gain from operations excluding unrealized gains or losses
+FY2024,ops_surrender_benefits_and_withdrawals,61671,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Surrender benefits and withdrawals
+FY2024,ops_total_benefits_and_other_deductions,1441574,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total benefits and other deductions
+FY2024,ops_total_benefits_excl_reserve_increase_per_fy2024_filing,89806,USD thousands,raw/cross-section/ares/edgar/aspida-n4a-fy2024.htm,Total benefits
+FY2024,ops_total_benefits_incl_reserve_increase,948904,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total benefits
+FY2024,ops_total_premiums_and_other_revenues,1363718,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total premiums and other revenues
+FY2025,bs_aggregate_reserve_life_contracts,5059635,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Aggregate reserve for life contracts
+FY2025,bs_asset_valuation_reserve,103597,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Asset valuation reserve
+FY2025,bs_common_stock,2500,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Common stock, $100 par value per share; 25,000 shares authorized, issued and outstanding"
+FY2025,bs_funds_held_under_reinsurance_treaties_unauthorized,7567271,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Funds held under reinsurance treaties with unauthorized reinsurers
+FY2025,bs_insurance_policy_benefits_claim_reserves,7801,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Insurance policy benefits, claim reserves"
+FY2025,bs_interest_maintenance_reserve_liability,7670,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Interest maintenance reserve
+FY2025,bs_liability_deposit_type_contracts,819312,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Liability for deposit-type contracts
+FY2025,bs_paid_in_and_contributed_surplus,791666,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Paid-in and contributed surplus
+FY2025,bs_total_admitted_assets,14741977,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total admitted assets
+FY2025,bs_total_capital_and_surplus,635460,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total capital and surplus
+FY2025,bs_total_cash_and_invested_assets,14527069,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total cash and invested assets
+FY2025,bs_total_liabilities,14106517,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total liabilities
+FY2025,bs_total_liabilities_and_capital_and_surplus,14741977,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total liabilities and capital and surplus
+FY2025,bs_unassigned_deficit,-158706,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Unassigned deficit
+FY2025,cf_capital_and_paid_in_surplus,225000,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Capital and paid in surplus, less treasury stock"
+FY2025,cf_cash_provided_by_revenues,2986286,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Cash provided by revenues
+FY2025,cf_funds_withheld_premium_ceded,3836947,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Funds withheld premium ceded
+FY2025,cf_net_cash_from_operations,1941434,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net cash from operations
+FY2025,cf_net_deposits_on_deposit_type_contracts,811271,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net deposits on deposit-type contracts and other insurance liabilities
+FY2025,cf_net_investment_income_received,523813,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net investment income received
+FY2025,cf_premiums_and_policy_proceeds,2186172,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums and policy proceeds
+FY2025,cs_beginning_balance,433050,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Balance, December 31, 2024"
+FY2025,cs_capital_contributions,225000,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Capital contributions
+FY2025,cs_ceding_unrealized_gains_losses_reinsurance,-58327,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Ceding unrealized gains and losses on reinsurance transactions
+FY2025,cs_change_asset_valuation_reserve,-64492,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Change in asset valuation reserve
+FY2025,cs_change_net_deferred_income_tax,12437,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Change in net deferred income tax
+FY2025,cs_change_net_unrealized_capital_gains,86596,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Change in net unrealized capital gains less capital gains tax of $7,514"
+FY2025,cs_change_nonadmitted_assets,1206,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Change in nonadmitted assets
+FY2025,cs_ending_balance,635460,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Balance, December 31, 2025"
+FY2025,cs_net_loss,-10,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net loss
+FY2025,note2_gross_investment_income,634843,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Gross investment income
+FY2025,note2_investment_expenses,-20550,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Less: Investment expenses
+FY2025,note2_net_investment_income,614293,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net investment income
+FY2025,note2_net_realized_gains_on_bond_sales,11850,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Such sales generated net realized gains of $11,850, $965, and $470 for the years ended December 31, 2025, 2024, and 2023, respectively."
+FY2025,note2_otti_recognized,905,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"OTTI recognized during the years ended December 31, 2025, 2024, and 2023 was $905, $0, and $1,191, respectively."
+FY2025,note3_net_realized_gain_loss_on_derivatives,73896,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"At December 31, 2025, 2024, and 2023 the net realized gain/(loss) on derivatives was $73,896, $40,983, and $1,837, respectively."
+FY2025,note5_insurance_policy_benefits_direct,4191208,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Insurance policy benefits: Direct
+FY2025,note5_insurance_policy_benefits_reinsurance_assumed,1687444,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Insurance policy benefits: Reinsurance assumed
+FY2025,note5_insurance_policy_benefits_reinsurance_ceded,-3746861,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Insurance policy benefits: Reinsurance ceded
+FY2025,note5_net_insurance_policy_benefits,2131791,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net insurance policy benefits
+FY2025,note5_net_policy_benefits,48006,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net policy benefits
+FY2025,note5_net_premiums_earned,2211000,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net premiums earned
+FY2025,note5_policy_benefits_direct,84166,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Policy benefits: Direct
+FY2025,note5_policy_benefits_reinsurance_assumed,9823,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Policy benefits: Reinsurance assumed
+FY2025,note5_policy_benefits_reinsurance_ceded,-45983,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Policy benefits: Reinsurance ceded
+FY2025,note5_premiums_earned_direct,4413068,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums earned: Direct
+FY2025,note5_premiums_earned_reinsurance_assumed,1634879,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums earned: Reinsurance assumed
+FY2025,note5_premiums_earned_reinsurance_ceded,-3836947,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premiums earned: Reinsurance ceded
+FY2025,note6_ceded_annuity_reserves,7773758,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Ceded reserves
+FY2025,note6_deposit_type_total_gross_reserves,819312,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total gross reserves
+FY2025,note6_deposit_type_total_net_reserves,819312,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total net reserves
+FY2025,note6_gross_annuity_reserves_total,12836486,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total gross annuity reserves
+FY2025,note6_net_annuity_reserves_total,5062728,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total net annuity reserves
+FY2025,note6_total_insurance_policy_and_claim_reserves,5067436,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total insurance policy and claim reserves
+FY2025,note7_net_realized_capital_gains_before_income_taxes,76093,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net realized capital gains before income taxes
+FY2025,note7_tax_on_capital_gains,17895,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Tax on capital gains
+FY2025,ops_amortization_deferred_reinsurance_gain,0,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Amortization of deferred reinsurance gain
+FY2025,ops_amortization_of_imr,1756,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Amortization of interest maintenance reserve
+FY2025,ops_annuity_benefits,48006,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Annuity benefits
+FY2025,ops_commission_expense_allowance_reinsurance_assumed,54183,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Commission and expense allowance on reinsurance assumed
+FY2025,ops_commissions_and_brokerage_expense,316014,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Commissions and brokerage expense
+FY2025,ops_commissions_expense_allowances_reinsurance_ceded,242189,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Commissions and expense allowances on reinsurance ceded
+FY2025,ops_considerations_supplementary_contracts_life_contingencies,111,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Considerations for supplementary contracts with life contingencies
+FY2025,ops_fit_expense_benefit,-978,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,(Benefits) expenses for federal and foreign income taxes
+FY2025,ops_general_insurance_expenses,50980,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,General insurance expenses
+FY2025,ops_increase_in_aggregate_reserves_life,2131791,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Increase in aggregate reserves for life contracts
+FY2025,ops_insurance_taxes_licenses_fees,4670,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Insurance taxes, licenses and fees"
+FY2025,ops_interest_adjustments_contract_deposit_type_funds,11242,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Interest and adjustments on contract or deposit-type contract funds
+FY2025,ops_loss_from_operations_before_fit,-59186,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Loss from operations before federal and foreign income taxes
+FY2025,ops_miscellaneous_income,1673,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Miscellaneous income
+FY2025,ops_modco_assumed_adjustment,32400,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Modified coinsurance assumed adjustment
+FY2025,ops_net_income_loss,-10,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net loss
+FY2025,ops_net_investment_income,614293,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Investment income (net of related expenses of $20,550 in 2025, $14,211 in 2024, and $10,379 in 2023)"
+FY2025,ops_net_loss_from_operations_before_realized_gains,-58208,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net loss from operations before net realized investment gains
+FY2025,ops_net_realized_investment_gains_net_of_tax,58198,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,"Net realized investment gains net of tax of $17,895 in 2025, $0 in 2024, and $0 in 2023"
+FY2025,ops_net_transfers_to_from_separate_accounts,1472,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Net transfers to or (from) Separate Accounts
+FY2025,ops_premium_and_annuity_considerations_life_net,2211000,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Premium and annuity considerations for life contracts
+FY2025,ops_reinsurance_investment_credit,380357,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Reinsurance investment credit
+FY2025,ops_separate_accounts_net_gain_from_operations,39,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Separate Accounts net gain from operations excluding unrealized gains or losses
+FY2025,ops_surrender_benefits_and_withdrawals,163932,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Surrender benefits and withdrawals
+FY2025,ops_total_benefits_and_other_deductions,3162647,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total benefits and other deductions
+FY2025,ops_total_benefits_incl_reserve_increase,2354971,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total benefits
+FY2025,ops_total_premiums_and_other_revenues,3103461,USD thousands,raw/cross-section/ares/edgar/aspida-485bpos-fy2025.htm,Total premiums and other revenues

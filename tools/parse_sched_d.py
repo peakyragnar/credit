@@ -40,6 +40,20 @@ YEARS = {
         'sections': [('ICO', 486, 573, 31957334729),
                      ('ABS', 574, 596, 11091828006)],
     },
+    'ael2024': {
+        'pdf': 'raw/cross-section/brookfield/statutory/ael-4q2024.pdf',
+        'sha': 'a5803f7995cdd2965e6d3ee0c242ddc467354648bff5f4feb3adacc66ed6386a',
+        'era': 2, 'suffix': '_ael2024',
+        'body_marker': r'Stated\s+Contractual\s+Maturity\s+Date',
+        'sections': [('ALL', 490, 605, 38063028918)],  # BACV = 4th value on Total Bonds line (cost/rate/FV/par/BACV)
+    },
+    'ael2023': {
+        'pdf': 'raw/cross-section/brookfield/statutory/ael-4q2023.pdf',
+        'sha': 'd03f41a6fd17e3cbec38e5ab3f5f4b234f9b0a64a41e1c6d6a13dad3ddd444a5',
+        'era': 2, 'suffix': '_ael2023',
+        'body_marker': r'Stated\s+Contractual\s+Maturity\s+Date',
+        'sections': [('ALL', 531, 646, 37602643077)],  # BACV = 4th value on Total Bonds line
+    },
     '2023': {
         'pdf': 'raw/athene/athene-annuity-life-company/aaia-statutory-4q2023.pdf',
         'sha': 'ab3c3ca439c241533b1662f2d1c7e859d0b4a8914d13761f1f85889650fd1e8f',

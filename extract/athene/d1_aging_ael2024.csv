@@ -1,0 +1,139 @@
+table,bucket,split,n_positions,bacv
+age_total,1-2y,all,250,1735172277
+age_total,2-3y,all,456,4389864262
+age_total,3-5y,all,977,7317890645
+age_total,5-10y,all,1455,10853863522
+age_total,<1y,all,1439,10374631622
+age_total,>=10y,all,624,3314565462
+age_total,unknown,all,2,77041128
+age_by_source,1-2y,FE (public agency rating),199,761889715
+age_by_source,1-2y,PL (private letter),19,793596482
+age_by_source,1-2y,none (exempt/blank),31,165303932
+age_by_source,1-2y,"self/temporary (Z,YE,E,M,GI)",1,14382148
+age_by_source,2-3y,FE (public agency rating),418,4131084963
+age_by_source,2-3y,FM (financially modeled),1,7954541
+age_by_source,2-3y,PL (private letter),11,55886145
+age_by_source,2-3y,none (exempt/blank),22,174742188
+age_by_source,2-3y,"self/temporary (Z,YE,E,M,GI)",4,20196425
+age_by_source,3-5y,FE (public agency rating),854,5843435791
+age_by_source,3-5y,FM (financially modeled),13,17198604
+age_by_source,3-5y,PL (private letter),43,591700522
+age_by_source,3-5y,none (exempt/blank),64,848804891
+age_by_source,3-5y,"self/temporary (Z,YE,E,M,GI)",3,16750837
+age_by_source,5-10y,FE (public agency rating),983,7402371324
+age_by_source,5-10y,FM (financially modeled),47,38837878
+age_by_source,5-10y,PL (private letter),58,590734922
+age_by_source,5-10y,none (exempt/blank),350,2603651592
+age_by_source,5-10y,"self/temporary (Z,YE,E,M,GI)",17,218267806
+age_by_source,<1y,FE (public agency rating),1191,6351924344
+age_by_source,<1y,FM (financially modeled),13,25575026
+age_by_source,<1y,PL (private letter),140,3359345677
+age_by_source,<1y,none (exempt/blank),51,283527386
+age_by_source,<1y,"self/temporary (Z,YE,E,M,GI)",44,354259189
+age_by_source,>=10y,FE (public agency rating),479,2533268110
+age_by_source,>=10y,FM (financially modeled),51,55331678
+age_by_source,>=10y,PL (private letter),4,22197789
+age_by_source,>=10y,none (exempt/blank),88,685767885
+age_by_source,>=10y,"self/temporary (Z,YE,E,M,GI)",2,18000000
+age_by_source,unknown,FE (public agency rating),2,77041128
+age_by_id_type,1-2y,CUSIP,226,887504673
+age_by_id_type,1-2y,PPN (private placement),24,847667604
+age_by_id_type,2-3y,CUSIP,443,4311841399
+age_by_id_type,2-3y,PPN (private placement),13,78022863
+age_by_id_type,3-5y,CUSIP,913,6566714769
+age_by_id_type,3-5y,PPN (private placement),64,751175876
+age_by_id_type,5-10y,CUSIP,1243,8942290528
+age_by_id_type,5-10y,PPN (private placement),212,1911572994
+age_by_id_type,<1y,CUSIP,1295,7232853581
+age_by_id_type,<1y,PPN (private placement),144,3141778041
+age_by_id_type,>=10y,CUSIP,585,2929506927
+age_by_id_type,>=10y,PPN (private placement),39,385058535
+age_by_id_type,unknown,CUSIP,2,77041128
+age_by_naic,1-2y,NAIC 1,152,955525658
+age_by_naic,1-2y,NAIC 2,91,756150438
+age_by_naic,1-2y,NAIC 3,6,23496181
+age_by_naic,1-2y,NAIC 6,1,0
+age_by_naic,2-3y,NAIC 1,260,2432236414
+age_by_naic,2-3y,NAIC 2,183,1913678276
+age_by_naic,2-3y,NAIC 3,5,16264748
+age_by_naic,2-3y,NAIC 4,1,4007613
+age_by_naic,2-3y,NAIC 5,4,20196425
+age_by_naic,2-3y,NAIC 6,3,3480786
+age_by_naic,3-5y,NAIC 1,467,3857920821
+age_by_naic,3-5y,NAIC 2,492,3363319676
+age_by_naic,3-5y,NAIC 3,7,26157641
+age_by_naic,3-5y,NAIC 4,5,32967256
+age_by_naic,3-5y,NAIC 5,4,37288551
+age_by_naic,3-5y,NAIC 6,2,236700
+age_by_naic,5-10y,NAIC 1,925,6486800483
+age_by_naic,5-10y,NAIC 2,460,3894337043
+age_by_naic,5-10y,NAIC 3,39,284571681
+age_by_naic,5-10y,NAIC 4,19,112732304
+age_by_naic,5-10y,NAIC 5,6,74990793
+age_by_naic,5-10y,NAIC 6,6,431218
+age_by_naic,<1y,NAIC 1,774,5825677309
+age_by_naic,<1y,NAIC 2,557,3947813538
+age_by_naic,<1y,NAIC 3,90,537707238
+age_by_naic,<1y,NAIC 4,14,56109394
+age_by_naic,<1y,NAIC 5,3,6186896
+age_by_naic,<1y,NAIC 6,1,1137247
+age_by_naic,>=10y,NAIC 1,434,2246458362
+age_by_naic,>=10y,NAIC 2,162,924239283
+age_by_naic,>=10y,NAIC 3,15,84384282
+age_by_naic,>=10y,NAIC 4,9,52342512
+age_by_naic,>=10y,NAIC 5,4,7141023
+age_by_naic,unknown,NAIC 2,2,77041128
+maturity_total,1-3y,all,454,2451587984
+maturity_total,10-20y,all,1443,10026608681
+maturity_total,20-30y,all,1033,9414998480
+maturity_total,3-5y,all,875,6513503610
+maturity_total,5-7y,all,561,3510373699
+maturity_total,7-10y,all,458,3238756296
+maturity_total,<1y,all,144,1044661166
+maturity_total,>30y,all,232,1783046936
+maturity_total,"matured, still held",all,2,77041128
+maturity_total,perpetual/no stated maturity,all,1,2450938
+maturity_by_source,1-3y,FE (public agency rating),396,2045183495
+maturity_by_source,1-3y,PL (private letter),20,166037386
+maturity_by_source,1-3y,none (exempt/blank),28,171893086
+maturity_by_source,1-3y,"self/temporary (Z,YE,E,M,GI)",10,68474017
+maturity_by_source,10-20y,FE (public agency rating),1047,7094580852
+maturity_by_source,10-20y,FM (financially modeled),112,137834172
+maturity_by_source,10-20y,PL (private letter),120,1358877740
+maturity_by_source,10-20y,none (exempt/blank),151,1297495453
+maturity_by_source,10-20y,"self/temporary (Z,YE,E,M,GI)",13,137820464
+maturity_by_source,20-30y,FE (public agency rating),756,6675056399
+maturity_by_source,20-30y,FM (financially modeled),6,3733156
+maturity_by_source,20-30y,PL (private letter),22,618439071
+maturity_by_source,20-30y,none (exempt/blank),238,1991988756
+maturity_by_source,20-30y,"self/temporary (Z,YE,E,M,GI)",11,125781098
+maturity_by_source,3-5y,FE (public agency rating),790,5113372472
+maturity_by_source,3-5y,PL (private letter),31,985557789
+maturity_by_source,3-5y,none (exempt/blank),27,194956349
+maturity_by_source,3-5y,"self/temporary (Z,YE,E,M,GI)",27,219617000
+maturity_by_source,5-7y,FE (public agency rating),495,2265404148
+maturity_by_source,5-7y,PL (private letter),39,1020073174
+maturity_by_source,5-7y,none (exempt/blank),21,172959114
+maturity_by_source,5-7y,"self/temporary (Z,YE,E,M,GI)",6,51937263
+maturity_by_source,7-10y,FE (public agency rating),377,2025733580
+maturity_by_source,7-10y,FM (financially modeled),6,2861354
+maturity_by_source,7-10y,PL (private letter),23,784013144
+maturity_by_source,7-10y,none (exempt/blank),48,387921655
+maturity_by_source,7-10y,"self/temporary (Z,YE,E,M,GI)",4,38226563
+maturity_by_source,<1y,FE (public agency rating),119,628945577
+maturity_by_source,<1y,PL (private letter),17,384725889
+maturity_by_source,<1y,none (exempt/blank),8,30989700
+maturity_by_source,>30y,FE (public agency rating),143,1173246786
+maturity_by_source,>30y,FM (financially modeled),1,469045
+maturity_by_source,>30y,PL (private letter),3,95737344
+maturity_by_source,>30y,none (exempt/blank),85,513593761
+maturity_by_source,"matured, still held",FE (public agency rating),2,77041128
+maturity_by_source,perpetual/no stated maturity,FE (public agency rating),1,2450938
+wavg_age_by_source,4.36,FE (public agency rating),,27023974247
+wavg_age_by_source,7.79,FM (financially modeled),,144897727
+wavg_age_by_source,1.67,PL (private letter),,5413461537
+wavg_age_by_source,6.65,none (exempt/blank),,4761797874
+wavg_age_by_source,3.14,"self/temporary (Z,YE,E,M,GI)",,641856405
+wavg_age_by_id_type,4.47,CUSIP,,30870711877
+wavg_age_by_id_type,3.34,PPN (private placement),,7115275913
+wavg_age_total,4.26,all,,37985987790

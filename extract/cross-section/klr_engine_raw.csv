@@ -1,0 +1,375 @@
+period,metric,value,unit,source_file,anchor_quote
+FY2023,cash_and_cash_equivalents,19670881,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Cash and cash equivalents
+FY2022,cash_and_cash_equivalents,10948745,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Cash and cash equivalents
+FY2023,restricted_cash,225553405,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Restricted cash
+FY2022,restricted_cash,164810552,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Restricted cash
+FY2023,fixed_maturity_trading,99151767,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,"Fixed maturity securities, trading, at fair value"
+FY2022,fixed_maturity_trading,102682967,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,"Fixed maturity securities, trading, at fair value"
+FY2023,fixed_maturity_afs,2139456599,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,"Fixed maturity securities, available for sale, at fair value, net of allowance for credit losses"
+FY2022,fixed_maturity_afs,220647262,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,"Fixed maturity securities, available for sale, at fair value, net of allowance for credit losses"
+FY2023,other_investments,41102525,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Other investments
+FY2022,other_investments,33736825,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Other investments
+FY2023,derivative_assets,36677286,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Derivative assets
+FY2022,derivative_assets,12987450,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Derivative assets
+FY2023,funds_withheld_assets,2737664843,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Funds withheld assets
+FY2022,funds_withheld_assets,2950414208,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Funds withheld assets
+FY2023,total_cash_and_invested_assets,5299277306,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total cash and invested assets
+FY2022,total_cash_and_invested_assets,3496228009,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total cash and invested assets
+FY2023,accrued_investment_income,26548225,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Accrued investment income
+FY2022,accrued_investment_income,3757914,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Accrued investment income
+FY2023,accounts_receivable,86486970,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Accounts receivable
+FY2022,accounts_receivable,182898431,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Accounts receivable
+FY2023,reinsurance_recoverable,601698241,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Reinsurance recoverable
+FY2022,reinsurance_recoverable,363088866,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Reinsurance recoverable
+FY2023,deferred_acquisition_costs,66416602,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Deferred acquisition costs
+FY2022,deferred_acquisition_costs,77618271,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Deferred acquisition costs
+FY2023,total_assets,6080427344,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total assets
+FY2022,total_assets,4123591491,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total assets
+FY2023,future_policy_benefit_reserves,4717071945,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Future policy benefit reserves
+FY2022,future_policy_benefit_reserves,3016925128,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Future policy benefit reserves
+FY2023,deposit_liability,295626469,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Deposit liability
+FY2022,deposit_liability,374587792,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Deposit liability
+FY2023,derivative_liabilities,71538432,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Derivative liabilities
+FY2022,derivative_liabilities,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Derivative liabilities
+FY2023,embedded_derivative_liabilities,377317879,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Embedded derivative liabilities
+FY2022,embedded_derivative_liabilities,438040589,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Embedded derivative liabilities
+FY2023,deferred_ceding_commission,8147914,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Deferred ceding commission
+FY2022,deferred_ceding_commission,8236577,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Deferred ceding commission
+FY2023,deferred_profit_liabilities,42506505,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Deferred profit liabilities
+FY2022,deferred_profit_liabilities,49223160,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Deferred profit liabilities
+FY2023,funds_withheld_liabilities,581617667,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Funds withheld liabilities
+FY2022,funds_withheld_liabilities,361407860,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Funds withheld liabilities
+FY2023,due_to_affiliates,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Due to affiliates
+FY2022,due_to_affiliates,35240049,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Due to affiliates
+FY2023,accounts_payable_and_accrued_expenses,50653170,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Accounts payable and accrued expenses
+FY2022,accounts_payable_and_accrued_expenses,14506742,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Accounts payable and accrued expenses
+FY2023,total_liabilities,6144479981,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total liabilities
+FY2022,total_liabilities,4298167897,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total liabilities
+FY2023,share_capital,250000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Share capital
+FY2022,share_capital,250000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Share capital
+FY2023,additional_paid_in_capital,182119428,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Additional paid-in capital
+FY2022,additional_paid_in_capital,132119428,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Additional paid-in capital
+FY2023,retained_earnings_deficit,-266336892,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Retained earnings (deficit)
+FY2022,retained_earnings_deficit,-290596704,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Retained earnings (deficit)
+FY2023,accumulated_other_comprehensive_income,19914827,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Accumulated other comprehensive (loss) income
+FY2022,accumulated_other_comprehensive_income,-16349130,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Accumulated other comprehensive (loss) income
+FY2023,total_shareholders_equity,-64052637,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total shareholder’s equity
+FY2022,total_shareholders_equity,-174576406,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total shareholder’s equity
+FY2023,total_liabilities_and_equity,6080427344,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total liabilities and shareholder’s equity
+FY2022,total_liabilities_and_equity,4123591491,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total liabilities and shareholder’s equity
+FY2023,premium_income,31499556,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Premium income
+FY2022,premium_income,323847363,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Premium income
+FY2023,investment_income_funds_withheld,111113176,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Investment income from funds withheld
+FY2022,investment_income_funds_withheld,138338022,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Investment income from funds withheld
+FY2023,realized_losses_funds_withheld,-17459106,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Realized losses from funds withheld
+FY2022,realized_losses_funds_withheld,-8529326,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Realized losses from funds withheld
+FY2023,derivative_gains_losses_funds_withheld,7728138,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Derivatives gains (losses) from funds withheld
+FY2022,derivative_gains_losses_funds_withheld,-6861246,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Derivatives gains (losses) from funds withheld
+FY2023,unrealized_gains_losses_embedded_derivative,60722710,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Unrealized gains (losses) on embedded derivative
+FY2022,unrealized_gains_losses_embedded_derivative,-643645049,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Unrealized gains (losses) on embedded derivative
+FY2023,amortization_deferred_profit_liability,6716655,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Amortization of deferred profit liability
+FY2022,amortization_deferred_profit_liability,7724099,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Amortization of deferred profit liability
+FY2023,investment_management_expenses,-15445404,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Investment management expenses
+FY2022,investment_management_expenses,-12479200,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Investment management expenses
+FY2023,net_investment_income,128516699,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net investment income
+FY2022,net_investment_income,16101286,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net investment income
+FY2023,realized_gains_losses_investments_derivatives,-6667377,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Realized losses on investments and derivatives
+FY2022,realized_gains_losses_investments_derivatives,-2461211,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Realized losses on investments and derivatives
+FY2023,unrealized_gains_losses_investments,9129385,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Unrealized gains (losses) on investments
+FY2022,unrealized_gains_losses_investments,-14185145,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Unrealized gains (losses) on investments
+FY2023,unrealized_losses_derivatives,-61636572,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Unrealized losses on derivatives
+FY2022,unrealized_losses_derivatives,-2647566,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Unrealized losses on derivatives
+FY2023,total_revenues,254217860,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total revenues (losses)
+FY2022,total_revenues,-204797973,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total revenues (losses)
+FY2023,claims_and_other_insurance_expenses,101826800,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Claims and other insurance expenses
+FY2022,claims_and_other_insurance_expenses,334958734,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Claims and other insurance expenses
+FY2023,interest_credited,136366525,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Interest credited to policyholder account balances and deposit liability expenses
+FY2022,interest_credited,29043643,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Interest credited to policyholder account balances and deposit liability expenses
+FY2023,amortization_deferred_acquisition_costs,7767036,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Amortization of deferred acquisition costs
+FY2022,amortization_deferred_acquisition_costs,43630204,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Amortization of deferred acquisition costs
+FY2023,amortization_deferred_commission,1897016,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Amortization of deferred commission
+FY2022,amortization_deferred_commission,2450048,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Amortization of deferred commission
+FY2023,net_foreign_exchange_gains_losses,-31979730,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net foreign exchange (gains) losses
+FY2022,net_foreign_exchange_gains_losses,1793430,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net foreign exchange (gains) losses
+FY2023,operating_expenses,14039102,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Operating expenses
+FY2022,operating_expenses,7742520,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Operating expenses
+FY2023,net_income_loss,24301111,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net income (loss)
+FY2022,net_income_loss,-624416552,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net income (loss)
+FY2023,oci_unrealized_gains_losses_afs,36222658,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Unrealized gains/(losses) on available for sale securities
+FY2022,oci_unrealized_gains_losses_afs,-16349130,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Unrealized gains/(losses) on available for sale securities
+FY2023,total_other_comprehensive_income_loss,36222658,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total other comprehensive income (loss)
+FY2022,total_other_comprehensive_income_loss,-16349130,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total other comprehensive income (loss)
+FY2023,total_comprehensive_income_loss,60523769,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total comprehensive income (loss) income
+FY2022,total_comprehensive_income_loss,-640765682,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Total comprehensive income (loss) income
+FY2023,cf_change_funds_withheld_assets,132745221,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Funds withheld assets
+FY2022,cf_change_funds_withheld_assets,-101130216,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Funds withheld assets
+FY2023,cf_change_future_policy_benefit_reserves,1700146817,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Future policy benefit reserves
+FY2022,cf_change_future_policy_benefit_reserves,736008747,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Future policy benefit reserves
+FY2023,cf_change_deposit_liability_operating,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Deposit liability
+FY2022,cf_change_deposit_liability_operating,-34206642,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Deposit liability
+FY2023,cf_change_funds_withheld_liabilities,220209807,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Funds withheld liabilities
+FY2022,cf_change_funds_withheld_liabilities,361407860,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Funds withheld liabilities
+FY2023,cf_net_cash_operating,1999675828,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net cash provided by operating activities
+FY2022,cf_net_cash_operating,425062461,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net cash provided by operating activities
+FY2023,cf_change_deposit_assets_and_liability_investing,1042821,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Change in deposit assets and liability
+FY2022,cf_change_deposit_assets_and_liability_investing,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Change in deposit assets and liability
+FY2023,cf_net_cash_investing,-1896704326,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net cash used in by investing activities
+FY2022,cf_net_cash_investing,-270668405,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net cash used in by investing activities
+FY2023,cf_net_cash_financing,-33506513,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net cash (used in) provided by financing activities
+FY2022,cf_net_cash_financing,739214,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Net cash (used in) provided by financing activities
+FY2023,cf_noncash_capital_contribution,50000000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Non-cash transaction – Capital contribution from Parent
+FY2022,cf_noncash_capital_contribution,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2023.pdf,Non-cash transaction – Capital contribution from Parent
+FY2024,cash_and_cash_equivalents,21658967,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Cash and cash equivalents
+FY2023,cash_and_cash_equivalents,19670881,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Cash and cash equivalents
+FY2024,restricted_cash,455147239,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Restricted cash
+FY2023,restricted_cash,225553405,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Restricted cash
+FY2024,fixed_maturity_trading,64599348,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,"Fixed maturity securities, trading, at fair value"
+FY2023,fixed_maturity_trading,99151767,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,"Fixed maturity securities, trading, at fair value"
+FY2024,fixed_maturity_afs,3611386500,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,"Fixed maturity securities, available for sale, at fair value, net of allowance for credit losses"
+FY2023,fixed_maturity_afs,2139456599,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,"Fixed maturity securities, available for sale, at fair value, net of allowance for credit losses"
+FY2024,other_investments,53475702,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Other investments
+FY2023,other_investments,41102525,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Other investments
+FY2024,derivative_assets,63816955,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Derivative assets
+FY2023,derivative_assets,36677286,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Derivative assets
+FY2024,funds_withheld_assets,2538240191,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Funds withheld assets
+FY2023,funds_withheld_assets,2737664843,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Funds withheld assets
+FY2024,total_cash_and_invested_assets,6808324902,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total cash and invested assets
+FY2023,total_cash_and_invested_assets,5299277306,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total cash and invested assets
+FY2024,accrued_investment_income,40716057,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Accrued investment income
+FY2023,accrued_investment_income,26548225,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Accrued investment income
+FY2024,accounts_receivable,120175744,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Accounts receivable
+FY2023,accounts_receivable,86486970,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Accounts receivable
+FY2024,reinsurance_recoverable,598000638,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Reinsurance recoverable
+FY2023,reinsurance_recoverable,601698241,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Reinsurance recoverable
+FY2024,deferred_acquisition_costs,73428859,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Deferred acquisition costs
+FY2023,deferred_acquisition_costs,66416602,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Deferred acquisition costs
+FY2024,total_assets,7640646200,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total assets
+FY2023,total_assets,6080427344,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total assets
+FY2024,future_policy_benefit_reserves,6066039676,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Future policy benefit reserves
+FY2023,future_policy_benefit_reserves,4717071945,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Future policy benefit reserves
+FY2024,deposit_liability,233908996,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Deposit liability
+FY2023,deposit_liability,295626469,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Deposit liability
+FY2024,derivative_liabilities,273310778,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Derivative liabilities
+FY2023,derivative_liabilities,71538432,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Derivative liabilities
+FY2024,embedded_derivative_liabilities,387692017,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Embedded derivative liabilities
+FY2023,embedded_derivative_liabilities,377317879,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Embedded derivative liabilities
+FY2024,deferred_ceding_commission,8083153,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Deferred ceding commission
+FY2023,deferred_ceding_commission,8147914,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Deferred ceding commission
+FY2024,deferred_profit_liabilities,36903309,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Deferred profit liabilities
+FY2023,deferred_profit_liabilities,42506505,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Deferred profit liabilities
+FY2024,funds_withheld_liabilities,583515381,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Funds withheld liabilities
+FY2023,funds_withheld_liabilities,581617667,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Funds withheld liabilities
+FY2024,due_to_affiliates,190288,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Due to affiliates
+FY2023,due_to_affiliates,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Due to affiliates
+FY2024,accounts_payable_and_accrued_expenses,43290125,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Accounts payable and accrued expenses
+FY2023,accounts_payable_and_accrued_expenses,50653170,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Accounts payable and accrued expenses
+FY2024,total_liabilities,7632933723,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total liabilities
+FY2023,total_liabilities,6144479981,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total liabilities
+FY2024,share_capital,250000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Share capital
+FY2023,share_capital,250000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Share capital
+FY2024,additional_paid_in_capital,307119428,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Additional paid-in capital
+FY2023,additional_paid_in_capital,182119428,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Additional paid-in capital
+FY2024,retained_earnings_deficit,-303491711,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Retained earnings (deficit)
+FY2023,retained_earnings_deficit,-266336892,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Retained earnings (deficit)
+FY2024,accumulated_other_comprehensive_income,3834760,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Accumulated other comprehensive income
+FY2023,accumulated_other_comprehensive_income,19914827,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Accumulated other comprehensive income
+FY2024,total_shareholders_equity,7712477,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total shareholder’s equity
+FY2023,total_shareholders_equity,-64052637,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total shareholder’s equity
+FY2024,total_liabilities_and_equity,7640646200,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total liabilities and shareholder’s equity
+FY2023,total_liabilities_and_equity,6080427344,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total liabilities and shareholder’s equity
+FY2024,premium_income,47434591,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Premium income
+FY2023,premium_income,31499556,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Premium income
+FY2024,investment_income_funds_withheld,85847672,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Investment income from funds withheld
+FY2023,investment_income_funds_withheld,111113176,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Investment income from funds withheld
+FY2024,realized_losses_funds_withheld,-13535126,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Realized losses from funds withheld
+FY2023,realized_losses_funds_withheld,-17459106,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Realized losses from funds withheld
+FY2024,derivative_gains_losses_funds_withheld,15381205,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Derivatives gains (losses) from funds withheld
+FY2023,derivative_gains_losses_funds_withheld,7728138,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Derivatives gains (losses) from funds withheld
+FY2024,unrealized_gains_losses_embedded_derivative,-10374138,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Unrealized gains (losses) on embedded derivative
+FY2023,unrealized_gains_losses_embedded_derivative,60722710,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Unrealized gains (losses) on embedded derivative
+FY2024,amortization_deferred_profit_liability,5603196,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Amortization of deferred profit liability
+FY2023,amortization_deferred_profit_liability,6716655,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Amortization of deferred profit liability
+FY2024,investment_management_expenses,-17614157,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Investment management expenses
+FY2023,investment_management_expenses,-15445404,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Investment management expenses
+FY2024,net_investment_income,250938723,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net investment income
+FY2023,net_investment_income,128516699,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net investment income
+FY2024,realized_gains_losses_investments_derivatives,-18767637,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Realized losses on investments and derivatives
+FY2023,realized_gains_losses_investments_derivatives,-6667377,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Realized losses on investments and derivatives
+FY2024,unrealized_gains_losses_investments,3139131,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Unrealized gains (losses) on investments
+FY2023,unrealized_gains_losses_investments,9129385,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Unrealized gains (losses) on investments
+FY2024,unrealized_losses_derivatives,-189931587,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Unrealized losses on derivatives
+FY2023,unrealized_losses_derivatives,-61636572,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Unrealized losses on derivatives
+FY2024,total_revenues,158121873,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total revenues (losses)
+FY2023,total_revenues,254217860,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total revenues (losses)
+FY2024,claims_and_other_insurance_expenses,140319149,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Claims and other insurance expenses
+FY2023,claims_and_other_insurance_expenses,101826800,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Claims and other insurance expenses
+FY2024,interest_credited,139800180,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Interest credited to policyholder account balances and deposit liability expenses
+FY2023,interest_credited,136366525,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Interest credited to policyholder account balances and deposit liability expenses
+FY2024,amortization_deferred_acquisition_costs,17143978,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Amortization of deferred acquisition costs
+FY2023,amortization_deferred_acquisition_costs,7767036,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Amortization of deferred acquisition costs
+FY2024,amortization_deferred_commission,2256367,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Amortization of deferred commission
+FY2023,amortization_deferred_commission,1897016,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Amortization of deferred commission
+FY2024,net_foreign_exchange_gains_losses,-125894284,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net foreign exchange (gains) losses
+FY2023,net_foreign_exchange_gains_losses,-31979730,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net foreign exchange (gains) losses
+FY2024,operating_expenses,21651302,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Operating expenses
+FY2023,operating_expenses,14039102,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Operating expenses
+FY2024,net_income_loss,-37154819,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net income (loss)
+FY2023,net_income_loss,24301111,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net income (loss)
+FY2024,oci_unrealized_gains_losses_afs,-16080067,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Unrealized gains/(losses) on available for sale securities
+FY2023,oci_unrealized_gains_losses_afs,36222658,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Unrealized gains/(losses) on available for sale securities
+FY2024,total_other_comprehensive_income_loss,-16080067,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total other comprehensive income (loss)
+FY2023,total_other_comprehensive_income_loss,36222658,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total other comprehensive income (loss)
+FY2024,total_comprehensive_income_loss,-53234886,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total comprehensive income (loss) income
+FY2023,total_comprehensive_income_loss,60523769,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Total comprehensive income (loss) income
+FY2024,cf_change_funds_withheld_assets,136328908,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Funds withheld assets
+FY2023,cf_change_funds_withheld_assets,132745221,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Funds withheld assets
+FY2024,cf_change_future_policy_benefit_reserves,1348967731,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Future policy benefit reserves
+FY2023,cf_change_future_policy_benefit_reserves,1700146817,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Future policy benefit reserves
+FY2024,cf_change_funds_withheld_liabilities,1897714,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Funds withheld liabilities
+FY2023,cf_change_funds_withheld_liabilities,220209807,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Funds withheld liabilities
+FY2024,cf_net_cash_operating,1681961791,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net cash provided by operating activities
+FY2023,cf_net_cash_operating,1999675828,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net cash provided by operating activities
+FY2024,cf_change_deposit_assets_and_liability_investing,1378271,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Change in deposit assets and liability
+FY2023,cf_change_deposit_assets_and_liability_investing,1042821,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Change in deposit assets and liability
+FY2024,cf_net_cash_investing,-1495379871,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net cash used in investing activities
+FY2023,cf_net_cash_investing,-1896704326,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net cash used in investing activities
+FY2024,cf_paid_in_capital,45000000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Paid in capital
+FY2023,cf_paid_in_capital,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Paid in capital
+FY2024,cf_net_cash_financing,45000000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net cash (used in) provided by financing activities
+FY2023,cf_net_cash_financing,-33506513,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Net cash (used in) provided by financing activities
+FY2024,cf_noncash_capital_contribution,80000000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Non-cash transaction – Capital contribution from Parent
+FY2023,cf_noncash_capital_contribution,50000000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2024.pdf,Non-cash transaction – Capital contribution from Parent
+FY2025,cash_and_cash_equivalents,46560956,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Cash and cash equivalents
+FY2024,cash_and_cash_equivalents,21658967,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Cash and cash equivalents
+FY2025,restricted_cash,411220564,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Restricted cash
+FY2024,restricted_cash,455147240,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Restricted cash
+FY2025,fixed_maturity_trading,89923055,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,"Fixed maturity securities, trading, at fair value"
+FY2024,fixed_maturity_trading,64599348,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,"Fixed maturity securities, trading, at fair value"
+FY2025,fixed_maturity_afs,5473769373,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,"Fixed maturity securities, available for sale, at fair value, net of allowance for credit losses"
+FY2024,fixed_maturity_afs,3611386500,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,"Fixed maturity securities, available for sale, at fair value, net of allowance for credit losses"
+FY2025,other_investments,50287588,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Other investments
+FY2024,other_investments,53475702,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Other investments
+FY2025,derivative_assets,119411646,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Derivative assets
+FY2024,derivative_assets,63816955,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Derivative assets
+FY2025,funds_withheld_assets,2380429197,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Funds withheld assets
+FY2024,funds_withheld_assets,2538240191,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Funds withheld assets
+FY2025,total_cash_and_invested_assets,8571602379,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total cash and invested assets
+FY2024,total_cash_and_invested_assets,6808324903,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total cash and invested assets
+FY2025,accrued_investment_income,60593972,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Accrued investment income
+FY2024,accrued_investment_income,40716057,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Accrued investment income
+FY2025,accounts_receivable,68638593,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Accounts receivable
+FY2024,accounts_receivable,120175742,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Accounts receivable
+FY2025,reinsurance_recoverable,1005136111,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Reinsurance recoverable
+FY2024,reinsurance_recoverable,590435279,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Reinsurance recoverable
+FY2025,market_risk_benefit_asset,5407784,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Market risk benefit (“MRB”) asset
+FY2024,market_risk_benefit_asset,3540693,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Market risk benefit (“MRB”) asset
+FY2025,deferred_acquisition_costs,99874590,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Deferred acquisition costs
+FY2024,deferred_acquisition_costs,83927267,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Deferred acquisition costs
+FY2025,total_assets,9811253429,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total assets
+FY2024,total_assets,7647119941,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total assets
+FY2025,policyholder_account_balance,6073847404,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Policyholder account balance (“PAB”)
+FY2024,policyholder_account_balance,4699682626,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Policyholder account balance (“PAB”)
+FY2025,liability_for_future_policy_benefits,1435122263,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Liability for future policy benefits (“LFPB”)
+FY2024,liability_for_future_policy_benefits,1322080499,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Liability for future policy benefits (“LFPB”)
+FY2025,market_risk_benefit_liability,1723897,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Market risk benefit liability
+FY2024,market_risk_benefit_liability,1457881,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Market risk benefit liability
+FY2025,deposit_liability,197854244,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Deposit liability
+FY2024,deposit_liability,234689570,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Deposit liability
+FY2025,derivative_liabilities,484800606,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Derivative liabilities
+FY2024,derivative_liabilities,273310778,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Derivative liabilities
+FY2025,embedded_derivative_liabilities,311608306,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Embedded derivative liabilities
+FY2024,embedded_derivative_liabilities,387692017,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Embedded derivative liabilities
+FY2025,unearned_revenue_reserve,28877223,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Unearned Revenue Reserve
+FY2024,unearned_revenue_reserve,33278216,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Unearned Revenue Reserve
+FY2025,funds_withheld_liabilities,993027009,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Funds withheld liabilities
+FY2024,funds_withheld_liabilities,583515381,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Funds withheld liabilities
+FY2025,repurchase_agreement_liabilities,20262710,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Repurchase agreement liabilities
+FY2024,repurchase_agreement_liabilities,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Repurchase agreement liabilities
+FY2025,due_to_affiliates,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Due to affiliates
+FY2024,due_to_affiliates,190288,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Due to affiliates
+FY2025,accounts_payable_and_accrued_expenses,92200810,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Accounts payable and accrued expenses
+FY2024,accounts_payable_and_accrued_expenses,43290124,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Accounts payable and accrued expenses
+FY2025,total_liabilities,9639324472,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total liabilities
+FY2024,total_liabilities,7579187380,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total liabilities
+FY2025,share_capital,250000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Share capital
+FY2024,share_capital,250000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Share capital
+FY2025,additional_paid_in_capital,327672912,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Additional paid-in capital
+FY2024,additional_paid_in_capital,307119428,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Additional paid-in capital
+FY2025,retained_earnings_deficit,-284448367,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Retained deficit
+FY2024,retained_earnings_deficit,-301305787,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Retained deficit
+FY2025,accumulated_other_comprehensive_income,128454412,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Accumulated other comprehensive income
+FY2024,accumulated_other_comprehensive_income,61868920,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Accumulated other comprehensive income
+FY2025,total_shareholders_equity,171928957,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total shareholder’s equity
+FY2024,total_shareholders_equity,67932561,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total shareholder’s equity
+FY2025,total_liabilities_and_equity,9811253429,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total liabilities and shareholder’s equity
+FY2024,total_liabilities_and_equity,7647119941,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total liabilities and shareholder’s equity
+FY2025,premium_income,104573992,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Premium income
+FY2024,premium_income,47434591,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Premium income
+FY2025,investment_income_funds_withheld,86782583,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Investment income from funds withheld
+FY2024,investment_income_funds_withheld,85847672,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Investment income from funds withheld
+FY2025,realized_losses_funds_withheld,-38865947,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Realized losses from funds withheld
+FY2024,realized_losses_funds_withheld,-13535126,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Realized losses from funds withheld
+FY2025,derivative_gains_losses_funds_withheld,16622953,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Derivatives gain from funds withheld
+FY2024,derivative_gains_losses_funds_withheld,15381205,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Derivatives gain from funds withheld
+FY2025,unrealized_gains_losses_embedded_derivative,76083711,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Unrealized gains (losses) on embedded derivative
+FY2024,unrealized_gains_losses_embedded_derivative,-10374138,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Unrealized gains (losses) on embedded derivative
+FY2025,amortization_unearned_revenue_reserve,4400993,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Amortization of unearned revenue reserve
+FY2024,amortization_unearned_revenue_reserve,4165059,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Amortization of unearned revenue reserve
+FY2025,investment_management_expenses,-22875521,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Investment management expenses
+FY2024,investment_management_expenses,-17614157,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Investment management expenses
+FY2025,net_investment_income,336659213,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net investment income
+FY2024,net_investment_income,250938723,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net investment income
+FY2025,realized_gains_losses_investments_derivatives,10499276,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Realized gains (losses) on investments and derivatives
+FY2024,realized_gains_losses_investments_derivatives,-18767637,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Realized gains (losses) on investments and derivatives
+FY2025,unrealized_gains_losses_investments,-3025747,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Unrealized (losses) gains on investments
+FY2024,unrealized_gains_losses_investments,3139131,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Unrealized (losses) gains on investments
+FY2025,unrealized_losses_derivatives,-170961813,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Unrealized losses on derivatives
+FY2024,unrealized_losses_derivatives,-189931587,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Unrealized losses on derivatives
+FY2025,total_revenues,399893693,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total revenues
+FY2024,total_revenues,156683736,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total revenues
+FY2025,claims_and_other_insurance_expenses,217020702,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,"Claims and other insurance expenses (net remeasurement (gain) losses on LFPB: 2025 - $1,856,816, 2024 - ($2,133,692))"
+FY2024,claims_and_other_insurance_expenses,145135552,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,"Claims and other insurance expenses (net remeasurement (gain) losses on LFPB: 2025 - $1,856,816, 2024 - ($2,133,692))"
+FY2025,interest_credited,144079620,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Interest credited
+FY2024,interest_credited,151669370,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Interest credited
+FY2025,change_in_fair_value_of_mrb_net,-2156861,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,"Change in the fair value of MRB, net"
+FY2024,change_in_fair_value_of_mrb_net,-1813405,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,"Change in the fair value of MRB, net"
+FY2025,amortization_deferred_acquisition_costs,10629733,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Amortization of deferred acquisition costs
+FY2024,amortization_deferred_acquisition_costs,6815028,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Amortization of deferred acquisition costs
+FY2025,net_foreign_exchange_gains_losses,-10491536,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net foreign exchange gains
+FY2024,net_foreign_exchange_gains_losses,-125895668,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net foreign exchange gains
+FY2025,operating_expenses,23954615,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Operating expenses
+FY2024,operating_expenses,21651302,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Operating expenses
+FY2025,net_income_loss,16857420,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net income (loss)
+FY2024,net_income_loss,-40878443,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net income (loss)
+FY2025,oci_unrealized_gains_losses_afs,77785831,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Unrealized gains (losses) on available for sale securities
+FY2024,oci_unrealized_gains_losses_afs,-16080067,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Unrealized gains (losses) on available for sale securities
+FY2025,oci_remeasurement_lfpb_discount_rate,-10644552,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Remeasurement (losses) gains on LFPB attributable to discount rate
+FY2024,oci_remeasurement_lfpb_discount_rate,94340310,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Remeasurement (losses) gains on LFPB attributable to discount rate
+FY2025,oci_remeasurement_mrb_own_credit_risk,-555787,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Remeasurement (losses) gains on MRB attributable to own credit risk
+FY2024,oci_remeasurement_mrb_own_credit_risk,343079,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Remeasurement (losses) gains on MRB attributable to own credit risk
+FY2025,total_other_comprehensive_income_loss,66585492,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total other comprehensive income
+FY2024,total_other_comprehensive_income_loss,78603322,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total other comprehensive income
+FY2025,total_comprehensive_income_loss,83442912,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total comprehensive income
+FY2024,total_comprehensive_income_loss,37724879,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Total comprehensive income
+FY2025,cf_change_funds_withheld_assets,119176464,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Funds withheld assets
+FY2024,cf_change_funds_withheld_assets,136328908,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Funds withheld assets
+FY2025,cf_change_pab_and_lfpb,1487206542,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Policy account balance and liability for future policy benefits
+FY2024,cf_change_pab_and_lfpb,1258866132,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Policy account balance and liability for future policy benefits
+FY2025,cf_change_funds_withheld_liabilities,409511628,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Funds withheld liabilities
+FY2024,cf_change_funds_withheld_liabilities,1897714,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Funds withheld liabilities
+FY2025,cf_net_cash_operating,1752685695,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net cash provided by operating activities
+FY2024,cf_net_cash_operating,1601181219,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net cash provided by operating activities
+FY2025,cf_change_deposit_liability_investing,1799205,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Deposit liability
+FY2024,cf_change_deposit_liability_investing,2158845,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Deposit liability
+FY2025,cf_net_cash_investing,-1798704717,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net cash used in investing activities
+FY2024,cf_net_cash_investing,-1494599299,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net cash used in investing activities
+FY2025,cf_paid_in_capital,106731625,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Paid in capital
+FY2024,cf_paid_in_capital,45000000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Paid in capital
+FY2025,cf_return_of_capital,-100000000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Return of capital
+FY2024,cf_return_of_capital,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Return of capital
+FY2025,cf_repurchase_agreement_liability,20262710,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Repurchase agreement liability
+FY2024,cf_repurchase_agreement_liability,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Repurchase agreement liability
+FY2025,cf_net_cash_financing,26994335,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net cash (used in) provided by financing activities
+FY2024,cf_net_cash_financing,45000000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Net cash (used in) provided by financing activities
+FY2025,cf_noncash_capital_contribution,0,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Non-cash transaction – Capital contribution from shareholder
+FY2024,cf_noncash_capital_contribution,80000000,USD,raw/cross-section/blueowl/bermuda/klr-fs-2025.pdf,Non-cash transaction – Capital contribution from shareholder

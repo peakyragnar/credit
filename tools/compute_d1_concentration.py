@@ -16,9 +16,13 @@ from collections import defaultdict, Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / 'extract/athene/sched_d_part1_lines.csv'
-DEST = ROOT / 'extract/athene/d1_concentration.csv'
-D1_TOTAL = 158_852_395_199
+import sys
+SUFFIX = sys.argv[1] if len(sys.argv) > 1 else ''
+SRC = ROOT / f'extract/athene/sched_d_part1_lines{SUFFIX}.csv'
+DEST = ROOT / f'extract/athene/d1_concentration{SUFFIX}.csv'
+CONTROLS = {'': 158_852_395_199, '_ael2025': 43_049_162_735,
+            '_ael2024': 38_063_028_918, '_ael2023': 37_602_643_077}  # gate-banked BACV per book
+D1_TOTAL = CONTROLS[SUFFIX]
 NOID = '000000'
 
 USG_NAME = re.compile(r'UNITED STATES TREASURY|US TREASURY|U S TREASURY|TREASURY STRIP', re.I)

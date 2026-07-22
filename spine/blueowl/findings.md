@@ -11,3 +11,7 @@
 5. **The weakest rating in the cross-section.** Lincoln Benefit Life: AM Best B++ with NEGATIVE outlook (2024). The three US carriers (Guaranty Income LA, United Life IA, Lincoln Benefit NE) publish no statutory statements; no Kuvare GAAP exists publicly.
 
 6. **Model implication for the thesis.** If private-credit-insurance stress arrives, Blue Owl's exposure is fee revenue and a preferred, not policyholder liabilities — the purest test of whether the managers or the balance sheets carry the risk.
+
+7. **The pivot ran on negative equity.** KLR's audited GAAP equity was −$174.6M at YE2022 and −$64.1M at YE2023, rebuilt to +$171.9M by YE2025 — 1.8% of $9.8B assets. FY2024 as-reported (+$7.7M) was restated to +$67.9M under LDTI (ASU 2018-12); both claims preserved. Engine workbook: dossiers/blueowl/klr-annual-engine.xlsx (FY2022–25, 20 live checks, single-source columns).
+
+8. **A real misprint, caught by the footing gate.** klr-fs-2025's FY2024 cash-flow comparative prints operating cash $1,601,181,219 where its own component lines sum to $1,681,181,217 and the restatement note states $1,681,181,219 — an $80M typo (1,6**0**1 vs 1,6**8**1); ending cash only foots with 1,681. The kind of error the exactness discipline exists to find.

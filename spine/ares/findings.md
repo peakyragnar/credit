@@ -11,3 +11,5 @@
 5. **Thinnest disclosure of any platform with an SEC-registered product.** No public NAIC blanks (no Schedule D — position drill impossible), no consolidated Aspida Holdings GAAP (one-pager only: $31B assets, $2.4B non-GAAP equity at 3/31/26), zero Aspida data in Ares 10-Qs, and Aspida Re Cayman Ltd (rated Jan 2026) publishes nothing.
 
 6. **The runnable channel just opened.** Aspida began issuing funding agreements in 2025 — the same channel that is 27% of reserves at Athene, starting from zero at the fastest-growing platform.
+
+7. **The engine foots — and shows a machine built for scale, not earnings.** Statutory net loss −$48.8M → −$36.7M → −$0.01M (exact breakeven in year three); every dollar of C&S growth ($115M → $635M) is capital contributions, not retained earnings. Note-5 premium machine FY2025: direct $4.41B + assumed $1.63B − ceded $3.84B = net $2.21B. One source print inconsistency logged: FY2023 net loss (48,758) in operations vs (48,760) in the C&S rollforward — $2k, in both filings. Engine workbook: dossiers/ares/aspida-annual-engine.xlsx (FY2023–25, 33 live checks).

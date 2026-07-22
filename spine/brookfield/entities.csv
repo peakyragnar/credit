@@ -5,7 +5,7 @@ name,jurisdiction,role_provisional,notes,naic_cocode,fein,lei,bma_registration,p
 "American Equity Investment Life Insurance Company",Iowa,carrier-lead,THE drillable carrier: full statutory statements incl CUSIP-level Schedule D (footed to the dollar; 5692 positions YE2025); assets $62.7B C&S $2.76B YE2025,,,,,"American Equity Investment Life Holding Company",100,ael-4q2025
 "Eagle Life Insurance Company",Iowa,carrier,AEL subsidiary writer,,,,,"American Equity Investment Life Insurance Company",100,ael-4q2025
 "American National Group Inc.",Delaware,holdco-intermediate,ANICO holdco; 10-K filer (ang-10k-fy2025),,,,,"Brookfield Wealth Solutions Ltd.",100,ang-10k-fy2025
-"American National Insurance Company",Texas,carrier,Assets $40.2B C&S $3.44B YE2025; full statutory statements published,,,,,"American National Group Inc.",100,anico-4q2025
+"American National Insurance Company",Texas,carrier,Assets $40.2B C&S $2.42B YE2025; full statutory statements published,,,,,"American National Group Inc.",100,anico-4q2025
 "North End Re Ltd.",Bermuda,reinsurer-pivot,Audited FS via BMA (equity $107M/$137M/$92M 2023-25 $k-scale per FS); NO FCR published — ECR coverage not publicly computable,,,,,"Brookfield Wealth Solutions Ltd.",,northendre-fs-2025
 "North End Re (Cayman) SPC",Cayman,reinsurer,Publishes nothing — opacity boundary,,,,,"Brookfield Wealth Solutions Ltd.",,bnt-20f-fy2025
 "Freestone Re Ltd.",Bermuda,reinsurer,Audited FS via BMA; no FCR,,,,,"Brookfield Wealth Solutions Ltd.",,freestonere-fs-2025
