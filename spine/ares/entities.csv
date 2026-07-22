@@ -1,0 +1,5 @@
+name,jurisdiction,role_provisional,notes,naic_cocode,fein,lei,bma_registration,parent_entity,parent_pct,sources
+"Ares Management Corporation",Delaware,manager-parent,NYSE: ARES; CIK 1176948; AIS = dedicated investment manager to Aspida,,,,,,,ares-10k-fy2025
+"Aspida Holdings Ltd.",Bermuda,holdco-top,per ares-10k-fy2025 (Aspida Life + Aspida Re under it); ownership via Ares-managed vehicles,,,,,"Ares-managed vehicles",,ares-10k-fy2025
+"Aspida Life Insurance Company",Michigan,insurer-lead-annuity,US life/annuity writer,,,,,"Aspida Holdings Ltd.",,ares-10k-fy2025
+"Aspida Life Re Limited",Bermuda,reinsurer-pivot,Bermuda reinsurer,,,,,"Aspida Holdings Ltd.",,ares-10k-fy2025

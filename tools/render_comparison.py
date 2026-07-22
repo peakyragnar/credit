@@ -262,12 +262,36 @@ same direction: both books look better on the regulatory ruler than the market o
 <div class="callout"><strong>Divergent funding risk:</strong> Athene's runnable share climbed 21% → 27.2%;
 GA's sits near 6–8% of net reserves. On liquidity structure, Athene is the outlier of the pair.</div>
 
-<h2>7 · What this pair says about the private-credit-insurance question</h2><hr class="rule">
-<p style="font-size:14.5px">Two data points don't make a cross-section, but they anchor one: the margin compression,
+<h2>7 · THE FIVE-PLATFORM CROSS-SECTION <span class="cnt">— every PE-insurance machine, one table (latest year-end)</span></h2><hr class="rule">
+<div class="tbl-scroll"><table>
+<thead><tr><th></th><th>Athene (Apollo)</th><th>Global Atlantic (KKR)</th><th>Brookfield (AEL+ANICO)</th><th>Ares (Aspida)</th><th>Blue Owl (Kuvare)</th></tr></thead>
+<tbody>
+<tr><td style="text-align:left">Ownership model</td><td>owns insurers</td><td>owns insurers</td><td>owns insurers</td><td>manages + fund-controls</td><td>owns manager + preferred only</td></tr>
+<tr><td style="text-align:left">Lead-carrier assets (statutory, YE25)</td><td>$282B (AAIA invested)</td><td>$112.5B (CWA) + $73.0B (FLIC)</td><td>$62.7B (AEL) + $40.2B (ANICO)</td><td>$14.7B (Aspida Life)</td><td>not public</td></tr>
+<tr><td style="text-align:left">Asset growth, 2yr</td><td>bond book +75%</td><td>NIA +25%</td><td>AEL +5%</td><td><strong>+378% (5×)</strong></td><td>not public</td></tr>
+<tr><td style="text-align:left">Private-letter share of bonds (position-level)</td><td><strong>25.3%</strong></td><td>n/a (no public filing)</td><td>9.7% (AEL, footed)</td><td>n/a</td><td>n/a</td></tr>
+<tr><td style="text-align:left">Identifier-private floor</td><td>31.0%</td><td>n/a</td><td>17.0%</td><td>n/a</td><td>n/a</td></tr>
+<tr><td style="text-align:left">Below-IG share (regulatory ruler)</td><td>2.9%</td><td>5.6% (NRSRO: <strong>10.0%</strong>)</td><td>5.1%</td><td>~7% one-pager basis</td><td>not public</td></tr>
+<tr><td style="text-align:left">Bond-book weighted age</td><td><strong>1.7y (unseasoned)</strong></td><td>n/a</td><td>4.0y (seasoned)</td><td>~new (5× growth)</td><td>n/a</td></tr>
+<tr><td style="text-align:left">Bermuda pivot ECR coverage (trend)</td><td>AARe 242→<strong>202%</strong></td><td>GA Re 171→235→<strong>205%</strong></td><td>not published (no FCR)</td><td>Aspida Re 214→206→<strong>199%</strong></td><td>KLR 207→190→<strong>176%</strong></td></tr>
+<tr><td style="text-align:left">Runnable funding-agreement exposure</td><td><strong>27% of reserves ↑</strong></td><td>~7% of reserves</td><td>modest (FHLB/FABN at AEL)</td><td>began issuing 2025 ↑</td><td>not public</td></tr>
+<tr><td style="text-align:left">Weakest public rating in fleet</td><td>A+ fleet</td><td>A fleet</td><td>A–/A fleet</td><td>A− fleet</td><td><strong>B++ negative (Lincoln Benefit)</strong></td></tr>
+</tbody></table></div>
+<div class="callout"><strong>What the cross-section actually shows:</strong> (1) <em>Every Bermuda pivot with a public
+FCR is compressing into the same 175–205% band</em> — five platforms, one direction; the sector's offshore cushion is
+thinning in unison. (2) <em>Athene is the opacity outlier</em>: 25.3% private-letter vs 9.7% at the only measurable peer,
+31% vs 17% identifier-private, and the youngest big book (1.7y vs 4.0y) — its "clean" loss history is the least
+informative of the five. (3) <em>Ares/Aspida is the growth outlier</em> (5× in two years on thin capital, half the book
+funds-withheld). (4) <em>Blue Owl is the model outlier</em> — pure fee extraction with the credit risk parked at carriers
+it doesn't own, including the group's only B++/negative. (5) Disclosure quality itself now ranks the sector:
+Brookfield/AEL best (full blanks), then Athene, GA, Ares, Blue Owl worst.</div>
+
+<h2>8 · What this cross-section says about the private-credit-insurance question</h2><hr class="rule">
+<p style="font-size:14.5px">Five platforms now sit on one measured ruler. The margin compression,
 the adjusted-vs-GAAP divergence, and the regulatory-vs-market grading gap now have <em>measured values at two
 companies</em> built by identical, gate-verified pipelines. Athene distinguishes itself by scale, private-letter
 concentration, and runnable funding; GA by a junkier market-rated book and thinner disclosure (no public
-position-level filings). Next names (Brookfield/AEL, Ares/Aspida, Blue Owl) drop into the same parsers.</p>
+position-level filings). The dispersion is now tradeable structure: opacity (Athene), growth (Aspida), model risk (Blue Owl), and the one common factor — Bermuda cushions thinning in unison.</p>
 
 <div class="footer">Sources &amp; verification: Athene — ATH supplements (Q4'25/Q1'26), AHL 10-K FY2025, AAIA
 statutory statements YE2023–25 footed to the dollar, NAIC C-1 factors. Global Atlantic — GALD supplements

@@ -60,20 +60,20 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 - `dossiers/athene/athene-quarterly-engine.xlsx`: 4 sheets, 77 live identity checks, formulas recalc in Excel; 2Q26 column ready. Finding 57 (spread compression + flow deceleration, quarterly).
 
 ## PHASE 1 — GLOBAL ATLANTIC (goal set 2026-07-22: full Athene-parity process + comparison artifact)
-### GA-1 `[~]` Document hunt — census sources, statutory statements, KKR filings, Bermuda FCR
-### GA-2 `[ ]` Census/spine — entities, cocodes, LEIs, Bermuda classes (BMA head start in findings: Ivy Re I/II/III, Ivy Peak I/II, GA Iris Re, Global Atlantic Assurance)
-### GA-3 `[ ]` L0 control totals — banked claims from primary docs
-### GA-4 `[ ]` Statutory bond drill — Schedule D through the parameterized parsers (if statements public), aging/concentration/source trends
-### GA-5 `[ ]` Quarterly + annual engine — KKR insurance-segment series 2023–2026, gated
-### GA-6 `[ ]` GA surfaces — dashboard artifact + engine workbook, verified
-### GA-7 `[ ]` THE COMPARISON — Athene vs Global Atlantic HTML artifact: 3 years quarterly + annual + all 2026 reported; same footed metrics side by side
+### GA-1 `[x]` Document hunt — DONE (36 docs, sha'd) — census sources, statutory statements, KKR filings, Bermuda FCR
+### GA-2 `[x]` Census/spine — DONE (25 entities) — entities, cocodes, LEIs, Bermuda classes (BMA head start in findings: Ivy Re I/II/III, Ivy Peak I/II, GA Iris Re, Global Atlantic Assurance)
+### GA-3 `[x]` L0 control totals — DONE (statutory L0 ×4 carriers, GALD supplement 1,018 gated cells) — banked claims from primary docs
+### GA-4 `[x]` Statutory bond drill — BLOCKED public-boundary: GA carriers publish no CUSIP-level schedules; quality via supplement two-ruler tables instead (NAIC 5.6% vs NRSRO 10.0% below-IG) — Schedule D through the parameterized parsers (if statements public), aging/concentration/source trends
+### GA-5 `[x]` Quarterly + annual engine — DONE (KKR lane 176 cells + ga-quarterly-engine.xlsx, 133 checks) — KKR insurance-segment series 2023–2026, gated
+### GA-6 `[x]` GA surfaces — DONE (dashboard artifact + workbook) — dashboard artifact + engine workbook, verified
+### GA-7 `[x]` THE COMPARISON — DONE (artifact live, 2023–1Q26) — Athene vs Global Atlantic HTML artifact: 3 years quarterly + annual + all 2026 reported; same footed metrics side by side
 
 ## PHASE 2 — THE CROSS-SECTION (goal set 2026-07-22: Brookfield, Ares, Blue Owl to Athene-format parity, in parallel; comparison extended to 5)
-### BF-1 `[~]` Brookfield Wealth Solutions (AEL, American National, North End Re) — doc hunt running
-### AR-1 `[~]` Ares / Aspida (Aspida Life, Aspida Life Re) — doc hunt running
-### OW-1 `[~]` Blue Owl / Kuvare (Guaranty Income, United Life, Lincoln Benefit, Kuvare Life Re) — doc hunt running
-### X-1 `[ ]` Per-platform: census + L0/capital extracts (gated) + dashboard artifact + findings ledger
-### X-2 `[ ]` Comparison v2: five columns on every metric that exists publicly for all; boundaries logged per platform
+### BF-1 `[x]` Brookfield — DONE: 16 docs sha'd; census 12 entities; **AEL YE2025 Schedule D through the Athene parser, foots TO THE DOLLAR (5,692 rows; ICO $31.96B + ABS $11.09B)**; PL 9.7% / floor 17.0% / below-IG 5.1% / wavg age 4.0y; AEL+ANICO statutory L0; North End Re/Freestone FS (no FCR — boundary); dashboard artifact + findings ledger
+### AR-1 `[x]` Ares/Aspida — DONE: 7 docs sha'd; Aspida Life L0 2023–25 (assets 5× to $14.7B, C&S $635M); Aspida Re ECR 214→206→199%; 49.7% funds-withheld; dashboard artifact + findings ledger
+### OW-1 `[x]` Blue Owl/Kuvare — DONE: 8 docs sha'd; manager-only model (KAM + $250M preferred); KLR ECR 207→190→176%; GILICO surplus-note circularity; US carriers publish nothing (boundary); dashboard artifact + findings ledger
+### X-1 `[x]` Per-platform census + extracts + dashboards + findings — DONE (extract/cross-section/{capital.csv, statutory_l0.csv, ael_bond_features.json})
+### X-2 `[x]` Comparison v2 — DONE: five-platform cross-section table + verdict in the comparison artifact; per-platform boundaries logged in the table itself
 
 ## New ideas (Michael, 2026-07-22 — parked, not yet scoped)
 - `[ ]` **Funding-map queries**: "which businesses does Athene/Apollo finance?" — issuer names now on 100% of D1 rows makes this queryable (the whale shelf was the first output); scope a proper query surface after D4 resolution.
@@ -96,6 +96,8 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 
 ## Evidence log
 *(append: date · item · what moved · commit)*
+- 2026-07-22 · GA-1..7 · Global Atlantic complete: 36 docs sha'd · census 25 · GALD parser 1,018 gated cells (13 quarters+FYs) · KKR lane 176 cells · FCR capital (GA Re 205%, GAAL 827%) · statutory L0 ×4 · workbook 133 checks · GA dashboard + COMPARISON artifacts · findings 1–7.
+- 2026-07-22 · BF/AR/OW + X-1/X-2 · Cross-section complete: 31 docs sha'd · AEL Schedule D foots exact through the Athene parser (second independent proof) · five-platform table live in comparison v2 · 3 dashboards published · findings ledgers ×3 · headline: all five Bermuda pivots with public FCRs compress into 176–205%; Athene is the opacity+youth outlier (PL 25.3% vs AEL 9.7%, age 1.7y vs 4.0y).
 - 2026-07-22 · J · The Read rendered + published (new stable artifact); dashboard header now links to it; STATUS points START HERE.
 - 2026-07-22 · I-v2 · four new mirrored sections (statutory features / mgmt NIA+quality / GAAP income-to-common / equity+ROE): parsers extended (788 suppl. cells + 99 annual cells, all gated), 316 live checks · finding 58 (1Q26 net loss −$1,973M common; equity −13% in Q; provisions −67% while book +75%).
 - 2026-07-22 · I-annual · `parse_10k_annual_tables.py` (66 cells FY2023–25, gates incl. quarters-vs-10-K cross-source exact) · Engine-FY sheet added (annual columns + live Σ-quarters audit column); 97 total live checks.

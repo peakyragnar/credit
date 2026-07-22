@@ -1,0 +1,23 @@
+platform,carrier,year,metric,value_kusd,source
+ares,aspida_life,2023,total_admitted_assets,3080855,aspida-n4a (EY-audited statutory FS via EDGAR)
+ares,aspida_life,2023,capital_surplus,352026,derived assets-liabilities
+ares,aspida_life,2024,total_admitted_assets,7711458,aspida-485bpos
+ares,aspida_life,2024,capital_surplus,433050,derived assets-liabilities
+ares,aspida_life,2025,total_admitted_assets,14741977,aspida-485bpos
+ares,aspida_life,2025,capital_surplus,635460,derived assets-liabilities
+brookfield,ael,2025,total_admitted_assets,62698148751,statutory statement (assets-liabilities identity)
+brookfield,ael,2025,capital_surplus,2760681104,statutory statement (assets-liabilities identity)
+brookfield,ael,2024,total_admitted_assets,61162140173,statutory statement (assets-liabilities identity)
+brookfield,ael,2024,capital_surplus,3213511366,statutory statement (assets-liabilities identity)
+brookfield,ael,2023,total_admitted_assets,59829070316,statutory statement (assets-liabilities identity)
+brookfield,ael,2023,capital_surplus,3730939531,statutory statement (assets-liabilities identity)
+brookfield,ael,2022,total_admitted_assets,58992338445,statutory statement (assets-liabilities identity)
+brookfield,ael,2022,capital_surplus,3692601781,statutory statement (assets-liabilities identity)
+brookfield,anico,2025,total_admitted_assets,40163116091,statutory statement (assets-liabilities identity)
+brookfield,anico,2025,capital_surplus,2418468725,statutory statement (assets-liabilities identity)
+brookfield,anico,2024,total_admitted_assets,35771441046,statutory statement (assets-liabilities identity)
+brookfield,anico,2024,capital_surplus,2263993638,statutory statement (assets-liabilities identity)
+brookfield,anico,2023,total_admitted_assets,29835484436,statutory statement (assets-liabilities identity)
+brookfield,anico,2023,capital_surplus,2362646613,statutory statement (assets-liabilities identity)
+brookfield,anico,2022,total_admitted_assets,24799084134,statutory statement (assets-liabilities identity)
+brookfield,anico,2022,capital_surplus,3522484463,statutory statement (assets-liabilities identity)

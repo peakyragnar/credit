@@ -1,0 +1,8 @@
+name,jurisdiction,role_provisional,notes,naic_cocode,fein,lei,bma_registration,parent_entity,parent_pct,sources
+"Blue Owl Capital Inc.",Delaware,manager-parent,NYSE: OWL; CIK 1823945; owns KAM (asset manager) since 2024-07-01 + minority stake in Kuvare US Holdings — does NOT own the insurers,,,,,,,owl-10k-fy2025
+"Kuvare Insurance Services LP (d/b/a Kuvare Asset Management)",Delaware,service-investment,acquired by Blue Owl 2024-07-01,,,,,"Blue Owl Capital Inc.",100,owl-10k-fy2025
+"Kuvare US Holdings, Inc.",Delaware,holdco-top,insurer holdco; Blue Owl minority investment only — ownership boundary logged,,,,,,,owl-10k-fy2025
+"Guaranty Income Life Insurance Company",Louisiana,insurer,Kuvare carrier,,,,,"Kuvare US Holdings, Inc.",,pending-verification
+"United Life Insurance Company",Iowa,insurer,Kuvare carrier,,,,,"Kuvare US Holdings, Inc.",,pending-verification
+"Lincoln Benefit Life Company",Nebraska,insurer,Kuvare carrier,,,,,"Kuvare US Holdings, Inc.",,pending-verification
+"Kuvare Life Re Ltd.",Bermuda,reinsurer,Bermuda reinsurer,,,,,"Kuvare US Holdings, Inc.",,pending-verification

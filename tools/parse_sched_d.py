@@ -32,6 +32,14 @@ YEARS = {
         # (filer cell rounding; cost/FV/par exact) — logged in runbook/exceptions.md
         'tolerance': 1,
     },
+    'ael2025': {
+        'pdf': 'raw/cross-section/brookfield/statutory/ael-4q2025.pdf',
+        'sha': '',
+        'era': 1, 'suffix': '_ael2025',
+        'body_marker': r'Payment\s+Due\s+at\s+Maturity',
+        'sections': [('ICO', 486, 573, 31957334729),
+                     ('ABS', 574, 596, 11091828006)],
+    },
     '2023': {
         'pdf': 'raw/athene/athene-annuity-life-company/aaia-statutory-4q2023.pdf',
         'sha': 'ab3c3ca439c241533b1662f2d1c7e859d0b4a8914d13761f1f85889650fd1e8f',
