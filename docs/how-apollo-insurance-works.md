@@ -260,6 +260,7 @@ That's why the map is built the way it is:
 | **Bermuda Class E / Class C** | BMA license tiers for long-term insurers, roughly by size. **Class E** = the top commercial tier (assets >$500M): AARe, ALRe. **Class C** = a smaller/lower tier — yet the multi-billion ACRA sidecars sit there; why is an open item, logged not guessed. |
 | **Holding age / seasoning** | Holding age = how long a bond has been on *this insurer's* books (Schedule D's "date acquired"). **Seasoned** = held long enough to have a track record: payments made, marks moved, ratings migrated. AAIA's book: 54% bought within the last 12 months — long-dated paper, almost none of it seasoned. Trap: "acquired" resets when an affiliate transfers the bond, so *young* can mean "recently moved," not "recently made." |
 | **Maturity ladder** | The book laid out by *when the money actually comes back*. AAIA's ladder is long: 70% repays beyond 10 years, ~1% inside a year — so cash for surrenders and rollovers must come from selling assets or from new inflows, not from bonds maturing on their own. |
+| **Issuer prefix (CUSIP6)** | The first 6 characters of a CUSIP or PPN identify the *issuer*; the last 3 identify the specific security. Grouping by prefix gives issuer-level concentration without needing to read names — but it's a **floor**: one corporate family can issue under many prefixes (AMAPS 1 and AMAPS 2 are separate prefixes, same family). Resolving prefixes into families is entity-resolution work (the D4 engine). |
 
 ---
 

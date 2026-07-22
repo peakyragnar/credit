@@ -14,7 +14,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 - **Gate:** every bucket sums back to the footed D1 BACV total, exact.
 - **Output:** dashboard panel + findings entries.
 
-### B. `[ ]` Coarse concentration panel — same snapshot
+### B. `[x]` Coarse concentration panel — same snapshot — DONE 2026-07-22
 - PBBD category mix (ICO / ABS / etc.) from the section codes already parsed.
 - Top-obligor concentration via issuer-name normalization (no external data; grouping quality logged, unresolved names go to OTHER, never guessed).
 - **Gate:** groups sum to footed total; normalization exceptions logged in `runbook/exceptions.md`.
@@ -51,4 +51,5 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 
 ## Evidence log
 *(append: date · item · what moved · commit)*
+- 2026-07-22 · B · description-column fix in `parse_sched_d.py` (quirk #10; reparse gated byte-identical by `tools/check_d1_reparse.py`, names now on 100% of rows) → `tools/compute_d1_concentration.py` → `extract/athene/d1_concentration.csv` (foots exactly) · findings 47–49 (whale shelf: top-10 = $22.7B, 10/12 PL + 2025 vintage; AP Grange anatomy verified vs raw p.5903) · dashboard concentration panel in ⑤ · glossary +1 (CUSIP6) · repo venv `.venv` with pypdf for parser runs.
 - 2026-07-22 · A · `tools/compute_d1_aging.py` → `extract/athene/d1_aging.csv` (6 tables + wavg, all foot to $158,852,395,199 exactly; f38 cross-check reproduced to the dollar) · findings 44–46 · dashboard aging panel in ⑤ · glossary +2 terms · exception logged (11271L-10-2 no-date/matured-2020) · runbook quirk #9. Follow-up spawned: Part 3 vendor parse (street vs affiliate on the Q4 surge) → parked list.

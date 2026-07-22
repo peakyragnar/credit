@@ -46,8 +46,12 @@ def parse_row(chunk):
         return None
     cusip = m.group(1)
     rest = chunk[m.end():]
-    dm = re.search(r'\.{4,}', rest)
-    desc = ' '.join(rest[:dm.start()].split()) if dm else ' '.join(rest[:60].split())
+    # description sits between the CUSIP's own separator dot-run and the next dot-run;
+    # skipping the leading run is required or desc is always empty (quirk #10)
+    lead = re.match(r'\s*\.{2,}\s*', rest)
+    ds = lead.end() if lead else 0
+    dm = re.search(r'\.{4,}', rest[ds:])
+    desc = ' '.join((rest[ds:ds + dm.start()] if dm else rest[ds:ds + 60]).split())
     d = DESIG_RE.search(rest)
     desig = f'{d.group(1)}.{d.group(2)}' if d else ''
     svo = (d.group(3) or '') if d else ''

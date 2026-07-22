@@ -1,0 +1,40 @@
+table,rank,key,name,section,n_positions,bacv
+top_issuers,1,G2964#,AP Grange Holdings LLC AP Grange Sr Secured Tranche A,ICO,1,3637502713
+top_issuers,2,35138C,Fox Hedge LP A,ABS,3,3225000000
+top_issuers,3,02300B,AMAPS 2 LLC AMAPS 2 LLC,ABS,2,2785000000
+top_issuers,4,L0187*,AP ALKAIOS (LUXEMBOURG) SARL AP ALKAIOS SENIOR,ABS,1,2636915762
+top_issuers,5,02300A,AMAPS 1 LLC AMAPS 1 LLC - Tranche A Note,ABS,2,2284500000
+top_issuers,6,G7741@,SVF II Finco Cayman LP SVF II Finco (Cayman) LP ...,ICO,3,2185452547
+top_issuers,7,86214@,Stonepeak Wallaby I Holdings L Stonepeak Wallaby I Holdings L,ICO,1,1660000000
+top_issuers,8,04941*,Atlas Securitized Products Fun ATLAS Funding 1 A1A,ABS,2,1532859518
+top_issuers,9,049400,"ATLAS SECURED ADVANCE FUNDING, ATLAS SECURED ADVANCE FUNDING,",ABS,1,1412877374
+top_issuers,10,408203,Hamlet Securitization Trust 20 HMLET 2020-CRE1 A .,ABS,6,1368553663
+top_issuers,11,09261H,Blackstone Private Credit Fund Senior Unsecured ...,ICO,8,1286578911
+top_issuers,12,00024D,AA Infrastructure Fund 2 LLC AAIF 2024-1A A1,ABS,8,1092475000
+top_issuers,13,55285H,MF1 2022-B1 LLC MF1 2022-B1 A,ABS,6,1068239543
+top_issuers,14,M6779*,MDC Capital LLC MDC Capital LLC,ICO,1,1035000000
+top_issuers,15,04940#,ATLAS SECURITIZED PRODUCTS FUN A,ABS,2,970000000
+top_issuers,16,G2973*,AP Falkor Senior Issuer Limite AP Falkor Senior Callable Note,ICO,2,884582876
+top_issuers,17,89103*,"Toreador Holdings, LLC Toreador LLC 5.89 31 Oct 43",ICO,1,867389000
+top_issuers,18,40440V,HPS Corporate Lending Fund Senior Unsecured,ICO,11,831096332
+top_issuers,19,049463,Atlas Warehouse Lending Co LP Senior Unsecured,ICO,4,788003944
+top_issuers,20,G1981*,CAYMAN UNIVERSE HOLDINGS LLC ADNOC ADNOC,ICO,1,691573122
+top_issuers,21,00229*,AP TUNDRA HOLDINGS LLC AP TUNDRA HOLDIN,ICO,1,685449652
+top_issuers,22,00240#,AP Fides HOLDINGS I LLC AP Fides HOLDINGS I LLC A-1 6,ICO,1,682295215
+top_issuers,23,09581C,Blue Owl Credit Income Corp Senior Unsecured,ICO,3,667939173
+top_issuers,24,20633K,Concord Music Royalties LLC TUNES 2024-1A A,ABS,2,647619135
+top_issuers,25,L0009*,AP Dolphin (Luxembourg) S.a.r. AP Dolphin,ABS,1,631660355
+top_issuers,26,04940J,Atlas Securitized Products Fun A1,ABS,1,600000000
+top_issuers,27,04020E,Ares Strategic Income Fund Senior Unsecured,ICO,6,598003740
+top_issuers,28,91835W,VMC Finance 2025-PV2 LLC Varde Partners Inc,ABS,6,592732760
+top_issuers,29,38179R,Golub Capital Private Credit F Senior Unsecured ...,ICO,5,580412523
+top_issuers,30,35632U,Donlen LLC Donlen OpCo Debt - Tranche B,ICO,1,562081181
+summary,,d1_total,,,,158852395199
+summary,,us_government,,,,14783432998
+summary,,no_identifier_bucket,,,,9872629887
+summary,,non_govt_identified,,,,134196332314
+summary,,n_issuer_prefixes_non_govt,,,,3775
+summary,,top10_bacv,,,,22728661577
+summary,,top25_bacv,,,,35558563835
+summary,,top50_bacv,,,,46744284367
+summary,,remainder_below_top30,,,,95704538275

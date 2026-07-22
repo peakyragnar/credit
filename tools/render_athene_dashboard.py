@@ -523,6 +523,66 @@ AGING_SECTION = (
 )
 
 
+# ---- B: issuer concentration (from footed d1_concentration.csv) ----
+_conc = list(csv.DictReader(open(ROOT / 'extract/athene/d1_concentration.csv')))
+_csum = {r['key']: int(r['bacv']) for r in _conc if r['table'] == 'summary'}
+_ctop = [r for r in _conc if r['table'] == 'top_issuers'][:12]
+
+def _cname(n):
+    t = n.split()
+    for k in range(len(t) // 2, 1, -1):
+        if t[:k] == t[k:2 * k]:
+            return ' '.join(t[k:])          # printed issuer+description repeat -> collapse
+    return n
+
+_pfx = {}
+for r in dlines:
+    _pfx.setdefault(r['cusip'][:6], []).append(r)
+
+def _pfx_meta(key):
+    rs = _pfx.get(key, [])
+    syms = {(r['svo_symbol'] or '').strip() for r in rs}
+    src = 'PL' if syms == {'PL'} else ('FE' if syms == {'FE'} else '/'.join(sorted(s or '·' for s in syms)))
+    yrs = sorted({r['acquired'][-4:] for r in rs if r['acquired']})
+    return src, (yrs[0] if len(yrs) == 1 else f'{yrs[0]}–{yrs[-1]}')
+
+_crows = []
+for r in _ctop:
+    src, yrs = _pfx_meta(r['key'])
+    hl = ' style="font-weight:600"' if src == 'PL' else ''
+    _crows.append(f'<tr{hl}><td>{r["rank"]}</td><td style="text-align:left">{html.escape(_cname(r["name"]))}</td>'
+                  f'<td>${int(r["bacv"])/1e9:,.2f}B</td><td>{r["n_positions"]}</td>'
+                  f'<td>{html.escape(src)}</td><td class="nm">{html.escape(yrs)}</td></tr>')
+
+_c_corp = _csum['non_govt_identified']
+_c_t10 = _csum['top10_bacv']
+CONC_SECTION = (
+    '<div class="cflabel" style="margin-top:26px"><span class="t">Concentration — who the money is actually lent to</span>'
+    '<span class="n">issuer = first 6 CUSIP/PPN characters · a floor: one family can span several prefixes (D4 resolves)</span></div>'
+    f'<p class="cfnote">Splitting the footed book three ways: US government ${_csum["us_government"]/1e9:,.1f}B · '
+    f'no-identifier paper ${_csum["no_identifier_bucket"]/1e9:,.1f}B (many issuers, unidentifiable by construction) · '
+    f'{_csum["n_issuer_prefixes_non_govt"]:,} identified non-government issuers ${_c_corp/1e9:,.1f}B. '
+    f'The tail is granular — but the head is heavy: <strong>the top 10 issuers hold ${_c_t10/1e9:,.1f}B '
+    f'({_c_t10/DTOT*100:.0f}% of the whole book)</strong>, and they are not household-name corporates.</p>'
+    '<div class="tbl-scroll"><table class="ptable"><thead><tr><th>#</th><th>Largest issuers (as printed in the filing)</th>'
+    '<th>BACV</th><th>Positions</th><th>Rating source</th><th>Acquired</th></tr></thead>'
+    f'<tbody>{"".join(_crows)}</tbody></table></div>'
+    '<div class="callout" style="margin-top:16px"><strong>The three lanes converge at the top of the book.</strong> '
+    'Ten of the twelve largest issuers are <strong>private-letter rated</strong>, nearly all <strong>acquired in 2025</strong>, '
+    'and the names are sponsor vehicles, several in Apollo\'s own naming convention — AP Grange, AP Alkaios, AMAPS, '
+    'AA Infrastructure, Atlas (Apollo\'s securitized-products platform) — alongside SoftBank Vision Fund II financing, '
+    'Stonepeak, and Blackstone\'s BCRED. The book\'s biggest single exposures are new, privately graded, and affiliate-adjacent: '
+    'concentration, opacity, and youth are the same positions.<br><br>'
+    '<strong>Anatomy of #1 (verified against the raw page):</strong> AP Grange Holdings — $3.64B in one tranche, BBB+ by '
+    'private letter, acquired <strong>12/22/2025</strong> (the spike day in the aging panel) at ~par, marked 6.2% above par '
+    'nine days later, with ~$230M of 2025 interest on the row — a full year\'s coupon at 6.5% despite the December acquisition '
+    'date. The economics ran all year: consistent with re-papering or affiliate transfer, not an open-market purchase. '
+    'Discriminator queued: Schedule D Part 3\'s vendor column.<br><br>'
+    '<strong>Floor caveat:</strong> prefix-level grouping understates families — AMAPS 1+2 ($5.1B) and the two Atlas shelves '
+    '($2.9B) are already visibly split. True family concentration needs the D4 obligor engine.</div>'
+)
+
+
 D1_SECTION = (
     '<div class="cflabel" style="margin-top:26px"><span class="t">D1 — every bond position, extracted and footed</span>'
     f'<span class="n">8,582 rows · both sections foot to the dollar</span></div>'
@@ -641,7 +701,7 @@ D5B_SECTION = (
 
 extras = {
  'step1': ('<div style="margin-top:18px"></div>' + CAPITAL_FLOW),
- 'step5': ASSET_SECTION + D1_SECTION + AGING_SECTION,
+ 'step5': ASSET_SECTION + D1_SECTION + AGING_SECTION + CONC_SECTION,
  'step3': ('<p class="cfnote" style="margin-top:18px"><strong>The 29 treaties behind those cards.</strong> Two families: 2018–2022 ModCo vintages (unauthorized status) and 2024+ funds-withheld coinsurance (reciprocal jurisdiction). The structure is readable from which column is populated — ModCo treaties fill the ModCo column; COFW treaties fill reserve credit + funds withheld. Business codes: IA individual annuities, FA funding agreements, VA variable, OA/OL other.</p>'
            + TREATY_TABLE + TREATY_FOOT
            + '<div class="callout"><strong>Mirror-check status:</strong> AARe publishes no unconsolidated statutory statement, so Iowa\'s ceded numbers cannot be line-item reconciled against Bermuda\'s assumed side from public documents. The FCR confirms the aggregate EBS picture (AARe eligible capital $30.6B vs required $15.2B). The treaty-level mirror is not publicly checkable — a measured opacity finding, logged not papered over.</div>'),
