@@ -499,6 +499,65 @@ def build_body():
             c.number_format = PCT_FMT
     row += 1
 
+    section('THE BRIDGE — SPREAD WORLD TO GAAP WORLD (published reconciliation, every step gated)')
+    r_bsre = row
+    put('SPREAD RELATED EARNINGS (from the reconciliation)', BLUE); vals('br_sre'); row += 1
+    put('   check: equals the income-engine SRE above', GREY)
+    check(lambda c: f'=IF({c}{r_bsre}="","n/a",IF({c}{r_bsre}={c}{r_srerep},"OK","FAIL"))'); row += 1
+    put('What GAAP adds back / strips out:', GREY); row += 1
+    rv = row
+    put('Realized gains (losses) ON SALE of AFS securities & mortgage loans', BLUE, 1); vals('br_realized_sale'); row += 1
+    put('Unrealized, allowances and other investment gains (losses)', BLUE, 1); vals('br_unreal'); row += 1
+    put('Change in fair value of reinsurance assets', BLUE, 1); vals('br_reins_fv'); row += 1
+    put('Offsets to investment gains (losses)', BLUE, 1); vals('br_offsets'); row += 1
+    r_igl = row
+    put('= Investment gains (losses), net of offsets', BOLD)
+    formula(lambda c: f'=IF({c}{rv}="","",SUM({c}{rv}:{c}{rv+3}))'); row += 1
+    r_iglrep = row
+    put('   reported (filed)', BLUE); vals('br_invgl_net'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_iglrep}="","n/a",IF({c}{r_igl}={c}{r_iglrep},"OK","FAIL"))'); row += 1
+    rn2 = row
+    put('Derivatives & embedded derivatives — indexed annuities', BLUE, 1); vals('br_deriv_ia'); row += 1
+    put('Non-operating change in funding agreements', BLUE, 1); vals('br_fa_nonop'); row += 1
+    put('Change in fair value of market risk benefits', BLUE, 1); vals('br_mrb_fv'); row += 1
+    put('Non-operating change in future policy benefits', BLUE, 1); vals('br_fpb_nonop'); row += 1
+    r_nol = row
+    put('= Non-operating change in insurance liabilities', BOLD)
+    formula(lambda c: f'=IF({c}{rn2}="","",SUM({c}{rn2}:{c}{rn2+3}))'); row += 1
+    r_nolrep = row
+    put('   reported (filed)', BLUE); vals('br_nonop_liab'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_nolrep}="","n/a",IF({c}{r_nol}={c}{r_nolrep},"OK","FAIL"))'); row += 1
+    ro = row
+    put('Integration, restructuring & other non-operating', BLUE, 1); vals('br_integration'); row += 1
+    put('Stock compensation expense', BLUE, 1); vals('br_stockcomp'); row += 1
+    put('Preferred stock dividends (add-back)', BLUE, 1); vals('br_pref2'); row += 1
+    put('NCI pre-tax income and VIE adjustments', BLUE, 1); vals('br_nci_pretax'); row += 1
+    r_tadj = row
+    put('= Total adjustments to pre-tax income', BOLD)
+    formula(lambda c: f'=IF({c}{r_iglrep}="","",{c}{r_iglrep}+{c}{r_nolrep}+SUM({c}{ro}:{c}{ro+3}))'); row += 1
+    r_tadjrep = row
+    put('   reported (filed)', BLUE); vals('br_total_adj'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_tadjrep}="","n/a",IF({c}{r_tadj}={c}{r_tadjrep},"OK","FAIL"))'); row += 1
+    r_bpt = row
+    put('= GAAP PRE-TAX INCOME (SRE + adjustments)', BOLD)
+    formula(lambda c: f'=IF({c}{r_bsre}="","",{c}{r_bsre}+{c}{r_tadjrep})'); row += 1
+    r_bptrep = row
+    put('   reported (filed)', BLUE); vals('br_pretax'); row += 1
+    put('   check', GREY)
+    check(lambda c: f'=IF({c}{r_bptrep}="","n/a",IF({c}{r_bpt}={c}{r_bptrep},"OK","FAIL"))'); row += 1
+    put('− Income tax', BLUE, 1); vals('br_tax'); row += 1
+    put('− NCI net income', BLUE, 1); vals('br_nci'); row += 1
+    put('− Preferred dividends (net of redemption adj.)', BLUE, 1); vals('br_pref'); row += 1
+    put('+ Preferred redemption adjustment', BLUE, 1); vals('br_pref_red'); row += 1
+    r_bnic = row
+    put('= NET INCOME TO COMMON — ties to the GAAP block above', BOLD)
+    formula(lambda c: f'=IF({c}{r_bptrep}="","",{c}{r_bptrep}-{c}{r_bnic-4}-{c}{r_bnic-3}-{c}{r_bnic-2}+{c}{r_bnic-1})'); row += 1
+    put('   check: equals GAAP net income to common', GREY)
+    check(lambda c: f'=IF({c}{r_bnic}="","n/a",IF({c}{r_bnic}={c}{r_nicrep},"OK","FAIL"))'); row += 1
+
 
 def sheet_header(title, note, extra_cols=()):
     global row

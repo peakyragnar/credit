@@ -134,6 +134,32 @@ EQ_ROWS = [
     ('eq_total_le', 'Total liabilities and equity'),
 ]
 
+BRIDGE_ROWS = [
+    ('br_ni_common', 'common stockholder'),
+    ('br_pref_red', 'Preferred stock redemption'),
+    ('br_pref', 'Preferred stock dividends'),
+    ('br_nci', 'noncontrolling interests'),
+    ('br_ni', ('Net income (loss)', 'Net income')),
+    ('br_tax', 'Income tax expense (benefit)'),
+    ('br_pretax', 'Income before income taxes'),
+    ('br_realized_sale', 'Realized gains (losses) on sale'),
+    ('br_unreal', 'Unrealized, allowances and other'),
+    ('br_reins_fv', 'Change in fair value of reinsurance assets'),
+    ('br_offsets', 'Offsets to investment gains'),
+    ('br_invgl_net', 'Investment gains (losses), net of offsets'),
+    ('br_deriv_ia', 'Change in fair values of derivatives and embedded derivatives'),
+    ('br_fa_nonop', 'Non-operating change in funding agreements'),
+    ('br_mrb_fv', 'Change in fair value of market risk benefits'),
+    ('br_fpb_nonop', 'Non-operating change in liability for future policy benefits'),
+    ('br_nonop_liab', 'Non-operating change in insurance liabilities and related derivatives'),
+    ('br_integration', 'Integration, restructuring and other non-operating items'),
+    ('br_stockcomp', 'Stock compensation expense'),
+    ('br_pref2', 'Preferred stock dividends'),
+    ('br_nci_pretax', 'Noncontrolling interests - pre-tax income and VIE adjustments'),
+    ('br_total_adj', 'Total adjustments to income before income taxes'),
+    ('br_sre', 'Spread related earnings'),
+]
+
 MONTH_Q = {'March 31': '1Q', 'June 30': '2Q', 'September 30': '3Q', 'December 31': '4Q'}
 
 
@@ -252,6 +278,10 @@ def parse_doc(tag, path):
     ez = te[te.find('Total liabilities'):]
     res.update(scan(ez, EQ_ROWS, nia_periods))
 
+    tb = find_page(r, 'Reconciliation of Earnings Measures')
+    tb = tb[tb.find('SPREAD RELATED EARNINGS') + 20:]        # skip the table title
+    res.update(scan(tb, BRIDGE_ROWS, quarters))
+
     ts = find_page(r, 'Spread Related Earnings')
     dollar_zone = ts[:ts.find('Average net invested assets')]
     # dollar rows come first; rate rows repeat the same labels afterwards
@@ -313,6 +343,21 @@ def main():
                 gate(g('gaap_ni') - g('gaap_ni_nci') == g('gaap_ni_ahl'), f'{tag} {q} NI-AHL')
                 gate(g('gaap_ni_ahl') - g('gaap_pref') + g('gaap_pref_red')
                      == g('gaap_ni_common'), f'{tag} {q} NI-common')
+            if g('br_sre') is not None:
+                gate(g('br_ni_common') - g('br_pref_red') + g('br_pref') + g('br_nci')
+                     == g('br_ni'), f'{tag} {q} bridge NI chain')
+                gate(g('br_ni') + g('br_tax') == g('br_pretax'), f'{tag} {q} bridge pretax')
+                gate(g('br_realized_sale') + g('br_unreal') + g('br_reins_fv') + g('br_offsets')
+                     == g('br_invgl_net'), f'{tag} {q} bridge inv-GL net')
+                gate(g('br_deriv_ia') + g('br_fa_nonop') + g('br_mrb_fv') + g('br_fpb_nonop')
+                     == g('br_nonop_liab'), f'{tag} {q} bridge non-op liabilities')
+                gate(g('br_invgl_net') + g('br_nonop_liab') + g('br_integration') + g('br_stockcomp')
+                     + g('br_pref2') + g('br_nci_pretax') == g('br_total_adj'), f'{tag} {q} bridge total adj')
+                gate(g('br_pretax') - g('br_total_adj') == g('br_sre'), f'{tag} {q} bridge to SRE')
+                if g('sre') is not None:
+                    gate(g('br_sre') == g('sre'), f'{tag} {q} bridge SRE == engine SRE')
+                if g('gaap_ni_common') is not None:
+                    gate(g('br_ni_common') == g('gaap_ni_common'), f'{tag} {q} bridge NI-common == GAAP page')
             if g('nia_total') is not None:
                 gate(g('nia_credit_sub') == g('nia_corporate') + g('nia_clo'), f'{tag} {q} NIA credit sub')
                 gate(g('nia_real_estate_sub') == g('nia_cml') + g('nia_rml') + g('nia_rmbs') + g('nia_cmbs'),
