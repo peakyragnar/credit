@@ -136,6 +136,11 @@ def main():
             if row['consideration'] == '' and row['par_value'] == '':
                 exceptions.append({'page': pg, 'chunk': ' '.join(ch.split())[:220]})
                 continue
+            if row['identity_ok'] == 'N' and row['consideration'] != '' and row['bacv_at_disposal'] != '':
+                row['total_gl'] = row['consideration'] - row['bacv_at_disposal']
+                row['realized_gl'] = row['total_gl'] - (row['fx_gl'] if row['fx_gl'] != '' else 0)
+                row['otti'] = ''; row['amort_accretion'] = ''; row['unrealized_val_change'] = ''
+                row['identity_ok'] = 'D'
             row['page'] = pg
             rows.append(row)
     with open(ROOT / 'extract/athene/sched_d_part4_disposals.csv', 'w', newline='') as f:
