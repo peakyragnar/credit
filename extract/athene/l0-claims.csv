@@ -63,3 +63,29 @@ aare_bscr_ratio,202,PCT,EBS,AARe (PY 242%),2025-12-31,athene-bermuda-fcr-2025,Se
 alre_ebs_capital,18622,USD_M,EBS,ALRe eligible capital (PY 23939),2025-12-31,athene-bermuda-fcr-2025,Section 8b(i) ECR and MSM table,2026-04,318949f0ae8329b1c2e28b2d0f04a983da9eeb26c1e752eb263427d0801bd314
 alre_ecr_required,6026,USD_M,EBS,ALRe (PY 5283),2025-12-31,athene-bermuda-fcr-2025,Section 8b(i) ECR and MSM table,2026-04,318949f0ae8329b1c2e28b2d0f04a983da9eeb26c1e752eb263427d0801bd314
 alre_bscr_ratio,309,PCT,EBS,ALRe (PY 453%),2025-12-31,athene-bermuda-fcr-2025,Section 8b(i) ECR and MSM table,2026-04,318949f0ae8329b1c2e28b2d0f04a983da9eeb26c1e752eb263427d0801bd314
+sis_issuer_credit_obligations,85388493721,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 1.18,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_abs_total,73463901478,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 2.04,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_abs_financial_self_liquidating,58721404736,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 2.01,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_abs_financial_not_self_liquidating,10088784617,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 2.02,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_abs_nonfinancial,4653712125,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 2.03,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_corporate_bonds,40883044785,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 1.07,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_us_govt,14783432998,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 1.01,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_bonds_issued_by_funds,11834873029,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 1.12,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_single_entity_backed,8711534737,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 1.09,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_project_finance,5634435971,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 1.06,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_bank_loans,2502024155,USD,SAP,AAIA (issued 1058120230 + acquired 1443903925),2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule lines 1.13-1.14,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_mortgages_residential,52096387976,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 5.02,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_mortgages_commercial,33644882171,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 5.03,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_mortgages_mezzanine,1004149885,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 5.04,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_schedule_ba_other_invested,17461797563,USD,SAP,AAIA gross (admitted 17387119006),2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 10,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_derivatives,5395752655,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 9,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_cash_and_st,9357351729,USD,SAP,AAIA,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 7.04,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+sis_total_invested_assets,282171785028,USD,SAP,AAIA gross,2025-12-31,aaia-statutory-4q2025,Summary Investment Schedule line 14,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+bonds_acquired_fy2025,97547231851,USD,SAP,AAIA (ICO 57642302246 + ABS 39904929605),FY2025,aaia-statutory-4q2025,Schedule D Verification line 2,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+bonds_disposed_fy2025,71600754660,USD,SAP,AAIA (ICO 41701399869 + ABS 29899354791),FY2025,aaia-statutory-4q2025,Schedule D Verification line 6,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+mortgages_acquired_fy2025,38403242920,USD,SAP,AAIA,FY2025,aaia-statutory-4q2025,Schedule B Verification line 2,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+mortgages_disposed_fy2025,12747768768,USD,SAP,AAIA,FY2025,aaia-statutory-4q2025,Schedule B Verification line 7,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+ba_begin_fy2025,11609085609,USD,SAP,AAIA,2024-12-31,aaia-statutory-4q2025,Schedule BA Verification line 1,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+ba_acquired_fy2025,9853471774,USD,SAP,AAIA,FY2025,aaia-statutory-4q2025,Schedule BA Verification line 2,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+pbbd_reclass_d_to_ba_ga,1648.5,USD_M,SAP,AAIA general account (pre-adoption BACV; SA adds 229.0),2025-01-01,aaia-statutory-4q2025,Note 2 Accounting Changes,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a
+reserve_error_correction,64.0,USD_M,SAP,AAIA — understatement of aggregate life reserves discovered 2025,FY2025,aaia-statutory-4q2025,Note 2 Accounting Changes,2026,6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a

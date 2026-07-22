@@ -223,8 +223,74 @@ Funds-withheld column total $65.5B of the $66.7B card (balance: Vermont captive 
 Premiums $35.2B of the $35.8B card (balance: US cessions $0.6B).
 8/8 footing gates pass in <span class="mono">extract/athene/treaties.csv</span>.</div>"""
 
+def usd(metric):
+    return float(claims[metric]['value']) / 1e6  # -> $M for USD-unit claims
+
+INV_TOTAL = usd('sis_total_invested_assets')
+inv_groups = [
+    ('Bonds — issuer credit', usd('sis_issuer_credit_obligations'), 'seg-annuity'),
+    ('Bonds — asset-backed (ABS)', usd('sis_abs_total'), 'seg-funding'),
+    ('Mortgage loans', usd('sis_mortgages_residential') + usd('sis_mortgages_commercial') + usd('sis_mortgages_mezzanine') - 106.892501, 'seg-acra'),
+    ('Schedule BA (funds/other)', usd('sis_schedule_ba_other_invested'), 'seg-athene'),
+    ('Cash + short-term', usd('sis_cash_and_st'), 'seg-life'),
+    ('Everything else (derivs, stocks, RE…)', INV_TOTAL - usd('sis_issuer_credit_obligations') - usd('sis_abs_total')
+       - (usd('sis_mortgages_residential') + usd('sis_mortgages_commercial') + usd('sis_mortgages_mezzanine') - 106.892501)
+       - usd('sis_schedule_ba_other_invested') - usd('sis_cash_and_st'), 'seg-ceded'),
+]
+BOND_TOTAL = usd('bonds_sched_d')
+bond_groups = [
+    ('Corporate bonds', usd('sis_corporate_bonds'), 'seg-annuity'),
+    ('Govt / munis / sovereign', usd('sis_us_govt') + 640.532566 + 34.712448 + 343.244069, 'seg-athene'),
+    ('Other issuer credit (funds, single-entity, project fin, loans…)',
+       usd('sis_issuer_credit_obligations') - usd('sis_corporate_bonds') - (usd('sis_us_govt') + 640.532566 + 34.712448 + 343.244069), 'seg-life'),
+    ('ABS — financial', usd('sis_abs_financial_self_liquidating') + usd('sis_abs_financial_not_self_liquidating'), 'seg-funding'),
+    ('ABS — non-financial', usd('sis_abs_nonfinancial'), 'seg-acra'),
+]
+
+def bfmt(vm): return f'${vm/1e3:,.1f}B'
+bridge_rows = []
+for label, beg, acq, disp, end in [
+    ('Bonds (Schedule D)', 130962.441664, usd('bonds_acquired_fy2025'), usd('bonds_disposed_fy2025'), usd('bonds_sched_d')),
+    ('Mortgages (Schedule B)', 60294.320216, usd('mortgages_acquired_fy2025'), usd('mortgages_disposed_fy2025'), 86745.420032),
+    ('Schedule BA', usd('ba_begin_fy2025'), usd('ba_acquired_fy2025'), 4417.190620, usd('sis_schedule_ba_other_invested')),
+]:
+    other = end - beg - acq + disp
+    bridge_rows.append(f'<tr><td>{label}</td><td>{bfmt(beg)}</td><td>+{bfmt(acq)}</td><td>−{bfmt(disp)}</td>'
+                       f'<td>{"+" if other>=0 else "−"}{bfmt(abs(other))}</td><td class="nm">{bfmt(end)}</td></tr>')
+BRIDGE_TABLE = ('<table class="ptable"><thead><tr><th>Book</th><th>Begin 2025</th><th>Acquired</th><th>Disposed</th>'
+                '<th>Itemized net*</th><th>End 2025</th></tr></thead><tbody>' + ''.join(bridge_rows) + '</tbody></table>'
+                "<p class=\"cfnote\">*Not a plug: the net of the verification schedules' remaining itemized lines "
+                '(discount accrual, FX, realized gains, amortization, OTTI, capitalized interest) — each extracted and '
+                'summing exactly to the printed ending balance. Mortgages row shown pre-valuation-allowance (−$0.11B to '
+                'statement value; $1 printed-rounding exception logged in runbook/exceptions.md).</p>')
+
+ASSET_SECTION = (
+    '<div class="cflabel" style="margin-top:22px"><span class="t">AAIA invested assets — what the money actually is</span>'
+    f'<span class="n">total {bfmt(INV_TOTAL)} · statutory, gross</span></div>'
+    + stackbar([(l, v, c) for l, v, c in inv_groups], INV_TOTAL)
+    + legend([(l, v, c) for l, v, c in inv_groups], INV_TOTAL)
+    + '<div class="cflabel" style="margin-top:18px"><span class="t">The $158.9B of "bonds", opened up</span>'
+    '<span class="n">foots to Schedule D exactly</span></div>'
+    + stackbar(bond_groups, BOND_TOTAL) + legend(bond_groups, BOND_TOTAL)
+    + '<div class="callout" style="margin-top:16px"><strong>What the split says:</strong> only 26% of the "bonds" are '
+    'plain corporates. 46% is asset-backed securities, and another ~$26B of the issuer-credit bucket is '
+    'structured-adjacent (bonds issued by funds, single-entity-backed, project finance). The portfolio is '
+    'predominantly structured/private credit wearing a bond label. And the mortgage book is majority '
+    '<strong>residential</strong> ($52.1B vs $33.6B commercial) — not the CRE-heavy book one might assume.</div>'
+    + '<div class="cflabel" style="margin-top:18px"><span class="t">FY2025 bridges — how each book moved</span>'
+    '<span class="n">verification schedules, all footed</span></div>'
+    + BRIDGE_TABLE
+    + '<div class="callout"><strong>The PBBD verdict (hard question #1, for AAIA): the +21% bond growth is real.</strong> '
+    'Note 2 disclosed the entire reclassification: $1.65B (GA) + $0.23B (SA) moved OUT of Schedule D into BA at '
+    'adoption — the canonical false signal is absent; adjusting for it, apples-to-apples growth is ~+22.8%, slightly '
+    '<em>higher</em> than reported. The growth is genuine origination: $97.5B of bonds and $38.4B of mortgages '
+    'acquired in one year (against $71.6B / $12.7B disposed — an actively churned book, ~55% annual disposal rate '
+    'on bonds).</div>'
+)
+
 extras = {
  'step1': ('<div style="margin-top:18px"></div>' + CAPITAL_FLOW),
+ 'step5': ASSET_SECTION,
  'step3': ('<p class="cfnote" style="margin-top:18px"><strong>The 29 treaties behind those cards.</strong> Two families: 2018–2022 ModCo vintages (unauthorized status) and 2024+ funds-withheld coinsurance (reciprocal jurisdiction). The structure is readable from which column is populated — ModCo treaties fill the ModCo column; COFW treaties fill reserve credit + funds withheld. Business codes: IA individual annuities, FA funding agreements, VA variable, OA/OL other.</p>'
            + TREATY_TABLE + TREATY_FOOT
            + '<div class="callout"><strong>Mirror-check status:</strong> AARe publishes no unconsolidated statutory statement, so Iowa\'s ceded numbers cannot be line-item reconciled against Bermuda\'s assumed side from public documents. The FCR confirms the aggregate EBS picture (AARe eligible capital $30.6B vs required $15.2B). The treaty-level mirror is not publicly checkable — a measured opacity finding, logged not papered over.</div>'),
