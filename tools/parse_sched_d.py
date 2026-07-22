@@ -74,15 +74,51 @@ def parse_row(chunk):
         return cells[i] if i < len(cells) and cells[i] is not None else ''
     rates = [float(x) for x in RATE_RE.findall(tail)]
     dates = DATE_RE.findall(tail)
+    # interest cells: between the when-paid code (after 2nd rate) and the first date
+    intr = ['', '']
+    m2 = list(re.finditer(r'\d{1,2}\.\d{3}', tail))
+    if len(m2) >= 2 and dates:
+        dpos = tail.find(dates[-2] if len(dates) >= 2 else dates[-1])
+        seg = tail[m2[1].end():dpos if dpos > m2[1].end() else len(tail)]
+        toks = seg.split()
+        # skip the when-paid code token and exactly ONE trailing padding token after it
+        j = 0
+        if j < len(toks) and re.fullmatch(r'[A-Z/]{1,6}', toks[j]):
+            j += 1
+            if j < len(toks) and re.fullmatch(r'\.{2,}', toks[j]):
+                j += 1
+        vals = []
+        while j < len(toks) and len(vals) < 2:
+            tok = toks[j]
+            if re.fullmatch(r'\.{2,}', tok):
+                nxt = toks[j+1] if j+1 < len(toks) else ''
+                if re.fullmatch(r'\(?\d[\d,]*\)?', nxt):
+                    vals.append(num(nxt)); j += 2; continue
+                vals.append(None); j += 1; continue
+            if re.fullmatch(r'\.*\(?\d[\d,]*\)?\.*', tok):
+                vals.append(num(tok.strip('.'))); j += 1; continue
+            j += 1
+        v2 = (vals + [None, None])[:2]
+        intr = [v2[0] if v2[0] is not None else '', v2[1] if v2[1] is not None else '']
+    # payment due at maturity: last money token after the maturity date
+    pay = ''
+    if dates:
+        after = tail[tail.rfind(dates[-1]) + len(dates[-1]):]
+        mm = re.findall(r'\(?\d[\d,]{2,}\)?', after)
+        if mm: pay = num(mm[-1])
     return {
         'cusip': cusip, 'description': desc[:80],
         'naic_designation': desig, 'equivalent': equiv(desig), 'svo_symbol': svo,
         'actual_cost': cell(0), 'par_value': cell(1),
         'fair_value': cell(2), 'bacv': cell(3),
+        'unrealized_val_change': cell(4), 'amort_accretion': cell(5),
+        'otti': cell(6), 'fx_change': cell(7),
         'stated_rate': rates[0] if rates else '',
         'effective_rate': rates[1] if len(rates) > 1 else '',
+        'interest_due_accrued': intr[0], 'interest_received': intr[1],
         'acquired': dates[-2] if len(dates) >= 2 else '',
         'maturity': dates[-1] if len(dates) >= 1 else '',
+        'payment_at_maturity': pay,
     }
 
 def main():
@@ -144,7 +180,9 @@ def main():
     with open(out, 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=['section','page','cusip','description','naic_designation','equivalent',
                                           'svo_symbol','actual_cost','par_value','fair_value','bacv',
-                                          'stated_rate','effective_rate','acquired','maturity'])
+                                          'unrealized_val_change','amort_accretion','otti','fx_change',
+                                          'stated_rate','effective_rate','interest_due_accrued','interest_received',
+                                          'acquired','maturity','payment_at_maturity'])
         w.writeheader(); w.writerows(all_rows)
 
     with open(ROOT / 'extract/athene/sched_d_part1_subtotals.csv', 'w', newline='') as f:

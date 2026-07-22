@@ -73,6 +73,11 @@ Stage 6 executed: 3 parallel cheap-model (haiku) verifiers over a stratified 145
 
 Bonus finding from the lane: the 000000-00-0 placeholder = bonds with NO identifier — 481 rows, $9.9B, private by construction. Combined with PPN symbols: identifier-based private floor = $49.3B (31.0% of bonds).
 
+
+## P&L columns — gate status (2026-07-21)
+
+Parser extended to capture per-position: unrealized valuation change, (amortization)/accretion, OTTI, FX change, interest due & accrued, interest received, payment at maturity. Money gates (BACV) still pass exactly. New-column status: **partially gated with structurally-explained residuals** — Part 1 lists only positions held at year-end, while the D-Verification totals span the full year including disposed positions. Residuals vs verification (OTTI −0.9M, FX −154.1M, unrealized −28.4M, amort −131.5M) and interest coverage (76.6% of NII bonds-collected) are the disposed-position share, to be closed exactly by the Schedule D Part 4 parse (pp 6073–6283 — which also carries per-disposal realized gain/loss). Not a plug: an assigned, testable residual. Quirk #8 for the parser: the when-paid code's trailing padding token creates a phantom blank cell (same disease as designation padding — third occurrence; rule: after any fixed-code column, consume exactly one padding token).
+
 ## Standing exceptions & resolutions
 
 See `exceptions.md`. Every exception resolved in any run gets generalized into a rule here — later runs inherit the scar tissue.
