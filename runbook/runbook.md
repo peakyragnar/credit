@@ -50,6 +50,20 @@ ACQUIRE → HASH → LOCATE → PARSE → GATE → VERIFY → CLAIMS → RENDER
 - Period backfill driver (same pipeline, list of periods).
 - XBRL extraction for GAAP tables that render poorly as text (first target: funding-agreement maturity ladder).
 
+
+## Schedule D parser — format quirks learned (D1, 2026-07-21)
+
+Seven iterations to exact footing; every rule traces to an observed quirk:
+1. **PPN identifiers use `#`, `@`, `*` in any position** (`54246#-AA-5`, `785592-B*-6`). A public-CUSIP charset silently drops ~$40B of private placements — the misses concentrate in exactly the private-credit categories.
+2. **Cells split across tokens**: dot-padding and value can be separate tokens ("..... 72,451,765"). Rule: pure-dots token followed by a bare number = one cell; followed by a dotted token = a true blank cell.
+3. **The designation cell's trailing padding must be fully consumed** — leaving even one orphan dot-run creates a phantom blank cell and shifts every money column left by one (BACV becomes FV — plausible-looking and wrong; only exact gates catch it).
+4. **Designation modifier is optional** ("6. *", "6. Z"): starred/symbol-only designations on written-down legacy paper.
+5. **Subtotal rows are space-separated, not dot-padded** — different number extraction than line rows; and the leading 10-digit code must be excluded from the numeric scan.
+6. **Subtotal hierarchy has rollup levels** (e.g. 160 = 151+152+153+154): gate against leaf categories and grand totals only; rollups always show parsed=0 in a reset-per-subtotal walk.
+7. Rows do NOT split across pages (filer pads pages) — cross-page continuation logic unnecessary for this filer; keep for robustness.
+
+Verification lens note: the near-miss trap in #3 is why gates demand exact equality — FV≈BACV for most bonds, so a tolerance gate would have accepted a systematically wrong column mapping.
+
 ## Standing exceptions & resolutions
 
 See `exceptions.md`. Every exception resolved in any run gets generalized into a rule here — later runs inherit the scar tissue.
