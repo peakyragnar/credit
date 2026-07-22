@@ -23,6 +23,18 @@ MONEY_RE = re.compile(r'\.{2,}\s?(\(?\d[\d,]{2,}\)?)\s')
 DATE_RE = re.compile(r'(\d{2}/\d{2}/\d{4})')
 RATE_RE = re.compile(r'\.{2,}(\d{1,2}\.\d{3})\b')
 
+EQUIV = {
+ '1.A':'AAA','1.B':'AA+','1.C':'AA','1.D':'AA-','1.E':'A+','1.F':'A','1.G':'A-',
+ '2.A':'BBB+','2.B':'BBB','2.C':'BBB-','3.A':'BB+','3.B':'BB','3.C':'BB-',
+ '4.A':'B+','4.B':'B','4.C':'B-','5.A':'CCC+','5.B':'CCC','5.C':'CCC-',
+ '6':'CC/C/D (default-adjacent)',
+ '1':'AAA to A-','2':'BBB range','3':'BB range','4':'B range','5':'CCC range',
+}
+
+def equiv(d):
+    d = (d or '').rstrip('.')
+    return EQUIV.get(d) or EQUIV.get(d.split('.')[0], '')
+
 def num(tok):
     neg = tok.startswith('(')
     v = int(re.sub(r'[^\d]', '', tok) or 0)
@@ -64,7 +76,7 @@ def parse_row(chunk):
     dates = DATE_RE.findall(tail)
     return {
         'cusip': cusip, 'description': desc[:80],
-        'naic_designation': desig, 'svo_symbol': svo,
+        'naic_designation': desig, 'equivalent': equiv(desig), 'svo_symbol': svo,
         'actual_cost': cell(0), 'par_value': cell(1),
         'fair_value': cell(2), 'bacv': cell(3),
         'stated_rate': rates[0] if rates else '',
@@ -130,7 +142,7 @@ def main():
 
     out = ROOT / 'extract/athene/sched_d_part1_lines.csv'
     with open(out, 'w', newline='') as f:
-        w = csv.DictWriter(f, fieldnames=['section','page','cusip','description','naic_designation',
+        w = csv.DictWriter(f, fieldnames=['section','page','cusip','description','naic_designation','equivalent',
                                           'svo_symbol','actual_cost','par_value','fair_value','bacv',
                                           'stated_rate','effective_rate','acquired','maturity'])
         w.writeheader(); w.writerows(all_rows)
