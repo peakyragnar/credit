@@ -55,11 +55,16 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 ### F. `[ ]` D4 obligor resolution + BDC engine
 - Reaches the untestable 94% of related-party flow; upgrades B's coarse buckets to true industry/sector + concentration.
 
+### I. `[x]` Quarterly engine workbook — DONE 2026-07-22 (Michael's stock-and-flow sheet, live)
+- 9 supplements fetched (manifest+sha); 2 clean docs parsed (`tools/parse_fin_supplement.py`, 384 cells, all cross-foot + overlap gates); 7 older docs glyph-encoded → decoder parked.
+- `dossiers/athene/athene-quarterly-engine.xlsx`: 4 sheets, 77 live identity checks, formulas recalc in Excel; 2Q26 column ready. Finding 57 (spread compression + flow deceleration, quarterly).
+
 ## New ideas (Michael, 2026-07-22 — parked, not yet scoped)
 - `[ ]` **Funding-map queries**: "which businesses does Athene/Apollo finance?" — issuer names now on 100% of D1 rows makes this queryable (the whale shelf was the first output); scope a proper query surface after D4 resolution.
 - `[ ]` **Peer normalization layer**: same footed metrics (PL share, private floor, aging, concentration, ROE tree, capital trends) computed identically across PE-insurance peers — KKR/Global Atlantic (already Phase 1), Brookfield/AEL, Ares/Aspida, Blue Owl — so quality is comparable, not narrative. This is the Phase-1+ payoff of the parameterized parsers.
 
 ## Parked small items (pull in opportunistically)
+- `[ ]` Supplement glyph decoder — recover 1Q24–3Q24 quarterly columns from the encoded-font supplements (CID subsets are monotonic; letters crack via known labels, digits pin via overlap quarters); extends the workbook left.
 - `[ ]` Schedule D Part 3 (acquisitions) parse — vendor column separates street purchases from affiliate transfers; discriminator for the Q4-2025 surge (finding 46). Now cheap: parser is year-parameterized and Part 3 pages are bookmarked in all three PDFs.
 - `[ ]` Cohort test run 2: 2024 PL cohort + FE control group; cross-ref exited-PL CUSIPs against Part 4/5 disposal buyers (did the bad letters exit via affiliates?).
 - `[ ]` YE2021/22 schedule hunt, other doors: state insurance department records requests; check AADE (Delaware) statements for the same era as a proxy lane.
@@ -72,6 +77,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 
 ## Evidence log
 *(append: date · item · what moved · commit)*
+- 2026-07-22 · I · 9 supplements fetched+hashed · parser w/ exact gates (2 clean docs, 384 cells, overlaps identical) · quarterly engine workbook (77 live checks, python-verified identities) · finding 57 · glossary +2.
 - 2026-07-22 · H · C-1 factors banked (Milliman 11/2021, sha) · `compute_letter_slip.py` (PL gate exact) → slip 2/3 = 376%/337% CAL bound, below-IG 7.0%/14.2% · run-stress $71B vs $11B + ratchet · dashboard panel in ⑥ · findings 55–56.
 - 2026-07-22 · G · 20 new L0 claims from 10-K (income/equity/expense stacks, cross-foots exact) · dashboard section ⑦ (engine waterfall + 6 return cards + levers callout) · glossary +3 (ROE/hurdle, AOCI, NCI realized return) · finding 54.
 - 2026-07-22 · C · doc hunt (4 fetched, 2 full + 2 partial-only, manifest+sha) · parser year-parameterized, era-2 quirks #11–14, 2025 regression byte-identical · gates 2025 exact / 2024 +$1 / 2023 −$327K assigned · `d1_trends.csv` footed · THE RESULT: PL 3.4× in 2yrs to 25.3%, FE −$5.1B absolute in 2025, quality prints flat; cohort run 1 mostly benign w/ violent tail (12-notch miss) · findings 50–53 · trends panel on dashboard.
