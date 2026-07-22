@@ -68,6 +68,13 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 ### GA-6 `[ ]` GA surfaces — dashboard artifact + engine workbook, verified
 ### GA-7 `[ ]` THE COMPARISON — Athene vs Global Atlantic HTML artifact: 3 years quarterly + annual + all 2026 reported; same footed metrics side by side
 
+## PHASE 2 — THE CROSS-SECTION (goal set 2026-07-22: Brookfield, Ares, Blue Owl to Athene-format parity, in parallel; comparison extended to 5)
+### BF-1 `[~]` Brookfield Wealth Solutions (AEL, American National, North End Re) — doc hunt running
+### AR-1 `[~]` Ares / Aspida (Aspida Life, Aspida Life Re) — doc hunt running
+### OW-1 `[~]` Blue Owl / Kuvare (Guaranty Income, United Life, Lincoln Benefit, Kuvare Life Re) — doc hunt running
+### X-1 `[ ]` Per-platform: census + L0/capital extracts (gated) + dashboard artifact + findings ledger
+### X-2 `[ ]` Comparison v2: five columns on every metric that exists publicly for all; boundaries logged per platform
+
 ## New ideas (Michael, 2026-07-22 — parked, not yet scoped)
 - `[ ]` **Funding-map queries**: "which businesses does Athene/Apollo finance?" — issuer names now on 100% of D1 rows makes this queryable (the whale shelf was the first output); scope a proper query surface after D4 resolution.
 - `[ ]` **Peer normalization layer**: same footed metrics (PL share, private floor, aging, concentration, ROE tree, capital trends) computed identically across PE-insurance peers — KKR/Global Atlantic (already Phase 1), Brookfield/AEL, Ares/Aspida, Blue Owl — so quality is comparable, not narrative. This is the Phase-1+ payoff of the parameterized parsers.
