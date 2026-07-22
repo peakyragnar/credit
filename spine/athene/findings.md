@@ -51,5 +51,17 @@ Working notes from the entity-map build. Each item is a finding or an open verif
 30. **Error correction disclosed**: $64.0M understatement of aggregate life reserves discovered during 2025 (Note 2). Small vs $110.6B, but a data point on controls.
 31. **FA maturity ladder: not extractable from the AHL 10-K text** (tables render poorly / live in XBRL). Open item — source it from the ISCL note tables or XBRL at L2. Logged, not estimated.
 
+## The asset drill — standing spec (agreed 2026-07-21)
+
+The structure buckets (Summary Investment Schedule) are NOT a public/private split; private credit cuts across corporates, both ABS buckets, bank loans, mortgages, and BA. Only the ~$15.8B of government paper is clearly public. The drill therefore proceeds by *classifying lines along the market-status axis*, in levels:
+
+- **D1 — line classification (~$243B, Schedule D Part 1 + B + BA line level):** tag every position by identifier type (CUSIP vs PPN vs none), private-placement/registration flags, and rating source (SVO vs filing-exempt vs private letter rating). Output: the honest private-credit share, per entity — currently only boundable, not known.
+- **D2 — quality and its source:** NAIC designation mix; PLR share (the NAIC found private ratings inflated up to 6 notches); affiliated-originator share (Apollo/MidCap/Atlas-originated paper identifiable by issuer name patterns + related-party flags).
+- **D3 — yield vs risk:** cross the classification against Schedule D yield/income columns — is the book earning private-credit spreads or IG spreads on opinion-marked paper? (F1 core.)
+- **D4 — obligor resolution:** map line items to actual borrowers (the resolution registry); intersect with BDC/CLO holdings for cross-holder mark dispersion. (F2 core; the moat.)
+- **Residential mortgage sub-drill:** $52.1B of resi whole loans — origination channel, geography, credit box (Schedule B detail + trends).
+
+Rule carried from the composition work: every level foots to the level above; market-status proportions are never estimated, only measured.
+
 ## Phase 1 bonus (parked)
 - BMA Class E declaration page lists Global Atlantic's entities: Ivy Re, Ivy Re II, Ivy Peak Co-Invest Re I/II, Global Atlantic Ivy Re III, GA Iris Re, Global Atlantic Assurance — a head start on the GA census.
