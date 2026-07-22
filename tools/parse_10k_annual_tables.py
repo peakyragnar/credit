@@ -26,6 +26,9 @@ FLOW_ROWS = [
     ('inflows_athene', 'Inflows attributable to Athene'),
     ('inflows_adip', 'Inflows attributable to ACRA noncontrolling interests'),
     ('inflows_ceded_3p', 'Inflows ceded to third-party reinsurers'),
+    ('outflows_athene', 'Outflows attributable to Athene'),
+    ('outflows_adip', 'Outflows attributable to ACRA noncontrolling interests'),
+    ('total_gross_outflows_check', 'Total gross outflows'),
 ]
 SRE_ROWS = [
     ('sre_fi_nii', 'Fixed income and other net investment income'),
@@ -94,6 +97,8 @@ def main():
         gate(g('inflows_athene') + g('inflows_adip') + g('inflows_ceded_3p')
              == g('total_gross_inflows'), f'{y} owner cut')
         gate(g('total_gross_inflows') + g('gross_outflows') == g('net_flows'), f'{y} net flows')
+        gate(g('outflows_athene') + g('outflows_adip') == g('total_gross_outflows_check')
+             == g('gross_outflows'), f'{y} outflow owner cut')
         gate(g('sre_nie') == g('sre_fi_nii') + g('sre_alt_nii'), f'{y} NIE sum')
         gate(g('sre_nis') == g('sre_nie') + g('sre_fees') + g('sre_cof'), f'{y} NIS chain')
         gate(g('sre') == g('sre_nis') + g('sre_opex') + g('sre_fin'), f'{y} SRE chain')
@@ -107,6 +112,10 @@ def main():
               'gross_outflows', 'net_flows', 'sre_cof', 'sre_nis', 'sre'):
         qsum = sum(Q.get((q, k), 0) for q in ('1Q25', '2Q25', '3Q25', '4Q25'))
         gate(qsum == res[('FY2025', k)], f'FY2025 {k}: quarters sum {qsum} != 10-K {res[("FY2025", k)]}')
+    # cross-source gate #2: supplement YTD full-year columns vs 10-K, both years
+    for (y, k), v in res.items():
+        if (y, k) in Q and y in ('FY2024', 'FY2025'):
+            gate(Q[(y, k)] == v, f'{y} {k}: supplement YTD {Q[(y, k)]} != 10-K {v}')
 
     with open(DEST, 'w', newline='') as f:
         w = csv.writer(f)

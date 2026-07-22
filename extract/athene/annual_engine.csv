@@ -9,6 +9,8 @@ FY2023,inflows_athene,43000
 FY2023,inflows_ceded_3p,0
 FY2023,net_flows,31753
 FY2023,other_spread,0
+FY2023,outflows_adip,-5105
+FY2023,outflows_athene,-28763
 FY2023,pga,10374
 FY2023,retail,35293
 FY2023,sre,3107
@@ -21,6 +23,7 @@ FY2023,sre_nie,9608
 FY2023,sre_nis,4030
 FY2023,sre_opex,-487
 FY2023,total_gross_inflows,65621
+FY2023,total_gross_outflows_check,-33868
 FY2024,flow_reins,5573
 FY2024,funding_agreements,28748
 FY2024,gross_inorganic,0
@@ -31,6 +34,8 @@ FY2024,inflows_athene,49084
 FY2024,inflows_ceded_3p,4071
 FY2024,net_flows,37534
 FY2024,other_spread,0
+FY2024,outflows_adip,-6221
+FY2024,outflows_athene,-27248
 FY2024,pga,918
 FY2024,retail,35764
 FY2024,sre,3221
@@ -43,6 +48,7 @@ FY2024,sre_nie,11750
 FY2024,sre_nis,4153
 FY2024,sre_opex,-467
 FY2024,total_gross_inflows,71003
+FY2024,total_gross_outflows_check,-33469
 FY2025,flow_reins,11171
 FY2025,funding_agreements,35375
 FY2025,gross_inorganic,1340
@@ -53,6 +59,8 @@ FY2025,inflows_athene,63236
 FY2025,inflows_ceded_3p,1750
 FY2025,net_flows,47910
 FY2025,other_spread,674
+FY2025,outflows_adip,-5803
+FY2025,outflows_athene,-29725
 FY2025,pga,751
 FY2025,retail,34127
 FY2025,sre,3361
@@ -65,3 +73,4 @@ FY2025,sre_nie,14325
 FY2025,sre_nis,4373
 FY2025,sre_opex,-452
 FY2025,total_gross_inflows,83438
+FY2025,total_gross_outflows_check,-35528

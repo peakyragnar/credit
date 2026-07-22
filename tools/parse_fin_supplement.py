@@ -100,6 +100,9 @@ def money_after(text, pos, n):
     vals = []
     for m in MONEY.finditer(text, pos):
         tok = m.group(0)
+        tail = text[m.end():m.end() + 5]
+        if re.match(r'\s?%|\s?bps', tail):
+            continue                                # Q/Q, Y/Y, YTD-delta token — not a value
         if m.group(2):
             vals.append(0)
         else:
@@ -115,6 +118,8 @@ def money_after(text, pos, n):
 def rates_after(text, pos, n):
     vals = []
     for m in RATE.finditer(text, pos):
+        if re.match(r'\s?bps', text[m.end():m.end() + 5]):
+            continue
         if m.group(2):
             vals.append(None)
         else:
@@ -128,6 +133,7 @@ def rates_after(text, pos, n):
 
 
 def scan(text, rows, quarters, mode='money'):
+    # 'quarters' may include trailing YTD period labels; None labels = parse-and-discard
     out = {}
     pos = 0
     for idx, row in enumerate(rows):
@@ -163,11 +169,14 @@ def scan(text, rows, quarters, mode='money'):
 def parse_doc(tag, path):
     r = PdfReader(str(ROOT / path))
     res = {}
+    # YTD pair: for a Q4 doc these are the two FULL YEARS; for a Q1 doc they
+    # equal the two 1Q columns (kept under gate labels, checked then dropped)
+    ytd = {'q4-2025': ['FY2024', 'FY2025'], 'q1-2026': ['GATE_1Q25', 'GATE_1Q26']}[tag]
 
     tf = find_page(r, 'Net Flows & Outflows Attributable to Athene by Type')
     qm = QTR.findall(tf[:400])[:5]
-    quarters = [f'{a}Q{b}' for a, b in qm]
-    if len(quarters) != 5:
+    quarters = [f'{a}Q{b}' for a, b in qm] + ytd
+    if len(quarters) != 7:
         sys.exit(f'{tag}: quarter header parse failed')
     res.update(scan(tf, FLOW_ROWS, quarters))
 
@@ -201,7 +210,7 @@ def main():
     all_res = {}
     for tag, path in DOCS:
         res, quarters, stock_periods = parse_doc(tag, path)
-        # within-doc gates, every quarter
+        # within-doc gates, every period (quarters AND full-year YTD columns)
         for q in quarters:
             g = lambda k: res[(q, k)]
             gate(g('retail') + g('flow_reins') + g('funding_agreements') + g('pga') + g('other_spread')
@@ -225,6 +234,24 @@ def main():
             gate(g('nrl_indexed') + g('nrl_fixed') == g('nrl_deferred_total'), f'{tag} {q} deferred sum')
             gate(g('nrl_deferred_total') + g('nrl_pga') + g('nrl_payout') + g('nrl_fa') + g('nrl_life_other')
                  == g('nrl_total'), f'{tag} {q} NRL stock sum')
+        # YTD gates
+        gkeys = sorted({k for (p, k) in res if p.startswith('GATE_')})
+        for gq in ('1Q25', '1Q26'):
+            for k in gkeys:
+                if (f'GATE_{gq}', k) in res and (gq, k) in res:
+                    gate(res[(f'GATE_{gq}', k)] == res[(gq, k)],
+                         f'{tag} YTD column mismatch {gq}/{k}')
+        res = {(p, k): v for (p, k), v in res.items() if not p.startswith('GATE_')}
+        if ('FY2025', 'net_flows') in res:
+            fy_qs = ('1Q25', '2Q25', '3Q25', '4Q25')
+            for k in sorted({k for (p, k) in res.items() if False} | {k for (p, k) in res if p == 'FY2025'}):
+                if k.endswith('_pct') or k.startswith('avg_nia') or k.startswith('nrl_') and k != 'nrl_begin':
+                    continue
+                if k in ('nrl_begin', 'nrl_end', 'acra_begin', 'acra_end'):
+                    continue        # stocks: YTD begin is Jan-1, not summable
+                qs = [res.get((q, k)) for q in fy_qs]
+                if all(v is not None for v in qs):
+                    gate(sum(qs) == res[('FY2025', k)], f'{tag} FY2025 {k} != sum of quarters')
         # cross-doc overlap gate
         for key, v in res.items():
             if key in all_res:
