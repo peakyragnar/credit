@@ -122,7 +122,13 @@ def stackbar(segs, total):
     parts = []
     for label, v, cls in segs:
         pct = 100 * v / total
-        inner = f'{pct:.0f}%' if pct >= 7 else ''
+        short = html.escape(label.split(' (')[0].split(' — ')[0])
+        if pct >= 13:
+            inner = f'{short} · {pct:.0f}%'
+        elif pct >= 7:
+            inner = f'{pct:.0f}%'
+        else:
+            inner = ''
         parts.append(f'<div class="seg {cls}" style="width:{pct:.3f}%" '
                      f'title="{html.escape(label)}: {fmt_b(v)} ({pct:.1f}%)">{inner}</div>')
     return f'<div class="stackbar">{"".join(parts)}</div>'
