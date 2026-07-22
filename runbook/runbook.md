@@ -64,6 +64,15 @@ Seven iterations to exact footing; every rule traces to an observed quirk:
 
 Verification lens note: the near-miss trap in #3 is why gates demand exact equality — FV≈BACV for most bonds, so a tolerance gate would have accepted a systematically wrong column mapping.
 
+
+## Verification lane — first run (D1, 2026-07-21)
+
+Stage 6 executed: 3 parallel cheap-model (haiku) verifiers over a stratified 145-row sample (all 45 positions ≥$400M, 35 PL rows, 15 empty-description rows, 50 random) — each independently re-extracting 10 fields from raw page text and diffing against parser output.
+
+**Result: 145/145 — zero true parser errors.** All 6 flags raised were fixture-builder artifacts: the fixture matched raw text by *first occurrence* of the identifier, which breaks for (a) the no-identifier placeholder `000000-00-0` (481 rows share it) and (b) multi-lot CUSIPs (98 CUSIPs appear 2–5 times — separate purchase lots, normal Schedule D). Rule for next run: fixtures must match by occurrence index (page + ordinal), not by identifier string.
+
+Bonus finding from the lane: the 000000-00-0 placeholder = bonds with NO identifier — 481 rows, $9.9B, private by construction. Combined with PPN symbols: identifier-based private floor = $49.3B (31.0% of bonds).
+
 ## Standing exceptions & resolutions
 
 See `exceptions.md`. Every exception resolved in any run gets generalized into a rule here — later runs inherit the scar tissue.
