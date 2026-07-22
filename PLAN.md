@@ -75,8 +75,12 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done (footed + on
 - `[ ]` Bermuda permitted-practices table.
 - `[ ]` Dossier emit + runbook v1 freeze (Phase-0 formal close).
 
+### J. `[x]` The Read — the verdict layer — DONE 2026-07-22
+- Michael's call: conclusions weren't apparent in the artifacts; the sheet wasn't driving the argument. New conclusions-first HTML surface (`tools/render_the_read.py` → `dossiers/athene/the-read.html`, stable artifact URL in STATUS): verdict, hypothesis scoreboard w/ badges, margin-cycle sparklines, seasoning clock (only 17.5% of book old enough to be informative), structural drift, 12 tripwires w/ trip levels, 3 alpha paths, falsifiers both directions. Every number from the footed extracts; regenerates after any re-run. Excel workbook remains the recalculating model; The Read is the reading layer.
+
 ## Evidence log
 *(append: date · item · what moved · commit)*
+- 2026-07-22 · J · The Read rendered + published (new stable artifact); dashboard header now links to it; STATUS points START HERE.
 - 2026-07-22 · I-v2 · four new mirrored sections (statutory features / mgmt NIA+quality / GAAP income-to-common / equity+ROE): parsers extended (788 suppl. cells + 99 annual cells, all gated), 316 live checks · finding 58 (1Q26 net loss −$1,973M common; equity −13% in Q; provisions −67% while book +75%).
 - 2026-07-22 · I-annual · `parse_10k_annual_tables.py` (66 cells FY2023–25, gates incl. quarters-vs-10-K cross-source exact) · Engine-FY sheet added (annual columns + live Σ-quarters audit column); 97 total live checks.
 - 2026-07-22 · I · 9 supplements fetched+hashed · parser w/ exact gates (2 clean docs, 384 cells, overlaps identical) · quarterly engine workbook (77 live checks, python-verified identities) · finding 57 · glossary +2.

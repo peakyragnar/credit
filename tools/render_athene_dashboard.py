@@ -213,6 +213,7 @@ TREATY_TABLE = (
 
 CONNECT = """
 <div class="callout" style="border-left-color:var(--acc)">
+<strong>The verdict layer lives at <a href="https://claude.ai/code/artifact/49e55676-3c62-473b-b52a-87e9dddba3a9">The Read</a></strong> — conclusions first, every claim numbered; this page is the evidence machine behind it.<br>
 <strong>How to read this page:</strong> the diagram below is the machine; the numbered badges on it are sections of this page, in order.
 Each section decomposes exactly one part of the picture and foots to it:
 <a href="#step1">① money in</a> →
