@@ -60,6 +60,8 @@ row = 1
 def put(label, font=BLACK, indent=0):
     global row
     c = ws.cell(row=row, column=1, value=('    ' * indent) + label)
+    if label.startswith('='):
+        c.data_type = 's'      # literal text — otherwise Excel reads '= …' as a formula -> #NAME?
     c.font = font
     return row
 
