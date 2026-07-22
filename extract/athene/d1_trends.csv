@@ -1,0 +1,52 @@
+year,dimension,bucket,n_positions,bacv
+2023,total,all,7487,75192553504
+2023,naic_band,NAIC 1,4068,43543526367
+2023,naic_band,NAIC 2,2510,28853902780
+2023,naic_band,NAIC 3,241,2012321088
+2023,naic_band,NAIC 4,114,591671591
+2023,naic_band,NAIC 5,38,60097722
+2023,naic_band,NAIC 6,516,131033956
+2023,rating_source,FE (public agency rating),4718,48819998985
+2023,rating_source,FM (financially modeled),1188,1620538251
+2023,rating_source,PL (private letter),293,11737978237
+2023,rating_source,none (exempt/blank),992,10057713529
+2023,rating_source,"self/temporary (Z,YE,E,M,GI...)",296,2956324502
+2023,id_type,CUSIP,6556,56859387048
+2023,id_type,PPN (private placement),770,16677852878
+2023,id_type,no identifier,161,1655313578
+2023,cliff_2C,2.C (BBB-),936,9875911306
+2023,cliff_2C,other,6551,65316642198
+2024,total,all,9291,130962441665
+2024,naic_band,NAIC 1,5252,77605750763
+2024,naic_band,NAIC 2,3081,49115706807
+2024,naic_band,NAIC 3,292,2514891688
+2024,naic_band,NAIC 4,189,1231535492
+2024,naic_band,NAIC 5,73,324411261
+2024,naic_band,NAIC 6,404,170145654
+2024,rating_source,FE (public agency rating),5849,83425581138
+2024,rating_source,FM (financially modeled),1647,2181696501
+2024,rating_source,PL (private letter),401,25500216037
+2024,rating_source,none (exempt/blank),1037,15381725274
+2024,rating_source,"self/temporary (Z,YE,E,M,GI...)",357,4473222715
+2024,id_type,CUSIP,7935,95884998776
+2024,id_type,PPN (private placement),879,28224932159
+2024,id_type,no identifier,477,6852510730
+2024,cliff_2C,2.C (BBB-),1096,18165633679
+2024,cliff_2C,other,8195,112796807986
+2025,total,all,8582,158852395199
+2025,naic_band,NAIC 1,5056,94173705503
+2025,naic_band,NAIC 2,2683,60081027826
+2025,naic_band,NAIC 3,234,2404314346
+2025,naic_band,NAIC 4,137,1530685016
+2025,naic_band,NAIC 5,135,508315926
+2025,naic_band,NAIC 6,337,154346582
+2025,rating_source,FE (public agency rating),4876,78328447355
+2025,rating_source,FM (financially modeled),1654,2100771901
+2025,rating_source,PL (private letter),402,40149868714
+2025,rating_source,none (exempt/blank),1156,26920692148
+2025,rating_source,"self/temporary (Z,YE,E,M,GI...)",494,11352615081
+2025,id_type,CUSIP,7279,109551182231
+2025,id_type,PPN (private placement),822,39428583081
+2025,id_type,no identifier,481,9872629887
+2025,cliff_2C,2.C (BBB-),974,18492696624
+2025,cliff_2C,other,7608,140359698575

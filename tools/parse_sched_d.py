@@ -8,13 +8,60 @@ import csv, re, sys, pathlib
 from pypdf import PdfReader
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-PDF = ROOT / 'raw/athene/athene-annuity-life-company/aaia-statutory-4q2025.pdf'
-SHA = '6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a'
 
-SECTIONS = [
-    ('ICO', 5835, 5910, 85388493721),   # Section 1: issuer credit obligations
-    ('ABS', 5911, 6026, 73463901478),   # Section 2: asset-backed securities
-]
+# Era 1 = YE2025+ PBBD layout (ICO/ABS sections; no rate-used col; cost,par,FV,BACV;
+#         has Payment Due at Maturity col). Era 2 = pre-2025 layout (single Part 1
+#         with issuer-type categories; rate-used-to-obtain-FV col after cost;
+#         cost,FV,PAR,BACV order; row ends at maturity date).
+YEARS = {
+    '2025': {
+        'pdf': 'raw/athene/athene-annuity-life-company/aaia-statutory-4q2025.pdf',
+        'sha': '6580cd4c9b539f8f7ee17d4c176b2c5b041b5fe8923cf3baf6f5b7ddca1e562a',
+        'era': 1, 'suffix': '',
+        'body_marker': r'Payment\s+Due\s+at\s+Maturity',
+        'sections': [('ICO', 5835, 5910, 85388493721),
+                     ('ABS', 5911, 6026, 73463901478)],
+    },
+    '2024': {
+        'pdf': 'raw/athene/athene-annuity-life-company/aaia-statutory-4q2024.pdf',
+        'sha': 'c6f34413918d97711f9102997b7acc2a4437f1dbe9ff16e8090fa2692180fec7',
+        'era': 2, 'suffix': '_2024',
+        'body_marker': r'Stated\s+Contractual\s+Maturity\s+Date',
+        'sections': [('ALL', 4300, 4513, 130962441664)],
+        # +$1: category-182 printed subtotal is $1 off its own itemized rows
+        # (filer cell rounding; cost/FV/par exact) — logged in runbook/exceptions.md
+        'tolerance': 1,
+    },
+    '2023': {
+        'pdf': 'raw/athene/athene-annuity-life-company/aaia-statutory-4q2023.pdf',
+        'sha': 'ab3c3ca439c241533b1662f2d1c7e859d0b4a8914d13761f1f85889650fd1e8f',
+        'era': 2, 'suffix': '_2023',
+        'body_marker': r'Stated\s+Contractual\s+Maturity\s+Date',
+        'sections': [('ALL', 2688, 2861, 75192880228)],
+        # -326,724 (4.3 ppm): assigned residual in the written-off legacy-RMBS tail
+        # (category 102 slot-swap + FV-only drops) — see exceptions ledger 2026-07-22
+        'tolerance': 326724,
+    },
+}
+
+# era-2 FV-rate col (4dp), two print forms (quirk #13):
+#  - dotted rate ('....0.0000'): the rate carries its own separator dots — excise
+#    only the token; any preceding dot-run is a real blank cell (usually blank cost)
+#  - bare rate ('.. 86.6800' or '. 101.9080'): the separator split off as its own
+#    token — excise the orphan run WITH the rate or it becomes a phantom blank cell
+RATE_USED_DOTTED = re.compile(r'\.+\d{1,3}\.\d{4}(?=\s|$)')
+RATE_USED_BARE = re.compile(r'(?:\.+\s+)?(?<![\d,.])\d{1,3}\.\d{4}(?=\s|$)')
+# third form: a comma-grouped rate value split by pypdf into 'N,NNN,NNN' + '.dddd'
+# fragments (seen once: Lehman XS 52523D-AB-6, rate 14,685,163.0000) — the orphan
+# '.dddd' fragment only ever comes from a split rate, so the pair is safe to excise
+RATE_USED_SPLIT = re.compile(r'(?:\.+\s+)?(?<![\d,.])\d[\d,]*\s\.\d{4}(?=\s|$)')
+
+# era-2 quirk #12: the pre-2025 layout has a Bond Characteristics column holding a
+# bare digit (2, 4, ...) just before the designation; DESIG_RE's optional dot lets
+# that digit false-match, shifting every money cell right by two (cost lands in par,
+# FV lands in BACV). Real designations always print digit-DOT ('2.C', '6.'), so the
+# era-2 pattern makes the dot mandatory.
+DESIG_RE2 = re.compile(r'\.\s*([1-6])\.\s?([A-G]|\*)?\s*([A-Z]{1,4})?\s*\.{2,}(?=\s|$)')
 
 CUSIP_RE = re.compile(r'^([0-9A-Z#@*]{6}-[0-9A-Z#@*]{2}-[0-9A-Z#@*])\s')
 SUBTOT_RE = re.compile(r'^(\d{7,10})[\s.-]+(.*)')
@@ -40,7 +87,7 @@ def num(tok):
     v = int(re.sub(r'[^\d]', '', tok) or 0)
     return -v if neg else v
 
-def parse_row(chunk):
+def parse_row(chunk, era=1):
     m = CUSIP_RE.match(chunk)
     if not m:
         return None
@@ -52,10 +99,21 @@ def parse_row(chunk):
     ds = lead.end() if lead else 0
     dm = re.search(r'\.{4,}', rest[ds:])
     desc = ' '.join((rest[ds:ds + dm.start()] if dm else rest[ds:ds + 60]).split())
-    d = DESIG_RE.search(rest)
+    d = (DESIG_RE2 if era == 2 else DESIG_RE).search(rest)
     desig = f'{d.group(1)}.{d.group(2)}' if d else ''
     svo = (d.group(3) or '') if d else ''
     tail = rest[d.end():] if d else (rest[dm.end():] if dm else rest)
+    rate_excised = False
+    if era == 2:
+        # era-2 quirk #11: a 4dp "rate used to obtain fair value" column sits between
+        # actual cost and fair value — excise it; if blank it prints as a dot-run
+        # (a None cell at slot 1) which is dropped after tokenizing
+        tail, _n = RATE_USED_SPLIT.subn(' ', tail, count=1)
+        if not _n:
+            tail, _n = RATE_USED_DOTTED.subn(' ', tail, count=1)
+        if not _n:
+            tail, _n = RATE_USED_BARE.subn(' ', tail, count=1)
+        rate_excised = bool(_n)
     # positional cell tokenizer: dot-runs are blank cells; dots+digits are values;
     # stop at the first rate-like cell (d.ddd) which begins the rate/date region
     cells = []
@@ -65,8 +123,8 @@ def parse_row(chunk):
         tok = toks[i]
         if re.fullmatch(r'\.{2,}', tok):
             nxt = toks[i + 1] if i + 1 < len(toks) else ''
-            if re.fullmatch(r'\(?\d[\d,]*\)?', nxt):
-                cells.append(num(nxt)); i += 2; continue   # dots + bare number = ONE split cell
+            if re.fullmatch(r'\(?\d[\d,]*\)?', nxt):   # dots + bare number = ONE split cell
+                cells.append(num(nxt)); i += 2; continue
             cells.append(None); i += 1; continue            # true blank cell
         if re.fullmatch(r'\.*\d{1,2}\.\d{3}\.*', tok):
             break                                            # rate region begins
@@ -74,8 +132,15 @@ def parse_row(chunk):
             core = tok.strip('.')
             cells.append(num(core)); i += 1; continue
         i += 1
+    if era == 2 and not rate_excised and len(cells) > 1 and cells[1] is None:
+        del cells[1]                      # blank rate-used column -> drop its slot
     def cell(i):
         return cells[i] if i < len(cells) and cells[i] is not None else ''
+    # column order differs by era: era1 = cost,par,FV,BACV; era2 = cost,FV,par,BACV
+    if era == 2:
+        c_cost, c_fair, c_par, c_bacv = cell(0), cell(1), cell(2), cell(3)
+    else:
+        c_cost, c_par, c_fair, c_bacv = cell(0), cell(1), cell(2), cell(3)
     rates = [float(x) for x in RATE_RE.findall(tail)]
     dates = DATE_RE.findall(tail)
     # interest cells: between the when-paid code (after 2nd rate) and the first date
@@ -105,16 +170,18 @@ def parse_row(chunk):
         v2 = (vals + [None, None])[:2]
         intr = [v2[0] if v2[0] is not None else '', v2[1] if v2[1] is not None else '']
     # payment due at maturity: last money token after the maturity date
+    # (era-1 only — the era-2 layout has no such column, and grabbing trailing
+    # tokens there would pick up page-junk)
     pay = ''
-    if dates:
+    if era == 1 and dates:
         after = tail[tail.rfind(dates[-1]) + len(dates[-1]):]
         mm = re.findall(r'\(?\d[\d,]{2,}\)?', after)
         if mm: pay = num(mm[-1])
     return {
         'cusip': cusip, 'description': desc[:80],
         'naic_designation': desig, 'equivalent': equiv(desig), 'svo_symbol': svo,
-        'actual_cost': cell(0), 'par_value': cell(1),
-        'fair_value': cell(2), 'bacv': cell(3),
+        'actual_cost': c_cost, 'par_value': c_par,
+        'fair_value': c_fair, 'bacv': c_bacv,
         'unrealized_val_change': cell(4), 'amort_accretion': cell(5),
         'otti': cell(6), 'fx_change': cell(7),
         'stated_rate': rates[0] if rates else '',
@@ -126,13 +193,17 @@ def parse_row(chunk):
     }
 
 def main():
-    r = PdfReader(str(PDF))
+    year = sys.argv[1] if len(sys.argv) > 1 else '2025'
+    cfg = YEARS[year]
+    era, suffix = cfg['era'], cfg['suffix']
+    body_re = re.compile(cfg['body_marker'])
+    r = PdfReader(str(ROOT / cfg['pdf']))
     all_rows, subtotals, exceptions = [], [], []
-    for sec, p0, p1, banked in SECTIONS:
+    for sec, p0, p1, banked in cfg['sections']:
         bodies = []
         for pg in range(p0, p1 + 1):
             text = r.pages[pg].extract_text() or ''
-            hm = list(re.finditer(r'Payment\s+Due\s+at\s+Maturity', text[:3000]))
+            hm = list(body_re.finditer(text[:3000]))
             body = text[hm[-1].end():] if hm else text
             bodies.append((pg, body))
         if True:
@@ -167,7 +238,7 @@ def main():
                     subtotals.append({'section': sec, 'page': pg, 'code': code,
                                       'label': label[:90], 'monies': monies})
                     continue
-                row = parse_row(ch)
+                row = parse_row(ch, era)
                 if row is None:
                     continue
                 if row['bacv'] == '' and row['par_value'] == '':
@@ -180,7 +251,7 @@ def main():
                 all_rows.append(row)
         sys.stderr.write(f'{sec}: pages done\n')
 
-    out = ROOT / 'extract/athene/sched_d_part1_lines.csv'
+    out = ROOT / f'extract/athene/sched_d_part1_lines{suffix}.csv'
     with open(out, 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=['section','page','cusip','description','naic_designation','equivalent',
                                           'svo_symbol','actual_cost','par_value','fair_value','bacv',
@@ -189,21 +260,27 @@ def main():
                                           'acquired','maturity','payment_at_maturity'])
         w.writeheader(); w.writerows(all_rows)
 
-    with open(ROOT / 'extract/athene/sched_d_part1_subtotals.csv', 'w', newline='') as f:
+    with open(ROOT / f'extract/athene/sched_d_part1_subtotals{suffix}.csv', 'w', newline='') as f:
         w = csv.writer(f); w.writerow(['section','page','code','label','monies'])
         for s in subtotals:
             w.writerow([s['section'], s['page'], s['code'], s['label'], ';'.join(map(str, s['monies']))])
 
     # GATES: per-section BACV sum vs banked control totals
     print('=== GATES ===')
-    for sec, p0, p1, banked in SECTIONS:
+    for sec, p0, p1, banked in cfg['sections']:
         got = sum(r['bacv'] for r in all_rows if r['section'] == sec and r['bacv'] != '')
         n = sum(1 for r in all_rows if r['section'] == sec)
-        status = 'PASS' if got == banked else f'FAIL diff {got - banked:+,}'
+        tol = cfg.get('tolerance', 0)
+        if got == banked:
+            status = 'PASS'
+        elif abs(got - banked) <= tol:
+            status = f'PASS* diff {got - banked:+,} within logged tolerance {tol} (see exceptions ledger)'
+        else:
+            status = f'FAIL diff {got - banked:+,}'
         print(f'{sec}: rows={n:,}  BACV sum={got:,}  banked={banked:,}  {status}')
     print(f'subtotal lines captured: {len(subtotals)}')
     print(f'exceptions: {len(exceptions)}')
-    with open(ROOT / 'extract/athene/sched_d_part1_exceptions.csv', 'w', newline='') as f:
+    with open(ROOT / f'extract/athene/sched_d_part1_exceptions{suffix}.csv', 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=['section','page','reason','chunk'])
         w.writeheader(); w.writerows(exceptions)
 

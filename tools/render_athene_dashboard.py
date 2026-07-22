@@ -583,6 +583,53 @@ CONC_SECTION = (
 )
 
 
+# ---- C: three-year trends (from footed d1_trends.csv) ----
+_tr = list(csv.DictReader(open(ROOT / 'extract/athene/d1_trends.csv')))
+_T = {(r['year'], r['dimension'], r['bucket']): int(r['bacv']) for r in _tr}
+_ty = {y: _T[(y, 'total', 'all')] for y in ('2023', '2024', '2025')}
+def _tv(dim, bucket, y):
+    return _T.get((y, dim, bucket), 0)
+def _trow(label, fn, bold=False):
+    cells = ''.join(
+        f'<td>${fn(y)/1e9:,.1f}B<span class="dim" style="font-size:11px"> · {fn(y)/_ty[y]*100:.1f}%</span></td>'
+        for y in ('2023', '2024', '2025'))
+    st = ' style="font-weight:600"' if bold else ''
+    return f'<tr{st}><td>{label}</td>{cells}</tr>'
+_belowig = lambda y: sum(_tv('naic_band', f'NAIC {i}', y) for i in '3456')
+_privfloor = lambda y: _tv('id_type', 'PPN (private placement)', y) + _tv('id_type', 'no identifier', y)
+TRENDS_SECTION = (
+    '<div class="cflabel" style="margin-top:26px"><span class="t">The film — the same book, three year-ends through the same parser</span>'
+    '<span class="n">YE2023 · YE2024 · YE2025, all footed (gates: exact / +$1 logged / −$327K assigned residual, see exceptions ledger)</span></div>'
+    '<p class="cfnote">The period backfill: the YE2023 and YE2024 statutory statements ran through the same footing-gated parser as YE2025 '
+    '(pre-2025 layout differences documented as quirks #11–#14). One photograph became a film — and the film answers a question '
+    'no single year could: <strong>which rating channel is the growth flowing through?</strong></p>'
+    '<div class="tbl-scroll"><table class="ptable" style="max-width:660px"><thead><tr><th>Bond book (BACV)</th><th>YE2023</th><th>YE2024</th><th>YE2025</th></tr></thead><tbody>'
+    + _trow('Total', lambda y: _ty[y], bold=True)
+    + _trow('PL (private letter)', lambda y: _tv('rating_source', 'PL (private letter)', y), bold=True)
+    + _trow('FE (public agency rating)', lambda y: _tv('rating_source', 'FE (public agency rating)', y))
+    + _trow('Identifier-private floor (PPN + no-ID)', _privfloor)
+    + _trow('BBB− cliff (2.C)', lambda y: _tv('cliff_2C', '2.C (BBB-)', y))
+    + _trow('Below investment grade (NAIC 3–6)', _belowig)
+    + '</tbody></table></div>'
+    '<div class="callout" style="margin-top:16px"><strong>The channel shift is the story.</strong> The book more than doubled '
+    f'(${_ty["2023"]/1e9:,.0f}B → ${_ty["2025"]/1e9:,.0f}B), and the growth routed through the least-checkable channels: '
+    'private-letter paper <strong>3.4×</strong> in two years (15.6% → 25.3% of the book); no-identifier paper <strong>5.8×</strong>; '
+    'and in 2025 <strong>publicly-rated holdings shrank $5.1B in absolute dollars while the book grew $27.9B</strong>. '
+    'Meanwhile the printed quality mix barely moved (NAIC-2 ≈ 38% all three years, below-IG ≈ 3%). '
+    'Benign reading: a deliberate, disclosed strategy shift into Apollo-originated private credit at stable quality. '
+    'Adverse reading: the share of the book whose grades face a market check is collapsing — printed quality stays flat '
+    'partly because ever more of it is graded in a channel that cannot contradict it.<br><br>'
+    '<strong>Cohort test (the strict discriminator, run 1):</strong> of the 293 bonds PL-rated at YE2023 ($11.7B), 239 were still held '
+    'at YE2025 — and their migration was <em>mostly benign</em>: $2.2B upgraded vs $0.3B downgraded, 193 unchanged. Recorded as such — '
+    'clean is a valid answer. The caveats that keep it open: the tail is violent (one 2.A went straight to NAIC-6 — a 12-notch miss), '
+    'the letters never graduate to public ratings ($7.9B of the $8.9B held cohort is still PL), $2.9B exited untested, and two years '
+    'of a young book is a short film.<br><br>'
+    '<strong>Coverage boundary, logged:</strong> YE2021 and YE2022 investment schedules are not public — Athene\'s IR site posts only '
+    'the 40-page core+notes part (file names say "part 2 of 5"), and the Wayback Machine has no copy of the other parts. '
+    'The film starts at 2023 unless another public door opens.</div>'
+)
+
+
 D1_SECTION = (
     '<div class="cflabel" style="margin-top:26px"><span class="t">D1 — every bond position, extracted and footed</span>'
     f'<span class="n">8,582 rows · both sections foot to the dollar</span></div>'
@@ -701,7 +748,7 @@ D5B_SECTION = (
 
 extras = {
  'step1': ('<div style="margin-top:18px"></div>' + CAPITAL_FLOW),
- 'step5': ASSET_SECTION + D1_SECTION + AGING_SECTION + CONC_SECTION,
+ 'step5': ASSET_SECTION + D1_SECTION + AGING_SECTION + CONC_SECTION + TRENDS_SECTION,
  'step3': ('<p class="cfnote" style="margin-top:18px"><strong>The 29 treaties behind those cards.</strong> Two families: 2018–2022 ModCo vintages (unauthorized status) and 2024+ funds-withheld coinsurance (reciprocal jurisdiction). The structure is readable from which column is populated — ModCo treaties fill the ModCo column; COFW treaties fill reserve credit + funds withheld. Business codes: IA individual annuities, FA funding agreements, VA variable, OA/OL other.</p>'
            + TREATY_TABLE + TREATY_FOOT
            + '<div class="callout"><strong>Mirror-check status:</strong> AARe publishes no unconsolidated statutory statement, so Iowa\'s ceded numbers cannot be line-item reconciled against Bermuda\'s assumed side from public documents. The FCR confirms the aggregate EBS picture (AARe eligible capital $30.6B vs required $15.2B). The treaty-level mirror is not publicly checkable — a measured opacity finding, logged not papered over.</div>'),

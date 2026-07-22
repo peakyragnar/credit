@@ -1,6 +1,6 @@
 # STATUS — read this first in a new session
 
-*Updated 2026-07-21, end of session 1. Companion to `spec/credit-map-spec.md` (the governing spec, v1.1 top-down) and `CLAUDE.md`.*
+*Updated 2026-07-22, session 2 (in progress). Companion to `spec/credit-map-spec.md` (the governing spec, v1.1 top-down) and `CLAUDE.md`. Work tracker: `PLAN.md`.*
 
 ## Where the project stands
 
@@ -14,6 +14,11 @@ Phase 0 (Athene by hand) is deep into the asset drill — far ahead of the origi
 - **D2/D3** — BBB− cliff ($18.5B) is 76% publicly rated (exculpatory, recorded); PL yields +0.6–0.9pp vs FE at same notch (PL "A" prices like public BBB/BBB−) — central F1 question, deliberately unresolved.
 - **Disposals (Parts 4+5)** — $72,140,293,824 consideration EXACT (P4 $45.4B + P5 round-trips $26.7B); 37% same-year flips (street→ACRA pipeline); **$9.21B related-party disposals, 889 named trades** incl Apollo Global Securities; RP gains +49bp vs +5bp third-party; **matched-pair test: clean where testable (6% coverage), 94% untestable by construction** — findings 39–43.
 - **Net spread** — AAIA: NII $12.73B − FWH pass-through to AARe $3.42B − credited $3.68B − OTTI $0.16B ≈ **$5.5B**; GAAP cross-check $5.8B.
+
+**Session 2 (2026-07-22) — all footed and committed:**
+- **Aging (A)** — acquired+maturity on all 8,582 D1 rows: 53.7% bought <12mo, wavg 1.72y vs 70% maturities >10y (conveyor, not vault); PL youngest shelf (1.05y) and 30.1% of the new cohort; Q4-2025 surge $35.6B incl 12/22 $6.1B spike. Findings 44–46.
+- **Concentration (B)** — description-column parser fix (quirk #10, regression-gated); top-10 issuer prefixes $22.7B = 14.3%; **10 of 12 largest are PL-rated 2025 vintages** (AP Grange $3.64B, AMAPS, AP Alkaios, Atlas, SVF II, Stonepeak); AP Grange anatomy verified vs raw (acquired 12/22/2025 at par, marked 106.2 nine days later, full-year coupon received — re-papering fingerprint). Findings 47–49.
+- **Time series (C)** — YE2023+YE2024 statements through the same parser (era-2 quirks #11–14); gates: 2025 exact / 2024 +$1 logged / 2023 −$327K assigned residual. **THE RESULT: PL channel 3.4× in two years ($11.7B→$40.1B, 15.6%→25.3%); FE shrank $5.1B absolute in 2025 while book grew $27.9B; printed quality flat throughout. Cohort test run 1 (2023 PL→2025): mostly benign where testable ($2.2B up vs $0.3B down) with a violent tail (one 12-notch miss) and letters that never graduate.** YE2021/22 schedules not public — coverage boundary logged. Findings 50–53.
 
 ## The living surfaces
 - **Dashboard** (artifact, stable URL): https://claude.ai/code/artifact/0dfa08f5-a1c0-49b7-b080-d578fdf98b39 — flow-structured ①→⑥ + ⑤b disposal machine. Regenerate: `python3 tools/render_athene_dashboard.py` then republish same path.
