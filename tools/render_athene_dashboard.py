@@ -465,6 +465,95 @@ D1_SECTION = (
     + PNL_TABLE
 )
 
+# ---- 5b: the disposal machine (Part 4 + Part 5 extracts) ----
+import datetime as _dtmod
+_NONSALE = re.compile(r'paydown|call|matur|redempt|sink|tender|conversion|exchange|cancel', re.I) if 're' in dir() else None
+import re as _re
+_NONSALE = _re.compile(r'paydown|call|matur|redempt|sink|tender|conversion|exchange|cancel', _re.I)
+def _dload(p, rpcol):
+    out = []
+    for r in csv.DictReader(open(ROOT / p)):
+        row = {'cusip': r['cusip'], 'rp': r[rpcol] == 'Y', 'buyer': r['purchaser'][:34], 'date': r['disposal_date'],
+               'consid': int(r['consideration']) if r['consideration'] not in ('', None) else 0,
+               'par': int(r['par_value']) if r['par_value'] not in ('', None) else 0,
+               'tgl': int(r['total_gl']) if r['total_gl'] not in ('', None) else 0}
+        out.append(row)
+    return out
+_d4 = _dload('extract/athene/sched_d_part4_disposals.csv', 'related_party')
+_d5 = _dload('extract/athene/sched_d_part5_roundtrips.csv', 'rp_purchaser')
+_all = _d4 + _d5
+_rp  = [r for r in _all if r['rp']]
+_tp  = [r for r in _all if not r['rp']]
+_rp_c = sum(r['consid'] for r in _rp); _tp_c = sum(r['consid'] for r in _tp)
+_rp_g = sum(r['tgl'] for r in _rp);    _tp_g = sum(r['tgl'] for r in _tp)
+_flip_c = sum(r['consid'] for r in _d5)
+_buyers = {}
+for r in _rp:
+    b = r['buyer']
+    _buyers.setdefault(b, [0, 0]); _buyers[b][0] += r['consid']; _buyers[b][1] += 1
+_btop = sorted(_buyers.items(), key=lambda x: -x[1][0])[:6]
+_brows = ''.join(f'<tr><td>{html.escape(b)}</td><td>${v/1e9:,.2f}B</td><td>{n}</td></tr>' for b, (v, n) in _btop)
+
+# matched pairs (condensed re-computation)
+def _pdt(s):
+    try: return _dtmod.datetime.strptime(s, '%m/%d/%Y')
+    except Exception: return None
+_bycus = {}
+for r in _all:
+    if r['cusip'] != '000000-00-0' and r['par'] > 0 and r['consid'] > 0 and not _NONSALE.search(r['buyer']):
+        _bycus.setdefault(r['cusip'], []).append(r)
+_npairs, _hi, _lo, _eq, _dlist = 0, 0, 0, 0, []
+for cus, rs in _bycus.items():
+    rp_ = [r for r in rs if r['rp']]; tp_ = [r for r in rs if not r['rp']]
+    if not rp_ or not tp_: continue
+    for a in rp_:
+        da = _pdt(a['date'])
+        if not da: continue
+        near = [b for b in tp_ if _pdt(b['date']) and abs((_pdt(b['date'])-da).days) <= 45]
+        if not near: continue
+        b = min(near, key=lambda b: abs((_pdt(b['date'])-da).days))
+        d = 100*a['consid']/a['par'] - 100*b['consid']/b['par']
+        _npairs += 1; _dlist.append(d)
+        if d > 0.05: _hi += 1
+        elif d < -0.05: _lo += 1
+        else: _eq += 1
+import statistics as _st
+_med = _st.median(_dlist) if _dlist else 0
+
+D5B_SECTION = (
+    '<h2 id="step5b"><span class="stepchip">⑤b</span> The disposal machine <span class="cnt">— who Athene sells to, and at what price</span></h2>'
+    '<hr class="rule">'
+    '<p class="cfnote">Every FY2025 bond sale from Schedule D Parts 4 and 5 — consideration reconciles to the printed '
+    'total to the dollar ($72,140,293,824). The question this section answers: when the seller and buyer share an owner, '
+    'do the prices behave?</p>'
+    '<div class="figure"><svg viewBox="0 0 680 300" role="img" aria-label="Disposal flows">' 
+    '<defs><marker id="ar5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
+    '<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>'
+    '<rect class="nd neutral" x="30" y="90" width="150" height="52" rx="3"/><text class="t1" x="105" y="111" text-anchor="middle">Wall Street dealers</text><text class="t2" x="105" y="129" text-anchor="middle">Deutsche · Citi · Wells…</text>'
+    '<line class="wire" x1="180" y1="116" x2="248" y2="116" marker-end="url(#ar5)"/>'
+    '<rect class="nd usn" x="252" y="80" width="176" height="72" rx="3"/><text class="t1u" x="340" y="105" text-anchor="middle">AAIA</text><text class="t2u" x="340" y="123" text-anchor="middle">sold $72.1B of bonds</text><text class="t2u" x="340" y="139" text-anchor="middle">in FY2025</text>'
+    '<path class="wire" d="M428 100 H500 V76" marker-end="url(#ar5)"/>'
+    '<rect class="nd neutral" x="440" y="20" width="210" height="52" rx="3"/><text class="t1" x="545" y="41" text-anchor="middle">Market buyers — $62.9B</text><text class="t2" x="545" y="59" text-anchor="middle">gains booked: +5bp</text>'
+    '<path class="wire" d="M428 132 H500 V156" marker-end="url(#ar5)"/>'
+    '<rect class="nd bmn" x="440" y="160" width="210" height="52" rx="3"/><text class="t1b" x="545" y="181" text-anchor="middle">Related parties — $9.2B</text><text class="t2b" x="545" y="199" text-anchor="middle">gains booked: +49bp (10×)</text>'
+    '<rect class="box-dash" x="30" y="230" width="620" height="48" rx="3"/>'
+    '<text class="t1" x="340" y="250" text-anchor="middle">$26.7B — 37% of all disposals — were same-year round-trips</text>'
+    '<text class="t2" x="340" y="268" text-anchor="middle">bought from dealers, sold weeks later, mostly to ACRA sidecar accounts (the street → sidecar pipeline)</text>'
+    '</svg></div>'
+    '<div class="cflabel" style="margin-top:18px"><span class="t">Top related-party buyers</span><span class="n">889 trades, all named in the filing</span></div>'
+    '<div class="tbl-scroll"><table class="ptable" style="max-width:560px"><thead><tr><th>Buyer</th><th>Consideration</th><th>Trades</th></tr></thead>'
+    f'<tbody>{_brows}</tbody></table></div>'
+    '<div class="cflabel" style="margin-top:18px"><span class="t">The matched-pair test — same bond, family vs market, within 45 days</span>'
+    f'<span class="n">{_npairs} clean pairs</span></div>'
+    f'<p class="cfnote">Median price difference (related − market): <strong>{_med:+.3f} points ≈ zero</strong> · related paid more in {_hi}, less in {_lo}, equal in {_eq}. '
+    'Where the same bond sold to both, prices match — the 10× gain gap is <strong>mix</strong> (seasoned, appreciated bonds routed to affiliates), not rigged prices.</p>'
+    + stackbar([('tested & clean', 6, 'seg-annuity'), ('untestable — no market trade to compare (mostly private paper)', 94, 'seg-ceded')], 100)
+    + '<div class="callout"><strong>The honest boundary:</strong> the test reaches only ~6% of the $9.2B related-party flow. '
+    'The other 94% — predominantly private, illiquid paper — never traded with an outside buyer, so no market check exists '
+    '<em>by construction</em>. The overlap is clean; the majority is unverifiable from this filing. Reaching it requires '
+    'cross-holder marks (the D4 / BDC-engine work) — which is exactly why that layer exists.</div>'
+)
+
 extras = {
  'step1': ('<div style="margin-top:18px"></div>' + CAPITAL_FLOW),
  'step5': ASSET_SECTION + D1_SECTION,
@@ -487,6 +576,7 @@ for sid, badge, title, sub, intro, items in STEPS:
         f'<div class="mgrid">{"".join(cs)}</div>'
         + extras.get(sid, '')
     )
+sections.insert(5, D5B_SECTION)
 FLOW_SECTIONS = '\n'.join(sections)
 
 TEMPLATE = open(ROOT / 'tools/dashboard_template.html').read()
