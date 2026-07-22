@@ -346,6 +346,44 @@ for d, eq in [('1.F','A'),('1.G','A−'),('2.A','BBB+'),('2.B','BBB')]:
 YIELD_TABLE = ('<table class="ptable" style="max-width:480px"><thead><tr><th>Notch</th><th>Public-rated (FE)</th>'
                '<th>Private letter (PL)</th><th>PL premium</th></tr></thead><tbody>' + ''.join(_yrows) + '</tbody></table>')
 
+# quality-within-source matrix: one quality bar per rating source
+_BANDS = [
+    ('AAA', lambda d: d == '1.A', 'seg-annuity'),
+    ('AA', lambda d: d in ('1.B','1.C','1.D'), 'seg-annuity'),
+    ('A', lambda d: d in ('1.E','1.F','1.G'), 'seg-annuity'),
+    ('BBB+/BBB', lambda d: d in ('2.A','2.B'), 'seg-funding'),
+    ('BBB−', lambda d: d == '2.C', 'seg-acra'),
+    ('<IG', lambda d: (d or '?').split('.')[0] in ('3','4','5','6'), 'seg-ceded'),
+]
+_matrix_rows = []
+for _src_label, _key in [('Public rating (FE)','Public rating (FE)'),
+                         ('Exempt / SVO-assessed','Exempt / SVO-assessed'),
+                         ('Self-assigned (Z/YE)','Self-assigned (Z/YE)'),
+                         ('Private letter (PL)','Private letter (PL)'),
+                         ('Modeled (FM) + other', None)]:
+    if _key is None:
+        _sel = [r for r in dlines if _srcb(r['svo_symbol']) in ('Modeled (FM)','Other')]
+    else:
+        _sel = [r for r in dlines if _srcb(r['svo_symbol']) == _key]
+    _stot = sum(_iv(r['bacv']) for r in _sel)
+    if _stot <= 0: continue
+    _segs = []
+    for _bl, _fn, _cls in _BANDS:
+        _v = sum(_iv(r['bacv']) for r in _sel if _fn(r['naic_designation']))
+        if _v > 0: _segs.append((_bl, _v/1e6, _cls))
+    _matrix_rows.append(
+        f'<div class="cflabel" style="margin:10px 0 4px"><span class="t" style="font-size:13px;font-weight:500">{_src_label}</span>'
+        f'<span class="n">${_stot/1e9:,.1f}B</span></div>'
+        + stackbar(_segs, _stot/1e6))
+MATRIX = (
+    '<div class="cflabel" style="margin-top:22px"><span class="t">Quality within each rating source</span>'
+    '<span class="n">same risk gradient; hover segments for exact figures</span></div>'
+    + ''.join(_matrix_rows)
+    + '<p class="cfnote">Read: the public-rated (FE) book skews higher-grade and holds most of the cliff paper; '
+    'the private-letter (PL) book is ~81% A/BBB with almost no cliff or junk — grades that earn capital relief, '
+    'assigned in a channel with no market check. Self-assigned paper carries the largest below-IG share.</p>'
+)
+
 D1_SECTION = (
     '<div class="cflabel" style="margin-top:26px"><span class="t">D1 — every bond position, extracted and footed</span>'
     f'<span class="n">8,582 rows · both sections foot to the dollar</span></div>'
@@ -361,7 +399,8 @@ D1_SECTION = (
     + '<div class="callout" style="margin-top:16px"><strong>D2 — the cliff is mostly publicly rated (exculpatory, recorded):</strong> '
     'of the $18.5B at BBB−, 76% carries public agency ratings; private letters are only 7.4%. The PL book ($40.1B) '
     'clusters at A/BBB+ instead — where the capital relief is earned.</div>'
-    '<div class="cflabel" style="margin-top:16px"><span class="t">D3 — same notch, different grader, different yield</span>'
+    + MATRIX
+    + '<div class="cflabel" style="margin-top:16px"><span class="t">D3 — same notch, different grader, different yield</span>'
     '<span class="n">2024–25 vintages, BACV-weighted</span></div>'
     + YIELD_TABLE
     + '<div class="callout"><strong>The open question of F1:</strong> private-letter paper yields +0.6–0.9pp over '
