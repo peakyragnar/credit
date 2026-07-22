@@ -63,5 +63,14 @@ The structure buckets (Summary Investment Schedule) are NOT a public/private spl
 
 Rule carried from the composition work: every level foots to the level above; market-status proportions are never estimated, only measured.
 
+
+## D2/D3 first results (2026-07-21, all from footed line data)
+
+32. **The BBB− cliff is NOT propped by private letters — mostly.** Of the $18.5B at 2.C (BBB−, last notch above junk): **76.0% carries public agency ratings (FE)**; PL is only $1.4B (7.4%), self-assigned Z/YE $1.8B (9.5%). The "private letters at the IG boundary" story is largely absent at AAIA. Clean is a valid answer; recorded as such.
+33. **Where PL actually lives: the middle of the book.** The $40.1B PL book clusters at A ($11.8B), BBB+ ($11.4B), A− ($4.2B), BBB ($5.2B) — 81% between A and BBB. Not cliff-adjacent, but capital-relevant (designation sets the RBC charge) and quality-relevant at scale.
+34. **PL paper yields ~0.6–0.9pp MORE than FE paper at the SAME notch** (recent vintages 2024–25, BACV-weighted effective yields): A: 6.08% vs 5.39%; A−: 6.11% vs 5.39%; BBB+: 6.06% vs 5.44%; BBB: 6.73% vs 5.79%. Benchmark: PL-rated "A" paper (6.08%) yields between public BBB (5.79%) and public BBB− (6.36%) — i.e., **the market prices PL "A" paper roughly like public BBB/BBB−, 2–3 notches below its letter** — the same magnitude as the NAIC's private-ratings inflation finding.
+35. **Two readings, deliberately unresolved:** (a) benign — an illiquidity/complexity premium on private placements at identical true quality (the industry's own pitch); (b) adverse — yield-implied ratings say the letters are generous. Yield alone cannot discriminate. The discriminators are downstream: impairment/migration outcomes by rating source (needs period backfill) and cross-holder marks (D4). Logged as the central open question of F1.
+36. Caveats on 34: effective-rate and symbol columns are ungated (verification lane pending); sector mix differs between FE and PL books (PL skews corporate/infrastructure privates); vintage controlled only to 2024–25 acquisition years.
+
 ## Phase 1 bonus (parked)
 - BMA Class E declaration page lists Global Atlantic's entities: Ivy Re, Ivy Re II, Ivy Peak Co-Invest Re I/II, Global Atlantic Ivy Re III, GA Iris Re, Global Atlantic Assurance — a head start on the GA census.
