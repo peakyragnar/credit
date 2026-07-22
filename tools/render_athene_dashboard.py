@@ -296,9 +296,9 @@ DTOT = sum(_iv(r['bacv']) for r in dlines)
 
 _band_groups = []
 for label, keys, cls in [
-    ('AAA', ['1.A'], 'seg-athene'),
+    ('AAA', ['1.A'], 'seg-annuity'),
     ('AA band', ['1.B','1.C','1.D'], 'seg-annuity'),
-    ('A band', ['1.E','1.F','1.G'], 'seg-life'),
+    ('A band', ['1.E','1.F','1.G'], 'seg-annuity'),
     ('BBB+ / BBB', ['2.A','2.B'], 'seg-funding'),
     ('BBB− (the cliff)', ['2.C'], 'seg-acra'),
     ('Below IG', ['3','4','5','6'], 'seg-ceded'),
@@ -319,10 +319,10 @@ for r in dlines:
     k = _srcb(r['svo_symbol']); _src_agg[k] = _src_agg.get(k, 0) + _iv(r['bacv'])
 _src_groups = [
     ('Public rating (FE)', _src_agg.get('Public rating (FE)',0)/1e6, 'seg-annuity'),
-    ('Private letter (PL)', _src_agg.get('Private letter (PL)',0)/1e6, 'seg-acra'),
     ('Exempt / SVO-assessed', _src_agg.get('Exempt / SVO-assessed',0)/1e6, 'seg-athene'),
     ('Self-assigned (Z/YE)', _src_agg.get('Self-assigned (Z/YE)',0)/1e6, 'seg-funding'),
-    ('Modeled (FM)', (_src_agg.get('Modeled (FM)',0)+_src_agg.get('Other',0))/1e6, 'seg-life'),
+    ('Private letter (PL)', _src_agg.get('Private letter (PL)',0)/1e6, 'seg-acra'),
+    ('Modeled (FM)', (_src_agg.get('Modeled (FM)',0)+_src_agg.get('Other',0))/1e6, 'seg-ceded'),
 ]
 
 # yield cross (FE vs PL, same notch, 2024-25 vintages)

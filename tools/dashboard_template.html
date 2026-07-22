@@ -4,7 +4,7 @@
   --bg:#F6F5F1; --panel:#FFFFFF; --ink:#22271F; --muted:#6E756D; --line:#E3E1D8; --line2:#CFCCC0;
   --us:#0F6E56; --us-bg:#E4F3EC; --us-ink:#085041;
   --bm:#A3431D; --bm-bg:#F9ECE5; --bm-ink:#712B13;
-  --acc:#185FA5; --warn-bg:#FAEEDA; --warn-ink:#633806;
+  --acc:#185FA5; --acc-bg:#E6F1FB; --warn:#BA7517; --warn-bg:#FAEEDA; --warn-ink:#633806;
 }
 @media (prefers-color-scheme: dark){:root{
   --bg:#15191B; --panel:#1D2325; --ink:#E7E9E3; --muted:#8F978F; --line:#2B3234; --line2:#3A4245;
@@ -22,7 +22,7 @@
   --bg:#F6F5F1; --panel:#FFFFFF; --ink:#22271F; --muted:#6E756D; --line:#E3E1D8; --line2:#CFCCC0;
   --us:#0F6E56; --us-bg:#E4F3EC; --us-ink:#085041;
   --bm:#A3431D; --bm-bg:#F9ECE5; --bm-ink:#712B13;
-  --acc:#185FA5; --warn-bg:#FAEEDA; --warn-ink:#633806;
+  --acc:#185FA5; --acc-bg:#E6F1FB; --warn:#BA7517; --warn-bg:#FAEEDA; --warn-ink:#633806;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:15px/1.55 "Avenir Next","Segoe UI",system-ui,sans-serif;margin:0}
@@ -138,8 +138,10 @@ svg text.flow2{fill:var(--muted);font-size:11px}
 .lg .dot{width:11px;height:11px;border-radius:3px;flex-shrink:0}
 .lg .lgl{color:var(--ink)}
 .lg .lgv{color:var(--muted);font-variant-numeric:tabular-nums}
-.dot.seg-annuity{background:var(--us)}.dot.seg-funding{background:var(--warn)}.dot.seg-life{background:var(--line2)}
-.dot.seg-athene{background:var(--acc)}.dot.seg-acra{background:var(--bm)}.dot.seg-ceded{background:var(--line2)}
+.lg .dot{border:1.5px solid transparent}
+.dot.seg-annuity{background:var(--us-bg);border-color:var(--us)}.dot.seg-funding{background:var(--warn-bg);border-color:var(--warn)}
+.dot.seg-life{background:var(--line);border-color:var(--line2)}.dot.seg-athene{background:var(--acc-bg);border-color:var(--acc)}
+.dot.seg-acra{background:var(--bm-bg);border-color:var(--bm)}.dot.seg-ceded{background:var(--line);border-color:var(--line2)}
 .ptable{width:100%;border-collapse:collapse;font-size:13px;margin:14px 0 4px}
 .ptable td{padding:7px 10px;border-bottom:1px solid var(--line)}
 .ptable td:last-child,.ptable td:nth-child(2){text-align:right;font-variant-numeric:tabular-nums}
